@@ -1,4 +1,3 @@
-
 CREATE TABLE Companies (
 email  varchar(100) NOT NULL PRIMARY KEY ,
 name varchar(40) NOT NULL ,
@@ -155,7 +154,7 @@ CREATE TABLE Emails(
     email_date DATETIME Not NULL,
     body VARCHAR(3000),
 );
-DROP TABLE Staff_Members_send_Email_Staff_Members
+
 
 CREATE TABLE Staff_Members_send_Email_Staff_Members(
     email_number int ,
@@ -163,8 +162,8 @@ CREATE TABLE Staff_Members_send_Email_Staff_Members(
     sender VARCHAR(20) Not NULL,
     PRIMARY KEY(email_number,recipient),
     FOREIGN KEY(email_number) REFERENCES Emails ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(recipient) REFERENCES Staff_Members ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(sender) REFERENCES Staff_Members ON DELETE CASCADE  ON UPDATE CASCADE
+    FOREIGN KEY(recipient) REFERENCES Staff_Members(username) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(sender) REFERENCES Staff_Members(username)  ON DELETE No Action  ON UPDATE No Action ,
 
 );
 

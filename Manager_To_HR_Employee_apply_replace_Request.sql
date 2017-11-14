@@ -24,10 +24,13 @@ CREATE TABLE Requests(
     request_date DATETIME NOT NULL,
     total_days AS end_date - start_date,
     hr_employee VARCHAR(50),
-    hr_response VARCHAR(50),
+    hr_response VARCHAR(50) NOT NULL,
     manager VARCHAR (50),
-    manager_response VARCHAR(50),
+    manager_response VARCHAR(50) NOT NULL,
     manager_reason VARCHAR(MAX),
+
+    CHECK(hr_response= 'Approved' or hr_response='Rejected' or hr_response='Pending'),
+    CHECK(manager_response= 'Approved' or manager_response='Rejected' or manager_response='Pending'),
 
     PRIMARY KEY (start_date, applicant),
     FOREIGN KEY (applicant) REFERENCES Staff_Members (username) ON DELETE CASCADE ON UPDATE CASCADE,

@@ -93,6 +93,30 @@ VALUES ('AhmedMalek', 'amalek@tesla.com','Tuesday',50000,'Head Calls',(select de
 INSERT INTO Managers
 VALUES ('AhmedMalek','Head')
 
+INSERT INTO Jobs
+VALUES('R&D Manager',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','R&D Manager','Manages R&D',2,100000,7/20/2017,3,8)
+
+INSERT INTO Users
+VALUES ('RamiMalek','hackerman','self@ramimalek.com', 2/20/1989,2,'Rami','Youssef','Malek');
+
+INSERT INTO Staff_Members
+VALUES ('RamiMalek', 'rmalek@tesla.com','Friday',100000,'R&D Manager' ,(select department FROM jobs WHERE title='R&D Manager' and company='info@tesla.com'), 'info@tesla.com');
+
+INSERT INTO Managers
+VALUES ('RamiMalek','Main Manager')
+
+INSERT INTO Jobs
+VALUES('R&D CoManager',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','R&D CoManager','CoManages R&D',2,100000,8/31/2017,3,8)
+
+INSERT INTO Users
+VALUES ('TonyStark','ironman','self@ironman.com', 5/10/1982,2,'Tony','Jr','Stark');
+
+INSERT INTO Staff_Members
+VALUES ('TonyStark', 'tstark@tesla.com','Friday',100000,'R&D CoManager' ,(select department FROM jobs WHERE title='R&D CoManager' and company='info@tesla.com'), 'info@tesla.com');
+
+INSERT INTO Managers
+VALUES ('TonyStark','Helper Manager')
+
 
 
 

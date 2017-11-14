@@ -23,7 +23,7 @@ FOREIGN KEY (company) REFERENCES Companies (email)  ON DELETE CASCADE ON UPDATE 
 CREATE TABLE Departments (
 code int IDENTITY NOT NULL ,
 company varchar(100) NOT NULL  ,
-name varchar ( 20 ) NOT NULL ,
+name varchar ( 40 ) NOT NULL ,
 PRIMARY KEY (code ,company),
 FOREIGN KEY (company) REFERENCES Companies (email)  ON DELETE CASCADE ON UPDATE CASCADE
 

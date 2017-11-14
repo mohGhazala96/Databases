@@ -41,7 +41,7 @@ CREATE TABLE Emails(
     serial_number int PRIMARY KEY IDENTITY ,
     email_subject VARCHAR(50),
     email_date DATETIME Not NULL,
-    body VARCHAR(1000),
+    body VARCHAR(3000),
 );
 
 CREATE TABLE Staff_Members_send_Email_Staff_Members(

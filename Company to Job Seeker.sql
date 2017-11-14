@@ -1,4 +1,4 @@
-﻿use Company 
+use Company 
 
 
 
@@ -16,8 +16,9 @@ specialization varchar(20) NOT NULL
 
 CREATE TABLE Company_Phone_Numbers (
 
+company varchar(100) NOT NULL ,
 phone char(11)  NOT NULL ,
-company varchar(100) NOT NULL
+
 PRIMARY KEY (phone , company),
 FOREIGN KEY (company) REFERENCES Companies (email)  ON DELETE CASCADE ON UPDATE CASCADE
 )
@@ -26,8 +27,8 @@ FOREIGN KEY (company) REFERENCES Companies (email)  ON DELETE CASCADE ON UPDATE 
 
 CREATE TABLE Departments (
 code int IDENTITY NOT NULL ,
+company varchar(100) NOT NULL  ,
 name varchar ( 20 ) NOT NULL ,
-company varchar(100) NOT NULL 
 
 PRIMARY KEY (code ,company),
 FOREIGN KEY (company) REFERENCES Companies (email)  ON DELETE CASCADE ON UPDATE CASCADE
@@ -39,6 +40,8 @@ FOREIGN KEY (company) REFERENCES Companies (email)  ON DELETE CASCADE ON UPDATE 
 CREATE TABLE Jobs ( 
 
 title varchar(20) NOT NULL ,
+department int NOT NULL ,
+company varchar(100) NOT NULL ,
 short_description varchar(100) NOT NULL,
 detailed_description varchar(200) NOT NULL,
 min_experience int NOT NULL , 
@@ -46,8 +49,7 @@ salary int ,
 deadline datetime NOT NULL ,
 no_of_vacancies int ,
 working_hours int NOT NULL ,
-department int NOT NULL ,
-company varchar(100) NOT NULL
+
 
 PRIMARY KEY ( title , department , company ) ,
 FOREIGN KEY ( department , company ) REFERENCES Departments( code , company ) ON DELETE CASCADE ON UPDATE CASCADE
@@ -101,6 +103,16 @@ age AS ( YEAR(CURRENT_TIMESTAMP) - YEAR(birth_date) )
 CREATE TABLE  User_Job (
 
 job varchar(20) NOT NULL ,
-user_ varchar(20) NOT NULL FOREIGN KEY ( user_ ) REFERENCES Users(username)
+username varchar(20) NOT NULL FOREIGN KEY ( username ) REFERENCES Users(username)
+
+PRIMARY KEY ( job , username )
+
+);
+
+
+
+CREATE TABLE Job_Seekers(
+
+username varchar(20) PRIMARY KEY FOREIGN KEY REFERENCES Users(username)
 
 );

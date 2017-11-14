@@ -1,7 +1,7 @@
-INSERT INTO Companies (email, name, address, domain, type, vision, specialization) 
+INSERT INTO Companies (email, name, address, domain, type, vision, specialization)
 VALUES(
-    'info@tesla.com', 
-    'Tesla', 
+    'info@tesla.com',
+    'Tesla',
     'Tesla Motors. 3500 Deer Creek Road.Palo Alto, CA 94304.',
     'tesla.com',
     'Manufacturer',
@@ -68,6 +68,54 @@ VALUES ('EmmaStone', 'estone@tesla.com','Sunday',20000,'HR Head Assistant',(sele
 
 INSERT INTO HR_Employees
 VALUES ('EmmaStone')
+
+INSERT INTO Jobs
+VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','HR Head','HR Heading',2,50000,3/7/2017,1,8)
+
+INSERT INTO Users
+VALUES ('MoxieMarlinspike','moxie','moxie@marlinspike.com', 11/7/1988,2,'Moxie','','Marlinspike');
+
+INSERT INTO Staff_Members
+VALUES ('MoxieMarlinspike', 'moxie@tesla.com','Sunday',54321,'HR Head',(select department FROM jobs WHERE title='HR Head' and company='info@tesla.com'), 'info@tesla.com');
+
+INSERT INTO HR_Employees
+VALUES ('MoxieMarlinspike')
+
+INSERT INTO Jobs
+VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','HR Head','HR Heading',2,20000,3/7/2017,1,8)
+
+INSERT INTO Users
+VALUES ('AaronSwartz','aaron','aaron@swartz.com', 11/8/1986,2,'Aaron','Hillel','Swartz');
+
+INSERT INTO Staff_Members
+VALUES ('AaronSwartz', 'aswartz@tesla.com','Sunday',20000,'HR Head Assistant',(select department FROM jobs WHERE title='HR Head Assistant' and company='info@tesla.com'), 'info@tesla.com');
+
+INSERT INTO HR_Employees
+VALUES ('AaronSwartz')
+
+INSERT INTO Jobs
+VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','HR Head','HR Heading',2,50000,3/7/2017,1,8)
+
+INSERT INTO Users
+VALUES ('PeterEckersley','pde','pde@eckersley.org', 11/7/1988,2,'Peter','','Eckersley');
+
+INSERT INTO Staff_Members
+VALUES ('PeterEckersley', 'moxie@tesla.com','Sunday',54321,'HR Head',(select department FROM jobs WHERE title='HR Head' and company='info@tesla.com'), 'info@tesla.com');
+
+INSERT INTO HR_Employees
+VALUES ('PeterEckersley')
+
+INSERT INTO Jobs
+VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','HR Head','HR Heading',2,20000,3/7/2017,1,8)
+
+INSERT INTO Users
+VALUES ('PewDiePie','pdp','pdp@personal.com', 11/8/1986,2,'Pew','Die','Pie');
+
+INSERT INTO Staff_Members
+VALUES ('PewDiePie', 'pdp@tesla.com','Sunday',20000,'HR Head Assistant',(select department FROM jobs WHERE title='HR Head Assistant' and company='info@tesla.com'), 'info@tesla.com');
+
+INSERT INTO HR_Employees
+VALUES ('PewDiePie')
 
 INSERT INTO Jobs
 VALUES('Chief Supervisor',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','Supervisor','Supervisor of CS',2,100000,4/12/2017,1,8)

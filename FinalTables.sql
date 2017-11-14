@@ -250,7 +250,7 @@ CREATE TABLE Regular_Employees_apply_replace_Requests(
   applicant VARCHAR(20) NOT NULL,
   reg_employee VARCHAR(20) NOT NULL,
   replacement VARCHAR(20) NOT NULL,
-  FOREIGN KEY(start_date, applicant) REFERENCES Requests ON DELETE CASCADE,
+  FOREIGN KEY(start_date, applicant) REFERENCES Requests ON DELETE CASCADE On UPDATE CASCADE,
   FOREIGN KEY(reg_employee) REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY(replacement) REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE NO ACTION,
   PRIMARY KEY(start_date, applicant)
@@ -261,25 +261,25 @@ CREATE TABLE Managers_apply_replace_Requests(
   applicant VARCHAR(20) NOT NULL,
   manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE NO ACTION,
   replacement VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY(start_date, applicant) REFERENCES Requests ON DELETE CASCADE,
+  FOREIGN KEY(start_date, applicant) REFERENCES Requests ON DELETE CASCADE On UPDATE CASCADE,
   PRIMARY KEY(start_date, applicant)
 )
 
 CREATE TABLE Projects(
   name VARCHAR(20) NOT NULL,
-  company VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES Companies ON DELETE CASCADE,
+  company VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES Companies ON DELETE CASCADE  On UPDATE CASCADE,
   start_date datetime,
   end_date datetime,
-  manager VARCHAR(20) FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION,
+  manager VARCHAR(20) FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE No ACTION,
   PRIMARY KEY(name, company)
 )
 
 CREATE TABLE Managers_assign_Regular_Employees_Projects( 
   project_name VARCHAR(20) NOT NULL,
   company VARCHAR(100) NOT NULL,
-  regular_employee VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION,
-  manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION,
-  FOREIGN KEY(project_name, company) REFERENCES Projects ON DELETE CASCADE,
+  regular_employee VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE No ACTION,
+  manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE No ACTION,
+  FOREIGN KEY(project_name, company) REFERENCES Projects ON DELETE CASCADE On UPDATE CASCADE,
   PRIMARY KEY(project_name, company, regular_employee)
 )
 
@@ -290,9 +290,9 @@ CREATE TABLE Tasks(
   deadline datetime,
   status VARCHAR(10) NOT NULL,
   description VARCHAR(MAX) NOT NULL,
-  regular_employee VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION,
-  manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION,
-  FOREIGN KEY(project, company) REFERENCES Projects ON DELETE CASCADE,
+  regular_employee VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE No ACTION,
+  manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE No ACTION,
+  FOREIGN KEY(project, company) REFERENCES Projects ON DELETE CASCADE On UPDATE CASCADE,
   PRIMARY KEY(name, project, company)
 )
 
@@ -301,6 +301,6 @@ CREATE TABLE Task_Comments(
   project VARCHAR(20) NOT NULL,
   company VARCHAR(100) NOT NULL,
   comment VARCHAR(700) NOT NULL,
-  FOREIGN KEY(task_name, project, company) REFERENCES Tasks ON DELETE CASCADE,
+  FOREIGN KEY(task_name, project, company) REFERENCES Tasks ON DELETE CASCADE On UPDATE CASCADE,
   PRIMARY KEY(task_name, project, company, comment)
 )

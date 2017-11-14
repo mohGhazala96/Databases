@@ -1,15 +1,15 @@
+
 CREATE TABLE Companies (
 email  varchar(100) NOT NULL PRIMARY KEY ,
 name varchar(40) NOT NULL ,
-address  varchar(50) NOT NULL ,
+address  varchar(300) NOT NULL ,
 domain varchar(50) NOT NULL ,
 type   varchar(20) ,
-vision  varchar(50) ,
+vision  varchar(300) ,
 specialization varchar(20) NOT NULL
 );
 
 CREATE TABLE Company_Phone_Numbers (
-
 company varchar(100) NOT NULL ,
 phone char(11)  NOT NULL ,
 PRIMARY KEY (phone , company),
@@ -113,12 +113,13 @@ CREATE Table Staff_Members
 (
 username VarCHAR(20) PRIMARY KEY ,
 company_email VARCHAR(50) Not NULL,
-day_off datetime Not NULL,
+day_off VARCHAR(10) Not NULL,
 salary INT Not NULL,
 job VARCHAR(20) Not NULL,
 department int Not NULL,
 company  VARCHAR(100) Not NULL,
 CHECK(salary>=0),
+CHECK(day_off='Friday' or day_off='Saturday' or day_off='Sunday' or day_off='Monday' or day_off='Tuesday' or day_off='Wednesday' or day_off='Thursday' ),
 FOREIGN KEY(username) REFERENCES Users ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(job,department,company) REFERENCES Jobs ON DELETE CASCADE ON UPDATE CASCADE,
 )
@@ -126,8 +127,8 @@ FOREIGN KEY(job,department,company) REFERENCES Jobs ON DELETE CASCADE ON UPDATE 
 
 CREATE Table Job_Seekers_apply_Jobs
 (
-job VarCHAR(20) ,
-department int  ,
+job VarCHAR(20),
+department int ,
 company VarCHAR(100)   ,
 job_seeker VarCHAR(20) ,
 hr_response VarCHAR(10) Not NULL, 

@@ -1,0 +1,61 @@
+INSERT INTO Companies
+VALUES ( 'hr@Microsoft.com' , 'Microsoft' , 'Seattle' , 'microsoft.com' , 'International' , 'empower every person on the planet to achieve more' , 'Software'  );
+
+INSERT INTO Company_Phone_Numbers
+VALUES ('hr@Microsoft.com' , '01111111111' )  ;
+INSERT INTO Company_Phone_Numbers
+VALUES ('hr@Microsoft.com' , '01122222222' )  ;
+
+
+INSERT INTO Departments
+VALUES (   'hr@Microsoft.com'  , 'Innovation' )  ;
+INSERT INTO Departments
+VALUES (   'hr@Microsoft.com'  , 'Devlopment' )  ;
+INSERT INTO Departments
+VALUES (   'hr@Microsoft.com'  , 'Teaching' )  ;
+
+
+
+
+INSERT INTO Jobs 
+VALUES ( 'Teacher' , 3  , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 10000 , 1 , 17/12/2017 , 4 , 9   );
+INSERT INTO Jobs 
+VALUES ( 'Engineer' , 1  , 'hr@Microsoft.com' , 'Invent new machines' , 'Working on Research projects to invent machines' , 20000 , 2 , 30/1/2017 , 1 , 8   );
+INSERT INTO Jobs 
+VALUES ( 'Engineer'  , 2 , 'hr@Microsoft.com' , 'Innovate and Invent' , 'Work with a team od developers to find solutions to challenging problems' , 30000  , 3 , 5/11/2017 , 7 , 9   );
+INSERT INTO Jobs  
+VALUES ( 'Devloper' , 2  , 'hr@Microsoft.com' , 'Coding and innovating' , 'Writing organized code that solves realtime problems' , 50000 , 1 , 10/11/2017 , 1 , 10   );
+
+
+INSERT INTO Users
+VALUES ( 'Mamdouh' , 'abcdef' , 'Mamdouh@gmail.com' , 03/12/1990 ,12000  , 15 , 'Mostafa' , 'Ahmed' , 'Mamdouh'   );
+INSERT INTO Users
+VALUES ( 'Rami' , '12345' , 'Rami@gmail.com' , 06/11/1990 , 10000 , 12 , 'Mohamed' , 'Ahmed' , 'Rami'   );
+INSERT INTO Users
+VALUES ( 'Mohamed' , 'ab123' , 'Mohamed@yahoo.com' , 05/07/1991 , 15000 , 1 , 'Ahmed' , 'Mohamed' , 'Mohamed'   );
+INSERT INTO Users
+VALUES ( 'Ahmed' , 'a12be' , 'Ahmed@outlook.com' , 04/07/1992 , 1000 , 10 , 'Sami' , 'Momdouh' , 'Ahmed'   );
+
+
+
+INSERT INTO Staff_Members
+VALUES (   'Mamdouh'   , 'Mamdouh@microsoft.com' , 'Thursday' , 2000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
+INSERT INTO Staff_Members
+VALUES (   'Rami'  , 'Rami@microsoft.com' , 'Friday' , 1000 , 'Engineer' , 2 , 'hr@Microsoft.com' )  ;
+INSERT INTO Staff_Members
+VALUES (   'Mohamed'   , 'Mohamed@microsoft.com' , 'Monday' , 5000 , 'Teacher' , 3 , 'hr@Microsoft.com' )  ;
+INSERT INTO Staff_Members
+VALUES (   'Ahmed'  , 'Ahmed@microsoft.com' , 'Friday' , 20000  , 'Engineer' , 1 , 'hr@Microsoft.com'  )  ;
+
+
+INSERT INTO HR_Employees
+VALUES ('Ahmed' )  ;
+INSERT INTO HR_Employees
+VALUES ('Rami' )  ;
+INSERT INTO HR_Employees
+VALUES ('Mohamed' )  ;
+
+INSERT INTO Managers
+VALUES ('Mohamed' , 'HR' )  ;
+INSERT INTO Managers
+VALUES ('Mamdouh' , 'HR' )  ;

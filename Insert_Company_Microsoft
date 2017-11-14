@@ -50,12 +50,11 @@ VALUES (   'Ahmed'  , 'Ahmed@microsoft.com' , 'Friday' , 20000  , 'Engineer' , 1
 
 INSERT INTO HR_Employees
 VALUES ('Ahmed' )  ;
-INSERT INTO HR_Employees
-VALUES ('Rami' )  ;
+
 INSERT INTO HR_Employees
 VALUES ('Mohamed' )  ;
 
 INSERT INTO Managers
-VALUES ('Mohamed' , 'HR' )  ;
+VALUES ('Rami' , 'HR' )  ;
 INSERT INTO Managers
 VALUES ('Mamdouh' , 'HR' )  ;

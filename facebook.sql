@@ -143,6 +143,51 @@ INSERT INTO Users VALUES(
     'shawky'
  
 );
+
+INSERT INTO Users VALUES(
+    'omar.sami',
+    'project_Zareef',
+    'omar.sami@gmail.com',
+    '9/7/1989 00:00:00',
+    8,
+    'omar',
+    'gates',
+    'sami'
+ 
+);
+INSERT INTO Users VALUES(
+   'hala.shoaib',
+    'nopassword_am_bored',
+    'hala.shoaib@yahoo.com',
+    '4/21/1970 00:00:00',
+    12,
+    'hala',
+    'mostafa',
+    'shoaib'
+ 
+);
+INSERT INTO Users VALUES(
+    'yara.gomez',
+    'kokofofololo',
+    'lara.shawky@hotmail.com',
+    '9/2/1988 00:00:00',
+    8,
+    'lara',
+    'ahmed',
+    'shawky'
+ 
+);
+INSERT INTO Users VALUES(
+    'sara.shehab',
+    'kolo_fel_keltsh',
+    'sara.shehab@aol.com',
+    '1/25/1978 00:00:00',
+    9,
+    'sara',
+    'mohamed',
+    'shehab'
+ 
+);
 INSERT INTO Jobs VALUES(
     'SalesMan',
     (select TOP 1 code from Departments where company = 'info@facebook.com' and name='Marekting and Sales'),
@@ -270,6 +315,47 @@ INSERT INTO Staff_Members VALUES(
 'info@facebook.com'
 )
 
+INSERT INTO Staff_Members VALUES(
+'sara.shehab',
+'sara.shehab@facebook.com',
+'Friday',
+60000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
+INSERT INTO Staff_Members VALUES(
+'omar.sami',
+'omar.sami@facebook.com',
+'Sunday',
+80000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
+INSERT INTO Staff_Members VALUES(
+'hala.shoaib',
+'hala.shoaib@facebook.com',
+'Friday',
+110000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
+INSERT INTO Staff_Members VALUES(
+'yara.gomez',
+'yara.gomez@facebook.com',
+'Tuesday',
+60000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
+
 INSERT INTO Managers VALUES(
 'osama.rady',
 'Head'
@@ -283,6 +369,21 @@ INSERT INTO HR_Employees VALUES(
 )
 INSERT INTO HR_Employees VALUES(
 'tarek.osman'
+)
+
+INSERT INTO Managers VALUES(
+'hala.shoaib',
+'Head'
+)
+INSERT INTO Managers VALUES(
+'omar.sami',
+'Vice Head'
+)
+INSERT INTO HR_Employees VALUES(
+'yara.gomez'
+)
+INSERT INTO HR_Employees VALUES(
+'sara.shehab'
 )
 
 INSERT INTO Managers VALUES(

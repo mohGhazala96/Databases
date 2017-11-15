@@ -46,13 +46,13 @@ INSERT INTO Users
 VALUES ( 'Sami.Ahmed' , 'a12be' , 'Sami.Ahmed@outlook.com' , 04/07/1992  , 10 , 'Sami' , 'Momdouh' , 'Ahmed'   );
 
 INSERT INTO Staff_Members
-VALUES (   'Mostafa.Mamdouh'   , 'Mostafa.Mamdouh@microsoft.com' , 04/07/1990 , 2000 , 'Devloper' , 1 , 'hr@Microsoft.com' )  ;
+VALUES (   'Mostafa.Mamdouh'   , 'Mostafa.Mamdouh@microsoft.com' , 'Thursday' , 2000 , 'Devloper' , 1 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Mohamed.Rami'  , 'Mohamed.Rami@microsoft.com' , 04/07/1982 , 1000 , 'Engineer' , 1 , 'hr@Microsoft.com' )  ;
+VALUES (   'Mohamed.Rami'  , 'Mohamed.Rami@microsoft.com' , 'Wednesday' , 1000 , 'Engineer' , 1 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Ahmed.Mohamed'   , 'Ahmed.Mohamed@microsoft.com' , 04/07/1992 , 5000 , 'Teacher' , 1 , 'hr@Microsoft.com' )  ;
+VALUES (   'Ahmed.Mohamed'   , 'Ahmed.Mohamed@microsoft.com' , 'Wednesday' , 5000 , 'Teacher' , 1 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Sami.Ahmed'  , 'Sami.Ahmed@microsoft.com' , 04/07/1989 , 20000  , 'Engineer' , 1 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Sami.Ahmed'  , 'Sami.Ahmed@microsoft.com' , 'Friday' , 20000  , 'Engineer' , 1 , 'hr@Microsoft.com'  )  ;
 
 INSERT INTO HR_Employees
 VALUES ('Mostafa.Mamdouh' )  ;
@@ -77,13 +77,13 @@ INSERT INTO Users
 VALUES ( 'Salman.Ahmed' , 'a12be' , 'Ahmed@outlook.com' , 04/07/1992  , 10 , 'Salman' , 'Morad' , 'Ahmed'   );
 
 INSERT INTO Staff_Members
-VALUES (   'Khalid.Mamdouh'  , 'Khalid.Mamdouh@microsoft.com' , 20/3/2017 , 2500  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Khalid.Mamdouh'  , 'Khalid.Mamdouh@microsoft.com' , 'Friday' , 2500  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Salem.Masoud'  , 'Salem.Masoud@microsoft.com' , 20/3/2017 , 2000  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Salem.Masoud'  , 'Salem.Masoud@microsoft.com' , 'Wednesday' , 2000  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'John.Steve'   , 'John.Steve@microsoft.com' , 20/3/2017 , 3000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
+VALUES (   'John.Steve'   , 'John.Steve@microsoft.com' , 'Thursday' , 3000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Salman.Ahmed'   , 'Salman.Ahmed@microsoft.com' , 20/3/2017 , 5000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
+VALUES (   'Salman.Ahmed'   , 'Salman.Ahmed@microsoft.com' , 'Friday' , 5000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
 
 INSERT INTO HR_Employees
 VALUES ('Khalid.Mamdouh' )  ;
@@ -109,13 +109,13 @@ INSERT INTO Users
 VALUES ( 'Kamal.Salman' , 'a12be' , 'Ahmed@outlook.com' , 04/07/1992  , 10 , 'Kamal' , 'Momdouh' , 'Salman'   );
 
 INSERT INTO Staff_Members
-VALUES (   'Raouf.Salem'  , 'Raouf.Salem@microsoft.com' , 20/3/2017 , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Raouf.Salem'  , 'Raouf.Salem@microsoft.com' , 'Monday' , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Kamel.Mohamed'  , 'Kamel.Mohamed@microsoft.com' , 20/3/2017 , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Kamel.Mohamed'  , 'Kamel.Mohamed@microsoft.com' , 'Saturday' , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Ahmed.Massoud'  , 'Ahmed.Massoud@microsoft.com' , 20/3/2017 , 20000  , 'Devloper' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Ahmed.Massoud'  , 'Ahmed.Massoud@microsoft.com' , 'Wednesday' , 20000  , 'Devloper' , 3 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Kamal.Salman'  , 'Kamal.Salman@microsoft.com' , 20/3/2017 , 20000  , 'Engineer' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Kamal.Salman'  , 'Kamal.Salman@microsoft.com' , 'Wednesday' , 20000  , 'Engineer' , 3 , 'hr@Microsoft.com'  )  ;
 
 INSERT INTO HR_Employees
 VALUES ('Raouf.Salem' )  ;

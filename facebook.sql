@@ -96,6 +96,98 @@ INSERT INTO Users VALUES(
     'mostafa'
  
 );
+INSERT INTO Users VALUES(
+    'karim.medhat',
+    'bettergetmymoney',
+    'karim.medhat@yahoo.com',
+    '1/7/1977 00:00:00',
+    11,
+    'karim',
+    'ahmed',
+    'medhat'
+ 
+);
+ 
+INSERT INTO Users VALUES(
+    'emad.sherif',
+    'verygoodpassword',
+    'emad.sherif@outlook.com',
+    '6/6/1972 00:00:00',
+    3,
+    'emad',
+    'mohamed',
+    'sherif'
+ 
+);
+
+
+INSERT INTO Users VALUES(
+    'hend.mohamed',
+    'anazeh2tgedan',
+    'hend.mohamed@aol.com',
+    '12/24/1978 00:00:00',
+    7,
+    'hend',
+    'yousef',
+    'mohamed'
+ 
+);
+INSERT INTO Users VALUES(
+    'lara.shawky',
+    'hellotheregoes',
+    'lara.shawky@gmail.com',
+    '11/23/1980 00:00:00',
+    8,
+    'lara',
+    'ahmed',
+    'shawky'
+ 
+);
+
+INSERT INTO Users VALUES(
+    'omar.sami',
+    'project_Zareef',
+    'omar.sami@gmail.com',
+    '9/7/1989 00:00:00',
+    8,
+    'omar',
+    'gates',
+    'sami'
+ 
+);
+INSERT INTO Users VALUES(
+   'hala.shoaib',
+    'nopassword_am_bored',
+    'hala.shoaib@yahoo.com',
+    '4/21/1970 00:00:00',
+    12,
+    'hala',
+    'mostafa',
+    'shoaib'
+ 
+);
+INSERT INTO Users VALUES(
+    'yara.gomez',
+    'kokofofololo',
+    'lara.shawky@hotmail.com',
+    '9/2/1988 00:00:00',
+    8,
+    'lara',
+    'ahmed',
+    'shawky'
+ 
+);
+INSERT INTO Users VALUES(
+    'sara.shehab',
+    'kolo_fel_keltsh',
+    'sara.shehab@aol.com',
+    '1/25/1978 00:00:00',
+    9,
+    'sara',
+    'mohamed',
+    'shehab'
+ 
+);
 INSERT INTO Jobs VALUES(
     'SalesMan',
     (select TOP 1 code from Departments where company = 'info@facebook.com' and name='Marekting and Sales'),
@@ -152,8 +244,8 @@ INSERT INTO Staff_Members VALUES(
 'tarek.osman@facebook.com',
 'Saturday',
 40000,
-'Graphics Designer',
-(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Creative'),
+'Engineer',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Online Operations'),
 'info@facebook.com'
 )
 INSERT INTO Staff_Members VALUES(
@@ -161,8 +253,8 @@ INSERT INTO Staff_Members VALUES(
 'bakr.mostafa@facebook.com',
 'Monday',
 60000,
-'Graphics Designer',
-(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Creative'),
+'Engineer',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Online Operations'),
 'info@facebook.com'
 )
 
@@ -183,9 +275,86 @@ INSERT INTO Staff_Members VALUES(
 80000,
 'Engineer',
 (select TOP 1 code from Departments where company = 'info@facebook.com' and name='Online Operations'),
-
 'info@facebook.com'
 )
+  
+INSERT INTO Staff_Members VALUES(
+'lara.shawky',
+'lara.shawky@facebook.com',
+'Tuesday',
+80000,
+'Graphics Designer',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Creative'),
+'info@facebook.com'
+)
+INSERT INTO Staff_Members VALUES(
+'hend.mohamed',
+'hend.mohamed@facebook.com',
+'Monday',
+60000,
+'Graphics Designer',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Creative'),
+'info@facebook.com'
+)
+INSERT INTO Staff_Members VALUES(
+ 'emad.sherif',
+'emad.sherif@facebook.com',
+'Saturday',
+100000,
+'Graphics Designer',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Creative'),
+'info@facebook.com'
+)
+INSERT INTO Staff_Members VALUES(
+'karim.medhat',
+'karim.medhat@facebook.com',
+'Friday',
+90000,
+'Graphics Designer',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Creative'),
+'info@facebook.com'
+)
+
+INSERT INTO Staff_Members VALUES(
+'sara.shehab',
+'sara.shehab@facebook.com',
+'Friday',
+60000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
+INSERT INTO Staff_Members VALUES(
+'omar.sami',
+'omar.sami@facebook.com',
+'Sunday',
+80000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
+INSERT INTO Staff_Members VALUES(
+'hala.shoaib',
+'hala.shoaib@facebook.com',
+'Friday',
+110000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
+INSERT INTO Staff_Members VALUES(
+'yara.gomez',
+'yara.gomez@facebook.com',
+'Tuesday',
+60000,
+'Data Analyst',
+(select TOP 1 code from Departments where company = 'info@facebook.com' and name='Data & Analytics'),
+'info@facebook.com'
+)
+
 
 INSERT INTO Managers VALUES(
 'osama.rady',
@@ -200,6 +369,36 @@ INSERT INTO HR_Employees VALUES(
 )
 INSERT INTO HR_Employees VALUES(
 'tarek.osman'
+)
+
+INSERT INTO Managers VALUES(
+'hala.shoaib',
+'Head'
+)
+INSERT INTO Managers VALUES(
+'omar.sami',
+'Vice Head'
+)
+INSERT INTO HR_Employees VALUES(
+'yara.gomez'
+)
+INSERT INTO HR_Employees VALUES(
+'sara.shehab'
+)
+
+INSERT INTO Managers VALUES(
+'lara.shawky',
+'Head'
+)
+INSERT INTO Managers VALUES(
+'emad.sherif',
+'Vice Head'
+)
+INSERT INTO HR_Employees VALUES(
+'karim.medhat'
+)
+INSERT INTO HR_Employees VALUES(
+'hend.mohamed'
 )
 
 

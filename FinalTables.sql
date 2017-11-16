@@ -292,7 +292,7 @@ CREATE TABLE Tasks(
   description VARCHAR(MAX) NOT NULL,
   regular_employee VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE No ACTION,
   manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE No ACTION,
-  CHECK(status = 'Fixed' or status = 'Assigned'),
+  CHECK(status = 'Fixed' or status = 'Assigned' or status='Open'),
   FOREIGN KEY(project, company) REFERENCES Projects ON DELETE CASCADE On UPDATE CASCADE,
   PRIMARY KEY(name, project, company)
 )

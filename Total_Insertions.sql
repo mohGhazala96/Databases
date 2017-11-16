@@ -493,7 +493,7 @@ INSERT INTO Managers VALUES(
 )
 INSERT INTO Managers VALUES(
 'bakr.mostafa',
-'Vice Head'
+'HR'
 )
 INSERT INTO HR_Employees VALUES(
 'shady.ahmed'
@@ -523,7 +523,7 @@ INSERT INTO Managers VALUES(
 )
 INSERT INTO Managers VALUES(
 'emad.sherif',
-'Vice Head'
+'HR'
 )
 INSERT INTO HR_Employees VALUES(
 'karim.medhat'
@@ -697,9 +697,6 @@ VALUES ('TonyStark', 'tstark@tesla.com','Friday',100000,'R&D CoManager' ,(select
 
 INSERT INTO Managers
 VALUES ('TonyStark','Helper Manager')
-
-
-
 
 
 

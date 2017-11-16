@@ -133,8 +133,8 @@ job_seeker VarCHAR(20) ,
 hr_response VarCHAR(10) Not NULL, 
 manager_response VarCHAR(10) Not NULL,
 score INT Not NULL,
-CHECK (hr_response= 'Approved' or hr_response='Rejected' or hr_response='Pending' ),-- as it can be only rejected accepted or waiting
-CHECK (manager_response= 'Approved' or manager_response='Rejected' or manager_response='Pending' ), -- as it can be only rejected, accepted  or waiting
+CHECK(hr_response= 'Approved' or hr_response='Rejected' or hr_response='Pending'),
+CHECK(manager_response= 'Approved' or manager_response='Rejected' or manager_response='Pending'),
 CHECK(score>=0),
 PRIMARY KEY(job,department,company,job_seeker),
 FOREIGN KEY(job,department,company) REFERENCES Jobs ON DELETE CASCADE ON UPDATE CASCADE,

@@ -203,9 +203,9 @@ CREATE TABLE Requests(
     request_date DATETIME NOT NULL,
     total_days AS end_date - start_date,
     hr_employee VARCHAR(20),
-    hr_response VARCHAR(50) DEFAULT 'Pending' NOT NULL,
+    hr_response VARCHAR(50) DEFAULT 'Pending' ,
     manager VARCHAR (20),
-    manager_response VARCHAR(50) DEFAULT 'Pending' NOT NULL,
+    manager_response VARCHAR(50) DEFAULT 'Pending' ,
     manager_reason VARCHAR(MAX),
 
     CHECK(hr_response= 'Approved' or hr_response='Rejected' or hr_response='Pending'),

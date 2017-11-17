@@ -292,7 +292,7 @@ CREATE TABLE Tasks(
   deadline datetime,
   status VARCHAR(10) DEFAULT 'Open' NOT NULL,
   description VARCHAR(MAX) NOT NULL,
-  regular_employee VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE No ACTION,
+  regular_employee VARCHAR(20)  FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE No ACTION,
   manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE No ACTION,
   CHECK(status = 'Fixed' or status = 'Assigned' or status='Open' or status ='Closed'),
   FOREIGN KEY(project, company) REFERENCES Projects ON DELETE CASCADE On UPDATE CASCADE,

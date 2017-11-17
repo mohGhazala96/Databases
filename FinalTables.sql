@@ -1,4 +1,5 @@
 
+
 CREATE TABLE Companies (
 email  varchar(100) NOT NULL PRIMARY KEY ,
 name varchar(40) NOT NULL ,
@@ -219,7 +220,7 @@ CREATE TABLE Requests(
 CREATE TABLE Leave_Requests(
     start_date DATETIME,
     applicant VARCHAR(20),
-
+    type VARCHAR(20),
     PRIMARY KEY (start_date, applicant),
     FOREIGN KEY (start_date, applicant) REFERENCES Requests (start_date, applicant) ON DELETE CASCADE ON UPDATE CASCADE
 )

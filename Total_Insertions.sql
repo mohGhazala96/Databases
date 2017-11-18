@@ -47,13 +47,13 @@ INSERT INTO Users
 VALUES ( 'Sami.Ahmed' , 'a12be' , 'Sami.Ahmed@outlook.com' , 04/07/1992  , 10 , 'Sami' , 'Momdouh' , 'Ahmed'   );
 
 INSERT INTO Staff_Members
-VALUES (   'Mostafa.Mamdouh'   , 'Mostafa.Mamdouh@microsoft.com' , 'Thursday' , 2000 , 'Devloper' , 1 , 'hr@Microsoft.com' )  ;
+VALUES (   'Mostafa.Mamdouh'  ,30 , 'Mostafa.Mamdouh@microsoft.com' , 'Thursday' , 2000 , 'Devloper' , 1 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Mohamed.Rami'  , 'Mohamed.Rami@microsoft.com' , 'Wednesday' , 1000 , 'Engineer' , 1 , 'hr@Microsoft.com' )  ;
+VALUES (   'Mohamed.Rami'  ,11, 'Mohamed.Rami@microsoft.com' , 'Wednesday' , 1000 , 'Engineer' , 1 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Ahmed.Mohamed'   , 'Ahmed.Mohamed@microsoft.com' , 'Wednesday' , 5000 , 'Teacher' , 1 , 'hr@Microsoft.com' )  ;
+VALUES (   'Ahmed.Mohamed' ,20  , 'Ahmed.Mohamed@microsoft.com' , 'Wednesday' , 5000 , 'Teacher' , 1 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Sami.Ahmed'  , 'Sami.Ahmed@microsoft.com' , 'Friday' , 20000  , 'Engineer' , 1 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Sami.Ahmed'  ,18, 'Sami.Ahmed@microsoft.com' , 'Friday' , 20000  , 'Engineer' , 1 , 'hr@Microsoft.com'  )  ;
 
 INSERT INTO HR_Employees
 VALUES ('Mostafa.Mamdouh' )  ;
@@ -78,13 +78,13 @@ INSERT INTO Users
 VALUES ( 'Salman.Ahmed' , 'a12be' , 'Ahmed@outlook.com' , 04/07/1992  , 10 , 'Salman' , 'Morad' , 'Ahmed'   );
 
 INSERT INTO Staff_Members
-VALUES (   'Khalid.Mamdouh'  , 'Khalid.Mamdouh@microsoft.com' , 'Friday' , 2500  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Khalid.Mamdouh'  ,6, 'Khalid.Mamdouh@microsoft.com' , 'Friday' , 2500  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Salem.Masoud'  , 'Salem.Masoud@microsoft.com' , 'Wednesday' , 2000  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Salem.Masoud'  ,7, 'Salem.Masoud@microsoft.com' , 'Wednesday' , 2000  , 'Engineer' , 2 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'John.Steve'   , 'John.Steve@microsoft.com' , 'Thursday' , 3000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
+VALUES (   'John.Steve'   , 12,'John.Steve@microsoft.com' , 'Thursday' , 3000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
 INSERT INTO Staff_Members
-VALUES (   'Salman.Ahmed'   , 'Salman.Ahmed@microsoft.com' , 'Friday' , 5000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
+VALUES (   'Salman.Ahmed'   , 12,'Salman.Ahmed@microsoft.com' , 'Friday' , 5000 , 'Devloper' , 2 , 'hr@Microsoft.com' )  ;
 
 INSERT INTO HR_Employees
 VALUES ('Khalid.Mamdouh' )  ;
@@ -110,13 +110,13 @@ INSERT INTO Users
 VALUES ( 'Kamal.Salman' , 'a12be' , 'Ahmed@outlook.com' , 04/07/1992  , 10 , 'Kamal' , 'Momdouh' , 'Salman'   );
 
 INSERT INTO Staff_Members
-VALUES (   'Raouf.Salem'  , 'Raouf.Salem@microsoft.com' , 'Monday' , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Raouf.Salem'  ,30, 'Raouf.Salem@microsoft.com' , 'Monday' , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Kamel.Mohamed'  , 'Kamel.Mohamed@microsoft.com' , 'Saturday' , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Kamel.Mohamed'  ,30, 'Kamel.Mohamed@microsoft.com' , 'Saturday' , 20000  , 'Teacher' , 3 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Ahmed.Massoud'  , 'Ahmed.Massoud@microsoft.com' , 'Wednesday' , 20000  , 'Devloper' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Ahmed.Massoud'  , 40,'Ahmed.Massoud@microsoft.com' , 'Wednesday' , 20000  , 'Devloper' , 3 , 'hr@Microsoft.com'  )  ;
 INSERT INTO Staff_Members
-VALUES (   'Kamal.Salman'  , 'Kamal.Salman@microsoft.com' , 'Wednesday' , 20000  , 'Engineer' , 3 , 'hr@Microsoft.com'  )  ;
+VALUES (   'Kamal.Salman'  , 45,'Kamal.Salman@microsoft.com' , 'Wednesday' , 20000  , 'Engineer' , 3 , 'hr@Microsoft.com'  )  ;
 
 INSERT INTO HR_Employees
 VALUES ('Raouf.Salem' )  ;
@@ -371,7 +371,7 @@ INSERT INTO Jobs VALUES(
 
 
 INSERT INTO Staff_Members VALUES(
-'tarek.osman',
+'tarek.osman',12,
 'tarek.osman@facebook.com',
 'Saturday',
 40000,
@@ -380,7 +380,7 @@ INSERT INTO Staff_Members VALUES(
 'info@facebook.com'
 )
 INSERT INTO Staff_Members VALUES(
-'bakr.mostafa',
+'bakr.mostafa',14,
 'bakr.mostafa@facebook.com',
 'Monday',
 60000,
@@ -390,7 +390,7 @@ INSERT INTO Staff_Members VALUES(
 )
 
 INSERT INTO Staff_Members VALUES(
-'shady.ahmed',
+'shady.ahmed',34,
 'shady.ahmed@facebook.com',
 'Monday',
 70000,
@@ -400,7 +400,7 @@ INSERT INTO Staff_Members VALUES(
 )
 
 INSERT INTO Staff_Members VALUES(
-'osama.rady',
+'osama.rady',33,
 'osama.rady@facebook.com',
 'Monday',
 80000,
@@ -410,7 +410,7 @@ INSERT INTO Staff_Members VALUES(
 )
   
 INSERT INTO Staff_Members VALUES(
-'lara.shawky',
+'lara.shawky',28,
 'lara.shawky@facebook.com',
 'Tuesday',
 80000,
@@ -419,7 +419,7 @@ INSERT INTO Staff_Members VALUES(
 'info@facebook.com'
 )
 INSERT INTO Staff_Members VALUES(
-'hend.mohamed',
+'hend.mohamed',29,
 'hend.mohamed@facebook.com',
 'Monday',
 60000,
@@ -428,7 +428,7 @@ INSERT INTO Staff_Members VALUES(
 'info@facebook.com'
 )
 INSERT INTO Staff_Members VALUES(
- 'emad.sherif',
+ 'emad.sherif',22,
 'emad.sherif@facebook.com',
 'Saturday',
 100000,
@@ -437,7 +437,7 @@ INSERT INTO Staff_Members VALUES(
 'info@facebook.com'
 )
 INSERT INTO Staff_Members VALUES(
-'karim.medhat',
+'karim.medhat',30,
 'karim.medhat@facebook.com',
 'Friday',
 90000,
@@ -447,7 +447,7 @@ INSERT INTO Staff_Members VALUES(
 )
 
 INSERT INTO Staff_Members VALUES(
-'sara.shehab',
+'sara.shehab',27,
 'sara.shehab@facebook.com',
 'Friday',
 60000,
@@ -457,7 +457,7 @@ INSERT INTO Staff_Members VALUES(
 )
 
 INSERT INTO Staff_Members VALUES(
-'omar.sami',
+'omar.sami',38,
 'omar.sami@facebook.com',
 'Sunday',
 80000,
@@ -467,7 +467,7 @@ INSERT INTO Staff_Members VALUES(
 )
 
 INSERT INTO Staff_Members VALUES(
-'hala.shoaib',
+'hala.shoaib',22,
 'hala.shoaib@facebook.com',
 'Friday',
 110000,
@@ -477,7 +477,7 @@ INSERT INTO Staff_Members VALUES(
 )
 
 INSERT INTO Staff_Members VALUES(
-'yara.gomez',
+'yara.gomez',40,
 'yara.gomez@facebook.com',
 'Tuesday',
 60000,
@@ -561,7 +561,7 @@ INSERT INTO Users
 VALUES ('ElonMusk','tesla4life','self@elonmusk.com', 6/28/1971,20,'Elon','Reeve','Musk');
 
 INSERT INTO Staff_Members
-VALUES ((select username from Users where username = 'ElonMusk'), 'ceo@tesla.com','Friday',2000000,'CEO',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ((select username from Users where username = 'ElonMusk'), 12,'ceo@tesla.com','Friday',2000000,'CEO',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO Managers
 VALUES ('ElonMusk','Head Of Manufacturing')
@@ -573,7 +573,7 @@ INSERT INTO Users
 VALUES ('BenedictCumberbatch','sherlock','sherlock@bbc.com', 7/19/1976,4,'Benedict','Timothy','Cumberbatch');
 
 INSERT INTO Staff_Members
-VALUES ('BenedictCumberbatch', 'bcumber@tesla.com','Friday',100000,'Supervisor',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('BenedictCumberbatch',23, 'bcumber@tesla.com','Friday',100000,'Supervisor',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO Managers
 VALUES ('BenedictCumberbatch','Head Of Manufacturing')
@@ -585,7 +585,7 @@ INSERT INTO Users
 VALUES ('JenniferLaw','jennifer','mockingjay@jlaw.com', 8/15/1990,4,'Jennifer','Shrader','Lawrence');
 
 INSERT INTO Staff_Members
-VALUES ('JenniferLaw', 'jlaw@tesla.com','Saturday',50000,'HR Head',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('JenniferLaw',28, 'jlaw@tesla.com','Saturday',50000,'HR Head',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO HR_Employees
 VALUES ('JenniferLaw')
@@ -597,7 +597,7 @@ INSERT INTO Users
 VALUES ('EmmaStone','emma','self@emmastone.com', 11/7/1988,2,'Emma','Jean','Stone');
 
 INSERT INTO Staff_Members
-VALUES ('EmmaStone', 'estone@tesla.com','Sunday',20000,'HR Head Assistant',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('EmmaStone', 29,'estone@tesla.com','Sunday',20000,'HR Head Assistant',(select code FROM Departments WHERE name='Manufacturing' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO HR_Employees
 VALUES ('EmmaStone')
@@ -609,7 +609,7 @@ INSERT INTO Users
 VALUES ('MoxieMarlinspike','moxie','moxie@marlinspike.com', 11/7/1988,2,'Moxie','','Marlinspike');
 
 INSERT INTO Staff_Members
-VALUES ('MoxieMarlinspike', 'moxie@tesla.com','Sunday',54321,'HR Head',(select code FROM Departments WHERE name='Customer Service' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('MoxieMarlinspike', 30,'moxie@tesla.com','Sunday',54321,'HR Head',(select code FROM Departments WHERE name='Customer Service' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO HR_Employees
 VALUES ('MoxieMarlinspike')
@@ -621,7 +621,7 @@ INSERT INTO Users
 VALUES ('AaronSwartz','aaron','aaron@swartz.com', 11/8/1986,2,'Aaron','Hillel','Swartz');
 
 INSERT INTO Staff_Members
-VALUES ('AaronSwartz', 'aswartz@tesla.com','Sunday',20000,'HR Head Assistant',(select code FROM Departments WHERE name='Customer Service' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('AaronSwartz',22, 'aswartz@tesla.com','Sunday',20000,'HR Head Assistant',(select code FROM Departments WHERE name='Customer Service' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO HR_Employees
 VALUES ('AaronSwartz')
@@ -633,7 +633,7 @@ INSERT INTO Users
 VALUES ('PeterEckersley','pde','pde@eckersley.org', 11/7/1988,2,'Peter','','Eckersley');
 
 INSERT INTO Staff_Members
-VALUES ('PeterEckersley', 'moxie@tesla.com','Sunday',54321,'HR Head',(select code FROM Departments WHERE name='R&D' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('PeterEckersley', 35,'moxie@tesla.com','Sunday',54321,'HR Head',(select code FROM Departments WHERE name='R&D' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO HR_Employees
 VALUES ('PeterEckersley')
@@ -645,7 +645,7 @@ INSERT INTO Users
 VALUES ('PewDiePie','pdp','pdp@personal.com', 11/8/1986,2,'Pew','Die','Pie');
 
 INSERT INTO Staff_Members
-VALUES ('PewDiePie', 'pdp@tesla.com','Sunday',20000,'HR Head Assistant',(select code FROM Departments WHERE name='R&D' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('PewDiePie', 38,'pdp@tesla.com','Sunday',20000,'HR Head Assistant',(select code FROM Departments WHERE name='R&D' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO HR_Employees
 VALUES ('PewDiePie')
@@ -657,7 +657,7 @@ INSERT INTO Users
 VALUES ('MartinFreeman','theHobbit','self@martinfreeman.com', 11/7/1988,2,'Martin','John','Freeman');
 
 INSERT INTO Staff_Members
-VALUES ('MartinFreeman', 'mfreeman@tesla.com','Tuesday',100000,'Chief Supervisor',(select code FROM Departments WHERE name='Customer Service' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('MartinFreeman', 25,'mfreeman@tesla.com','Tuesday',100000,'Chief Supervisor',(select code FROM Departments WHERE name='Customer Service' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO Managers
 VALUES ('MartinFreeman','Chief')
@@ -669,7 +669,7 @@ INSERT INTO Users
 VALUES ('AhmedMalek','actorguy','self@amalek.com', 1/7/1992,2,'Ahmed','Hesham','Malek');
 
 INSERT INTO Staff_Members
-VALUES ('AhmedMalek', 'amalek@tesla.com','Tuesday',50000,'Head Calls',(select department FROM jobs WHERE title='Head Calls' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('AhmedMalek', 45,'amalek@tesla.com','Tuesday',50000,'Head Calls',(select department FROM jobs WHERE title='Head Calls' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO Managers
 VALUES ('AhmedMalek','Head')
@@ -681,7 +681,7 @@ INSERT INTO Users
 VALUES ('RamiMalek','hackerman','self@ramimalek.com', 2/20/1989,2,'Rami','Youssef','Malek');
 
 INSERT INTO Staff_Members
-VALUES ('RamiMalek', 'rmalek@tesla.com','Friday',100000,'R&D Manager' ,(select department FROM jobs WHERE title='R&D Manager' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('RamiMalek', 16,'rmalek@tesla.com','Friday',100000,'R&D Manager' ,(select department FROM jobs WHERE title='R&D Manager' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO Managers
 VALUES ('RamiMalek','Main Manager')
@@ -693,7 +693,7 @@ INSERT INTO Users
 VALUES ('TonyStark','ironman','self@ironman.com', 5/10/1982,2,'Tony','Jr','Stark');
 
 INSERT INTO Staff_Members
-VALUES ('TonyStark', 'tstark@tesla.com','Friday',100000,'R&D CoManager' ,(select department FROM jobs WHERE title='R&D CoManager' and company='info@tesla.com'), 'info@tesla.com');
+VALUES ('TonyStark', 18,'tstark@tesla.com','Friday',100000,'R&D CoManager' ,(select department FROM jobs WHERE title='R&D CoManager' and company='info@tesla.com'), 'info@tesla.com');
 
 INSERT INTO Managers
 VALUES ('TonyStark','Helper Manager')

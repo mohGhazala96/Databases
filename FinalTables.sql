@@ -113,6 +113,7 @@ username varchar(20) PRIMARY KEY FOREIGN KEY REFERENCES Users(username)
 CREATE Table Staff_Members
 (
 username VarCHAR(20) PRIMARY KEY ,
+annual_leaves int Not NULL,
 company_email VARCHAR(50) Not NULL,
 day_off VARCHAR(10) Not NULL,
 salary INT Not NULL,

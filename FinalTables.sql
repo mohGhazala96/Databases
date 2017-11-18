@@ -202,7 +202,7 @@ CREATE TABLE Requests(
     applicant VARCHAR(20),
     end_date DATETIME NOT NULL,
     request_date DATETIME NOT NULL,
-    total_days AS end_date - start_date,
+    total_days AS day(end_date - start_date),
     hr_employee VARCHAR(20),
     hr_response VARCHAR(50) DEFAULT 'Pending' ,
     manager VARCHAR (20),

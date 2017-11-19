@@ -55,22 +55,45 @@ BEGIN
                 SELECT @domain=domain
                 FROM Companies
                 WHERE email=@company
+                IF @day_off != 'Friday'
                 BEGIN
-                    UPDATE Jobs
-                    SET no_of_vacancies = @nVacancies-1
-                    WHERE title=@job AND department=@department and company= @company
-                    BEGIN
-                        IF @day_off != 'Friday'
-                            INSERT INTO Staff_Members
-                            VALUES(
-                                @seeker_username,30, @seeker_username + '@' + @domain, @day_off,@salary,@job,@department,@company
-                            )
-                        ELSE PRINT 'Please Pick a day off other than Friday'
-                    END
+                    
+                        UPDATE Jobs
+                        SET no_of_vacancies = @nVacancies-1
+                        WHERE title=@job AND department=@department and company= @company
+                        BEGIN
+                                INSERT INTO Staff_Members
+                                VALUES(
+                                    @seeker_username,30, @seeker_username + '@' + @domain, @day_off,@salary,@job,@department,@company
+                                )
+                        END
                 END
+                ELSE PRINT 'Please Pick a day off other than Friday'    
             END
         END     
     ELSE PRINT 'Invalid Job -- Rejected'
 END
 ---
-EXEC Choose_Job 'Engineer', 6, 'info@facebook.com','Hossam.Azzab','Saturday'
+EXEC Choose_Job 'Engineer', 6, 'info@facebook.com','Khaled.Hanafy','Saturday'
+---
+Go
+CREATE PROC Delete_Job
+    @job VARCHAR(20),
+    @department int,
+    @company VARCHAR(100),
+    @seeker_username VARCHAR(20)
+AS
+DECLARE @hr_response VARCHAR(10)
+DECLARE @manager_response VARCHAR(10)
+SELECT @hr_response = hr_response, @manager_response = manager_response
+FROM Job_Seekers_apply_Jobs
+WHERE job=@job AND department=@department and company= @company and job_seeker=@seeker_username
+IF @hr_response = 'Pending' OR @manager_response = 'Pending'
+BEGIN
+    DELETE FROM Job_Seekers_apply_Jobs
+    WHERE job=@job AND department=@department and company= @company and job_seeker=@seeker_username 
+END
+ELSE PRINT @hr_response + @manager_response
+---
+EXEC Delete_Job 'Graphic Designer', 8, 'info@facebook.com','Hello.world'
+

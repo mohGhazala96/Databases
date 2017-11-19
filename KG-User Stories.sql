@@ -93,7 +93,23 @@ BEGIN
     DELETE FROM Job_Seekers_apply_Jobs
     WHERE job=@job AND department=@department and company= @company and job_seeker=@seeker_username 
 END
-ELSE PRINT @hr_response + @manager_response
+ELSE PRINT 'Unable to delete job. Already reviewed'
 ---
-EXEC Delete_Job 'Graphic Designer', 8, 'info@facebook.com','Hello.world'
-
+EXEC Delete_Job 'Graphics Designer', 8, 'info@facebook.com','Hello.world'
+---
+Go
+CREATE PROC Check_in
+    @username VARCHAR(20)
+AS
+DECLARE @Staff_Members_exist VARCHAR(20)
+SELECT @Staff_Members_exist = username
+FROM Staff_Members
+WHERE username = @username
+IF @Staff_Members_exist = @username
+    INSERT INTO Attendance_Records
+    VALUES(
+        CONVERT(DATE,CURRENT_TIMESTAMP), CONVERT(time, CURRENT_TIMESTAMP), NULL, @username
+    )
+ELSE PRINT 'Invalid operation. Username not a staff member'
+---
+exec Check_in 'ElonMusk'

@@ -102,14 +102,36 @@ CREATE PROC Check_in
     @username VARCHAR(20)
 AS
 DECLARE @Staff_Members_exist VARCHAR(20)
-SELECT @Staff_Members_exist = username
+DECLARE @day_off VARCHAR(10)
+SELECT @Staff_Members_exist = username, @day_off = day_off
 FROM Staff_Members
 WHERE username = @username
 IF @Staff_Members_exist = @username
-    INSERT INTO Attendance_Records
-    VALUES(
-        CONVERT(DATE,CURRENT_TIMESTAMP), CONVERT(time, CURRENT_TIMESTAMP), NULL, @username
-    )
+    IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
+        INSERT INTO Attendance_Records
+        VALUES(
+            CONVERT(DATE,CURRENT_TIMESTAMP), @username, CONVERT(time, CURRENT_TIMESTAMP), NULL
+        )
+    ELSE PRINT 'Trying to attend a day off'
 ELSE PRINT 'Invalid operation. Username not a staff member'
 ---
 exec Check_in 'ElonMusk'
+---
+GO 
+CREATE PROC Check_out
+    @username VARCHAR(20)
+AS
+DECLARE @Staff_Members_exist VARCHAR(20)
+DECLARE @day_off VARCHAR(10)
+SELECT @Staff_Members_exist = username, @day_off=day_off
+FROM Staff_Members
+WHERE username = @username
+IF @Staff_Members_exist = @username
+    IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
+        UPDATE Attendance_Records
+        SET end_time = CONVERT(time, CURRENT_TIMESTAMP)
+        WHERE attendace_date = CONVERT(DATE,CURRENT_TIMESTAMP) AND staff = @username
+    ELSE PRINT 'Trying to attend a day off'
+ELSE PRINT 'Invalid operation. Username not a staff member'
+--
+exec Check_out 'ElonMusk'

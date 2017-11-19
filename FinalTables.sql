@@ -147,7 +147,7 @@ FOREIGN KEY(job_seeker) REFERENCES Job_Seekers ON DELETE CASCADE ON UPDATE CASCA
 CREATE TABLE Attendance_Records(
     attendace_date date PRIMARY KEY ,
     start_time DATETIME Not NULL,
-    end_time DATETIME Not NULL,
+    end_time DATETIME,
     staff VARCHAR(20)  Not NULL,
     FOREIGN KEY(staff) REFERENCES Staff_Members ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -181,7 +181,7 @@ CREATE TABLE Regular_Employees(
 CREATE TABLE Managers(
     username VARCHAR (20),
     type VARCHAR (50) NOT NULL,
-
+    
     PRIMARY KEY (username),
     FOREIGN KEY (username) REFERENCES Staff_Members (username) ON DELETE CASCADE ON UPDATE CASCADE
 )

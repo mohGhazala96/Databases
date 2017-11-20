@@ -1,19 +1,8 @@
 use Company4
 
-go
-CREATE PROC InsertEmployeeSP
-@name VARCHAR(50),
-@hasInsurance BIT,
-@birthCountryId SMALLINT,
-@companyId INT,
-@age INT
-AS
-IF @name IS NULL or @hasInsurance IS NULL or @birthCountryId IS NULL or
-@companyId IS NULL or @age IS NULL
-print 'One of the inputs is null'
-Else
-INSERT INTO Employee(name, has_insurance, birth_country_id, company_id, age)
-VALUES(@name, @hasInsurance, @birthCountryId, @companyId, @age)
+
+
+
 
 go
 

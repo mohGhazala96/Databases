@@ -168,6 +168,10 @@ VALUES ( 'Albert.enstein' )
 INSERT INTO Job_Seekers
 VALUES ( 'John.Harris' )
 
+INSERT INTO Job_Seekers
+VALUES ( 'John.Steve' )
+
+
 GO
 
 ALTER PROC View_Information
@@ -234,7 +238,7 @@ ALTER PROC View_Question
 @company varchar (100) 
 
 AS
-Select *
+Select q.question
 FROM Questions q
 where q.number = ANY
 ( SELECT js.question
@@ -261,3 +265,29 @@ GO
 
 EXEC View_Question  'CEO' , 9 , 'info@tesla.com' 
 EXEC View_Question  'Engineer' , 2 , 'hr@Microsoft.com'
+
+
+
+
+GO
+
+CREATE PROC Save_Score 
+@job_title varchar(100) ,
+@department int         ,
+@company varchar (100) ,
+@job_seeker varchar(100) ,
+@score int 
+
+AS
+
+UPDATE Job_Seekers_apply_Jobs
+SET score = @score
+WHERE   department = @department AND  job = @job_title AND  company = @company AND job_seeker = @job_seeker
+
+
+
+INSERT INTO Job_Seekers_apply_Jobs ( job ,     department  , company  , job_seeker , score )
+VALUES ( 'CEO' , 9 , 'info@tesla.com' , 'John.Steve' , 100  );
+
+EXEC Save_Score  'Engineer' , 6 , 'info@facebook.com' , 'Albert.enstein'  , 100
+EXEC Save_Score  'CEO' , 9 , 'info@tesla.com' , 'John.Steve'  , 50

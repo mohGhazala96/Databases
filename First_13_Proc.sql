@@ -1,8 +1,19 @@
 use Company4
 
-
-
-
+go
+CREATE PROC InsertEmployeeSP
+@name VARCHAR(50),
+@hasInsurance BIT,
+@birthCountryId SMALLINT,
+@companyId INT,
+@age INT
+AS
+IF @name IS NULL or @hasInsurance IS NULL or @birthCountryId IS NULL or
+@companyId IS NULL or @age IS NULL
+print 'One of the inputs is null'
+Else
+INSERT INTO Employee(name, has_insurance, birth_country_id, company_id, age)
+VALUES(@name, @hasInsurance, @birthCountryId, @companyId, @age)
 
 go
 
@@ -69,6 +80,23 @@ EXEC Register 'Khalid.K' , 'abcdef' , 'Mamdouh@gmail.com' , '03/12/1990'  , 15 ,
 GO
 
 
+--6
+
+alter PROC Search_Job 
+@key varchar(100)
+AS
+
+SELECT *
+FROM Jobs j
+WHERE j.no_of_vacancies > 0 AND ( CHARINDEX ( j.short_description , @key  ) > 0 OR  CHARINDEX (  j.title  , @key ) > 0 )
+
+
+
+EXEC Search_Job 'innovating'
+EXEC Search_Job 'CEO'
+EXEC Search_Job 'Teach'
+
+GO
 -- PROCEDURE 7
 
 CREATE PROC Jobs_Sorted

@@ -158,7 +158,7 @@ print @out
 INSERT INTO Users
 VALUES ( 'Albert.enstein' , 'abcdef' , 'Albert.enstein@gmail.com' , 03/12/1990  , 15 , 'Albert' , 'Steve' , 'enstein'   );
 INSERT INTO Users
-VALUES ( 'John.Harris' , '12345' , 'John.Harris@gmail.com' , 06/11/1990  , 12 , 'John' , 'Albert' , 'Harris'   );
+VALUES ( 'John.Harris' , '12345' , 'John.Harris@gmail.com' , 06/11/1990  , 1 , 'John' , 'Albert' , 'Harris'   );
 INSERT INTO Users
 VALUES ( 'Steve.Sipser' , 'ab123' , 'Steve.Sipser@yahoo.com' , 05/07/1991 , 1 , 'Steve' , 'Michael' , 'Sipser'   );
 INSERT INTO Users
@@ -201,3 +201,27 @@ first_name = @first_name  , middle_name = @middle_name    , last_name = @last_na
 WHERE username  = @username
 
 EXEC Edit 'John.Harris' , 'abcdef' , 'Mostafa.Mamdouh@gmail.com' , '03/12/1990'  , 15 , 'Mostafa' , 'Ahmed' , 'Mamdouh' 
+
+GO
+
+ALTER PROC  Apply
+@job_title varchar(100) ,
+@department int         ,
+@company varchar (100) ,
+@username varchar(100) 
+
+AS
+
+IF  (SELECT u.years_of_experience
+FROM Users u where u.username = @username ) >= (SELECT j.min_experience FROM Jobs j WHERE j.title = @job_title AND j.department = @department AND j.company = @company )
+AND NOT EXISTS ( SELECT *  FROM Job_Seekers_apply_Jobs js where js.department = @department AND js.job = @job_title AND js.company = @company AND js.hr_response = 'Pending'  )
+INSERT INTO Job_Seekers_apply_Jobs ( job ,     department  , company  , job_seeker )
+VALUES ( @job_title , @department , @company , @username );
+ELSE
+print 'You do not have enough ecperience for the job or you have a pending application'
+
+GO
+
+EXEC Apply 'Engineer' , 6 , 'info@facebook.com' , 'Albert.enstein'
+EXEC Apply 'Engineer' , 6 , 'info@facebook.com' , 'John.Harris'
+EXEC Apply 'Engineer' , 6 , 'info@facebook.com' , 'John.Harris'

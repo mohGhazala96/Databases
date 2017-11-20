@@ -225,3 +225,39 @@ GO
 EXEC Apply 'Engineer' , 6 , 'info@facebook.com' , 'Albert.enstein'
 EXEC Apply 'Engineer' , 6 , 'info@facebook.com' , 'John.Harris'
 EXEC Apply 'Engineer' , 6 , 'info@facebook.com' , 'John.Harris'
+
+GO
+
+ALTER PROC View_Question 
+@job_title varchar(100) ,
+@department int         ,
+@company varchar (100) 
+
+AS
+Select *
+FROM Questions q
+where q.number = ANY
+( SELECT js.question
+FROM Job_Has_Question js
+WHERE js.company = @company AND js.department = @department AND js.job = @job_title )
+
+GO
+
+INSERT INTO Questions ( question , answer  )
+VALUES ('What is the Programming language you know best' , 'Python'    );
+INSERT INTO Questions ( question , answer  )
+VALUES ('What is the String in C++' , 'Array of chars'    );
+INSERT INTO Questions ( question , answer  )
+VALUES ('How to implement merge sort' , 'divide and conquer'    );
+
+INSERT INTO Job_Has_Question
+VALUES ( 'CEO' , 9 , 'info@tesla.com' , 3 );
+INSERT INTO Job_Has_Question
+VALUES ( 'CEO' , 9 , 'info@tesla.com' , 4 );
+INSERT INTO Job_Has_Question
+VALUES ( 'Engineer' , 2 , 'hr@Microsoft.com' , 2 );
+
+GO
+
+EXEC View_Question  'CEO' , 9 , 'info@tesla.com' 
+EXEC View_Question  'Engineer' , 2 , 'hr@Microsoft.com'

@@ -145,7 +145,7 @@ FOREIGN KEY(job_seeker) REFERENCES Job_Seekers ON DELETE CASCADE ON UPDATE CASCA
 )
 ;
 CREATE TABLE Attendance_Records(
-    attendace_date date,
+    attendance_date date,
     staff VARCHAR(20),
     start_time time Not NULL,
     end_time time,

@@ -198,13 +198,12 @@ CREATE TABLE Announcements(
     PRIMARY KEY (date, title, hr_employee),
     FOREIGN KEY (hr_employee) REFERENCES HR_Employees (username) ON DELETE CASCADE ON UPDATE CASCADE
 )
-
 CREATE TABLE Requests(
     start_date DATETIME,
     applicant VARCHAR(20),
     end_date DATETIME NOT NULL,
     request_date DATETIME NOT NULL,
-    total_days AS day(end_date - start_date),
+    total_days AS datediff(day,[end_date],[start_date]),
     hr_employee VARCHAR(20),
     hr_response VARCHAR(50) DEFAULT 'Pending' ,
     manager VARCHAR (20),

@@ -1,9 +1,7 @@
-use Company4
-
 GO
 
 -- 1
-ALTER PROC Company_Search 
+CREATE PROC Company_Search 
 @name varchar(100) ,
 @adderss varchar(500) ,
 @type varchar(200)
@@ -25,7 +23,7 @@ else BEGIN
 		WHERE c.type = @type )
 	END
 END
-
+GO
 EXEC Company_Search NULL , NULL , 'International'
 EXEC Company_Search 'Microsoft' , NULL , 'International'
 EXEC Company_Search NULL ,'Tesla Motors. 3500 Deer Creek Road.Palo Alto, CA 94304.' ,NULL
@@ -70,9 +68,9 @@ WHERE  c.email = @company
 go 
 
 EXEC View_Company_Department 'hr@Microsoft.com'
+
+
 GO
-
-
 -- 4
 CREATE PROC Department_Jobs
 @company varchar(40) ,
@@ -82,6 +80,7 @@ SELECT d.* , j.*
 FROM Departments d inner join Jobs j ON j.department = d.code AND j.company = d.company
 WHERE d.company =  @company AND d.code = @department  AND   j.no_of_vacancies > 0
 
+GO
 EXEC Department_Jobs 'hr@Microsoft.com' , 1
 
 GO
@@ -112,15 +111,16 @@ GO
 
 --6
 
-  
 
-
-ALTER DATABASE Company4 SET COMPATIBILITY_LEVEL = 130
-
+------
+------
+------ Please replace the YOUR_DATABASE_NAME name with the name that you will use ... Won't work any other way
+ALTER DATABASE master SET COMPATIBILITY_LEVEL = 130
+-----
+-----
+-----
 GO
-
-
-alter PROC Search_Job 
+CREATE PROC Search_Job 
 @key varchar(100)
 AS
 SELECT *
@@ -131,7 +131,7 @@ WHERE j.no_of_vacancies > 0 AND EXISTS (SELECT value
 	   FROM STRING_SPLIT(j.short_description, ' ' )) )
 
 
-
+GO
 EXEC Search_Job 'innovating'
 EXEC Search_Job 'CEO'
 EXEC Search_Job 'Teach Company'
@@ -157,7 +157,7 @@ GO
 
 
 
-ALTER PROC Login
+CREATE PROC Login
 @username varchar(100) ,
 @password VARCHAR(100) ,
 @out varchar(100) OUTPUT
@@ -202,14 +202,14 @@ BEGIN
 END
 
 END
-
-DECLARE @out varchar(100)
-EXEC Login 'Albert.enstein' , 'abcdef' , @out OUTPUT
+GO
+DECLARE @out1 varchar(100)
+EXEC Login 'Albert.enstein' , 'abcdef' , @out1 OUTPUT
 print @out
 
-DECLARE @out varchar(100)
-EXEC Login 'Ahmed.Mohamed' , 'ab123' , @out OUTPUT
-print @out
+DECLARE @out2 varchar(100)
+EXEC Login 'Ahmed.Mohamed' , 'ab123' , @out2 OUTPUT
+print @out1
 
 
 INSERT INTO Users
@@ -231,19 +231,18 @@ VALUES ( 'John.Steve' )
 
 GO
 
-ALTER PROC View_Information
+CREATE PROC View_Information
 @username varchar(100)
 AS
 SELECT *
 FROM  Users u
 WHERE u.username = @username
 
-
+Go
 EXEC View_Information 'Ahmed.Massoud'
 
+
 GO
-
-
 CREATE PROC Edit 
 @username varchar ( 50) ,
 @password varchar(30)  , 
@@ -261,11 +260,12 @@ SET password = @password , personal_email = @personal_email , birth_date = @birt
 first_name = @first_name  , middle_name = @middle_name    , last_name = @last_name
 WHERE username  = @username
 
+Go
 EXEC Edit 'John.Harris' , 'abcdef' , 'Mostafa.Mamdouh@gmail.com' , '03/12/1990'  , 15 , 'Mostafa' , 'Ahmed' , 'Mamdouh' 
 
 GO
 
-ALTER PROC  Apply
+CREATE PROC  Apply
 @job_title varchar(100) ,
 @department int         ,
 @company varchar (100) ,
@@ -289,7 +289,7 @@ EXEC Apply 'Engineer' , 6 , 'info@facebook.com' , 'John.Harris'
 
 GO
 
-ALTER PROC View_Question 
+CREATE PROC View_Question 
 @job_title varchar(100) ,
 @department int         ,
 @company varchar (100) 
@@ -346,5 +346,6 @@ WHERE   department = @department AND  job = @job_title AND  company = @company A
 INSERT INTO Job_Seekers_apply_Jobs ( job ,     department  , company  , job_seeker , score )
 VALUES ( 'CEO' , 9 , 'info@tesla.com' , 'John.Steve' , 100  );
 
+GO
 EXEC Save_Score  'Engineer' , 6 , 'info@facebook.com' , 'Albert.enstein'  , 100
 EXEC Save_Score  'CEO' , 9 , 'info@tesla.com' , 'John.Steve'  , 50

@@ -1,5 +1,35 @@
 use Company4
 
+GO
+
+-- 1
+ALTER PROC Company_Search 
+@name varchar(100) ,
+@adderss varchar(500) ,
+@type varchar(200)
+AS
+
+IF @name is not null
+(SELECT *
+FROM  Companies c
+WHERE c.name = @name )
+else BEGIN
+	IF @adderss is not null
+	(SELECT *
+	FROM  Companies c
+	WHERE c.address = @adderss )
+	ELSE BEGIN 
+		IF @type is not null
+		(SELECT *
+		FROM  Companies c
+		WHERE c.type = @type )
+	END
+END
+
+EXEC Company_Search NULL , NULL , 'International'
+EXEC Company_Search 'Microsoft' , NULL , 'International'
+EXEC Company_Search NULL ,'Tesla Motors. 3500 Deer Creek Road.Palo Alto, CA 94304.' ,NULL
+
 go
 CREATE PROC InsertEmployeeSP
 @name VARCHAR(50),

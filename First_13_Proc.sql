@@ -112,19 +112,29 @@ GO
 
 --6
 
+  
+
+
+ALTER DATABASE Company4 SET COMPATIBILITY_LEVEL = 130
+
+GO
+
+
 alter PROC Search_Job 
 @key varchar(100)
 AS
-
 SELECT *
 FROM Jobs j
-WHERE j.no_of_vacancies > 0 AND ( CHARINDEX ( j.short_description , @key  ) > 0 OR  CHARINDEX (  j.title  , @key ) > 0 )
+WHERE j.no_of_vacancies > 0 AND EXISTS (SELECT value  
+    FROM STRING_SPLIT(@key, ' ') 
+    WHERE value IN (SELECT value  
+	   FROM STRING_SPLIT(j.short_description, ' ' )) )
 
 
 
 EXEC Search_Job 'innovating'
 EXEC Search_Job 'CEO'
-EXEC Search_Job 'Teach'
+EXEC Search_Job 'Teach Company'
 
 GO
 -- PROCEDURE 7

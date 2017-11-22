@@ -19,6 +19,12 @@ AS
         SET @is_hr = 1
 GO
 
+CREATE TYPE q_list AS TABLE (
+    question varchar(100) NOT NULL PRIMARY KEY,
+    answer varchar(100) NOT NULL
+);
+GO
+
 CREATE PROCEDURE HR_Employees_add_job /* I forgot to add the questions, add them */
     @username varchar(20),
     @title VARCHAR(20),
@@ -28,7 +34,8 @@ CREATE PROCEDURE HR_Employees_add_job /* I forgot to add the questions, add them
     @salary int,
     @deadline datetime,
     @no_of_vacancies int,
-    @working_hours int
+    @working_hours int,
+    @q_list q_list READONLY
 AS
     declare @is_hr BIT;
     EXEC HR_Employee_check @username, @is_hr output
@@ -42,8 +49,6 @@ AS
     declare @company VARCHAR(100);
     EXEC Staff_Members_get_my_department @username, @dep output, @company output
 
-    SELECT @is_hr = COUNT(*) FROM HR_Employees
-
     INSERT INTO Jobs VALUES(
         @title,
         @dep,
@@ -56,6 +61,11 @@ AS
         @no_of_vacancies,
         @working_hours
     )
+
+    DECLARE @inserted_ids TABLE ([id] INT);
+
+    INSERT INTO Questions OUTPUT INSERTED.number INTO @inserted_ids SELECT * FROM @q_list
+    INSERT INTO Job_Has_Question SELECT @title, @dep, @company, id FROM @inserted_ids
 GO
 
 CREATE PROCEDURE HR_Employees_view_job
@@ -127,10 +137,21 @@ AS
     declare @company VARCHAR(100);
     EXEC Staff_Members_get_my_department @username, @department output, @company output
 
-    SELECT * FROM Job_Seekers_apply_Jobs WHERE job = @job_title AND
-                                               department = @department AND
-                                               company = @company AND
-                                               hr_response = 'Pending';
+    SELECT Job_Seekers_apply_Jobs.job,
+           Job_Seekers_apply_Jobs.score,
+           Users.personal_email,
+           Users.birth_date,
+           Users.years_of_experience,
+           Users.first_name,
+           Users.middle_name,
+           Users.last_name,
+           Users.age
+        FROM Job_Seekers_apply_Jobs INNER JOIN Users ON
+            Job_Seekers_apply_Jobs.job_seeker = Users.username
+        WHERE job = @job_title AND
+              department = @department AND
+              company = @company AND
+              hr_response = 'Pending';
 GO
 
 CREATE PROCEDURE HR_Employees_accept_reject_applications

@@ -1,3 +1,7 @@
+declare @q_list q_list
+INSERT INTO @q_list VALUES('Is this true?', 'True'), ('Really?', 'False')
+SELECT * FROM @q_list
+
 EXEC HR_Employees_add_job "JenniferLaw",
                           "Rocket Scientist",
                           "Mad scientists",
@@ -6,7 +10,8 @@ EXEC HR_Employees_add_job "JenniferLaw",
                           250000,
                           "12/12/2020",
                           5,
-                          8;
+                          8,
+                          @q_list;
 
 EXEC HR_Employees_view_job "JenniferLaw", "Rocket Scientist"
 
@@ -157,20 +162,20 @@ EXEC HR_Employees_update_requests 'JenniferLaw', /* Reject non-leave request */
                                   '9/26/2017 16:00:00',
                                   'Rejected'
 
--- EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept annual leave request */
---                                   'BenedictCumberbatch',
---                                   '9/27/2017 16:00:00',
---                                   'Rejected'
+EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept annual leave request */
+                                  'BenedictCumberbatch',
+                                  '9/27/2017 16:00:00',
+                                  'Rejected'
 
--- EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept annual leave request with not enough annual leaves */
---                                   'BenedictCumberbatch',
---                                   '9/26/2017 16:00:00',
---                                   'Rejected'
+EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept annual leave request with not enough annual leaves */
+                                  'BenedictCumberbatch',
+                                  '9/26/2017 16:00:00',
+                                  'Rejected'
 
--- EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept accidental leave request */
---                                   'BenedictCumberbatch',
---                                   '9/26/2017 16:00:00',
---                                   'Rejected'
+EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept accidental leave request */
+                                  'BenedictCumberbatch',
+                                  '9/26/2017 16:00:00',
+                                  'Rejected'
 
 INSERT INTO Attendance_Records VALUES(
     '2012-12-12',

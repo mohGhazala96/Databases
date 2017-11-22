@@ -39,7 +39,7 @@ short_description varchar(100) NOT NULL,
 detailed_description varchar(200) NOT NULL,
 min_experience int NOT NULL , 
 salary int , 
-deadline datetime NOT NULL ,
+deadline date NOT NULL ,
 no_of_vacancies int ,
 working_hours int NOT NULL ,
 

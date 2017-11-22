@@ -878,7 +878,7 @@ INSERT INTO Job_Seekers_apply_Jobs
 VALUES
     ( 'Engineer', (select code
         FROM Departments
-        WHERE name='Online Operations' and company='info@facebook.com'), 'info@facebook.com', 'Hossam.Azzab' , 'Approved', 'Pending', 60)
+        WHERE name='Online Operations' and company='info@facebook.com'), 'info@facebook.com', 'Hossam.Azzab' , 'Pending', 'Pending', 60)
 INSERT INTO Job_Seekers_apply_Jobs
 VALUES
     ( 'Engineer', (select code
@@ -1123,6 +1123,19 @@ VALUES
 INSERT INTO Regular_Employees
 VALUES
     ('FifthGuy')
+
+INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
+    'cloudApp', 'info@facebook.com', 'FirstGuy', 'bakr.mostafa'
+)
+INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
+    'cloudApp', 'info@facebook.com', 'SecondGuy', 'bakr.mostafa'
+)
+INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
+    'cloudApp', 'info@facebook.com', 'ThirdGuy', 'bakr.mostafa'
+)
+INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
+    'cloudApp', 'info@facebook.com', 'FifthGuy', 'bakr.mostafa'
+)
 
 INSERT INTO Tasks
 VALUES

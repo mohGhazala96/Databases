@@ -1001,6 +1001,23 @@ INSERT INTO Leave_Requests VALUES(
     'BenedictCumberbatch',
     'accidental'
 )
+
+INSERT INTO Business_Trip_Requests VALUES(
+    '9/26/2017 12:00:00',
+    'BenedictCumberbatch',
+    'Paris',
+    'purpose1'
+)
+
+INSERT INTO Business_Trip_Requests VALUES(
+    '9/26/2017 11:00:00',
+    'BenedictCumberbatch',
+    'London',
+    'purpose2'
+)
+
+SELECT * FROM Business_Trip_Requests
+
 INSERT INTO Attendance_Records VALUES(
     '2012-12-12',
     'BenedictCumberbatch',

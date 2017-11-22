@@ -36,6 +36,7 @@ EXEC HR_Employees_create_announcement "tarek.osman",
                                       "type",
                                       "The databases milestone deadline has been extended to 12/12/2021"
 --hr 7
+
 EXEC HR_Employees_view_requests "JenniferLaw"
 --hr 8
 EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept non-leave request */

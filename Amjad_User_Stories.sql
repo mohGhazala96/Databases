@@ -195,7 +195,7 @@ AS
 
     INSERT INTO Announcements VALUES(getdate(), @title, @username, @type, @description)
 GO
-SELECT * FROM Business_Trip_Requests
+
 CREATE PROCEDURE HR_Employees_view_requests
     @username VARCHAR(20)
 AS

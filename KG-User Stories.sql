@@ -1,22 +1,4 @@
-INSERT INTO Announcements
-VALUES(
-    CURRENT_TIMESTAMP, 'Hello','AaronSwartz','URGENT','Hello'
-)
----
-Go
-CREATE PROC Job_save_score
-    @job_applied_for VARCHAR(20),
-    @department int,
-    @company VARCHAR(100),
-    @seeker_username VARCHAR(20),
-    @score int
-AS
-    UPDATE Job_Seekers_Apply_Jobs
-    SET score = @score 
-    WHERE job = @job_applied_for AND department = @department AND company = @company AND job_seeker=@seeker_username
---
-exec Job_save_score 'Engineer', 6, 'info@facebook.com','Hossam.Azzab',300
---
+--- Job Seeker 4
 Go
 CREATE PROC Review_Job_Status
     @seeker_username VARCHAR(20)
@@ -31,8 +13,9 @@ DECLARE @score int
     FROM Job_Seekers_apply_Jobs
     WHERE job_seeker = @seeker_username
 ---
+GO
 exec Review_Job_Status 'Hossam.Azzab'
----
+--- Job Seeker 5
 Go
 CREATE PROC Choose_Job
     @job VARCHAR(20),
@@ -77,8 +60,9 @@ BEGIN
     ELSE PRINT 'Invalid Job -- Rejected'
 END
 ---
+GO
 EXEC Choose_Job 'Engineer', 6, 'info@facebook.com','Khaled.Hanafy','Saturday'
----
+--- Job Seeker 6
 Go
 CREATE PROC Delete_Job
     @job VARCHAR(20),
@@ -98,8 +82,9 @@ BEGIN
 END
 ELSE PRINT 'Unable to delete job. Already reviewed'
 ---
+GO
 EXEC Delete_Job 'Graphics Designer', 8, 'info@facebook.com','Hello.world'
----
+--- Staff Member 1 
 Go
 CREATE PROC Check_in
     @username VARCHAR(20)
@@ -118,8 +103,9 @@ IF @Staff_Members_exist = @username
     ELSE PRINT 'Trying to attend a day off'
 ELSE PRINT 'Invalid operation. Username not a staff member'
 ---
+GO
 exec Check_in 'ElonMusk'
----
+--- Staff Member 2
 GO 
 CREATE PROC Check_out
     @username VARCHAR(20)
@@ -137,8 +123,9 @@ IF @Staff_Members_exist = @username
     ELSE PRINT 'Trying to attend a day off'
 ELSE PRINT 'Invalid operation. Username not a staff member'
 --
+GO
 exec Check_out 'ElonMusk'
---
+-- Staff Member 3
 GO
 CREATE PROC Review_Attendance
     @username VARCHAR(20),
@@ -165,8 +152,9 @@ ELSE
             WHERE staff = @username AND attendace_date >= @from_date AND attendace_date <= @to_date
 
 --
+GO
 exec Review_Attendance 'ElonMusk', '2017-11-19'
---
+-- Staff Member 4
 Go
 CREATE PROC Apply_for_Leave_Request
     @username VARCHAR(20),
@@ -182,6 +170,8 @@ DECLARE @position2 VARCHAR(20)
 DECLARE @annual_leaves int
 DECLARE @requests_start DATE
 DECLARE @requests_end DATE
+DECLARE @company_name VARCHAR(100)
+DECLARE @company_replacement VARCHAR(100)
 SELECT @annual_leaves = annual_leaves
 FROM Staff_Members
 WHERE username = @username
@@ -193,94 +183,118 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
     IF (@from_date > @requests_start AND @from_date < @requests_end)OR(@to_date>@requests_start AND @to_date<@requests_end)
     PRINT 'Request Overlapping'
     ELSE
-    SELECT @applicant_exist = username  -- First Check both managers
-    FROM Managers
-    WHERE username = @username
-    IF @applicant_exist = @username
         BEGIN
-        SET @position1 = 'Manager'
-        SELECT @replacement_exist = username
-        FROM Managers
-        WHERE username = @replacement
-        IF @replacement_exist = @replacement
-        SET @position2 = 'Manager'
-            IF @position1 = @position2
+        SELECT @company_replacement = company
+        FROM Staff_Members
+        Where username = @replacement
+        IF @company_name != @company_replacement
+        PRINT 'not in same company'
+        ELSE
+            BEGIN
+            SELECT @applicant_exist = username  -- First Check both managers
+            FROM Managers
+            WHERE username = @username
+            IF @applicant_exist = @username
                 BEGIN
-                    INSERT INTO Requests
-                    VALUES(
-                        @from_date,@username,@to_date,CURRENT_TIMESTAMP,DATEDIFF(DAY,@from_date,@to_date),null,'Approved',@username,'Approved'
-                    )
-                    INSERT INTO Leave_Requests
-                    VALUES(
-                        @from_date,@username,@type
-                    )
-                    INSERT INTO Managers_apply_replace_Requests
-                    VALUES(
-                        @from_date, @username, @username,@replacement
-                    )
+                PRINT 'Applicant is Manager'
+                SET @position1 = 'Manager'
+                PRINT 'User 1 is a manager'
+                SELECT @replacement_exist = username
+                FROM Managers
+                WHERE username = @replacement
+                IF @replacement_exist = @replacement
+                SET @position2 = 'Manager'
+                    IF @position1 = @position2
+                        BEGIN
+                            INSERT INTO Requests(start_date,applicant,end_date,request_date,hr_response,manager,manager_response)
+                            VALUES(
+                                @from_date,@username,@to_date,CURRENT_TIMESTAMP,'PENDING',@username,'Approved'
+                            )
+                            INSERT INTO Leave_Requests
+                            VALUES(
+                                @from_date,@username,@type
+                            )
+                            INSERT INTO Managers_apply_replace_Requests
+                            VALUES(
+                                @from_date, @username, @username,@replacement
+                            )
+                        END
+                    ELSE PRINT 'Sorry the replacement is not a manager'
                 END
-            ELSE PRINT 'Sorry the replacement is not a manager'
-        END
-    ELSE
-    SELECT @applicant_exist = username  -- First Check both HR
-    FROM HR_Employees
-    IF @applicant_exist = @username
-        BEGIN
-        SET @position1 = 'HR'
-        SELECT @replacement_exist = username
-        FROM HR_Employees
-        WHERE username = @replacement
-        IF @replacement_exist = @replacement
-        SET @position2 = 'HR'
-            IF @position1 = @position2
+            ELSE
                 BEGIN
-                    INSERT INTO Requests (start_date,applicant,end_date,request_date)
-                    VALUES(
-                        @from_date,@username,@to_date,CURRENT_TIMESTAMP
-                    )
-                    INSERT INTO Leave_Requests
-                    VALUES(
-                        @from_date,@username,@type
-                    )
-                    INSERT INTO HR_Employee_apply_replace_Requests
-                    VALUES(
-                        @from_date, @username, @username,@replacement
-                    )
+                SELECT @applicant_exist = username  -- First Check both HR
+                FROM HR_Employees
+                WHERE username=@username
+                IF @applicant_exist = @username
+                    BEGIN
+                    print 'APPLICANT IS HR'
+                    SET @position1 = 'HR'
+                    SELECT @replacement_exist = username
+                    FROM HR_Employees
+                    WHERE username = @replacement
+                    IF @replacement_exist = @replacement
+                    SET @position2 = 'HR'
+                        IF @position1 = @position2
+                            BEGIN
+                                INSERT INTO Requests (start_date,applicant,end_date,request_date)
+                                VALUES(
+                                    @from_date,@username,@to_date,CURRENT_TIMESTAMP
+                                )
+                                INSERT INTO Leave_Requests
+                                VALUES(
+                                    @from_date,@username,@type
+                                )
+                                INSERT INTO HR_Employee_apply_replace_Requests
+                                VALUES(
+                                    @from_date, @username, @username,@replacement
+                                )
+                            END
+                        ELSE PRINT 'Sorry the replacement is not an HR'
+                    END
+                ELSE
+                    BEGIN
+                    SELECT @applicant_exist = username  -- Third Check both Reg
+                    FROM Regular_Employees
+                    WHERE username=@username
+                    IF @applicant_exist = @username
+                        BEGIN
+                        SET @position1 = 'Reg'
+                        SELECT @replacement_exist = username
+                        FROM Regular_Employees
+                        WHERE username = @replacement
+                        IF @replacement_exist = @replacement
+                        SET @position2 = 'Reg'
+                            IF @position1 = @position2
+                                BEGIN
+                                    INSERT INTO Requests(start_date,applicant,end_date,request_date)
+                                    VALUES(
+                                        @from_date,@username,@to_date,CURRENT_TIMESTAMP
+                                    )
+                                    INSERT INTO Leave_Requests
+                                    VALUES(
+                                        @from_date,@username,@type
+                                    )
+                                    INSERT INTO Regular_Employees_apply_replace_Requests
+                                    VALUES(
+                                        @from_date, @username, @username ,@replacement
+                                    )
+                                END
+                            ELSE PRINT 'Sorry the replacement is not an HR'
+                        END
+                    END
                 END
-            ELSE PRINT 'Sorry the replacement is not an HR'
-        END
-    ELSE
-    SELECT @applicant_exist = username  -- Third Check both Reg
-    FROM Regular_Employees
-    IF @applicant_exist = @username
-        BEGIN
-        SET @position1 = 'Reg'
-        SELECT @replacement_exist = username
-        FROM Regular_Employees
-        WHERE username = @replacement
-        IF @replacement_exist = @replacement
-        SET @position2 = 'Reg'
-            IF @position1 = @position2
-                BEGIN
-                    INSERT INTO Requests(start_date,applicant,end_date,request_date)
-                    VALUES(
-                        @from_date,@username,@to_date,CURRENT_TIMESTAMP
-                    )
-                    INSERT INTO Leave_Requests
-                    VALUES(
-                        @from_date,@username,@type
-                    )
-                    INSERT INTO Regular_Employees_apply_replace_Requests
-                    VALUES(
-                        @from_date, @username, @username ,@replacement
-                    )
-                END
-            ELSE PRINT 'Sorry the replacement is not an HR'
+            END
         END
     END
-ELSE PRINT 'Sorry, you are out of annual leaves'  
---   
-Go
+ELSE PRINT 'Sorry, you are out of annual leaves' 
+--
+GO
+exec Apply_for_Leave_Request 'ElonMusk', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Medical'
+exec Apply_for_Leave_Request 'JenniferLaw', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Medical'
+exec Apply_for_Leave_Request 'JenniferLaw', 'EmmaStone', '2017-11-27', '2017-12-3', 'Medical'
+-- Staff Member 4 (part 2)
+GO
 CREATE PROC Apply_for_Business_Request
     @username VARCHAR(20),
     @replacement VARCHAR(20),
@@ -296,7 +310,9 @@ DECLARE @position2 VARCHAR(20)
 DECLARE @annual_leaves int
 DECLARE @requests_start DATE
 DECLARE @requests_end DATE
-SELECT @annual_leaves = annual_leaves
+DECLARE @company_name VARCHAR(100)
+DECLARE @company_replacement VARCHAR(100)
+SELECT @annual_leaves = annual_leaves, @company_name=company
 FROM Staff_Members
 WHERE username = @username
 IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
@@ -307,93 +323,118 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
     IF (@from_date > @requests_start AND @from_date < @requests_end)OR(@to_date>@requests_start AND @to_date<@requests_end)
     PRINT 'Request Overlapping'
     ELSE
-    SELECT @applicant_exist = username  -- First Check both managers
-    FROM Managers
-    WHERE username = @username
-    IF @applicant_exist = @username
         BEGIN
-        SET @position1 = 'Manager'
-        SELECT @replacement_exist = username
-        FROM Managers
-        WHERE username = @replacement
-        IF @replacement_exist = @replacement
-        SET @position2 = 'Manager'
-            IF @position1 = @position2
+        SELECT @company_replacement = company
+        FROM Staff_Members
+        Where username = @replacement
+        IF @company_name != @company_replacement
+        PRINT 'not in same company'
+        ELSE
+            BEGIN
+            SELECT @applicant_exist = username  -- First Check both managers
+            FROM Managers
+            WHERE username = @username
+            IF @applicant_exist = @username
                 BEGIN
-                    INSERT INTO Requests
-                    VALUES(
-                        @from_date,@username,@to_date,CURRENT_TIMESTAMP,DATEDIFF(DAY,@from_date,@to_date),null,'Approved',@username,'Approved'
-                    )
-                    INSERT INTO Business_Trip_Requests
-                    VALUES(
-                        @from_date,@username,@destination,@purpose
-                    )
-                    INSERT INTO Managers_apply_replace_Requests
-                    VALUES(
-                        @from_date, @username, @username,@replacement
-                    )
+                PRINT 'Applicant is Manager'
+                SET @position1 = 'Manager'
+                PRINT 'User 1 is a manager'
+                SELECT @replacement_exist = username
+                FROM Managers
+                WHERE username = @replacement
+                IF @replacement_exist = @replacement
+                SET @position2 = 'Manager'
+                    IF @position1 = @position2
+                        BEGIN
+                            INSERT INTO Requests(start_date,applicant,end_date,request_date,hr_response,manager,manager_response)
+                            VALUES(
+                                @from_date,@username,@to_date,CURRENT_TIMESTAMP,'PENDING',@username,'Approved'
+                            )
+                            INSERT INTO Business_Trip_Requests
+                            VALUES(
+                                @from_date,@username,@destination,@purpose
+                            )
+                            INSERT INTO Managers_apply_replace_Requests
+                            VALUES(
+                                @from_date, @username, @username,@replacement
+                            )
+                        END
+                    ELSE PRINT 'Sorry the replacement is not a manager'
                 END
-            ELSE PRINT 'Sorry the replacement is not a manager'
-        END
-    ELSE
-    SELECT @applicant_exist = username  -- First Check both HR
-    FROM HR_Employees
-    IF @applicant_exist = @username
-        BEGIN
-        SET @position1 = 'HR'
-        SELECT @replacement_exist = username
-        FROM HR_Employees
-        WHERE username = @replacement
-        IF @replacement_exist = @replacement
-        SET @position2 = 'HR'
-            IF @position1 = @position2
+            ELSE
                 BEGIN
-                    INSERT INTO Requests (start_date,applicant,end_date,request_date)
-                    VALUES(
-                        @from_date,@username,@to_date,CURRENT_TIMESTAMP
-                    )
-                    INSERT INTO Business_Trip_Requests
-                    VALUES(
-                        @from_date,@username,@destination,@purpose
-                    )
-                    INSERT INTO HR_Employee_apply_replace_Requests
-                    VALUES(
-                        @from_date, @username, @username,@replacement
-                    )
+                SELECT @applicant_exist = username  -- First Check both HR
+                FROM HR_Employees
+                WHERE username=@username
+                IF @applicant_exist = @username
+                    BEGIN
+                    print 'APPLICANT IS HR'
+                    SET @position1 = 'HR'
+                    SELECT @replacement_exist = username
+                    FROM HR_Employees
+                    WHERE username = @replacement
+                    IF @replacement_exist = @replacement
+                    SET @position2 = 'HR'
+                        IF @position1 = @position2
+                            BEGIN
+                                INSERT INTO Requests (start_date,applicant,end_date,request_date)
+                                VALUES(
+                                    @from_date,@username,@to_date,CURRENT_TIMESTAMP
+                                )
+                                INSERT INTO Business_Trip_Requests
+                                VALUES(
+                                    @from_date,@username,@destination,@purpose
+                                )
+                                INSERT INTO HR_Employee_apply_replace_Requests
+                                VALUES(
+                                    @from_date, @username, @username,@replacement
+                                )
+                            END
+                        ELSE PRINT 'Sorry the replacement is not an HR'
+                    END
+                ELSE
+                    BEGIN
+                    SELECT @applicant_exist = username  -- Third Check both Reg
+                    FROM Regular_Employees
+                    WHERE username=@username
+                    IF @applicant_exist = @username
+                        BEGIN
+                        SET @position1 = 'Reg'
+                        SELECT @replacement_exist = username
+                        FROM Regular_Employees
+                        WHERE username = @replacement
+                        IF @replacement_exist = @replacement
+                        SET @position2 = 'Reg'
+                            IF @position1 = @position2
+                                BEGIN
+                                    INSERT INTO Requests(start_date,applicant,end_date,request_date)
+                                    VALUES(
+                                        @from_date,@username,@to_date,CURRENT_TIMESTAMP
+                                    )
+                                    INSERT INTO Business_Trip_Requests
+                                    VALUES(
+                                        @from_date,@username,@destination, @purpose
+                                    )
+                                    INSERT INTO Regular_Employees_apply_replace_Requests
+                                    VALUES(
+                                        @from_date, @username, @username ,@replacement
+                                    )
+                                END
+                            ELSE PRINT 'Sorry the replacement is not an HR'
+                        END
+                    END
                 END
-            ELSE PRINT 'Sorry the replacement is not an HR'
-        END
-    ELSE
-    SELECT @applicant_exist = username  -- Third Check both Reg
-    FROM Regular_Employees
-    IF @applicant_exist = @username
-        BEGIN
-        SET @position1 = 'Reg'
-        SELECT @replacement_exist = username
-        FROM Regular_Employees
-        WHERE username = @replacement
-        IF @replacement_exist = @replacement
-        SET @position2 = 'Reg'
-            IF @position1 = @position2
-                BEGIN
-                    INSERT INTO Requests(start_date,applicant,end_date,request_date)
-                    VALUES(
-                        @from_date,@username,@to_date,CURRENT_TIMESTAMP
-                    )
-                    INSERT INTO Business_Trip_Requests
-                    VALUES(
-                        @from_date,@username,@destination,@purpose
-                    )
-                    INSERT INTO Regular_Employees_apply_replace_Requests
-                    VALUES(
-                        @from_date, @username, @username ,@replacement
-                    )
-                END
-            ELSE PRINT 'Sorry the replacement is not an HR'
+            END
         END
     END
-ELSE PRINT 'Sorry, you are out of annual leaves'  
---   
+ELSE PRINT 'Sorry, you are out of annual leaves' 
+----
+GO
+exec Apply_for_Business_Request 'ElonMusk', 'bakr.mostafa', '2017-11-27', '2017-12-3', 'Cairo','Buy'
+exec Apply_for_Business_Request 'ElonMusk', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Cairo','Buy'
+exec Apply_for_Business_Request 'JenniferLaw', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Cairo', 'Buy'
+exec Apply_for_Business_Request 'JenniferLaw', 'EmmaStone', '2017-11-27', '2017-12-3', 'Cairo', 'Buy'
+--- Staff Member 5
 GO
 CREATE PROC View_Requests
     @username VARCHAR(20)
@@ -402,6 +443,9 @@ SELECT *
 FROM Requests
 WHERE applicant = @username
 ---
+Go
+exec View_Requests 'ElonMusk'
+--- Staff Member 6
 GO
 CREATE PROC Delete_Request
     @start_date DATETIME,
@@ -426,8 +470,9 @@ IF @hr_response = 'Pending' OR @manager_response = 'Pending'
 ELSE 
     PRINT 'Sorry, Request already processed'
 --
-exec Delete_Request '2017-09-23 11:00:00.000', 'shady.ahmed'
---
+GO
+exec Delete_Request '2017-11-27', 'JenniferLaw'
+-- Staff Member 7
 Go
 CREATE PROC Send_email
     @sender VARCHAR(20),
@@ -436,18 +481,31 @@ CREATE PROC Send_email
     @body VARCHAR(3000)
 AS
 DECLARE @emailnum int
-INSERT INTO Emails (email_subject,email_date,body)
-VALUES(
-    @subject,CURRENT_TIMESTAMP,@body
-)
-SELECT @emailnum = serial_number
-FROM Emails
-WHERE email_subject = @subject AND email_date = CURRENT_TIMESTAMP AND body = @body
-INSERT INTO Staff_Members_send_Email_Staff_Members
-VALUES(
-    @emailnum,@recipient,@sender
-)
---
+DECLARE @company1 VARCHAR(100)
+DECLARE @company2 VARCHAR(100)
+SELECT @company1=company
+FROM Staff_Members
+WHERE username = @sender
+SELECT @company2=company
+FROM Staff_Members
+WHERE username = @recipient
+IF @company1 = @company2
+BEGIN
+    INSERT INTO Emails (email_subject,email_date,body)
+    VALUES(
+        @subject,CURRENT_TIMESTAMP,@body
+    )
+    SELECT @emailnum=SCOPE_IDENTITY()
+    INSERT INTO Staff_Members_send_Email_Staff_Members
+    VALUES(
+         @emailnum ,@recipient,@sender
+    )
+END
+---
+GO
+exec Send_email 'ElonMusk', 'JenniferLaw','Welcome','You are awesome'
+
+-- Staff Member 8
 GO
 CREATE PROC View_emails
     @recipient VARCHAR(20)
@@ -461,6 +519,9 @@ SELECT *
 FROM Emails
 WHERE serial_number = @emailnum
 --
+GO
+exec View_emails 'JenniferLaw'
+--- Staff Member 9
 GO
 CREATE PROC Reply_email
     @recipient VARCHAR(20),
@@ -477,14 +538,15 @@ INSERT INTO Emails (email_subject,email_date,body)
 VALUES(
     @subject,CURRENT_TIMESTAMP,@body
 )
-SELECT @emailnum = serial_number
-FROM Emails
-WHERE email_subject = @subject AND email_date = CURRENT_TIMESTAMP AND body = @body
+SELECT @emailnum=SCOPE_IDENTITY()
 INSERT INTO Staff_Members_send_Email_Staff_Members
 VALUES(
     @emailnum,@sender,@recipient
 )
 --
+GO
+exec Reply_email 'JenniferLaw', 1, 'Thank you!','I Love you too'
+-- Staff Member 10
 GO
 CREATE PROC View_Announcements
     @username VARCHAR(20)
@@ -503,5 +565,5 @@ FROM Announcements a inner join Staff_Members s
 ON a.hr_employee = s.username
 WHERE s.company = @company AND (CURRENT_TIMESTAMP-[date])<90
 --
-exec View_Announcements 'AaronSwartz'
+exec View_Announcements 'ElonMusk'
 

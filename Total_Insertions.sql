@@ -698,7 +698,10 @@ VALUES ('TonyStark', 18,'tstark@tesla.com','Friday',100000,'R&D CoManager' ,(sel
 INSERT INTO Managers
 VALUES ('TonyStark','Helper Manager')
 
-
+INSERT INTO Announcements
+VALUES(
+    CURRENT_TIMESTAMP, 'Hello','AaronSwartz','URGENT','Hello'
+)
 
 
 

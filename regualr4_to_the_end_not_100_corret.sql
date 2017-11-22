@@ -174,6 +174,7 @@ VALUES
         WHERE name='Creative' and company='info@facebook.com'), 'info@facebook.com', 'Mahmoud.Hassan' , 'Approved', 'Pending', 100)
 
 ----
+
 Go
 CREATE PROCEDURE Work_on_task_again
     @in_username VARCHAR(20),
@@ -294,20 +295,16 @@ AS
     ELSE
         PRINT 'You canot access this record, or it is not found'
 Go
-SELECT * from Requests    
-GO   
+SELECT * from Requests       
 EXEC Change_Request_state 'osama.rady','1/10/2017 11:00:00', 'Mona.Osman','Approved','reason'
 ---------------
 GO
 CREATE PROCEDURE View_All_Applications
     @manager_name VARCHAR(20)
 AS
-    DECLARE @manager_department VARCHAR(50)
+    DECLARE @manager_department int
     DECLARE @company_check VARCHAR(100)
-
-    SELECT @manager_department= department,@company_check =company
-    FROM Staff_Members
-    where @manager_name = username
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check output
     --below i showed all information of the job seeker except the username and password
     SELECT job ,score ,U.personal_email,U.birth_date,U.years_of_experience,U.first_name,U.middle_name,U.last_name,U.age
     FROM Job_Seekers_apply_Jobs J inner JOIN Users U on U.username=J.job_seeker AND J.company=@company_check
@@ -324,19 +321,16 @@ CREATE PROCEDURE Edit_Application
     @job_seeker_in VarCHAR(20),
     @job_in VarCHAR(20)
 AS
-    DECLARE @manager_department VARCHAR(50)
+    DECLARE @manager_department int
     DECLARE @company_check VARCHAR(100)
-
-    SELECT @manager_department= department,@company_check =company -- gets manager's company and department
-    FROM Staff_Members
-    where @manager_name = username
-
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check output
     UPDATE  Job_Seekers_apply_Jobs
     Set manager_response =@manager_in_response
     WHERE @manager_department= department AND  @company_check =company  AND hr_response= 'Approved' AND job_seeker=@job_seeker_in And job= @job_in and manager_response = 'Pending'
 
 GO
-EXEC Edit_Application 'osama.rady','Approved','Khaled.Hanafy','Engineer'
+select * from Job_Seekers_apply_Jobs
+EXEC Edit_Application 'osama.rady','Rejected','Khaled.Hanafy','Engineer'
 GO
 ----------------
 Create PROCEDURE Create_project
@@ -357,21 +351,17 @@ Create PROCEDURE Assign_regular_employees_on_projects
   @project_name_in VARCHAR(20),
   @regular_employee_in  VARCHAR(20)
   AS 
-    DECLARE @manager_department VARCHAR(50)
-    DECLARE @regular_department VARCHAR(50)
+    DECLARE @manager_department int
+    DECLARE @regular_department int
     DECLARE @regular_company VARCHAR(100)
     DECLARE @sum_of_projects int
-    DECLARE   @company_in VARCHAR(100) 
+    DECLARE @company_check_manager VARCHAR(100) 
+
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check_manager output
+    EXEC Staff_Members_get_my_department @regular_employee_in , @regular_department output, @regular_company output
 
 
-    SELECT @manager_department= department ,  @company_in =company
-    FROM Staff_Members
-    where @manager_name = username
-
-    SELECT @regular_department= department
-    FROM Staff_Members
-    where @regular_employee_in = username
-    IF @regular_department <> @manager_department or @company_in <>@regular_company -- make sure the manager's company and department is the same as the regular employee
+    IF @regular_department <> @manager_department or @company_check_manager <>@regular_company -- make sure the manager's company and department is the same as the regular employee
         PRINT 'regular employee should have same department as the manager'
     ELSE
         BEGIN
@@ -380,7 +370,7 @@ Create PROCEDURE Assign_regular_employees_on_projects
             WHERE  @regular_employee_in= regular_employee
         IF @sum_of_projects<2
 
-            INSERT Into Managers_assign_Regular_Employees_Projects VALUES( @project_name_in, @company_in, @regular_employee_in,  @manager_name )
+            INSERT Into Managers_assign_Regular_Employees_Projects VALUES( @project_name_in, @company_check_manager, @regular_employee_in,  @manager_name )
         ELSE
             PRINT 'regular employee shouldnt be not working on more than two projects at the same time.'
 
@@ -396,10 +386,8 @@ CREATE PROCEDURE Remove_regular_employee_from_project
   AS 
     DECLARE @check_regular VARCHAR(20)
     DECLARE @check_manager_company varchar(100)
-
-    SELECT @check_manager_company=company -- gets manager's company
-    FROM Staff_Members
-    where username = @manager_name 
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @check_manager_company output
 
     Select @check_regular = regular_employee -- gets the old regular employee
     from Managers_assign_Regular_Employees_Projects
@@ -422,15 +410,12 @@ CREATE PROCEDURE Define_task
   @manager_name VARCHAR(20) 
 
   AS 
-    DECLARE @manager_department VARCHAR(50)
+    DECLARE @manager_department int
     DECLARE @manager_company VARCHAR(100)
     DECLARE @project_manager_name VARCHAR(20) 
-    DECLARE @project_manager_department VARCHAR(20) 
+    DECLARE @project_manager_department int
     DECLARE @project_manager_company VARCHAR(100)
-
-    SELECT @manager_department= department ,@manager_company =company
-    FROM Staff_Members
-    where @manager_name = username
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
 
     SELECT  @project_manager_name = manager -- get name of the manager who defined the project
     FROM  Projects
@@ -457,10 +442,8 @@ CREATE PROCEDURE Assign_regular_employee_on_task
   AS
     DECLARE @check_regular VARCHAR(20)
     DECLARE @manager_company VARCHAR(100)
-
-    SELECT @manager_company =company
-    FROM Staff_Members
-    where @manager_name = username
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
 
     SELECT @check_regular = regular_employee -- gets regular employee assinged on the project
     FROM Managers_assign_Regular_Employees_Projects
@@ -484,10 +467,8 @@ CREATE PROCEDURE Change_regular_employee_on_a_task
   @regular_employee_in VARCHAR(20)
   AS
     DECLARE @manager_company VARCHAR(100)
-
-    SELECT @manager_company =company
-    FROM Staff_Members
-    where @manager_name = username
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
 
     UPDATE  Tasks
     Set regular_employee = @regular_employee_in
@@ -502,10 +483,8 @@ Create PROCEDURE View_list_of_tasks_in_project
   @status_in VARCHAR(10)
 AS 
     DECLARE @manager_company VARCHAR(100)
-
-    SELECT @manager_company =company
-    FROM Staff_Members
-    where @manager_name = username
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
 
     SELECT *
     FROM Tasks 
@@ -513,7 +492,7 @@ AS
 
     SELECT *
     FROM Task_Comments
-    Where @manager_name= manager AND @project_name_in = project  and @manager_company= company
+    Where  @project_name_in = project  and @manager_company= company
 
 GO
  exec View_list_of_tasks_in_project 'osama.rady','project1','Assigned'
@@ -529,10 +508,8 @@ CREATE PROCEDURE Review_task_in_a_project
     DECLARE @stauts_check VARCHAR(10)
     DECLARE @deadline_check datetime
     DECLARE @manager_company VARCHAR(100)
-
-    SELECT @manager_company =company
-    FROM Staff_Members
-    where @manager_name = username
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
 
     IF @accept_or_recject = 1
         Begin

@@ -53,11 +53,13 @@ BEGIN
                                     @seeker_username,30, @seeker_username + '@' + @domain, @day_off,@salary,@job,@department,@company
                                 )
                         END
+                        DELETE FROM Job_Seekers_apply_Jobs
+                        WHERE job=@job AND department=@department and company= @company and job_seeker=@seeker_username
                 END
                 ELSE PRINT 'Please Pick a day off other than Friday'    
             END
         END     
-    ELSE PRINT 'Invalid Job -- Rejected'
+    ELSE PRINT 'Invalid Job -- Not found or Rejected'
 END
 ---
 GO
@@ -80,7 +82,7 @@ BEGIN
     DELETE FROM Job_Seekers_apply_Jobs
     WHERE job=@job AND department=@department and company= @company and job_seeker=@seeker_username 
 END
-ELSE PRINT 'Unable to delete job. Already reviewed'
+ELSE PRINT 'Unable to delete job. Job does not exist or Already reviewed'
 ---
 GO
 EXEC Delete_Job 'Graphics Designer', 8, 'info@facebook.com','Hello.world'
@@ -547,19 +549,14 @@ GO
 CREATE PROC View_Announcements
     @username VARCHAR(20)
 AS
-DECLARE @hr_employee VARCHAR(20)
-DECLARE @usersworking VARCHAR(20)
 DECLARE @company Varchar(100)
 SELECT @company = company
 FROM Staff_Members
 WHERE username = @username
-SELECT @usersworking = username
-FROM Staff_Members
-WHERE company = @company
 SELECT *
 FROM Announcements a inner join Staff_Members s
 ON a.hr_employee = s.username
-WHERE s.company = @company AND (CURRENT_TIMESTAMP-[date])<90
+WHERE s.company = @company AND datediff(day,date,CURRENT_TIMESTAMP)<90
 --
 exec View_Announcements 'ElonMusk'
 

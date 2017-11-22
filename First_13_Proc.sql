@@ -205,11 +205,11 @@ END
 GO
 DECLARE @out1 varchar(100)
 EXEC Login 'Albert.enstein' , 'abcdef' , @out1 OUTPUT
-print @out
+print @out1
 
 DECLARE @out2 varchar(100)
 EXEC Login 'Ahmed.Mohamed' , 'ab123' , @out2 OUTPUT
-print @out1
+print @out2
 
 
 INSERT INTO Users

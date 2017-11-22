@@ -39,7 +39,7 @@ short_description varchar(100) NOT NULL,
 detailed_description varchar(200) NOT NULL,
 min_experience int NOT NULL , 
 salary int , 
-deadline datetime NOT NULL ,
+deadline date NOT NULL ,
 no_of_vacancies int ,
 working_hours int NOT NULL ,
 
@@ -135,7 +135,7 @@ company VarCHAR(100)   ,
 job_seeker VarCHAR(20) ,
 hr_response VarCHAR(10) Not NULL DEFAULT 'Pending', 
 manager_response VarCHAR(10) Not NULL DEFAULT 'Pending',
-score INT Not NULL,
+score INT ,
 CHECK(hr_response= 'Approved' or hr_response='Rejected' or hr_response='Pending'),
 CHECK(manager_response= 'Approved' or manager_response='Rejected' or manager_response='Pending'),
 CHECK(score>=0),
@@ -150,7 +150,7 @@ CREATE TABLE Attendance_Records(
     start_time time Not NULL,
     end_time time,
 
-    PRIMARY KEY(attendace_date,staff),
+    PRIMARY KEY(attendance_date,staff),
     FOREIGN KEY(staff) REFERENCES Staff_Members ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE Emails(

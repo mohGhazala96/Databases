@@ -1,6 +1,3 @@
-use company5
-
-
 
 INSERT INTO Companies
 VALUES ( 'hr@Microsoft.com' , 'Microsoft' , 'Seattle' , 'microsoft.com' , 'International' , 'empower every person on the planet to achieve more' , 'Software'  );

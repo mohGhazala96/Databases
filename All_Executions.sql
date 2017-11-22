@@ -56,7 +56,6 @@ exec Apply_for_Leave_Request 'JenniferLaw', 'EmmaStone', '2017-11-27', '2017-12-
 
 exec Apply_for_Business_Request 'bakr.mostafa', 'ElonMusk', '2017-11-27', '2017-12-3', 'Cairo','Buy'
 exec Apply_for_Business_Request 'bakr.mostafa', 'osaasdadma.rady', '2017-11-27', '2017-12-3', 'Cairo','Buy'
-exec Apply_for_Business_Request 'ElonMusk', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Cairo','Buy'
 
 exec Apply_for_Business_Request 'JenniferLaw', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Cairo', 'Buy'
 exec Apply_for_Business_Request 'JenniferLaw', 'EmmaStone', '2017-11-27', '2017-12-3', 'Cairo', 'Buy'

@@ -75,7 +75,7 @@ CREATE FUNCTION filter_staff_members2
 END
 Go
 --------
-CREATE PROCEDURE View_New_Requests
+CREATE PROCEDURE View_New_Requests 
     @manager_name VARCHAR(20)
 AS
     SELECT R.*,L.type  -- to show leave requests
@@ -122,7 +122,8 @@ EXEC Change_Request_state 'osama.rady','1/10/2017 11:00:00', 'Mona.Osman','Appro
 ---------------
 GO
 CREATE PROCEDURE View_All_Applications
-    @manager_name VARCHAR(20)
+    @manager_name VARCHAR(20),
+    @job_name VARCHAR(20)
 AS
     DECLARE @manager_department int
     DECLARE @company_check VARCHAR(100)
@@ -130,10 +131,10 @@ AS
     --below i showed all information of the job seeker except the username and password
     SELECT job ,score ,U.personal_email,U.birth_date,U.years_of_experience,U.first_name,U.middle_name,U.last_name,U.age
     FROM Job_Seekers_apply_Jobs J inner JOIN Users U on U.username=J.job_seeker AND J.company=@company_check
-    WHERE @manager_department= J.department AND J.hr_response= 'Approved' and J.manager_response = 'Pending'
+    WHERE @manager_department= J.department AND J.hr_response= 'Approved' and J.manager_response = 'Pending' and job=@job_name
 
 Go
-EXEC View_All_Applications 'osama.rady'
+EXEC View_All_Applications 'osama.rady','Engineer'
 GO
 ----------
 GO
@@ -198,7 +199,7 @@ Create PROCEDURE Assign_regular_employees_on_projects
 
         END
 GO
-EXEC Assign_regular_employees_on_projects 'osama.rady','project1','Mona.Osman'
+EXEC Assign_regular_employees_on_projects 'osama.rady','project1','Amina.Abaas'
 GO
 ------
 CREATE PROCEDURE Remove_regular_employee_from_project

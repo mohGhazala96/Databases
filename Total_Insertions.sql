@@ -1250,13 +1250,13 @@ INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
 
 
 INSERT INTO Users
-VALUES ( 'Albert.enstein' , 'abcdef' , 'Albert.enstein@gmail.com' , 03/12/1990  , 15 , 'Albert' , 'Steve' , 'enstein'   );
+VALUES ( 'Albert.enstein' , 'abcdef' , 'Albert.enstein@gmail.com' , '03/12/1990'  , 15 , 'Albert' , 'Steve' , 'enstein'   );
 INSERT INTO Users
-VALUES ( 'John.Harris' , '12345' , 'John.Harris@gmail.com' , 06/11/1990  , 1 , 'John' , 'Albert' , 'Harris'   );
+VALUES ( 'John.Harris' , '12345' , 'John.Harris@gmail.com' , '06/11/1990' , 1 , 'John' , 'Albert' , 'Harris'   );
 INSERT INTO Users
-VALUES ( 'Steve.Sipser' , 'ab123' , 'Steve.Sipser@yahoo.com' , 05/07/1991 , 1 , 'Steve' , 'Michael' , 'Sipser'   );
+VALUES ( 'Steve.Sipser' , 'ab123' , 'Steve.Sipser@yahoo.com' , '05/07/1991' , 1 , 'Steve' , 'Michael' , 'Sipser'   );
 INSERT INTO Users
-VALUES ( 'Rami.Kamal' , 'a12be' , 'Rami.Kamal@outlook.com' , 04/07/1992  , 10 , 'Rami' , 'Momdouh' , 'Kamal'   );
+VALUES ( 'Rami.Kamal' , 'a12be' , 'Rami.Kamal@outlook.com' , '04/07/1992'  , 10 , 'Rami' , 'Momdouh' , 'Kamal'   );
 INSERT INTO Job_Seekers
 VALUES ( 'Albert.enstein' )
 INSERT INTO Job_Seekers
@@ -1271,13 +1271,14 @@ INSERT INTO Questions ( question , answer  )
 VALUES ('What is the String in C++' , 'Array of chars'    );
 INSERT INTO Questions ( question , answer  )
 VALUES ('How to implement merge sort' , 'divide and conquer'    );
-
+SELECT * FROM Questions
 INSERT INTO Job_Has_Question
 VALUES ( 'CEO' , 9 , 'info@tesla.com' , 3 );
 INSERT INTO Job_Has_Question
-VALUES ( 'CEO' , 9 , 'info@tesla.com' , 4 );
+VALUES ( 'CEO' , 9 , 'info@tesla.com' , 1);
 INSERT INTO Job_Has_Question
 VALUES ( 'Engineer' , 2 , 'hr@Microsoft.com' , 2 );
 
 INSERT INTO Job_Seekers_apply_Jobs ( job ,     department  , company  , job_seeker , score )
 VALUES ( 'CEO' , 9 , 'info@tesla.com' , 'John.Steve' , 100  );
+

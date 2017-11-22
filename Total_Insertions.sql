@@ -18,22 +18,23 @@ VALUES (   'hr@Microsoft.com'  , 'Teaching' )  ;
 
 
 
+
 INSERT INTO Jobs 
-VALUES ( 'Teacher' , 3  , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 10000 , 1 , 17/12/2017 , 4 , 9   );
+VALUES ( 'Teacher' , 3  , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 10000 , 1 , '1/12/2017' , 4 , 9   );
 INSERT INTO Jobs 
-VALUES ( 'Engineer' , 1  , 'hr@Microsoft.com' , 'Invent new machines' , 'Working on Research projects to invent machines' , 20000 , 2 , 30/1/2017 , 1 , 8   );
+VALUES ( 'Engineer' , 1  , 'hr@Microsoft.com' , 'Invent new machines' , 'Working on Research projects to invent machines' , 20000 , 2 , '3/1/2017' , 1 , 8   );
 INSERT INTO Jobs 
-VALUES ( 'Engineer'  , 2 , 'hr@Microsoft.com' , 'Innovate and Invent' , 'Work with a team od developers to find solutions to challenging problems' , 30000  , 3 , 5/11/2017 , 7 , 9   );
+VALUES ( 'Engineer'  , 2 , 'hr@Microsoft.com' , 'Innovate and Invent' , 'Work with a team od developers to find solutions to challenging problems' , 30000  , 3 , '5/11/2017' , 7 , 9   );
 INSERT INTO Jobs  
-VALUES ( 'Devloper' , 2  , 'hr@Microsoft.com' , 'Coding and innovating' , 'Writing organized code that solves realtime problems' , 50000 , 1 , 10/11/2017 , 1 , 10   );
+VALUES ( 'Devloper' , 2  , 'hr@Microsoft.com' , 'Coding and innovating' , 'Writing organized code that solves realtime problems' , 50000 , 1 , '10/11/2017' , 1 , 10   );
 INSERT INTO Jobs 
-VALUES ( 'Teacher' , 1  , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 10500 , 1 , 17/12/2017 , 4 , 9   );
+VALUES ( 'Teacher' , 1  , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 10500 , 1 , '1/12/2017', 4 , 9   );
 INSERT INTO Jobs  
-VALUES ( 'Devloper' , 1  , 'hr@Microsoft.com' , 'Coding and innovating' , 'Writing organized code that solves realtime problems' , 5000 , 1 , 10/11/2017 , 1 , 19   );
+VALUES ( 'Devloper' , 1  , 'hr@Microsoft.com' , 'Coding and innovating' , 'Writing organized code that solves realtime problems' , 5000 , 1 , '10/11/2017' , 1 , 19   );
 INSERT INTO Jobs
-VALUES ( 'Engineer'  , 3 , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 10000 , 1 , 17/12/2017 , 5 , 9   );
+VALUES ( 'Engineer'  , 3 , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 10000 , 1 , '1/12/2017' , 5 , 9   );
 INSERT INTO Jobs  
-VALUES ( 'Devloper' , 3  , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 30000 , 1 , 17/12/2017 , 4 , 9   );
+VALUES ( 'Devloper' , 3  , 'hr@Microsoft.com' , 'Teach people in the company' , 'Teach Developpers and engineers the new updated features in Java' , 30000 , 1 , '1/12/2017' , 4 , 9   );
 
 
 
@@ -185,7 +186,7 @@ INSERT INTO Users VALUES(
     'tarek.osman',
     '909090flag',
     'tarek.osman@yahoo.com',
-    '12/10/1982 00:00:00',
+    '12/10/1982',
     7,
     'tarek',
     'sherif',
@@ -197,7 +198,7 @@ INSERT INTO Users VALUES(
     'osama.rady',
     'getReady7171',
     'osama.rady@hotmail.com',
-    '9/1/1976 00:00:00',
+    '9/1/1976',
     9,
     'osama',
     'sherif',
@@ -209,7 +210,7 @@ INSERT INTO Users VALUES(
     'shady.ahmed',
     'verytopsecret99',
     'shady.ahmed@hotmail.com',
-    '7/22/1986 00:00:00',
+    '7/22/1986',
     5,
     'shady',
     'mohamed',
@@ -220,7 +221,7 @@ INSERT INTO Users VALUES(
     'bakr.mostafa',
     'breakingBadForLife82',
     'bakr.mostafa@outlook.com',
-    '12/9/1970 00:00:00',
+    '12/9/1970',
     12,
     'bakr',
     'ahmed',
@@ -231,7 +232,7 @@ INSERT INTO Users VALUES(
     'karim.medhat',
     'bettergetmymoney',
     'karim.medhat@yahoo.com',
-    '1/7/1977 00:00:00',
+    '1/7/1977',
     11,
     'karim',
     'ahmed',
@@ -243,7 +244,7 @@ INSERT INTO Users VALUES(
     'emad.sherif',
     'verygoodpassword',
     'emad.sherif@outlook.com',
-    '6/6/1972 00:00:00',
+    '6/6/1972',
     3,
     'emad',
     'mohamed',
@@ -256,7 +257,7 @@ INSERT INTO Users VALUES(
     'hend.mohamed',
     'anazeh2tgedan',
     'hend.mohamed@aol.com',
-    '12/24/1978 00:00:00',
+    '12/24/1978',
     7,
     'hend',
     'yousef',
@@ -267,7 +268,7 @@ INSERT INTO Users VALUES(
     'lara.shawky',
     'hellotheregoes',
     'lara.shawky@gmail.com',
-    '11/23/1980 00:00:00',
+    '11/23/1980',
     8,
     'lara',
     'ahmed',
@@ -279,7 +280,7 @@ INSERT INTO Users VALUES(
     'omar.sami',
     'project_Zareef',
     'omar.sami@gmail.com',
-    '9/7/1989 00:00:00',
+    '9/7/1989',
     8,
     'omar',
     'gates',
@@ -290,7 +291,7 @@ INSERT INTO Users VALUES(
    'hala.shoaib',
     'nopassword_am_bored',
     'hala.shoaib@yahoo.com',
-    '4/21/1970 00:00:00',
+    '4/21/1970',
     12,
     'hala',
     'mostafa',
@@ -301,7 +302,7 @@ INSERT INTO Users VALUES(
     'yara.gomez',
     'kokofofololo',
     'lara.shawky@hotmail.com',
-    '9/2/1988 00:00:00',
+    '9/2/1988',
     8,
     'lara',
     'ahmed',
@@ -312,7 +313,7 @@ INSERT INTO Users VALUES(
     'sara.shehab',
     'kolo_fel_keltsh',
     'sara.shehab@aol.com',
-    '1/25/1978 00:00:00',
+    '1/25/1978',
     9,
     'sara',
     'mohamed',
@@ -327,7 +328,7 @@ INSERT INTO Jobs VALUES(
     '',
     2,
     30000,
-    '12/10/2018 00:00:00',
+    '12/10/2018',
     12,
     8
 
@@ -340,7 +341,7 @@ INSERT INTO Jobs VALUES(
     '',
     8,
     60000,
-    '7/7/2018 00:00:00',
+    '7/7/2018',
     4,
     7
 );
@@ -352,7 +353,7 @@ INSERT INTO Jobs VALUES(
     '',
     5,
     50000,
-    '8/8/2018 00:00:00',
+    '8/8/2018',
     10,
     8
 );
@@ -364,7 +365,7 @@ INSERT INTO Jobs VALUES(
     '',
     2,
     40000,
-    '1/3/2018 00:00:00',
+    '1/3/2018',
     3,
     8
 );
@@ -555,7 +556,7 @@ INSERT INTO Departments(company, name)
 VALUES ((select email from Companies where name = 'Tesla'), 'Customer Service');
 
 INSERT INTO Jobs
-VALUES('CEO',(select code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),(select TOP 1 company from Departments where company = 'info@tesla.com'),'CEO','Chief Executive Officer',3,2000000,1/7/2017,1,8)
+VALUES('CEO',(select code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),(select TOP 1 company from Departments where company = 'info@tesla.com'),'CEO','Chief Executive Officer',3,2000000,'1/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('ElonMusk','tesla4life','self@elonmusk.com', 6/28/1971,20,'Elon','Reeve','Musk');
@@ -567,7 +568,7 @@ INSERT INTO Managers
 VALUES ('ElonMusk','Head Of Manufacturing')
 
 INSERT INTO Jobs
-VALUES('Supervisor',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),(select TOP 1 company from Departments where company = 'info@tesla.com'),'Supervisor','Supervisor of Stuff',3,100000,1/7/2017,1,8)
+VALUES('Supervisor',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),(select TOP 1 company from Departments where company = 'info@tesla.com'),'Supervisor','Supervisor of Stuff',3,100000,'1/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('BenedictCumberbatch','sherlock','sherlock@bbc.com', 7/19/1976,4,'Benedict','Timothy','Cumberbatch');
@@ -579,7 +580,7 @@ INSERT INTO Managers
 VALUES ('BenedictCumberbatch','Head Of Manufacturing')
 
 INSERT INTO Jobs
-VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),'info@tesla.com','HR Head','HR Heading',3,50000,3/7/2017,1,8)
+VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),'info@tesla.com','HR Head','HR Heading',3,50000,'3/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('JenniferLaw','jennifer','mockingjay@jlaw.com', 8/15/1990,4,'Jennifer','Shrader','Lawrence');
@@ -591,7 +592,7 @@ INSERT INTO HR_Employees
 VALUES ('JenniferLaw')
 
 INSERT INTO Jobs
-VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),'info@tesla.com','HR Head','HR Heading',2,20000,3/7/2017,1,8)
+VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Manufacturing'),'info@tesla.com','HR Head','HR Heading',2,20000,'3/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('EmmaStone','emma','self@emmastone.com', 11/7/1988,2,'Emma','Jean','Stone');
@@ -603,7 +604,7 @@ INSERT INTO HR_Employees
 VALUES ('EmmaStone')
 
 INSERT INTO Jobs
-VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','HR Head','HR Heading',2,50000,3/7/2017,1,8)
+VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','HR Head','HR Heading',2,50000,'3/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('MoxieMarlinspike','moxie','moxie@marlinspike.com', 11/7/1988,2,'Moxie','','Marlinspike');
@@ -615,7 +616,7 @@ INSERT INTO HR_Employees
 VALUES ('MoxieMarlinspike')
 
 INSERT INTO Jobs
-VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','HR Head','HR Heading',2,20000,3/7/2017,1,8)
+VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','HR Head','HR Heading',2,20000,'3/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('AaronSwartz','aaron','aaron@swartz.com', 11/8/1986,2,'Aaron','Hillel','Swartz');
@@ -627,7 +628,7 @@ INSERT INTO HR_Employees
 VALUES ('AaronSwartz')
 
 INSERT INTO Jobs
-VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','HR Head','HR Heading',2,50000,3/7/2017,1,8)
+VALUES('HR Head',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','HR Head','HR Heading',2,50000,'3/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('PeterEckersley','pde','pde@eckersley.org', 11/7/1988,2,'Peter','','Eckersley');
@@ -639,7 +640,7 @@ INSERT INTO HR_Employees
 VALUES ('PeterEckersley')
 
 INSERT INTO Jobs
-VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','HR Head','HR Heading',2,20000,3/7/2017,1,8)
+VALUES('HR Head Assistant',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','HR Head','HR Heading',2,20000,'3/7/2017',1,8)
 
 INSERT INTO Users
 VALUES ('PewDiePie','pdp','pdp@personal.com', 11/8/1986,2,'Pew','Die','Pie');
@@ -651,7 +652,7 @@ INSERT INTO HR_Employees
 VALUES ('PewDiePie')
 
 INSERT INTO Jobs
-VALUES('Chief Supervisor',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','Supervisor','Supervisor of CS',2,100000,4/12/2017,1,8)
+VALUES('Chief Supervisor',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','Supervisor','Supervisor of CS',2,100000,'4/12/2017',1,8)
 
 INSERT INTO Users
 VALUES ('MartinFreeman','theHobbit','self@martinfreeman.com', 11/7/1988,2,'Martin','John','Freeman');
@@ -663,7 +664,7 @@ INSERT INTO Managers
 VALUES ('MartinFreeman','Chief')
 
 INSERT INTO Jobs
-VALUES('Head Calls',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','Head Calls','Supervisor of Calls',2,50000,7/20/2017,3,8)
+VALUES('Head Calls',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='Customer Service'),'info@tesla.com','Head Calls','Supervisor of Calls',2,50000,'7/20/2017',3,8)
 
 INSERT INTO Users
 VALUES ('AhmedMalek','actorguy','self@amalek.com', 1/7/1992,2,'Ahmed','Hesham','Malek');
@@ -675,7 +676,7 @@ INSERT INTO Managers
 VALUES ('AhmedMalek','Head')
 
 INSERT INTO Jobs
-VALUES('R&D Manager',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','R&D Manager','Manages R&D',2,100000,7/20/2017,3,8)
+VALUES('R&D Manager',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','R&D Manager','Manages R&D',2,100000,'7/20/2017',3,8)
 
 INSERT INTO Users
 VALUES ('RamiMalek','hackerman','self@ramimalek.com', 2/20/1989,2,'Rami','Youssef','Malek');
@@ -687,7 +688,7 @@ INSERT INTO Managers
 VALUES ('RamiMalek','Main Manager')
 
 INSERT INTO Jobs
-VALUES('R&D CoManager',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','R&D CoManager','CoManages R&D',2,100000,8/31/2017,3,8)
+VALUES('R&D CoManager',(select TOP 1 code from Departments where company = 'info@tesla.com' AND name='R&D'),'info@tesla.com','R&D CoManager','CoManages R&D',2,100000,'8/31/2017',3,8)
 
 INSERT INTO Users
 VALUES ('TonyStark','ironman','self@ironman.com', 5/10/1982,2,'Tony','Jr','Stark');
@@ -708,28 +709,28 @@ VALUES(
 -- add new 8 users
 INSERT INTO Users
 VALUES
-    ('Doaa.Ahmed', 'tobeornottobe', 'Doaa.Ahmed@Hotmail.com', '7/2/1975 00:00:00', 7, 'Doaa', 'Mohamed', 'Ahmed');
+    ('Doaa.Ahmed', 'tobeornottobe', 'Doaa.Ahmed@Hotmail.com', '7/2/1975', 7, 'Doaa', 'Mohamed', 'Ahmed');
 INSERT INTO Users
 VALUES
-    ('Rowan.Ibrahim', 'hala_beek_hala', 'Rowan.Ibrahim@Yahoo.com', '8/21/1976 00:00:00', 11, 'Rowan', 'Mostafa', 'Ibrahim');
+    ('Rowan.Ibrahim', 'hala_beek_hala', 'Rowan.Ibrahim@Yahoo.com', '8/21/1976', 11, 'Rowan', 'Mostafa', 'Ibrahim');
 INSERT INTO Users
 VALUES
-    ('Amina.Abaas', 'hussien_al_jasmi', 'Amina.Abaas@Hotmail.com', '9/18/1970 00:00:00', 9, 'Amina', 'Ashraf', 'Abaas');
+    ('Amina.Abaas', 'hussien_al_jasmi', 'Amina.Abaas@Hotmail.com', '9/18/1970', 9, 'Amina', 'Ashraf', 'Abaas');
 INSERT INTO Users
 VALUES
-    ('Mona.Osman', 'ellonmeshellon', 'Mona.Osman@Gmail.com', '11/3/1979 00:00:00', 5, 'Mona', 'Ali', 'Osman');
+    ('Mona.Osman', 'ellonmeshellon', 'Mona.Osman@Gmail.com', '11/3/1979', 5, 'Mona', 'Ali', 'Osman');
 INSERT INTO Users
 VALUES
-    ('Ashraf.Zaki', 'billkoftakormb', 'Ashraf.Zaki@Hotmail.com', '5/7/1974 00:00:00', 3, 'Ashraf', 'Ibrahim', 'Zaki');
+    ('Ashraf.Zaki', 'billkoftakormb', 'Ashraf.Zaki@Hotmail.com', '5/7/1974', 3, 'Ashraf', 'Ibrahim', 'Zaki');
 INSERT INTO Users
 VALUES
-    ('Mahmoud.Hassan', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Mahmoud', 'Hamad', 'Hassan');
+    ('Mahmoud.Hassan', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978', 10, 'Mahmoud', 'Hamad', 'Hassan');
 INSERT INTO Users
 VALUES
-    ('Khaled.Hanafy', 'keyskeyskeys', 'Khaled.Hanafy@Hotmail.com', '3/12/1982 00:00:00', 6, 'Khaled', 'Mohsen', 'Hanafy');
+    ('Khaled.Hanafy', 'keyskeyskeys', 'Khaled.Hanafy@Hotmail.com', '3/12/1982', 6, 'Khaled', 'Mohsen', 'Hanafy');
 INSERT INTO Users
 VALUES
-    ('Hossam.Azzab', 'phonebehoney', 'Hossam.Azzab@Gmail.com', ' 6/24/1984 00:00:00', 4, 'Hossam', 'Shaker', 'Azzab');
+    ('Hossam.Azzab', 'phonebehoney', 'Hossam.Azzab@Gmail.com', ' 6/24/1984', 4, 'Hossam', 'Shaker', 'Azzab');
 -- job seekers
 INSERT INTO Job_Seekers
 VALUES

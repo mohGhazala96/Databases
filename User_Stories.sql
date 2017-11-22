@@ -195,13 +195,19 @@ AS
         WHERE Requests.manager_response = 'Approved'
 GO
 
-DROP PROCEDURE HR_Employees_update_requests
 CREATE PROCEDURE HR_Employees_update_requests /* Should updating the value of annual_leaves be exclusive to leave requests? */
     @username VARCHAR(20),
     @applicant VARCHAR(20),
     @start_date DATETIME,
     @response VARCHAR(50)
 AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
 
     declare @dep int;
     declare @company_email VARCHAR(50);
@@ -282,12 +288,22 @@ AS
         END
 GO
 
-CREATE PROCEDURE HR_Employees_view_attendance /* Check if this is correct. Should the missed_hours be missed_hours per day? */
+CREATE PROCEDURE HR_Employees_view_attendance /* Does "Any staff member" mean list all staff members,
+    or be able to specify which staff member do you want to view?
+    If we need to list all, just remove the WHERE condition and the @staff variable */
     @username VARCHAR(20),
     @staff VARCHAR(20),
-    @start_date DATETIME,
-    @end_date DATETIME
+    @start_datetime DATETIME,
+    @end_datetime DATETIME
 AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
     declare @dep int;
     declare @company_email VARCHAR(50);
 
@@ -296,54 +312,104 @@ AS
     declare @temp int;
 
     SELECT @temp = COUNT(*) FROM Staff_Members WHERE
-        username = @staff,
-        department = @dep,
+        username = @staff AND
+        department = @dep AND
         company = @company_email;
 
     IF @temp = 0
-        RAISERROR('Staff member not in your department or does not exist', 0, 1);
+    BEGIN
+        PRINT 'Staff member not in your department or does not exist'
+        RETURN
+    END
 
-    SELECT start_time,
+    SELECT attendance_date,
+           start_time,
            end_time,
            DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
-           CASE WHEN Jobs.working_hours < DATEDIFF(second, start_time, end_time) / 3600.0
+           Jobs.working_hours,
+           CASE WHEN Jobs.working_hours > (DATEDIFF(second, start_time, end_time) / 3600.0)
                 THEN Jobs.working_hours - (DATEDIFF(second, start_time, end_time) / 3600.0)
                 ELSE 0 END AS missed_hours
-        FROM Staff_Members INNER JOIN Jobs 
-                           INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
-        WHERE start_time >= @start_time AND end_time <= @end_time
- GO
+        FROM Staff_Members INNER JOIN Jobs ON (
+            Staff_Members.job = Jobs.title AND
+            Staff_Members.department = Jobs.department AND
+            Staff_Members.company = Jobs.company
+        ) INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
+        WHERE CAST(Attendance_records.attendance_date AS DATETIME) + CAST(CAST(Attendance_records.start_time AS TIME) AS DATETIME) BETWEEN @start_datetime AND @end_datetime
+GO
 
- CREATE PROCEDURE HR_Employees_total_hours /* Check if this is correct. Should the total hours be total working hours? */
+CREATE PROCEDURE HR_Employees_total_hours /* Check if this is correct. Should the total hours be total working hours? */
     @username VARCHAR(20),
-    @month VARCHAR(10),
-    @year int,
-    @staff VARCHAR(20)
+    @year int
 AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
     declare @dep int;
     declare @company_email VARCHAR(50);
 
     EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
 
-    DECLARE @my_date DATETIME
-    SET @my_date = '01 ' + @month + ' ' + @year;
-
-    DECLARE @no_of_days int;
-    SELECT @no_of_days = DAY(EOMONTH(@my_date))
-
-    SELECT (Jobs.working_hours * @no_of_days) AS total_hours
-        FROM Staff_Members INNER JOIN Jobs ON Staff_Members.job = Jobs.title
-                                              AND Jobs.company = @company_email
-                                              AND Jobs.department = @dep
-        WHERE Staff_Members.company = @company_email
-              AND Staff_Members.department = @dep;
+    SELECT username,
+       ISNULL(January, 0) as January,
+       ISNULL(February, 0) as February,
+       ISNULL(March, 0) as March,
+       ISNULL(April, 0) as April,
+       ISNULL(May, 0) as May,
+       ISNULL(June, 0) as June,
+       ISNULL(July, 0) as July,
+       ISNULL(August, 0) as August,
+       ISNULL(September, 0) as September,
+       ISNULL(October, 0) as October,
+       ISNULL(November, 0) as November,
+       ISNULL(December, 0) as December FROM(
+    SELECT Staff_Members.username,
+           DATENAME(MONTH, attendance_date) as month,
+           DATEDIFF(second, start_time, end_time) / 3600.0 as duration
+    FROM Staff_Members
+        LEFT OUTER JOIN(
+            SELECT * FROM Attendance_Records WHERE YEAR(attendance_date) = @year
+        ) a ON Staff_Members.username = a.staff
+        WHERE Staff_Members.company = @company_email AND
+              Staff_Members.department = @dep
+    ) d
+    PIVOT (
+        SUM(duration) for month in (
+            January,
+            February,
+            March,
+            April,
+            May,
+            June,
+            July,
+            August,
+            September,
+            October,
+            November,
+            December)
+    ) piv;
 GO
 
 CREATE PROCEDURE HR_Employees_view_high_achievers
     @username VARCHAR(20)
 AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
     declare @dep int;
     declare @company_email VARCHAR(50);
+
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
 
     SELECT TOP 3 Users.first_name, Users.middle_name, Users.last_name, SUM(DATEDIFF(second, Attendance_Records.start_time, Attendance_Records.end_time) / 3600.0) as hours_spent
         FROM Regular_Employees INNER JOIN Attendance_Records
@@ -351,7 +417,7 @@ AS
         INNER JOIN Staff_Members ON Regular_Employees.username = Staff_Members.username
         INNER JOIN Users ON Staff_Members.username = Users.username
         WHERE Staff_Members.department = @dep
-              AND Staff_Members.company_email = @company_email
+              AND Staff_Members.company = @company_email
               AND NOT EXISTS(SElECT * FROM Tasks WHERE
                 Tasks.regular_employee = Regular_Employees.username
                 AND Tasks.status <> 'Fixed'

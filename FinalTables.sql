@@ -144,13 +144,14 @@ FOREIGN KEY(job,department,company) REFERENCES Jobs ON DELETE CASCADE ON UPDATE 
 FOREIGN KEY(job_seeker) REFERENCES Job_Seekers ON DELETE CASCADE ON UPDATE CASCADE
 )
 ;
+
 CREATE TABLE Attendance_Records(
     attendance_date date,
     staff VARCHAR(20),
     start_time time Not NULL,
     end_time time,
 
-    PRIMARY KEY(attendace_date,staff),
+    PRIMARY KEY(attendance_date,staff),
     FOREIGN KEY(staff) REFERENCES Staff_Members ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE Emails(
@@ -294,10 +295,10 @@ CREATE TABLE Tasks(
   deadline datetime,
   status VARCHAR(10) DEFAULT 'Open' NOT NULL,
   description VARCHAR(MAX) NOT NULL,
-  regular_employee VARCHAR(20)  FOREIGN KEY REFERENCES Regular_Employees ON DELETE NO ACTION ON UPDATE No ACTION, --can be null as the manager can define the task first
+  regular_employee VARCHAR(20),
   manager VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Managers ON DELETE NO ACTION ON UPDATE No ACTION,
   CHECK(status = 'Fixed' or status = 'Assigned' or status='Open' or status ='Closed'),
-  FOREIGN KEY(project, company) REFERENCES Projects ON DELETE CASCADE On UPDATE CASCADE,
+  FOREIGN KEY(project, company, regular_employee) REFERENCES Managers_assign_Regular_Employees_Projects ON DELETE CASCADE On UPDATE CASCADE,
   PRIMARY KEY(name, project, company)
 )
 

@@ -53,6 +53,8 @@ BEGIN
                                     @seeker_username,30, @seeker_username + '@' + @domain, @day_off,@salary,@job,@department,@company
                                 )
                         END
+                        DELETE FROM Job_Seekers_apply_Jobs
+                        WHERE job=@job AND department=@department and company= @company and job_seeker=@seeker_username
                 END
                 ELSE PRINT 'Please Pick a day off other than Friday'    
             END

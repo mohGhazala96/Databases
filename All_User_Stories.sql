@@ -261,8 +261,6 @@ DECLARE @score int
     FROM Job_Seekers_apply_Jobs
     WHERE job_seeker = @seeker_username
 ---
-GO
-exec Review_Job_Status 'Hossam.Azzab'
 --- Job Seeker 5
 Go
 CREATE PROC Choose_Job
@@ -310,8 +308,6 @@ BEGIN
     ELSE PRINT 'Invalid Job -- Not found or Rejected'
 END
 ---
-GO
-EXEC Choose_Job 'Engineer', 6, 'info@facebook.com','Khaled.Hanafy','Saturday'
 --- Job Seeker 6
 Go
 CREATE PROC Delete_Job
@@ -332,8 +328,6 @@ BEGIN
 END
 ELSE PRINT 'Unable to delete job. Job does not exist or Already reviewed'
 ---
-GO
-EXEC Delete_Job 'Graphics Designer', 8, 'info@facebook.com','Hello.world'
 --- Staff Member 1 
 Go
 CREATE PROC Check_in
@@ -353,8 +347,6 @@ IF @Staff_Members_exist = @username
     ELSE PRINT 'Trying to attend a day off'
 ELSE PRINT 'Invalid operation. Username not a staff member'
 ---
-GO
-exec Check_in 'ElonMusk'
 --- Staff Member 2
 GO 
 CREATE PROC Check_out
@@ -369,12 +361,10 @@ IF @Staff_Members_exist = @username
     IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
         UPDATE Attendance_Records
         SET end_time = CONVERT(time, CURRENT_TIMESTAMP)
-        WHERE attendace_date = CONVERT(DATE,CURRENT_TIMESTAMP) AND staff = @username
+        WHERE attendance_date = CONVERT(DATE,CURRENT_TIMESTAMP) AND staff = @username
     ELSE PRINT 'Trying to attend a day off'
 ELSE PRINT 'Invalid operation. Username not a staff member'
 --
-GO
-exec Check_out 'ElonMusk'
 -- Staff Member 3
 GO
 CREATE PROC Review_Attendance
@@ -390,20 +380,18 @@ ELSE
     IF @to_date IS NULL
     SELECT *
     FROM Attendance_Records
-    WHERE staff = @username AND attendace_date >= @from_date
+    WHERE staff = @username AND attendance_date >= @from_date
     ELSE IF
         @from_date IS NULL
         SELECT *
         FROM Attendance_Records
-        WHERE staff = @username AND attendace_date<= @to_date
+        WHERE staff = @username AND attendance_date<= @to_date
         ELSE
             SELECT *
             FROM Attendance_Records
-            WHERE staff = @username AND attendace_date >= @from_date AND attendace_date <= @to_date
+            WHERE staff = @username AND attendance_date >= @from_date AND attendance_date <= @to_date
 
 --
-GO
-exec Review_Attendance 'ElonMusk', '2017-11-19'
 -- Staff Member 4
 Go
 CREATE PROC Apply_for_Leave_Request
@@ -539,10 +527,6 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
     END
 ELSE PRINT 'Sorry, you are out of annual leaves' 
 --
-GO
-exec Apply_for_Leave_Request 'ElonMusk', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Medical'
-exec Apply_for_Leave_Request 'JenniferLaw', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Medical'
-exec Apply_for_Leave_Request 'JenniferLaw', 'EmmaStone', '2017-11-27', '2017-12-3', 'Medical'
 -- Staff Member 4 (part 2)
 GO
 CREATE PROC Apply_for_Business_Request
@@ -679,11 +663,7 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
     END
 ELSE PRINT 'Sorry, you are out of annual leaves' 
 ----
-GO
-exec Apply_for_Business_Request 'ElonMusk', 'bakr.mostafa', '2017-11-27', '2017-12-3', 'Cairo','Buy'
-exec Apply_for_Business_Request 'ElonMusk', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Cairo','Buy'
-exec Apply_for_Business_Request 'JenniferLaw', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Cairo', 'Buy'
-exec Apply_for_Business_Request 'JenniferLaw', 'EmmaStone', '2017-11-27', '2017-12-3', 'Cairo', 'Buy'
+
 --- Staff Member 5
 GO
 CREATE PROC View_Requests
@@ -693,8 +673,6 @@ SELECT *
 FROM Requests
 WHERE applicant = @username
 ---
-Go
-exec View_Requests 'ElonMusk'
 --- Staff Member 6
 GO
 CREATE PROC Delete_Request
@@ -720,8 +698,6 @@ IF @hr_response = 'Pending' OR @manager_response = 'Pending'
 ELSE 
     PRINT 'Sorry, Request already processed'
 --
-GO
-exec Delete_Request '2017-11-27', 'JenniferLaw'
 -- Staff Member 7
 Go
 CREATE PROC Send_email
@@ -751,10 +727,7 @@ BEGIN
          @emailnum ,@recipient,@sender
     )
 END
----
-GO
-exec Send_email 'ElonMusk', 'JenniferLaw','Welcome','You are awesome'
-
+--
 -- Staff Member 8
 GO
 CREATE PROC View_emails
@@ -765,8 +738,6 @@ FROM Staff_Members_send_Email_Staff_Members s INNER JOIN Emails e
 ON email_number = serial_number
 WHERE s.recipient=@recipient
 --
-GO
-exec View_emails 'JenniferLaw'
 --- Staff Member 9
 GO
 CREATE PROC Reply_email
@@ -790,8 +761,6 @@ VALUES(
     @emailnum,@sender,@recipient
 )
 --
-GO
-exec Reply_email 'JenniferLaw', 1, 'Thank you!','I Love you too'
 -- Staff Member 10
 GO
 CREATE PROC View_Announcements
@@ -806,5 +775,4 @@ FROM Announcements a inner join Staff_Members s
 ON a.hr_employee = s.username
 WHERE s.company = @company AND datediff(day,date,CURRENT_TIMESTAMP)<90
 --
-exec View_Announcements 'ElonMusk'
 

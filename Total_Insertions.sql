@@ -1064,19 +1064,19 @@ INSERT INTO Attendance_Records VALUES(
     '23:00'
 )
 
-INSERT INTO Users VALUES('FirstGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Mahmoud', 'Hamad', 'Hassan');
+INSERT INTO Users VALUES('FirstGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'First', 'Hamad', 'Hassan');
 INSERT INTO Users
 VALUES
-    ('SecondGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Mahmoud', 'Hamad', 'Hassan');
+    ('SecondGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Second', 'Hamad', 'Hassan');
 INSERT INTO Users
 VALUES
-    ('ThirdGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Mahmoud', 'Hamad', 'Hassan');
+    ('ThirdGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Third', 'Hamad', 'Hassan');
 INSERT INTO Users
 VALUES
-    ('FourthGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Mahmoud', 'Hamad', 'Hassan');
+    ('FourthGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Fourth', 'Hamad', 'Hassan');
 INSERT INTO Users
 VALUES
-    ('FifthGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Mahmoud', 'Hamad', 'Hassan');
+    ('FifthGuy', 'war2_3nb', 'Mahmoud.Hassan@Gmail.com', '2/9/1978 00:00:00', 10, 'Fifth', 'Hamad', 'Hassan');
 
 INSERT INTO Staff_Members
 VALUES

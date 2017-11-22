@@ -63,7 +63,7 @@ EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept accidental leave requ
                                   '9/26/2017 16:00:00',
                                   'Rejected'
 --hr 9
-EXEC HR_Employees_view_attendance 'JenniferLaw', 'BenedictCumberbatch', '2012-01-01 08:00:00', '2022-12-12 09:00:00'
+EXEC HR_Employees_view_attendance 'JenniferLaw', '2012-01-01 08:00:00', '2022-12-12 09:00:00'
 --hr 10
 EXEC HR_Employees_total_hours 'JenniferLaw', 2012
 -- hr11

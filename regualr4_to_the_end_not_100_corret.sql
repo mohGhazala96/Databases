@@ -30,7 +30,7 @@ GO
 EXEC Work_on_task_again 'Rowan.Ibrahim', 'task6',1 -- to  change the status is optional , choose 1 else 0
 GO
 -------------------
---- function used in the next two procedures to filter the staff memebers 
+--- function used in the next two procedures to filter the staff memebers
 CREATE FUNCTION filter_staff_members2
       (  @manager_name VARCHAR(20),@applicant_applied VARCHAR(20) )
     RETURNS BIT
@@ -117,7 +117,7 @@ AS
     ELSE
         PRINT 'You canot access this record, or it is not found'
 Go
-SELECT * from Requests       
+SELECT * from Requests
 EXEC Change_Request_state 'osama.rady','1/10/2017 11:00:00', 'Mona.Osman','Approved','reason'
 ---------------
 GO
@@ -155,7 +155,7 @@ select * from Job_Seekers_apply_Jobs
 EXEC Edit_Application 'osama.rady','Rejected','Khaled.Hanafy','Engineer'
 GO
 ----------------
-Create PROCEDURE Create_project
+Create PROCEDURE Create_project -- Amjad is here --
   @manager_name VARCHAR(20) ,
   @name_in VARCHAR(20) ,
   @company_in VARCHAR(100) ,

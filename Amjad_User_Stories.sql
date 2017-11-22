@@ -175,7 +175,8 @@ AS
     UPDATE Job_Seekers_apply_Jobs SET hr_response = @response WHERE job = @job AND
                                                                     job_seeker = @job_seeker AND
                                                                     department = @department AND
-                                                                    company = @company;
+                                                                    company = @company AND
+                                                                    manager_response = 'Pending';
 GO
 
 CREATE PROCEDURE HR_Employees_create_announcement
@@ -313,7 +314,6 @@ CREATE PROCEDURE HR_Employees_view_attendance /* Does "Any staff member" mean li
     or be able to specify which staff member do you want to view?
     If we need to list all, just remove the WHERE condition and the @staff variable */
     @username VARCHAR(20),
-    @staff VARCHAR(20),
     @start_datetime DATETIME,
     @end_datetime DATETIME
 AS

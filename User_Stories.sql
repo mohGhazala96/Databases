@@ -455,7 +455,8 @@ AS
         WHERE Managers_assign_Regular_Employees_Projects.regular_employee = @username
 GO
 
-CREATE PROCEDURE Regular_Employees_view_tasks /* Should I view only my tasks? */
+CREATE PROCEDURE Regular_Employees_view_tasks /* Should I view only my tasks?
+    Assigned to me here means project, or task? */
     @username VARCHAR(20),
     @project_name VARCHAR(20)
 AS
@@ -468,16 +469,19 @@ GO
 
 CREATE PROCEDURE Regular_Employee_finalize_task
     @username VARCHAR(20),
-    @task_name VARCHAR(20),
-    @project_name VARCHAR(20)
+    @project_name VARCHAR(20),
+    @task_name VARCHAR(20)
 AS
-    UPDATE Tasks SET status = 'Fixed' WHERE EXISTS (
-        SELECT * FROM Tasks t INNER JOIN Managers_assign_Regular_Employees_Projects ON
-            t.name = Managers_assign_Regular_Employees_Projects.project_name AND
-            t.company = Managers_assign_Regular_Employees_Projects.company AND
-            t.name = Tasks.name AND
-            Tasks.name = @task_name AND
-            Managers_assign_Regular_Employees_Projects.project_name = @project_name AND
-            t.deadline <= GETDATE()
-    )
+    declare @dep int;
+    declare @company_email VARCHAR(50);
+
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+    UPDATE Tasks SET status = 'Fixed' WHERE
+        Tasks.name = @task_name AND
+        Tasks.company = @company_email AND
+        Tasks.project = @project_name AND
+        Tasks.deadline >= GETDATE() AND
+        Tasks.regular_employee = @username AND
+        Tasks.status = 'Assigned'
 GO

@@ -822,6 +822,9 @@ VALUES
 INSERT INTO Tasks
 VALUES
     ('task6', 'Animation Video', 'info@facebook.com', '10/20/2018 00:00:00', 'Fixed', 'description', 'Rowan.Ibrahim', 'emad.sherif');
+INSERT INTO Tasks
+VALUES
+    ('task7', 'Animation Video', 'info@facebook.com', '10/20/2018 00:00:00', 'Assigned', 'description', 'Rowan.Ibrahim', 'emad.sherif');
 -- add 4 requests
 INSERT INTO  Requests
 VALUES

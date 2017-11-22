@@ -417,11 +417,6 @@ INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
 
 EXEC Regular_Employees_view_projects "Mona.Osman"
 
-EXEC Regular_Employees_view_tasks "Rowan.Ibrahim"
-SELECT * FROM Tasks
+EXEC Regular_Employees_view_tasks "Rowan.Ibrahim", "Animation Video"
 
-SELECT * FROM Staff_Members INNER JOIN Regular_Employees
-    ON Staff_Members.username = Regular_Employees.username
-
-SELECT * FROM Projects
-SELECT * FROM Managers_assign_Regular_Employees_Projects
+EXEC Regular_Employee_finalize_task "Rowan.Ibrahim", "Animation Video", "task7"

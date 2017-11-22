@@ -27,10 +27,9 @@ AS
     END
 
 GO
-EXEC Work_on_task_again 'Rowan.Ibrahim', 'task6',1 -- to  change the status is optional , choose 1 else 0
-GO
+
 -------------------
---- function used in the next two procedures to filter the staff memebers
+--- function used in the next two procedures to filter the staff memebers 
 CREATE FUNCTION filter_staff_members2
       (  @manager_name VARCHAR(20),@applicant_applied VARCHAR(20) )
     RETURNS BIT
@@ -85,9 +84,7 @@ AS
     SELECT R.*,L.destination,L.purpose -- to show business requests 
     from Requests R inner join Business_Trip_Requests L on L.applicant =R.applicant and L.start_date=R.start_date
     WHERE  manager_response = 'Pending' and dbo.filter_staff_members2(@manager_name,R.applicant)=1
-GO
-EXEC View_New_Requests 'bakr.mostafa'--hr type
-EXEC View_New_Requests 'osama.rady' 
+
 
 GO
 --------------
@@ -116,9 +113,7 @@ AS
         End
     ELSE
         PRINT 'You canot access this record, or it is not found'
-Go
-SELECT * from Requests
-EXEC Change_Request_state 'osama.rady','1/10/2017 11:00:00', 'Mona.Osman','Approved','reason'
+
 ---------------
 GO
 CREATE PROCEDURE View_All_Applications
@@ -133,8 +128,7 @@ AS
     FROM Job_Seekers_apply_Jobs J inner JOIN Users U on U.username=J.job_seeker AND J.company=@company_check
     WHERE @manager_department= J.department AND J.hr_response= 'Approved' and J.manager_response = 'Pending' and job=@job_name
 
-Go
-EXEC View_All_Applications 'osama.rady','Engineer'
+
 GO
 ----------
 GO
@@ -151,12 +145,10 @@ AS
     Set manager_response =@manager_in_response
     WHERE @manager_department= department AND  @company_check =company  AND hr_response= 'Approved' AND job_seeker=@job_seeker_in And job= @job_in and manager_response = 'Pending'
 
-GO
-select * from Job_Seekers_apply_Jobs
-EXEC Edit_Application 'osama.rady','Rejected','Khaled.Hanafy','Engineer'
+
 GO
 ----------------
-Create PROCEDURE Create_project -- Amjad is here --
+Create PROCEDURE Create_project
   @manager_name VARCHAR(20) ,
   @name_in VARCHAR(20) ,
   @company_in VARCHAR(100) ,
@@ -166,8 +158,8 @@ Create PROCEDURE Create_project -- Amjad is here --
   AS
     INSERT Into Projects VALUES( @name_in, @company_in, @start_date_in,  @end_date_in,  @manager_name )
     GO
-    EXEC Create_project 'osama.rady','project1','info@facebook.com','9/2/2017 00:00:00', '10/2/2017 00:00:00'
-GO
+
+
 ----------- 
 Create PROCEDURE Assign_regular_employees_on_projects
   @manager_name VARCHAR(20) ,
@@ -199,8 +191,7 @@ Create PROCEDURE Assign_regular_employees_on_projects
 
         END
 GO
-EXEC Assign_regular_employees_on_projects 'osama.rady','project1','Amina.Abaas'
-GO
+
 ------
 CREATE PROCEDURE Remove_regular_employee_from_project
   @manager_name VARCHAR(20) ,
@@ -221,8 +212,7 @@ CREATE PROCEDURE Remove_regular_employee_from_project
         WHERE project_name=@project_name_in And regular_employee =  @regular_employee_in;
 
 GO
-exec Remove_regular_employee_from_project'osama.rady','project1','Mona.Osman'
-GO
+
 -------
 CREATE PROCEDURE Define_task
   @task_in VARCHAR(20),
@@ -254,9 +244,9 @@ CREATE PROCEDURE Define_task
     ELSE
         PRINT 'The project is not in your department or company'
 GO
-exec Define_task 'task0','project1','info@facebook.com','9/2/2018 00:00:00','description','osama.rady' -- the insertion is based on pervius procedure
-GO
+
 ---------
+Go
 CREATE PROCEDURE Assign_regular_employee_on_task
   @manager_name VARCHAR(20) ,
   @project_name_in VARCHAR(20),
@@ -280,8 +270,7 @@ CREATE PROCEDURE Assign_regular_employee_on_task
     ELSE
         PRINT 'the regular employee doesnot work on such project'
 GO
-exec Assign_regular_employee_on_task 'osama.rady','project1','task0' ,'Mona.Osman'
-GO
+
 -----------
 CREATE PROCEDURE Change_regular_employee_on_a_task
   @manager_name VARCHAR(20) ,
@@ -292,13 +281,14 @@ CREATE PROCEDURE Change_regular_employee_on_a_task
     DECLARE @manager_company VARCHAR(100)
     DECLARE @manager_department int
     EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
-
+    INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
+     @project_name_in, @manager_company, @regular_employee_in, @manager_name
+    )
     UPDATE  Tasks
     Set regular_employee = @regular_employee_in
     WHERE @manager_name= manager AND @project_name_in = project and @task_in=name AND status='Assigned' AND regular_employee is not null and @manager_company= company
 GO
-exec Change_regular_employee_on_a_task 'osama.rady','project1','task0' ,'Amina.Abaas'
-GO
+
 ----
 Create PROCEDURE View_list_of_tasks_in_project
   @manager_name VARCHAR(20) ,
@@ -318,8 +308,7 @@ AS
     Where  @project_name_in = project  and @manager_company= company
 
 GO
- exec View_list_of_tasks_in_project 'osama.rady','project1','Assigned'
-GO
+
 ------
 CREATE PROCEDURE Review_task_in_a_project
   @manager_name VARCHAR(20) ,
@@ -350,5 +339,3 @@ CREATE PROCEDURE Review_task_in_a_project
             WHERE @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company
         END
 Go
-exec Review_task_in_a_project 'emad.sherif','task5','Animation Video',0,'12/2/2018 00:00:00' -- 0 reject 1 accept
-GO

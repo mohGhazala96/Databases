@@ -191,7 +191,6 @@ INSERT INTO Users VALUES(
     'tarek',
     'sherif',
     'osman'
- 
 );
 
 INSERT INTO Users VALUES(
@@ -1026,6 +1025,13 @@ INSERT INTO Attendance_Records VALUES(
 )
 
 INSERT INTO Attendance_Records VALUES(
+    '2012-12-12',
+    'BenedictCumberbatch',
+    '08:00:00',
+    '16:00:00'
+)
+
+INSERT INTO Attendance_Records VALUES(
     '2012-12-13',
     'BenedictCumberbatch',
     '12:00',
@@ -1298,3 +1304,10 @@ VALUES ( 'Engineer' , 2 , 'hr@Microsoft.com' , 2 );
 INSERT INTO Job_Seekers_apply_Jobs ( job ,     department  , company  , job_seeker , score )
 VALUES ( 'CEO' , 9 , 'info@tesla.com' , 'John.Steve' , 100  );
 
+INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
+    'Logo', 'info@facebook.com', 'Doaa.Ahmed', 'emad.sherif'
+)
+
+INSERT INTO Tasks
+VALUES
+    ('task_Logo', 'Logo', 'info@facebook.com', '10/20/2018 00:00:00', 'Assigned', 'description', null, 'emad.sherif');

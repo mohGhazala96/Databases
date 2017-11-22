@@ -6,23 +6,22 @@ EXEC View_New_Requests 'osama.rady'
 --manager 2
 EXEC Change_Request_state 'osama.rady','1/10/2017 11:00:00', 'Mona.Osman','Approved','reason'
 --manager 3
-EXEC View_All_Applications 'osama.rady'
+EXEC View_All_Applications 'osama.rady','Engineer'
 --manager 4
 EXEC Edit_Application 'osama.rady','Rejected','Khaled.Hanafy','Engineer'
 --manager 5
 EXEC Create_project 'osama.rady','project1','info@facebook.com','9/2/2017 00:00:00', '10/2/2017 00:00:00'
 --manager 6
-EXEC Assign_regular_employees_on_projects 'osama.rady','project1','Mona.Osman'
+EXEC Assign_regular_employees_on_projects 'osama.rady','project1','Amina.Abaas'
 --manager 7
-exec Remove_regular_employee_from_project'osama.rady','project1','Mona.Osman'
+exec Remove_regular_employee_from_project'osama.rady','project1','Amina.Abaas'
 --manager 8
 exec Define_task 'task0','project1','info@facebook.com','9/2/2018 00:00:00','description','osama.rady' -- the insertion is based on pervius procedure
 --manager 9
-exec Assign_regular_employee_on_task 'osama.rady','project1','task0' ,'Mona.Osman'
+exec Assign_regular_employee_on_task 'emad.sherif','Logo','task_Logo' ,'Doaa.Ahmed'
 --manager 10
-exec Change_regular_employee_on_a_task 'osama.rady','project1','task0' ,'Amina.Abaas'
+exec Change_regular_employee_on_a_task 'emad.sherif','Logo','task_Logo' ,'Rowan.Ibrahim'
 --manager 11
- exec View_list_of_tasks_in_project 'osama.rady','project1','Assigned'
+exec View_list_of_tasks_in_project 'emad.sherif','Logo','Assigned'
 --manager 12
 exec Review_task_in_a_project 'emad.sherif','task5','Animation Video',0,'12/2/2018 00:00:00' -- 0 reject 1 accept
-

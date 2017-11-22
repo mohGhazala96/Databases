@@ -773,6 +773,6 @@ WHERE username = @username
 SELECT *
 FROM Announcements a inner join Staff_Members s
 ON a.hr_employee = s.username
-WHERE s.company = @company AND datediff(day,date,CURRENT_TIMESTAMP)<90
+WHERE s.company = @company AND datediff(day,date,CURRENT_TIMESTAMP)<21
 --
 

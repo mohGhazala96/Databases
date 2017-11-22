@@ -1,4 +1,3 @@
-Go
 CREATE PROCEDURE Work_on_task_again
     @in_username VARCHAR(20),
     @in_task VARCHAR(20),

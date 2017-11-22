@@ -150,7 +150,7 @@ CREATE TABLE Attendance_Records(
     start_time time Not NULL,
     end_time time,
 
-    PRIMARY KEY(attendace_date,staff),
+    PRIMARY KEY(attendance_date,staff),
     FOREIGN KEY(staff) REFERENCES Staff_Members ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE Emails(

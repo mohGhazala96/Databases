@@ -1271,7 +1271,6 @@ INSERT INTO Questions ( question , answer  )
 VALUES ('What is the String in C++' , 'Array of chars'    );
 INSERT INTO Questions ( question , answer  )
 VALUES ('How to implement merge sort' , 'divide and conquer'    );
-SELECT * FROM Questions
 INSERT INTO Job_Has_Question
 VALUES ( 'CEO' , 9 , 'info@tesla.com' , 3 );
 INSERT INTO Job_Has_Question

@@ -798,6 +798,12 @@ VALUES
     ( 'Animation Video', 'info@facebook.com' , '9/30/2017 12:00:00', '10/30/2017 12:00:00', 'emad.sherif')--Creative
 -- add 4 tasks
 --hr@Microsoft.com' info@facebook.com info@tesla.com Assigned Open Fixed
+INSERT INTO     Managers_assign_Regular_Employees_Projects VALUES
+    ('cloudApp', 'info@facebook.com','Mona.Osman', 'bakr.mostafa')
+INSERT INto     Managers_assign_Regular_Employees_Projects VALUES
+    ('cloudApp', 'info@facebook.com','Amina.Abaas', 'bakr.mostafa')
+INSERT INto     Managers_assign_Regular_Employees_Projects VALUES
+    ('Animation Video', 'info@facebook.com','Rowan.Ibrahim', 'emad.sherif')
 INSERT INTO Tasks
 VALUES
     ('task1', 'cloudApp', 'info@facebook.com', '9/27/2017 00:00:00', 'Fixed', 'description', 'Mona.Osman', 'bakr.mostafa');

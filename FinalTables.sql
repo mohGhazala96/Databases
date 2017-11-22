@@ -80,7 +80,7 @@ CREATE TABLE Users(
 username varchar(20) PRIMARY KEY NOT NULL , 
 password varchar(30) NOT NULL , 
 personal_email varchar(100) NOT NULL , 
-birth_date datetime NOT NULL , 
+birth_date date NOT NULL , 
 years_of_experience int  NOT NULL , 
 first_name varchar (30) NOT NULL , 
 middle_name varchar (30)  ,

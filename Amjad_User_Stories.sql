@@ -195,8 +195,8 @@ AS
 
     INSERT INTO Announcements VALUES(getdate(), @title, @username, @type, @description)
 GO
-
-CREATE PROCEDURE HR_Employees_view_requests /* Does "Approved by a manager only" mean that we should exclude those approved by HR? */
+SELECT * FROM Business_Trip_Requests
+CREATE PROCEDURE HR_Employees_view_requests
     @username VARCHAR(20)
 AS
     declare @is_hr BIT;
@@ -212,9 +212,19 @@ AS
 
     EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
 
-    SELECT * FROM Requests INNER JOIN Staff_Members
+    SELECT Requests.*, Business_Trip_Requests.destination, Business_Trip_Requests.purpose FROM Requests INNER JOIN Staff_Members
         ON (applicant = Staff_Members.username AND Staff_Members.department = @dep)
-        WHERE Requests.manager_response = 'Approved'
+    INNER JOIN Business_Trip_Requests ON
+        Requests.start_date = Business_Trip_Requests.start_date AND
+        Requests.applicant = Business_Trip_Requests.applicant
+    WHERE Requests.manager_response = 'Approved'
+
+    SELECT Requests.*, Leave_Requests.type FROM Requests INNER JOIN Staff_Members
+        ON (applicant = Staff_Members.username AND Staff_Members.department = @dep)
+    INNER JOIN Leave_Requests ON
+        Requests.start_date = Leave_Requests.start_date AND
+        Requests.applicant = Leave_Requests.applicant
+    WHERE Requests.manager_response = 'Approved'
 GO
 
 CREATE PROCEDURE HR_Employees_update_requests /* Should updating the value of annual_leaves be exclusive to leave requests? */

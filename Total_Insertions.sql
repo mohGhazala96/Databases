@@ -878,7 +878,7 @@ INSERT INTO Job_Seekers_apply_Jobs
 VALUES
     ( 'Engineer', (select code
         FROM Departments
-        WHERE name='Online Operations' and company='info@facebook.com'), 'info@facebook.com', 'Hossam.Azzab' , 'Pending', 'Pending', 60)
+        WHERE name='Online Operations' and company='info@facebook.com'), 'info@facebook.com', 'Hossam.Azzab' , 'Approved', 'Pending', 60)
 INSERT INTO Job_Seekers_apply_Jobs
 VALUES
     ( 'Engineer', (select code
@@ -1265,3 +1265,19 @@ VALUES ( 'John.Harris' )
 INSERT INTO Job_Seekers
 VALUES ( 'John.Steve' )
 
+INSERT INTO Questions ( question , answer  )
+VALUES ('What is the Programming language you know best' , 'Python'    );
+INSERT INTO Questions ( question , answer  )
+VALUES ('What is the String in C++' , 'Array of chars'    );
+INSERT INTO Questions ( question , answer  )
+VALUES ('How to implement merge sort' , 'divide and conquer'    );
+
+INSERT INTO Job_Has_Question
+VALUES ( 'CEO' , 9 , 'info@tesla.com' , 3 );
+INSERT INTO Job_Has_Question
+VALUES ( 'CEO' , 9 , 'info@tesla.com' , 4 );
+INSERT INTO Job_Has_Question
+VALUES ( 'Engineer' , 2 , 'hr@Microsoft.com' , 2 );
+
+INSERT INTO Job_Seekers_apply_Jobs ( job ,     department  , company  , job_seeker , score )
+VALUES ( 'CEO' , 9 , 'info@tesla.com' , 'John.Steve' , 100  );

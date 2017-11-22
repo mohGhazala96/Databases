@@ -510,14 +510,10 @@ GO
 CREATE PROC View_emails
     @recipient VARCHAR(20)
 AS
-DECLARE @emailnum int
-DECLARE @sender VARCHAR(20)
-SELECT @emailnum = email_number, @sender = sender
-FROM Staff_Members_send_Email_Staff_Members
-WHERE recipient=@recipient
 SELECT *
-FROM Emails
-WHERE serial_number = @emailnum
+FROM Staff_Members_send_Email_Staff_Members s INNER JOIN Emails e
+ON email_number = serial_number
+WHERE s.recipient=@recipient
 --
 GO
 exec View_emails 'JenniferLaw'

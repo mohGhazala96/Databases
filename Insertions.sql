@@ -877,7 +877,7 @@ INSERT INTO Job_Seekers_apply_Jobs
 VALUES
     ( 'Engineer', (select code
         FROM Departments
-        WHERE name='Online Operations' and company='info@facebook.com'), 'info@facebook.com', 'Hossam.Azzab' , 'Approved', 'Pending', 60)
+        WHERE name='Online Operations' and company='info@facebook.com'), 'info@facebook.com', 'Hossam.Azzab' , 'Pending', 'Pending', 60)
 INSERT INTO Job_Seekers_apply_Jobs
 VALUES
     ( 'Engineer', (select code
@@ -1016,13 +1016,6 @@ INSERT INTO Business_Trip_Requests VALUES(
 )
 
 SELECT * FROM Business_Trip_Requests
-
-INSERT INTO Attendance_Records VALUES(
-    '2012-12-12',
-    'BenedictCumberbatch',
-    '08:00:00',
-    '16:00:00'
-)
 
 INSERT INTO Attendance_Records VALUES(
     '2012-12-12',

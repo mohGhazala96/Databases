@@ -775,4 +775,878 @@ FROM Announcements a inner join Staff_Members s
 ON a.hr_employee = s.username
 WHERE s.company = @company AND datediff(day,a.date,CURRENT_TIMESTAMP)<21
 --
+GO
 
+CREATE PROCEDURE Staff_Members_get_my_department
+    @username varchar(20),
+    @code int output,
+    @company VARCHAR(100) output
+AS
+    SELECT @code = department, @company = company FROM Staff_Members WHERE username = @username;
+GO
+
+CREATE PROCEDURE HR_Employee_check
+    @username VARCHAR(20),
+    @is_hr BIT OUTPUT
+AS
+    declare @count int;
+    SET @is_hr = 0;
+
+    SELECT @count = COUNT(*) FROM HR_Employees WHERE username = @username
+
+    IF @count > 0
+        SET @is_hr = 1
+GO
+
+CREATE TYPE q_list AS TABLE (
+    question varchar(100) NOT NULL PRIMARY KEY,
+    answer varchar(100) NOT NULL
+);
+GO
+
+CREATE PROCEDURE HR_Employees_add_job /* I forgot to add the questions, add them */
+    @username varchar(20),
+    @title VARCHAR(20),
+    @short_description VARCHAR(100),
+    @detailed_description VARCHAR(200),
+    @min_experience int,
+    @salary int,
+    @deadline datetime,
+    @no_of_vacancies int,
+    @working_hours int,
+    @q_list q_list READONLY
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @dep output, @company output
+
+    INSERT INTO Jobs VALUES(
+        @title,
+        @dep,
+        @company,
+        @short_description,
+        @detailed_description,
+        @min_experience,
+        @salary,
+        @deadline,
+        @no_of_vacancies,
+        @working_hours
+    )
+
+    DECLARE @inserted_ids TABLE ([id] INT);
+
+    INSERT INTO Questions OUTPUT INSERTED.number INTO @inserted_ids SELECT * FROM @q_list
+    INSERT INTO Job_Has_Question SELECT @title, @dep, @company, id FROM @inserted_ids
+GO
+
+CREATE PROCEDURE HR_Employees_view_job
+    @username VARCHAR(20),
+    @title VARCHAR(20)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @dep output, @company output
+    SELECT * FROM Jobs WHERE title = @title AND department = @dep AND company = @company
+GO
+
+CREATE PROCEDURE HR_Employees_update_job
+    @username VARCHAR(20),
+    @title VARCHAR(20),
+    @new_title VARCHAR(20),
+    @new_short_description VARCHAR(100),
+    @new_detailed_description VARCHAR(200),
+    @new_min_experience int,
+    @new_salary int,
+    @new_deadline datetime,
+    @new_no_of_vacancies int,
+    @new_working_hours int
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @dep output, @company output
+
+    UPDATE Jobs SET title = @new_title,
+                    short_description = @new_short_description,
+                    detailed_description = @new_detailed_description,
+                    min_experience = @new_min_experience,
+                    salary = @new_salary,
+                    deadline = @new_deadline,
+                    no_of_vacancies = @new_no_of_vacancies,
+                    working_hours = @new_working_hours
+        WHERE Jobs.title = @title AND Jobs.department = @dep AND Jobs.company = @company
+GO
+
+CREATE PROCEDURE HR_Employees_view_applications /* Does "new" applications mean that the hr_response is pending? I believe so */
+    @username VARCHAR(20),
+    @job_title VARCHAR(20)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @department int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @department output, @company output
+
+    SELECT Job_Seekers_apply_Jobs.job,
+           Job_Seekers_apply_Jobs.score,
+           Users.personal_email,
+           Users.birth_date,
+           Users.years_of_experience,
+           Users.first_name,
+           Users.middle_name,
+           Users.last_name,
+           Users.age
+        FROM Job_Seekers_apply_Jobs INNER JOIN Users ON
+            Job_Seekers_apply_Jobs.job_seeker = Users.username
+        WHERE job = @job_title AND
+              department = @department AND
+              company = @company AND
+              hr_response = 'Pending';
+GO
+
+CREATE PROCEDURE HR_Employees_accept_reject_applications
+    @username VARCHAR(20),
+    @job_seeker VARCHAR(20),
+    @job VARCHAR(20),
+    @response VARCHAR(10)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @department int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @department output, @company output
+
+    UPDATE Job_Seekers_apply_Jobs SET hr_response = @response WHERE job = @job AND
+                                                                    job_seeker = @job_seeker AND
+                                                                    department = @department AND
+                                                                    company = @company AND
+                                                                    manager_response = 'Pending';
+GO
+
+CREATE PROCEDURE HR_Employees_create_announcement
+    @username VARCHAR(20),
+    @title VARCHAR(50),
+    @type VARCHAR(50),
+    @description VARCHAR(MAX)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    INSERT INTO Announcements VALUES(getdate(), @title, @username, @type, @description)
+GO
+
+CREATE PROCEDURE HR_Employees_view_requests
+    @username VARCHAR(20)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company_email VARCHAR(50);
+
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+    SELECT Requests.*, Business_Trip_Requests.destination, Business_Trip_Requests.purpose FROM Requests INNER JOIN Staff_Members
+        ON (applicant = Staff_Members.username AND Staff_Members.department = @dep)
+    INNER JOIN Business_Trip_Requests ON
+        Requests.start_date = Business_Trip_Requests.start_date AND
+        Requests.applicant = Business_Trip_Requests.applicant
+    WHERE Requests.manager_response = 'Approved'
+
+    SELECT Requests.*, Leave_Requests.type FROM Requests INNER JOIN Staff_Members
+        ON (applicant = Staff_Members.username AND Staff_Members.department = @dep)
+    INNER JOIN Leave_Requests ON
+        Requests.start_date = Leave_Requests.start_date AND
+        Requests.applicant = Leave_Requests.applicant
+    WHERE Requests.manager_response = 'Approved'
+GO
+
+CREATE PROCEDURE HR_Employees_update_requests /* Should updating the value of annual_leaves be exclusive to leave requests? */
+    @username VARCHAR(20),
+    @applicant VARCHAR(20),
+    @start_date DATETIME,
+    @response VARCHAR(50)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company_email VARCHAR(50);
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+    declare @end_date DATETIME;
+    
+    SELECT @end_date = end_date FROM
+        Requests INNER JOIN Staff_Members ON (
+            Requests.applicant = Staff_Members.username
+        )
+    WHERE Staff_Members.department = @dep
+            AND Staff_Members.company = @company_email
+            AND Staff_Members.username = @applicant
+            AND Requests.start_date = @start_date
+            AND Requests.manager_response = 'Approved';
+
+    IF @end_date IS NULL
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+    
+    IF @response = 'Approved'
+        BEGIN
+            declare @annual_leave int;
+
+            SELECT @annual_leave = COUNT(*) FROM Leave_Requests WHERE
+                start_date = @start_date AND
+                applicant = @applicant AND
+                type = 'annual'
+
+            IF @annual_leave > 0
+            BEGIN
+                declare @start_date_temp DATETIME;
+                SET @start_date_temp = @start_date;
+
+                declare @day_off VARCHAR(10);
+
+                SELECT @day_off = day_off FROM Staff_Members
+
+                declare @vacation_days int;
+                SET @vacation_days = 0;
+
+                while(@start_date_temp <= @end_date)
+                    BEGIN
+                        declare @day_name VARCHAR(10);
+
+                        SELECT @day_name = DATENAME(dw, @start_date_temp);
+
+                        IF NOT (@day_name = @day_off OR @day_name = 'Friday')
+                            SET @vacation_days = @vacation_days + 1;
+                        
+                        SET @start_date_temp = DATEADD(d, 1, @start_date_temp)
+                    END
+                
+                declare @annual_leaves int;
+
+                SELECT @annual_leaves = annual_leaves FROM Staff_Members WHERE username = @username
+
+                IF @vacation_days > @annual_leaves
+                    PRINT 'Staff member does not have enough annual leaves'
+                    RETURN
+
+                UPDATE Staff_Members SET annual_leaves = (@annual_leaves - @vacation_days)
+            END
+
+            UPDATE Requests SET hr_response = 'Approved' WHERE
+                start_date = @start_date AND
+                applicant = @applicant
+
+        END
+    ELSE
+        BEGIN
+            UPDATE Requests SET hr_response = 'Rejected' WHERE
+                start_date = @start_date AND
+                applicant = @applicant
+        END
+GO
+
+CREATE PROCEDURE HR_Employees_view_attendance /* Does "Any staff member" mean list all staff members,
+    or be able to specify which staff member do you want to view?
+    If we need to list all, just remove the WHERE condition and the @staff variable */
+    @username VARCHAR(20),
+    @start_datetime DATETIME,
+    @end_datetime DATETIME
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company_email VARCHAR(50);
+
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+    declare @temp int;
+
+    SELECT @temp = COUNT(*) FROM Staff_Members WHERE
+        username = @staff AND
+        department = @dep AND
+        company = @company_email;
+
+    IF @temp = 0
+    BEGIN
+        PRINT 'Staff member not in your department or does not exist'
+        RETURN
+    END
+
+    SELECT attendance_date,
+           start_time,
+           end_time,
+           DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
+           Jobs.working_hours,
+           CASE WHEN Jobs.working_hours > (DATEDIFF(second, start_time, end_time) / 3600.0)
+                THEN Jobs.working_hours - (DATEDIFF(second, start_time, end_time) / 3600.0)
+                ELSE 0 END AS missed_hours
+        FROM Staff_Members INNER JOIN Jobs ON (
+            Staff_Members.job = Jobs.title AND
+            Staff_Members.department = Jobs.department AND
+            Staff_Members.company = Jobs.company
+        ) INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
+        WHERE CAST(Attendance_records.attendance_date AS DATETIME) + CAST(CAST(Attendance_records.start_time AS TIME) AS DATETIME) BETWEEN @start_datetime AND @end_datetime
+GO
+
+CREATE PROCEDURE HR_Employees_total_hours /* Check if this is correct. Should the total hours be total working hours? */
+    @username VARCHAR(20),
+    @year int
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company_email VARCHAR(50);
+
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+    SELECT username,
+       ISNULL(January, 0) as January,
+       ISNULL(February, 0) as February,
+       ISNULL(March, 0) as March,
+       ISNULL(April, 0) as April,
+       ISNULL(May, 0) as May,
+       ISNULL(June, 0) as June,
+       ISNULL(July, 0) as July,
+       ISNULL(August, 0) as August,
+       ISNULL(September, 0) as September,
+       ISNULL(October, 0) as October,
+       ISNULL(November, 0) as November,
+       ISNULL(December, 0) as December FROM(
+    SELECT Staff_Members.username,
+           DATENAME(MONTH, attendance_date) as month,
+           DATEDIFF(second, start_time, end_time) / 3600.0 as duration
+    FROM Staff_Members
+        LEFT OUTER JOIN(
+            SELECT * FROM Attendance_Records WHERE YEAR(attendance_date) = @year
+        ) a ON Staff_Members.username = a.staff
+        WHERE Staff_Members.company = @company_email AND
+              Staff_Members.department = @dep
+    ) d
+    PIVOT (
+        SUM(duration) for month in (
+            January,
+            February,
+            March,
+            April,
+            May,
+            June,
+            July,
+            August,
+            September,
+            October,
+            November,
+            December)
+    ) piv;
+GO
+
+CREATE PROCEDURE HR_Employees_view_high_achievers
+    @username VARCHAR(20)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company_email VARCHAR(50);
+
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+    SELECT TOP 3 Users.first_name, Users.middle_name, Users.last_name, SUM(DATEDIFF(second, Attendance_Records.start_time, Attendance_Records.end_time) / 3600.0) as hours_spent
+        FROM Regular_Employees INNER JOIN Attendance_Records
+            ON Regular_Employees.username = Attendance_Records.staff
+        INNER JOIN Staff_Members ON Regular_Employees.username = Staff_Members.username
+        INNER JOIN Users ON Staff_Members.username = Users.username
+        WHERE Staff_Members.department = @dep
+              AND Staff_Members.company = @company_email
+              AND NOT EXISTS(SElECT * FROM Tasks WHERE
+                Tasks.regular_employee = Regular_Employees.username
+                AND Tasks.status <> 'Fixed'
+              )
+        GROUP BY Users.first_name, Users.middle_name, Users.last_name
+        ORDER BY hours_spent DESC;
+GO
+
+-- CREATE PROCEDURE Managers_view_requests
+--     @username VARCHAR(20)
+-- AS
+--     declare @type VARCHAR(50);
+--     SELECT @type = type FROM Managers WHERE username = @username;
+
+--     declare @dep int;
+--     declare @company_email VARCHAR(50);
+
+--     EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+--     SELECT * FROM Requests INNER JOIN Staff_Members
+--             ON Requests.applicant = Staff_Members.username
+--         WHERE Staff_Members.company = @company_email
+--               AND Staff_Members.department = @dep
+--               AND (@type = 'HR' OR NOT EXISTS (
+--                   SELECT * FROM HR_Employees WHERE Requests.applicant = HR_Employees.username
+--               ))
+-- GO
+
+CREATE PROCEDURE Regular_Employees_view_projects
+    @username VARCHAR(20)
+AS
+    SELECT Projects.* FROM Managers_assign_Regular_Employees_Projects INNER JOIN Projects
+        ON Managers_assign_Regular_Employees_Projects.company = Projects.company
+           AND Managers_assign_Regular_Employees_Projects.project_name = Projects.name
+        WHERE Managers_assign_Regular_Employees_Projects.regular_employee = @username
+GO
+
+CREATE PROCEDURE Regular_Employees_view_tasks /* Should I view only my tasks?
+    Assigned to me here means project, or task? */
+    @username VARCHAR(20),
+    @project_name VARCHAR(20)
+AS
+    SELECT Tasks.* FROM Managers_assign_Regular_Employees_Projects INNER JOIN Projects
+        ON Managers_assign_Regular_Employees_Projects.company = Projects.company
+           AND Managers_assign_Regular_Employees_Projects.project_name = Projects.name
+        INNER JOIN Tasks ON Tasks.project = Projects.name AND Tasks.company = Projects.company
+        WHERE Managers_assign_Regular_Employees_Projects.regular_employee = @username
+GO
+
+CREATE PROCEDURE Regular_Employee_finalize_task
+    @username VARCHAR(20),
+    @project_name VARCHAR(20),
+    @task_name VARCHAR(20)
+AS
+    declare @dep int;
+    declare @company_email VARCHAR(50);
+
+    EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
+
+    UPDATE Tasks SET status = 'Fixed' WHERE
+        Tasks.name = @task_name AND
+        Tasks.company = @company_email AND
+        Tasks.project = @project_name AND
+        Tasks.deadline >= GETDATE() AND
+        Tasks.regular_employee = @username AND
+        Tasks.status = 'Assigned'
+GO
+----- regular 4
+CREATE PROCEDURE Work_on_task_again
+    @in_username VARCHAR(20),
+    @in_task VARCHAR(20),
+    @change_status BIT
+AS
+    DECLARE @check_date DATETIME
+    DECLARE @check_status VARCHAR(10)
+    BEGIN
+        SELECT @check_date= T.deadline, @check_status = T.status --get status and deadline of the task
+        FROM Tasks T, Regular_Employees R,Staff_Members U
+        WHERE @in_username =T.regular_employee And @in_task =T.name and U.company = T.company  and R.username=@in_username and @in_username=U.username ;
+        BEGIN
+            IF @check_date is NULL
+            PRINT 'You donont work on such task'
+        End
+        BEGIN
+            If @check_status <> 'Fixed'
+                    PRINT 'The task status is not Fixed'
+        END
+        IF CURRENT_TIMESTAMP <= @check_date --to make sure deadline did not pass
+        IF @change_status =1
+            UPDATE Tasks
+            SET status = 'Assigned'
+            WHERE regular_employee = @in_username and name= @in_task and status ='Fixed';
+        ELSE
+            PRINT 'deadline has passed'
+    END
+
+GO
+
+-------------------
+--- function used in the next two procedures to filter the staff memebers 
+CREATE FUNCTION filter_staff_members2
+      (  @manager_name VARCHAR(20),@applicant_applied VARCHAR(20) )
+    RETURNS BIT
+    BEGIN
+    DECLARE @returnedValue BIT
+    DECLARE @check_appliacant VARCHAR(20)
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE  @department_number INT
+    DECLARE @manager_type VARCHAR(50)
+
+        --getting manager's department
+        SELECT @department_number= department
+        FROM Staff_Members
+        where @manager_name = username
+        --getting manager's type
+        SELECT @manager_type = type
+        FROM Managers
+        where @manager_name=username
+        -- getting manager's company
+        SELECT @manager_company= company
+        FROM Staff_Members
+        where @manager_name = username
+
+    SET @returnedValue= 0
+    IF @manager_type='HR' -- if the manager is hr then he can see all the other staff memebers
+        SELECT @check_appliacant = username
+        FROM Staff_Members
+        WHERE @department_number = department AND username<>@manager_name and @applicant_applied = username and company = @manager_company
+    ELSE
+        SELECT @check_appliacant = s.username -- if the manager is hr then he can see all the other staff memebers except hr employees
+        FROM Staff_Members s
+        WHERE @department_number = s.department AND s.username<>@manager_name and @applicant_applied = s.username and s.company = @manager_company
+        And s.username 
+           Not IN(
+                Select h.username
+                FROM HR_Employees h
+                )
+    IF  @check_appliacant is NOT NULL -- if there is an applicant found return 1
+        SET @returnedValue= 1
+      
+    RETURN @returnedValue
+END
+Go
+--------
+-- manager1
+
+CREATE PROCEDURE View_New_Requests 
+    @manager_name VARCHAR(20)
+AS
+    SELECT R.*,L.type  -- to show leave requests
+    from Requests R inner join Leave_Requests L on L.applicant =R.applicant and L.start_date=R.start_date
+    WHERE  manager_response = 'Pending' and dbo.filter_staff_members2(@manager_name,R.applicant)=1
+
+    SELECT R.*,L.destination,L.purpose -- to show business requests 
+    from Requests R inner join Business_Trip_Requests L on L.applicant =R.applicant and L.start_date=R.start_date
+    WHERE  manager_response = 'Pending' and dbo.filter_staff_members2(@manager_name,R.applicant)=1
+
+
+GO
+--------------
+-- manager2
+CREATE PROCEDURE Change_Request_state
+    @manager_name VARCHAR(20),
+    @start_date_in DATETIME,
+    @applicant_in VARCHAR(20),
+    @status_in VARCHAR(10),
+    @reason VARCHAR(MAX)
+AS
+    DECLARE @check_hr VARCHAR(20)
+    If  (@status_in = 'Rejected' and @reason is NOT NULL )Or (@status_in = 'Approved')
+        BEGIN
+            SELECT @check_hr =@applicant_in
+            FROM HR_Employees
+            where @applicant_in=username
+
+            IF  @check_hr Is  NOT NULL -- to check if the applicant is hr employee
+                UPDATE Requests -- if the manager is of type hr he/she will finalize the review and add the hr_response as well
+                SET manager_response =@status_in , manager_reason =@reason , hr_response =@status_in , manager =    @manager_name 
+                WHERE @start_date_in = start_date and applicant= @applicant_in and dbo.filter_staff_members2(@manager_name,applicant)=1 and manager_response ='Pending' and hr_response='Pending' ; 
+            ELSE
+                UPDATE Requests
+                SET manager_response =@status_in , manager_reason =@reason , manager =    @manager_name 
+                WHERE @start_date_in = start_date and applicant= @applicant_in and dbo.filter_staff_members2(@manager_name,applicant)=1 and manager_response ='Pending' and hr_response='Pending' ;
+        End
+    ELSE
+        PRINT 'You canot access this record, or it is not found'
+
+---------------
+-- manager3
+GO
+CREATE PROCEDURE View_All_Applications
+    @manager_name VARCHAR(20),
+    @job_name VARCHAR(20)
+AS
+    DECLARE @manager_department int
+    DECLARE @company_check VARCHAR(100)
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check output
+    --below i showed all information of the job seeker except the username and password
+    SELECT job ,score ,U.personal_email,U.birth_date,U.years_of_experience,U.first_name,U.middle_name,U.last_name,U.age
+    FROM Job_Seekers_apply_Jobs J inner JOIN Users U on U.username=J.job_seeker AND J.company=@company_check
+    WHERE @manager_department= J.department AND J.hr_response= 'Approved' and J.manager_response = 'Pending' and job=@job_name
+
+
+GO
+----------
+GO
+-- manager4
+CREATE PROCEDURE Edit_Application
+    @manager_name VARCHAR(20),
+    @manager_in_response VARCHAR(10),
+    @job_seeker_in VarCHAR(20),
+    @job_in VarCHAR(20)
+AS
+    DECLARE @manager_department int
+    DECLARE @company_check VARCHAR(100)
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check output
+    UPDATE  Job_Seekers_apply_Jobs
+    Set manager_response =@manager_in_response
+    WHERE @manager_department= department AND  @company_check =company  AND hr_response= 'Approved' AND job_seeker=@job_seeker_in And job= @job_in and manager_response = 'Pending'
+
+
+GO
+----------------
+-- manager5
+Create PROCEDURE Create_project
+  @manager_name VARCHAR(20) ,
+  @name_in VARCHAR(20) ,
+  @company_in VARCHAR(100) ,
+  @start_date_in datetime,
+  @end_date_in datetime
+
+  AS
+    INSERT Into Projects VALUES( @name_in, @company_in, @start_date_in,  @end_date_in,  @manager_name )
+    GO
+
+
+----------- 
+-- manager6
+Create PROCEDURE Assign_regular_employees_on_projects
+  @manager_name VARCHAR(20) ,
+  @project_name_in VARCHAR(20),
+  @regular_employee_in  VARCHAR(20)
+  AS 
+    DECLARE @manager_department int
+    DECLARE @regular_department int
+    DECLARE @regular_company VARCHAR(100)
+    DECLARE @sum_of_projects int
+    DECLARE @company_check_manager VARCHAR(100) 
+
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check_manager output
+    EXEC Staff_Members_get_my_department @regular_employee_in , @regular_department output, @regular_company output
+
+
+    IF @regular_department <> @manager_department or @company_check_manager <>@regular_company -- make sure the manager's company and department is the same as the regular employee
+        PRINT 'regular employee should have same department as the manager'
+    ELSE
+        BEGIN
+            SELECT @sum_of_projects = COUNT(*) -- as regular employee should work on maximum two projects so i get the count
+            FROM Managers_assign_Regular_Employees_Projects
+            WHERE  @regular_employee_in= regular_employee
+        IF @sum_of_projects<2
+
+            INSERT Into Managers_assign_Regular_Employees_Projects VALUES( @project_name_in, @company_check_manager, @regular_employee_in,  @manager_name )
+        ELSE
+            PRINT 'regular employee shouldnt be not working on more than two projects at the same time.'
+
+        END
+GO
+
+-----
+-- manager7
+CREATE PROCEDURE Remove_regular_employee_from_project
+  @manager_name VARCHAR(20) ,
+  @project_name_in VARCHAR(20),
+  @regular_employee_in  VARCHAR(20)
+  AS 
+    DECLARE @check_regular VARCHAR(20)
+    DECLARE @check_manager_company varchar(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @check_manager_company output
+
+    Select @check_regular = regular_employee -- gets the old regular employee
+    from Managers_assign_Regular_Employees_Projects
+    where project_name=@project_name_in and regular_employee=@regular_employee_in  and @check_manager_company=company
+
+    IF @check_regular is not NULL 
+        DELETE FROM   Managers_assign_Regular_Employees_Projects
+        WHERE project_name=@project_name_in And regular_employee =  @regular_employee_in;
+
+GO
+
+-------
+-- manager8
+CREATE PROCEDURE Define_task
+  @task_in VARCHAR(20),
+  @project_name_in VARCHAR(20),
+  @company_in VARCHAR(100) ,
+  @deadline_in datetime,
+  @description_in VARCHAR(MAX),
+  @manager_name VARCHAR(20) 
+
+  AS 
+    DECLARE @manager_department int
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE @project_manager_name VARCHAR(20) 
+    DECLARE @project_manager_department int
+    DECLARE @project_manager_company VARCHAR(100)
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+
+    SELECT  @project_manager_name = manager -- get name of the manager who defined the project
+    FROM  Projects
+    WHERE name= @project_name_in
+
+
+    SELECT @project_manager_department= department  ,@project_manager_company =company -- get the department and company of the manager who defined the project
+    FROM Staff_Members
+    where @project_manager_name = username
+
+    IF @project_manager_department=  @manager_department and @project_manager_company=@manager_company 
+        INSERT Into Tasks VALUES( @task_in,@project_name_in,@company_in, @deadline_in,'Open',@description_in,null, @manager_name)
+    ELSE
+        PRINT 'The project is not in your department or company'
+GO
+
+---------
+Go
+-- manager9
+CREATE PROCEDURE Assign_regular_employee_on_task
+  @manager_name VARCHAR(20) ,
+  @project_name_in VARCHAR(20),
+  @task_in VARCHAR(20),
+  @regular_employee_in VARCHAR(20)
+  AS
+    DECLARE @check_regular VARCHAR(20)
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+
+    SELECT @check_regular = regular_employee -- gets regular employee assinged on the project
+    FROM Managers_assign_Regular_Employees_Projects
+    WHERE @regular_employee_in =  regular_employee
+
+    IF @check_regular IS Not NULL
+        UPDATE  Tasks
+        Set regular_employee = @regular_employee_in , status='Assigned'
+        WHERE @manager_name= manager AND @project_name_in = project and regular_employee is null and @task_in=name and @manager_company=company
+
+    ELSE
+        PRINT 'the regular employee doesnot work on such project'
+GO
+
+-----------
+-- manager10
+CREATE PROCEDURE Change_regular_employee_on_a_task
+  @manager_name VARCHAR(20) ,
+   @project_name_in VARCHAR(20),
+   @task_in VARCHAR(20),
+  @regular_employee_in VARCHAR(20)
+  AS
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+    INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
+     @project_name_in, @manager_company, @regular_employee_in, @manager_name
+    )
+    UPDATE  Tasks
+    Set regular_employee = @regular_employee_in
+    WHERE @manager_name= manager AND @project_name_in = project and @task_in=name AND status='Assigned' AND regular_employee is not null and @manager_company= company
+GO
+
+----
+-- manager11
+Create PROCEDURE View_list_of_tasks_in_project
+  @manager_name VARCHAR(20) ,
+  @project_name_in VARCHAR(20),
+  @status_in VARCHAR(10)
+AS 
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+
+    SELECT *
+    FROM Tasks 
+    Where @manager_name= manager AND @project_name_in = project  And status= @status_in and @manager_company= company
+
+    SELECT *
+    FROM Task_Comments
+    Where  @project_name_in = project  and @manager_company= company
+
+GO
+
+------
+-- manager12
+CREATE PROCEDURE Review_task_in_a_project
+  @manager_name VARCHAR(20) ,
+  @task_in VARCHAR(20),
+  @project_name_in VARCHAR(20),
+  @accept_or_recject bit,
+  @deadline_in datetime
+  AS
+    DECLARE @stauts_check VARCHAR(10)
+    DECLARE @deadline_check datetime
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+
+    IF @accept_or_recject = 1
+        Begin
+            Set @stauts_check = 'Closed'
+            UPDATE  Tasks
+            Set status = @stauts_check 
+            WHERE @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company
+        END
+    ELSE
+        BEGIN
+            Set @stauts_check= 'Assigned'
+            SET @deadline_check =   @deadline_in 
+            UPDATE  Tasks
+            Set status = @stauts_check , deadline= @deadline_check
+            WHERE @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company
+        END
+Go

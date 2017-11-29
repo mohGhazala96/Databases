@@ -1015,7 +1015,7 @@ INSERT INTO Business_Trip_Requests VALUES(
     'purpose2'
 )
 
-SELECT * FROM Business_Trip_Requests
+
 
 INSERT INTO Attendance_Records VALUES(
     '2012-12-12',

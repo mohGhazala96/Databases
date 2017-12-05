@@ -72,7 +72,7 @@ namespace iWork
             }
             else
             {
-                Response.Redirect("Default.aspx",true);
+                Response.Redirect("Login.aspx",true);
             }
         }
 

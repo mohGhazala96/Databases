@@ -20,7 +20,7 @@ namespace iWork
                 lbl_username.Text = "Logged in as, " + Session["Username"];
             }
             else{
-                Response.Redirect("Default.aspx",true);
+                Response.Redirect("Login.aspx",true);
             }
         }
         protected void changePass(object sender, EventArgs e)

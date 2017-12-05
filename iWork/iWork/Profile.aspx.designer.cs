@@ -61,6 +61,18 @@ namespace iWork {
 		
 		protected System.Web.UI.WebControls.Button btn_check_attendance;
 		
+		protected System.Web.UI.WebControls.Button btn_leave_request;
+		
+		protected System.Web.UI.WebControls.Button btn_business_request;
+		
+		protected System.Web.UI.WebControls.Button btn_view_requests;
+		
+		protected System.Web.UI.WebControls.Button btn_send_email;
+		
+		protected System.Web.UI.WebControls.Button btn_view_emails;
+		
+		protected System.Web.UI.WebControls.Button btn_view_announcements;
+		
 		protected System.Web.UI.HtmlControls.HtmlForm Job_Seeker;
 		
 		protected System.Web.UI.HtmlControls.HtmlForm Manager;

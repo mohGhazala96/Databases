@@ -31,7 +31,12 @@
             <asp:Button id="btn_check_in" runat="server" Text="Check In" OnClick="checkIn"></asp:Button><br />
             <asp:Button id="btn_check_out" runat="server" Text="Check Out" OnClick="checkOut"></asp:Button><br />
             <asp:Button id="btn_check_attendance" runat="server" Text="Check Attendance" OnClick="checkAttendance"></asp:Button><br />
-
+            <asp:Button id="btn_leave_request" runat="server" Text="Apply For a Leave Request" OnClick="leaveRequest"></asp:Button><br />
+            <asp:Button id="btn_business_request" runat="server" Text="Apply For a Business Request" OnClick="businessRequest"></asp:Button><br />
+            <asp:Button id="btn_view_requests" runat="server" Text="View Your Requests" OnClick="viewRequests"></asp:Button><br />
+            <asp:Button id="btn_send_email" runat="server" Text="Send an Email" OnClick="sendEmail"></asp:Button><br />
+            <asp:Button id="btn_view_emails" runat="server" Text="View Emails" OnClick="viewEmails"></asp:Button><br />
+            <asp:Button id="btn_view_announcements" runat="server" Text="View Announcements" OnClick="viewAnnouncements"></asp:Button><br />
 	</form>
     <form id="Job_Seeker" runat="server">
             <h1>Job Seeker stuff here</h1>

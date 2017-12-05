@@ -151,5 +151,29 @@ namespace iWork
         {
             Response.Redirect("Check_Attendance.aspx",true);
         }
+        protected void leaveRequest(object sender, EventArgs e)
+        {
+            Response.Redirect("Leave_Request.aspx", true);
+        }
+        protected void businessRequest(object sender, EventArgs e)
+        {
+            Response.Redirect("Business_Request.aspx", true);
+        }
+        protected void viewRequests(object sender, EventArgs e)
+        {
+            Response.Redirect("View_Requests.aspx", true);
+        }
+        protected void sendEmail(object sender, EventArgs e)
+        {
+            Response.Redirect("Send_Email.aspx", true);
+        }
+        protected void viewEmails(object sender, EventArgs e)
+        {
+            Response.Redirect("View_Emails.aspx", true);
+        }
+        protected void viewAnnouncements(object sender, EventArgs e)
+        {
+            Response.Redirect("View Announcements.aspx", true);
+        }
     }
 }

@@ -25,6 +25,7 @@ DECLARE @out2 varchar(100)
 EXEC Login 'Ahmed.Mohamed' , 'ab123' , @out2 OUTPUT
 print @out2
 
+Select * FROM Users
 EXEC View_Information 'Ahmed.Massoud'
 exec Review_Job_Status 'Hossam.Azzab'
 

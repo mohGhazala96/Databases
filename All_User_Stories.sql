@@ -104,14 +104,14 @@ GO
 GO
 -- Registered/Unregistered User 7
 
-CREATE PROC Jobs_Sorted
+CREATE or ALTER PROC Jobs_Sorted
 AS
 
 
-SELECT AVG(j.salary)
+SELECT c.email, AVG(j.salary) AS salary
 FROM Companies c inner join Jobs j ON c.email = j.company
 GROUP BY c.email
-ORDER BY AVG(j.salary)
+ORDER BY AVG(j.salary) DESC
 
 GO
 
@@ -178,23 +178,54 @@ WHERE u.username = @username
 
 GO
 -- Registered User 3
-CREATE PROC Edit 
-@username varchar ( 50) ,
-@password varchar(30)  , 
+CREATE OR ALTER PROC Edit 
+@oldusername varchar (20) ,
+@newusername varchar(20),
 @personal_email varchar(100)  , 
 @birth_date datetime , 
 @years_of_experience int  , 
 @first_name varchar (30) , 
 @middle_name varchar (30)  ,
-@last_name varchar(30) 
+@last_name varchar(30), 
+@result int OUTPUT
 
 AS
-
+DECLARE @userexist VARCHAR(20)
+SELECT @userexist = username
+FROM Users
+WHERE username = @newusername
+IF @userexist = @newusername and @userexist!=@oldusername
+SET @result = 0
+ELSE
+BEGIN
+SET @result=1
 UPDATE Users 
-SET password = @password , personal_email = @personal_email , birth_date = @birth_date , years_of_experience = @years_of_experience ,
+SET username=@newusername, personal_email = @personal_email , birth_date = @birth_date , years_of_experience = @years_of_experience ,
 first_name = @first_name  , middle_name = @middle_name    , last_name = @last_name
-WHERE username  = @username
+WHERE username  = @oldusername
+END
 
+GO
+
+CREATE OR ALTER PROC ChangePass
+@username VARCHAR(20),
+@oldpassword varchar(100),
+@newpassword varchar(100),
+@result int OUTPUT
+AS 
+DECLARE @pass varchar(100)
+SELECT @pass = password
+WHERE username = @username and password = @oldpassword
+
+If @pass = @oldpassword
+BEGIN
+SET @result = 1
+UPDATE Users 
+SET password=@newpassword
+WHERE username = @username and password = @oldpassword
+END
+ELSE
+SET @result = 0
 
 GO
 -- Job seeker 1

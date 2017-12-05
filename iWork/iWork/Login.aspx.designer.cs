@@ -11,7 +11,7 @@
 namespace iWork {
 	
 	
-	public partial class Default {
+	public partial class Login {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm loginForm;
 		

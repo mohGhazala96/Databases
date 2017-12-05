@@ -361,8 +361,9 @@ ELSE PRINT 'Unable to delete job. Job does not exist or Already reviewed'
 ---
 --- Staff Member 1 
 Go
-CREATE PROC Check_in
-    @username VARCHAR(20)
+CREATE OR ALTER PROC Check_in
+    @username VARCHAR(20),
+    @result int OUTPUT
 AS
 DECLARE @Staff_Members_exist VARCHAR(20)
 DECLARE @day_off VARCHAR(10)
@@ -371,17 +372,21 @@ FROM Staff_Members
 WHERE username = @username
 IF @Staff_Members_exist = @username
     IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
+        BEGIN
+        SET @result=1
         INSERT INTO Attendance_Records
         VALUES(
             CONVERT(DATE,CURRENT_TIMESTAMP), @username, CONVERT(time, CURRENT_TIMESTAMP), NULL
         )
-    ELSE PRINT 'Trying to attend a day off'
+        END
+    ELSE SET @result =0
 ELSE PRINT 'Invalid operation. Username not a staff member'
 ---
 --- Staff Member 2
 GO 
-CREATE PROC Check_out
-    @username VARCHAR(20)
+CREATE OR ALTER PROC Check_out
+    @username VARCHAR(20),
+    @result int OUTPUT
 AS
 DECLARE @Staff_Members_exist VARCHAR(20)
 DECLARE @day_off VARCHAR(10)
@@ -390,38 +395,94 @@ FROM Staff_Members
 WHERE username = @username
 IF @Staff_Members_exist = @username
     IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
+        BEGIN
+        SET @result=1
         UPDATE Attendance_Records
         SET end_time = CONVERT(time, CURRENT_TIMESTAMP)
         WHERE attendance_date = CONVERT(DATE,CURRENT_TIMESTAMP) AND staff = @username
-    ELSE PRINT 'Trying to attend a day off'
+        END
+    ELSE SET @result=0
 ELSE PRINT 'Invalid operation. Username not a staff member'
 --
 -- Staff Member 3
 GO
-CREATE PROC Review_Attendance
+CREATE OR ALTER PROC Review_Attendance
     @username VARCHAR(20),
     @from_date DATE = NULL,
     @to_date DATE = NULL
 AS
 IF @from_date IS NULL AND @to_date IS NULL
-SELECT * 
-FROM Attendance_Records
-WHERE staff = @username
-ELSE 
-    IF @to_date IS NULL
-    SELECT *
-    FROM Attendance_Records
-    WHERE staff = @username AND attendance_date >= @from_date
-    ELSE IF
-        @from_date IS NULL
-        SELECT *
-        FROM Attendance_Records
-        WHERE staff = @username AND attendance_date<= @to_date
-        ELSE
-            SELECT *
-            FROM Attendance_Records
-            WHERE staff = @username AND attendance_date >= @from_date AND attendance_date <= @to_date
-
+BEGIN
+SELECT attendance_date,
+           start_time,
+           end_time,
+           staff,
+           DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
+           Jobs.working_hours,
+           CASE WHEN Jobs.working_hours > (DATEDIFF(second, start_time, end_time) / 3600.0)
+                THEN Jobs.working_hours - (DATEDIFF(second, start_time, end_time) / 3600.0)
+                ELSE 0 END AS missed_hours
+FROM Staff_Members INNER JOIN Jobs ON (
+            Staff_Members.job = Jobs.title AND
+            Staff_Members.department = Jobs.department AND
+            Staff_Members.company = Jobs.company
+        ) INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
+        WHERE Attendance_Records.staff = @username
+END
+ELSE IF @to_date IS NULL
+    BEGIN
+    SELECT attendance_date,
+            start_time,
+            end_time,
+            staff,
+            DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
+            Jobs.working_hours,
+            CASE WHEN Jobs.working_hours > (DATEDIFF(second, start_time, end_time) / 3600.0)
+                    THEN Jobs.working_hours - (DATEDIFF(second, start_time, end_time) / 3600.0)
+                    ELSE 0 END AS missed_hours
+    FROM Staff_Members INNER JOIN Jobs ON (
+                Staff_Members.job = Jobs.title AND
+                Staff_Members.department = Jobs.department AND
+                Staff_Members.company = Jobs.company
+            ) INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
+            WHERE Attendance_Records.staff = @username AND Attendance_Records.attendance_date >= @from_date
+    END
+    ELSE IF @from_date IS NULL
+        BEGIN
+        SELECT attendance_date,
+                start_time,
+                end_time,
+                staff,
+                DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
+                Jobs.working_hours,
+                CASE WHEN Jobs.working_hours > (DATEDIFF(second, start_time, end_time) / 3600.0)
+                        THEN Jobs.working_hours - (DATEDIFF(second, start_time, end_time) / 3600.0)
+                        ELSE 0 END AS missed_hours
+        FROM Staff_Members INNER JOIN Jobs ON (
+                    Staff_Members.job = Jobs.title AND
+                    Staff_Members.department = Jobs.department AND
+                    Staff_Members.company = Jobs.company
+                ) INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
+                WHERE Attendance_Records.staff = @username AND Attendance_Records.attendance_date <= @to_date
+        END
+        ELSE 
+        BEGIN
+        SELECT attendance_date,
+                start_time,
+                end_time,
+                staff,
+                DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
+                Jobs.working_hours,
+                CASE WHEN Jobs.working_hours > (DATEDIFF(second, start_time, end_time) / 3600.0)
+                        THEN Jobs.working_hours - (DATEDIFF(second, start_time, end_time) / 3600.0)
+                        ELSE 0 END AS missed_hours
+        FROM Staff_Members INNER JOIN Jobs ON (
+                    Staff_Members.job = Jobs.title AND
+                    Staff_Members.department = Jobs.department AND
+                    Staff_Members.company = Jobs.company
+                ) INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
+                WHERE Attendance_Records.staff = @username AND Attendance_Records.attendance_date >= @from_date AND Attendance_Records.attendance_date <=@to_date
+        END
 --
 -- Staff Member 4
 Go
@@ -1153,7 +1214,6 @@ AS
     declare @temp int;
 
     SELECT @temp = COUNT(*) FROM Staff_Members WHERE
-        username = @staff AND
         department = @dep AND
         company = @company_email;
 

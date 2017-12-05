@@ -13,6 +13,7 @@ namespace iWork
 
     public partial class changePassword : System.Web.UI.Page
     {
+        string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Username"] != null)
@@ -27,7 +28,7 @@ namespace iWork
         {
             if (txt_newpassword.Text.Equals(txt_repeatpassword.Text))
             {
-                SqlConnection conn = new SqlConnection(@"Server=localhost;Database=master;User Id=sa;Password=Ghand0ur");
+                SqlConnection conn = new SqlConnection(connStr);
 
                 SqlCommand cmd = new SqlCommand("ChangePass", conn);
                 cmd.CommandType = CommandType.StoredProcedure;

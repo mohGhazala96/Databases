@@ -27,7 +27,11 @@
         <asp:Button id="btn_update" runat="server" Text="Update Info" OnClick="updateInfo"></asp:Button>
 	</form>
     <form id="Staff_Member" runat="server">
-			<h1>Staff Member stuff here</h1>
+			<h1>Staff Member stuff here</h1><br />
+            <asp:Button id="btn_check_in" runat="server" Text="Check In" OnClick="checkIn"></asp:Button><br />
+            <asp:Button id="btn_check_out" runat="server" Text="Check Out" OnClick="checkOut"></asp:Button><br />
+            <asp:Button id="btn_check_attendance" runat="server" Text="Check Attendance" OnClick="checkAttendance"></asp:Button><br />
+
 	</form>
     <form id="Job_Seeker" runat="server">
             <h1>Job Seeker stuff here</h1>

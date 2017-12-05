@@ -9,58 +9,64 @@
 //------------------------------------------------------------------------------
 
 namespace iWork {
-    
-    
-    public partial class Profile {
-        
-        protected System.Web.UI.HtmlControls.HtmlForm info;
-        
-        protected System.Web.UI.WebControls.Label lbl_username;
-        
-        protected System.Web.UI.WebControls.TextBox txt_username;
-        
-        protected System.Web.UI.WebControls.Label lbl_password;
-        
-        protected System.Web.UI.WebControls.Button btn_changePass;
-        
-        protected System.Web.UI.WebControls.Label lbl_personal_email;
-        
-        protected System.Web.UI.WebControls.TextBox txt_personal_email;
-        
-        protected System.Web.UI.WebControls.Label lbl_first_name;
-        
-        protected System.Web.UI.WebControls.TextBox txt_first_name;
-        
-        protected System.Web.UI.WebControls.Label lbl_middle_name;
-        
-        protected System.Web.UI.WebControls.TextBox txt_middle_name;
-        
-        protected System.Web.UI.WebControls.Label lbl_last_name;
-        
-        protected System.Web.UI.WebControls.TextBox txt_last_name;
-        
-        protected System.Web.UI.WebControls.Label lbl_birth_date;
-        
-        protected System.Web.UI.WebControls.TextBox txt_birth_date;
-        
-        protected System.Web.UI.WebControls.Label lbl_age;
-        
-        protected System.Web.UI.WebControls.Label lbl_age_value;
-        
-        protected System.Web.UI.WebControls.Label lbl_years_of_exp;
-        
-        protected System.Web.UI.WebControls.TextBox txt_years_of_exp;
-        
-        protected System.Web.UI.WebControls.Button btn_update;
-        
-        protected System.Web.UI.HtmlControls.HtmlForm Staff_Member;
-        
-        protected System.Web.UI.HtmlControls.HtmlForm Job_Seeker;
-        
-        protected System.Web.UI.HtmlControls.HtmlForm Manager;
-        
-        protected System.Web.UI.HtmlControls.HtmlForm HR_Employee;
-        
-        protected System.Web.UI.HtmlControls.HtmlForm Regular_Employee;
-    }
+	
+	
+	public partial class Profile {
+		
+		protected System.Web.UI.HtmlControls.HtmlForm info;
+		
+		protected System.Web.UI.WebControls.Label lbl_username;
+		
+		protected System.Web.UI.WebControls.TextBox txt_username;
+		
+		protected System.Web.UI.WebControls.Label lbl_password;
+		
+		protected System.Web.UI.WebControls.Button btn_changePass;
+		
+		protected System.Web.UI.WebControls.Label lbl_personal_email;
+		
+		protected System.Web.UI.WebControls.TextBox txt_personal_email;
+		
+		protected System.Web.UI.WebControls.Label lbl_first_name;
+		
+		protected System.Web.UI.WebControls.TextBox txt_first_name;
+		
+		protected System.Web.UI.WebControls.Label lbl_middle_name;
+		
+		protected System.Web.UI.WebControls.TextBox txt_middle_name;
+		
+		protected System.Web.UI.WebControls.Label lbl_last_name;
+		
+		protected System.Web.UI.WebControls.TextBox txt_last_name;
+		
+		protected System.Web.UI.WebControls.Label lbl_birth_date;
+		
+		protected System.Web.UI.WebControls.TextBox txt_birth_date;
+		
+		protected System.Web.UI.WebControls.Label lbl_age;
+		
+		protected System.Web.UI.WebControls.Label lbl_age_value;
+		
+		protected System.Web.UI.WebControls.Label lbl_years_of_exp;
+		
+		protected System.Web.UI.WebControls.TextBox txt_years_of_exp;
+		
+		protected System.Web.UI.WebControls.Button btn_update;
+		
+		protected System.Web.UI.HtmlControls.HtmlForm Staff_Member;
+		
+		protected System.Web.UI.WebControls.Button btn_check_in;
+		
+		protected System.Web.UI.WebControls.Button btn_check_out;
+		
+		protected System.Web.UI.WebControls.Button btn_check_attendance;
+		
+		protected System.Web.UI.HtmlControls.HtmlForm Job_Seeker;
+		
+		protected System.Web.UI.HtmlControls.HtmlForm Manager;
+		
+		protected System.Web.UI.HtmlControls.HtmlForm HR_Employee;
+		
+		protected System.Web.UI.HtmlControls.HtmlForm Regular_Employee;
+	}
 }

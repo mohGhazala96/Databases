@@ -10,15 +10,15 @@ using System.Data;
 
 namespace iWork
 {
-
     public partial class Profile : System.Web.UI.Page
     {
+        string connStr= ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Username"] != null)
             {
                 if(!IsPostBack){
-                    SqlConnection conn = new SqlConnection(@"Server=localhost;Database=master;User Id=sa;Password=Ghand0ur");
+                    SqlConnection conn = new SqlConnection(connStr);
 
                     SqlCommand cmd = new SqlCommand("View_Information", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -82,7 +82,7 @@ namespace iWork
         }
         protected void updateInfo(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Server=localhost;Database=master;User Id=sa;Password=Ghand0ur");
+            SqlConnection conn = new SqlConnection(connStr);
 
             SqlCommand cmd = new SqlCommand("Edit", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -106,6 +106,50 @@ namespace iWork
             }else{
                 Response.Write("New username is already taken");
             }
+        }
+        protected void checkIn(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(connStr);
+
+            SqlCommand cmd = new SqlCommand("Check_in", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
+            SqlParameter output = cmd.Parameters.Add(new SqlParameter("@result", SqlDbType.Int));
+            output.Direction = ParameterDirection.Output;
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (output.Value.ToString().Equals("1"))
+            {
+                Response.Write("Checked in");
+            }else{
+                Response.Write("Trying to check in on a day off");
+            }
+        }
+        protected void checkOut(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(connStr);
+
+            SqlCommand cmd = new SqlCommand("Check_out", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
+            SqlParameter output = cmd.Parameters.Add(new SqlParameter("@result", SqlDbType.Int));
+            output.Direction = ParameterDirection.Output;
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (output.Value.ToString().Equals("1"))
+            {
+                Response.Write("Checked out");
+            }
+            else
+            {
+                Response.Write("Trying to check in on a day off");
+            }
+        }
+        protected void checkAttendance(object sender, EventArgs e)
+        {
+            Response.Redirect("Check_Attendance.aspx",true);
         }
     }
 }

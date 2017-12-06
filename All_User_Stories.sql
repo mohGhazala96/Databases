@@ -810,11 +810,12 @@ ELSE
 --
 -- Staff Member 7
 Go
-CREATE PROC Send_email
+CREATE OR ALTER PROC Send_email
     @sender VARCHAR(20),
     @recipient VARCHAR(20),
     @subject VARCHAR(50),
-    @body VARCHAR(3000)
+    @body VARCHAR(3000),
+    @result int OUTPUT
 AS
 DECLARE @emailnum int
 DECLARE @company1 VARCHAR(100)
@@ -836,7 +837,9 @@ BEGIN
     VALUES(
          @emailnum ,@recipient,@sender
     )
+    SET @result =1
 END
+ELSE SET @result = 0
 --
 -- Staff Member 8
 GO
@@ -847,7 +850,16 @@ SELECT *
 FROM Staff_Members_send_Email_Staff_Members s INNER JOIN Emails e
 ON email_number = serial_number
 WHERE s.recipient=@recipient
+ORDER BY(email_date) DESC
 --
+GO
+CREATE PROC Read_Email
+    @email_num int
+AS
+SELECT *
+FROM Staff_Members_send_Email_Staff_Members s INNER JOIN Emails e
+ON email_number = serial_number
+WHERE s.email_number = @email_num
 --- Staff Member 9
 GO
 CREATE PROC Reply_email

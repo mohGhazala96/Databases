@@ -173,7 +173,7 @@ namespace iWork
         }
         protected void viewAnnouncements(object sender, EventArgs e)
         {
-            Response.Redirect("View Announcements.aspx", true);
+            Response.Redirect("View_Announcements.aspx", true);
         }
     }
 }

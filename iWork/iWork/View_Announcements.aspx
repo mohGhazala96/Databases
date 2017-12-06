@@ -5,7 +5,8 @@
 	<title>View_Announcements</title>
 </head>
 <body>
-	<form id="form1" runat="server">
+	<form id="View_Announcements_Form" runat="server">
+            
 	</form>
 </body>
 </html>

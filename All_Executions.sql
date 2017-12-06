@@ -49,7 +49,7 @@ exec Check_in 'ElonMusk'
 
 exec Check_out 'ElonMusk'
 
-exec Review_Attendance 'ElonMusk', '2017-11-19'
+exec Review_Attendance 'ElonMusk'
 
 exec Apply_for_Leave_Request 'ElonMusk', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Medical'
 exec Apply_for_Leave_Request 'JenniferLaw', 'BenedictCumberbatch', '2017-11-27', '2017-12-3', 'Medical'

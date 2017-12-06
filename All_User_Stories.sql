@@ -486,12 +486,13 @@ ELSE IF @to_date IS NULL
 --
 -- Staff Member 4
 Go
-CREATE PROC Apply_for_Leave_Request
+CREATE OR ALTER PROC Apply_for_Leave_Request
     @username VARCHAR(20),
     @replacement VARCHAR(20),
     @from_date DATETIME,
     @to_date DATETIME,
-    @type VARCHAR(20)
+    @type VARCHAR(20),
+    @result int OUTPUT
 AS
 DECLARE @applicant_exist VARCHAR(20)
 DECLARE @replacement_exist VARCHAR(20)
@@ -511,14 +512,14 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
     FROM Requests
     WHERE applicant = @username
     IF (@from_date > @requests_start AND @from_date < @requests_end)OR(@to_date>@requests_start AND @to_date<@requests_end)
-    PRINT 'Request Overlapping'
+    SET @result = 4
     ELSE
         BEGIN
         SELECT @company_replacement = company
         FROM Staff_Members
         Where username = @replacement
         IF @company_name != @company_replacement
-        PRINT 'not in same company'
+        SET @result = 3
         ELSE
             BEGIN
             SELECT @applicant_exist = username  -- First Check both managers
@@ -548,8 +549,9 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
                             VALUES(
                                 @from_date, @username, @username,@replacement
                             )
+                            SET @result =1
                         END
-                    ELSE PRINT 'Sorry the replacement is not a manager'
+                    ELSE SET @result = 2
                 END
             ELSE
                 BEGIN
@@ -579,8 +581,9 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
                                 VALUES(
                                     @from_date, @username, @username,@replacement
                                 )
+                                SET @result =1
                             END
-                        ELSE PRINT 'Sorry the replacement is not an HR'
+                        ELSE SET @result =2
                     END
                 ELSE
                     BEGIN
@@ -609,25 +612,27 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
                                     VALUES(
                                         @from_date, @username, @username ,@replacement
                                     )
+                                    SET @result =1
                                 END
-                            ELSE PRINT 'Sorry the replacement is not an HR'
+                            ELSE SET @result = 2
                         END
                     END
                 END
             END
         END
     END
-ELSE PRINT 'Sorry, you are out of annual leaves' 
+ELSE SET @result = 0
 --
 -- Staff Member 4 (part 2)
 GO
-CREATE PROC Apply_for_Business_Request
+CREATE OR ALTER PROC Apply_for_Business_Request
     @username VARCHAR(20),
     @replacement VARCHAR(20),
     @from_date DATETIME,
     @to_date DATETIME,
     @destination VARCHAR(50),
-    @purpose VARCHAR(1000)
+    @purpose VARCHAR(1000),
+    @result int OUTPUT
 AS
 DECLARE @applicant_exist VARCHAR(20)
 DECLARE @replacement_exist VARCHAR(20)
@@ -647,14 +652,14 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
     FROM Requests
     WHERE applicant = @username
     IF (@from_date > @requests_start AND @from_date < @requests_end)OR(@to_date>@requests_start AND @to_date<@requests_end)
-    PRINT 'Request Overlapping'
+    SET @result =4
     ELSE
         BEGIN
         SELECT @company_replacement = company
         FROM Staff_Members
         Where username = @replacement
         IF @company_name != @company_replacement
-        PRINT 'not in same company'
+        SET @result = 3
         ELSE
             BEGIN
             SELECT @applicant_exist = username  -- First Check both managers
@@ -684,8 +689,9 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
                             VALUES(
                                 @from_date, @username, @username,@replacement
                             )
+                            SET @result =1
                         END
-                    ELSE PRINT 'Sorry the replacement is not a manager'
+                    ELSE SET @result =2
                 END
             ELSE
                 BEGIN
@@ -715,8 +721,9 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
                                 VALUES(
                                     @from_date, @username, @username,@replacement
                                 )
+                                SET @result =1
                             END
-                        ELSE PRINT 'Sorry the replacement is not an HR'
+                        ELSE SET @result =2
                     END
                 ELSE
                     BEGIN
@@ -745,38 +752,47 @@ IF DATEDIFF(DAY,@from_date,@to_date) < @annual_leaves
                                     VALUES(
                                         @from_date, @username, @username ,@replacement
                                     )
+                                    SET @result =1
                                 END
-                            ELSE PRINT 'Sorry the replacement is not an HR'
+                            ELSE SET @result =2
                         END
                     END
                 END
             END
         END
     END
-ELSE PRINT 'Sorry, you are out of annual leaves' 
+ELSE SET @result =0
 ----
 
 --- Staff Member 5
 GO
-CREATE PROC View_Requests
+CREATE OR ALTER PROC View_Requests
     @username VARCHAR(20)
 AS
-SELECT *
+SELECT start_date,
+    applicant,
+    end_date,
+    request_date,
+    total_days,
+    CASE WHEN (manager_response='Approved') THEN 'Approved' WHEN (hr_response = 'Rejected' OR manager_response='Rejected') THEN 'Rejected' ELSE 'Pending' END AS response,
+    manager,
+    manager_reason
 FROM Requests
 WHERE applicant = @username
 ---
 --- Staff Member 6
 GO
-CREATE PROC Delete_Request
+CREATE OR ALTER PROC Delete_Request
     @start_date DATETIME,
-    @username VARCHAR(20)
+    @username VARCHAR(20),
+    @result int OUTPUT
 AS
 DECLARE @hr_response VARCHAR(50)
 DECLARE @manager_response VARCHAR(50)
 SELECT @hr_response = hr_response , @manager_response = manager_response
 FROM Requests
 WHERE start_date = @start_date and applicant = @username
-IF @hr_response = 'Pending' OR @manager_response = 'Pending'
+IF @manager_response <> 'Approved' AND (@hr_response = 'Pending' OR @manager_response = 'Pending')
     BEGIN
         DELETE FROM Requests
         WHERE start_date = @start_date AND applicant = @username
@@ -786,9 +802,11 @@ IF @hr_response = 'Pending' OR @manager_response = 'Pending'
 
         DELETE FROM Business_Trip_Requests
         WHERE start_date = @start_date AND applicant = @username
+
+        SET @result = 1
     END
 ELSE 
-    PRINT 'Sorry, Request already processed'
+    SET @result = 0
 --
 -- Staff Member 7
 Go

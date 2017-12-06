@@ -162,6 +162,9 @@
     <Content Include="View_Sorted_Companies.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Check_Attendance.aspx" />
+    <Content Include="Leave_Request.aspx" />
+    <Content Include="Business_Request.aspx" />
+    <Content Include="View_Requests.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -202,6 +205,24 @@
     </Compile>
     <Compile Include="Check_Attendance.aspx.designer.cs">
       <DependentUpon>Check_Attendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Leave_Request.aspx.cs">
+      <DependentUpon>Leave_Request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Leave_Request.aspx.designer.cs">
+      <DependentUpon>Leave_Request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Business_Request.aspx.cs">
+      <DependentUpon>Business_Request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Business_Request.aspx.designer.cs">
+      <DependentUpon>Business_Request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View_Requests.aspx.cs">
+      <DependentUpon>View_Requests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View_Requests.aspx.designer.cs">
+      <DependentUpon>View_Requests.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

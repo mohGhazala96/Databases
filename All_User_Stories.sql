@@ -843,7 +843,7 @@ ELSE SET @result = 0
 --
 -- Staff Member 8
 GO
-CREATE PROC View_emails
+CREATE OR ALTER PROC View_emails
     @recipient VARCHAR(20)
 AS
 SELECT *

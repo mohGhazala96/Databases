@@ -181,6 +181,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Register.aspx" />
+    <Content Include="Search_Jobs.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -257,6 +259,18 @@
     </Compile>
     <Compile Include="View_Announcements.aspx.designer.cs">
       <DependentUpon>View_Announcements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search_Jobs.aspx.cs">
+      <DependentUpon>Search_Jobs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search_Jobs.aspx.designer.cs">
+      <DependentUpon>Search_Jobs.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

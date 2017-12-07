@@ -62,7 +62,7 @@ namespace iWork
                 }
                 Response.Redirect("Profile.aspx",true);
             }else{
-                Response.Write("User not found");
+                Response.Write("User/Password incorrect");
             }
         }
         protected void logout(object sender, EventArgs e)

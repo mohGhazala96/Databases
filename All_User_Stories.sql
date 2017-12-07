@@ -60,7 +60,7 @@ WHERE d.company =  @company AND d.code = @department  AND   j.no_of_vacancies > 
 GO
 
 -- Registered/Unregistered User 5
-CREATE PROC Register
+CREATE OR ALTER PROC Register
 @username varchar(20) , 
 @password varchar(30)  , 
 @email varchar(100)  , 
@@ -68,13 +68,19 @@ CREATE PROC Register
 @years_of_experience int   , 
 @first_name varchar (30)  , 
 @middle_name varchar (30)  ,
-@last_name varchar(30)  
+@last_name varchar(30) ,
+@result int output 
 AS
 IF ( EXISTS ( SELECT * FROM Users u where u.username = @username ) )
-PRINT ( 'Username already exists' )
+SET @result = 0
 ELSE
+BEGIN
 INSERT INTO Users 
 VALUES ( @username , @password , @email , @birthdate  , @years_of_experience , @first_name , @middle_name , @last_name   );
+INSERT INTO Job_Seekers
+VALUES(@username);
+SET @result =1
+END 
 
 GO 
 
@@ -87,11 +93,11 @@ ALTER DATABASE master SET COMPATIBILITY_LEVEL = 130
 -----
 -----
 GO
-CREATE PROC Search_Job 
+CREATE OR ALTER PROC Search_Job 
 @key varchar(100)
 AS
-SELECT *
-FROM Jobs j
+SELECT j.title, j.no_of_vacancies,j.short_description, j.detailed_description, j.min_experience,j.salary, j.deadline,j.working_hours, d.name as department_name, c.name as company_name, c.email as company_email
+FROM Jobs j inner join Departments d ON j.department = d.code inner join Companies c on j.company = c.email
 WHERE j.no_of_vacancies > 0 AND EXISTS (SELECT value  
     FROM STRING_SPLIT(@key, ' ') 
     WHERE value IN (SELECT value  

@@ -3,5 +3,6 @@ iWork/iWork/bin/
 iWork/iWork/obj/
 iWork/iWork.userprefs
 iWork/.vs
-UpgradeLog.htm
+UpgradeLog*.htm
 *.csproj.user
+iWork/Backup*

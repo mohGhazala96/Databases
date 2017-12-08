@@ -1543,7 +1543,22 @@ AS
         PRINT 'You canot access this record, or it is not found'
 
 ---------------
+-- manager3 helper 
+GO
+CREATE PROCEDURE getJobs
+    @manager_name VARCHAR(20)
+AS
+    DECLARE @jobIN VarCHAR(20)
+    DECLARE @manager_department int
+    DECLARE @company_check VARCHAR(100)
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check output
+
+    SELECT title
+    from Jobs
+    where @manager_department=department AND @company_check=company
+
 -- manager3
+
 GO
 CREATE PROCEDURE View_All_Applications
     @manager_name VARCHAR(20),
@@ -1553,10 +1568,9 @@ AS
     DECLARE @company_check VARCHAR(100)
     EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check output
     --below i showed all information of the job seeker except the username and password
-    SELECT job ,score ,U.personal_email,U.birth_date,U.years_of_experience,U.first_name,U.middle_name,U.last_name,U.age
+    SELECT job ,score ,U.personal_email,U.birth_date,U.years_of_experience,U.username,U.first_name,U.middle_name,U.last_name,U.age
     FROM Job_Seekers_apply_Jobs J inner JOIN Users U on U.username=J.job_seeker AND J.company=@company_check
     WHERE @manager_department= J.department AND J.hr_response= 'Approved' and J.manager_response = 'Pending' and job=@job_name
-
 
 GO
 ----------
@@ -1582,11 +1596,14 @@ GO
 Create PROCEDURE Create_project
   @manager_name VARCHAR(20) ,
   @name_in VARCHAR(20) ,
-  @company_in VARCHAR(100) ,
   @start_date_in datetime,
   @end_date_in datetime
 
   AS
+    DECLARE @manager_department int
+    DECLARE  @company_in VARCHAR(100) 
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_in output
+
     INSERT Into Projects VALUES( @name_in, @company_in, @start_date_in,  @end_date_in,  @manager_name )
     GO
 

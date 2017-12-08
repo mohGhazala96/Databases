@@ -214,26 +214,23 @@ END
 GO
 
 CREATE OR ALTER PROC ChangePass
-@username VARCHAR(20),
-@oldpassword varchar(100),
-@newpassword varchar(100),
-@result int OUTPUT
+	@username VARCHAR(20),
+	@oldpassword varchar(100),
+	@newpassword varchar(100),
+	@result int OUTPUT
 AS 
-DECLARE @pass varchar(100)
-SELECT @pass = password
-WHERE username = @username and password = @oldpassword
+	DECLARE @pass varchar(100);
 
-If @pass = @oldpassword
-BEGIN
-SET @result = 1
-UPDATE Users 
-SET password=@newpassword
-WHERE username = @username and password = @oldpassword
-END
-ELSE
-SET @result = 0
+	SELECT @pass = password FROM Users WHERE username = @username and password = @oldpassword
 
+	If @pass = @oldpassword BEGIN
+		SET @result = 1
+		UPDATE Users SET password = @newpassword WHERE username = @username and password = @oldpassword
+	END
+	ELSE
+		SET @result = 0
 GO
+
 -- Job seeker 1
 CREATE PROC  Apply
 @job_title varchar(100) ,

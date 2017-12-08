@@ -36,7 +36,6 @@ namespace iWork
                         txt_birth_date.Text = reader.GetString(reader.GetOrdinal("birth_date"));
                         lbl_age_value.Text = ""+reader.GetInt32(reader.GetOrdinal("age"));
                         txt_years_of_exp.Text = ""+reader.GetInt32(reader.GetOrdinal("years_of_experience"));
-
                     }
             
                 }

@@ -5,6 +5,12 @@
 	<title>Business_Request</title>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("Pages/unsigned-menu.inc");
+    }
+    %>
 	<form id="Business_Requests" runat="server">
         <asp:Label id="lbl_replacement" runat="server" Text="Replacement:"></asp:Label><br />
         <asp:TextBox id="txt_replacement" runat="server"></asp:TextBox><br/> 

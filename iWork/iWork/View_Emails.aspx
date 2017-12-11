@@ -5,6 +5,12 @@
 	<title>View_Emails</title>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("Pages/unsigned-menu.inc");
+    }
+    %>
 	<form id="View_Emails_Form" runat="server">
             
 	</form>

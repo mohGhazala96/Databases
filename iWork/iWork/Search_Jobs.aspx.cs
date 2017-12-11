@@ -25,6 +25,7 @@ namespace iWork
             conn.Open();
             SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             Table jobs_table = new Table();
+            jobs_table.CssClass = "table table-striped";
             TableRow headerRow = new TableRow();
             TableCell header_title = new TableCell();
             header_title.Text = "Title";

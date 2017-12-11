@@ -9,26 +9,26 @@
 //------------------------------------------------------------------------------
 
 namespace iWork {
-	
-	
-	public partial class Login {
-		
-		protected System.Web.UI.HtmlControls.HtmlForm loginForm;
-		
-		protected System.Web.UI.WebControls.Label lbl_username;
-		
-		protected System.Web.UI.WebControls.TextBox txt_username;
-		
-		protected System.Web.UI.WebControls.Label lbl_password;
-		
-		protected System.Web.UI.WebControls.TextBox txt_password;
-		
-		protected System.Web.UI.WebControls.Button btn_login;
-		
-		protected System.Web.UI.HtmlControls.HtmlForm logged_inForm;
-		
-		protected System.Web.UI.WebControls.Label lbl_loggedin_username;
-		
-		protected System.Web.UI.WebControls.Button btn_logout;
-	}
+    
+    
+    public partial class Login {
+        
+        protected System.Web.UI.HtmlControls.HtmlForm loginForm;
+        
+        protected System.Web.UI.WebControls.Label lbl_username;
+        
+        protected System.Web.UI.WebControls.TextBox txt_username;
+        
+        protected System.Web.UI.WebControls.Label lbl_password;
+        
+        protected System.Web.UI.WebControls.TextBox txt_password;
+        
+        protected System.Web.UI.WebControls.Button btn_login;
+        
+        protected System.Web.UI.HtmlControls.HtmlForm logged_inForm;
+        
+        protected System.Web.UI.WebControls.Label lbl_loggedin_username;
+        
+        protected System.Web.UI.WebControls.Button btn_logout;
+    }
 }

@@ -1,10 +1,14 @@
-﻿<%@ Page Language="C#" Inherits="iWork.Default" %>
+﻿<%@ Page Language="C#"  Inherits="iWork.Login" %>
 <!DOCTYPE html>
 <html>
 <head runat="server">
 	<title>Default</title>
 </head>
 <body>
+    <% 
+    Response.WriteFile("Pages/unsigned-menu.inc");
+
+    %>
 	<form id="loginForm" runat="server">
         <asp:Label id="lbl_username" runat="server" Text="Username:"></asp:Label>
         <asp:TextBox id="txt_username" runat="server"></asp:TextBox><br/>

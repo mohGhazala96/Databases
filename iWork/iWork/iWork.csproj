@@ -174,7 +174,6 @@
     <Content Include="Profile.aspx" />
     <Content Include="changePassword.aspx" />
     <Content Include="View_Sorted_Companies.aspx" />
-    <Content Include="Login.aspx" />
     <Content Include="Check_Attendance.aspx" />
     <Content Include="Leave_Request.aspx" />
     <Content Include="Business_Request.aspx" />
@@ -197,6 +196,8 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Register.aspx" />
     <Content Include="Search_Jobs.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="Login.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -229,13 +230,6 @@
     </Compile>
     <Compile Include="View_Sorted_Companies.aspx.designer.cs">
       <DependentUpon>View_Sorted_Companies.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Check_Attendance.aspx.cs">
       <DependentUpon>Check_Attendance.aspx</DependentUpon>
@@ -300,6 +294,18 @@
     <Compile Include="Search_Jobs.aspx.designer.cs">
       <DependentUpon>Search_Jobs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.9.1.min.map" />
@@ -308,6 +314,10 @@
     <None Include="Content\bootstrap.css.map" />
     <None Include="Content\bootstrap-theme.min.css.map" />
     <None Include="Content\bootstrap-theme.css.map" />
+    <None Include="Pages\menu.inc" />
+    <None Include="Pages\footer.inc" />
+    <None Include="Pages\unsigned-menu.inc" />
+    <None Include="EmptyTextFile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

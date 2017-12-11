@@ -5,6 +5,12 @@
 	<title>Register</title>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("Pages/unsigned-menu.inc");
+    }
+    %>
 	<form id="Register_Form" runat="server">
         <asp:Label id="lbl_username" runat="server" Text="Username:"></asp:Label><br />
         <asp:TextBox id="txt_username" runat="server"></asp:TextBox><br/>

@@ -5,6 +5,12 @@
 	<title>Check_Attendance</title>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("Pages/unsigned-menu.inc");
+    }
+    %>
 	<form id="check_attendance" runat="server">
     <asp:Label id="lbl_from_date" runat="server" Text="From Date (Leave empty if you want from the beginning):"></asp:Label><br />
     <asp:TextBox id="txt_from_date" runat="server"></asp:TextBox><br/>

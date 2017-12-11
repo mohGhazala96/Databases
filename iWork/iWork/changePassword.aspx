@@ -5,6 +5,12 @@
 	<title>changePassword</title>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("Pages/unsigned-menu.inc");
+    }
+    %>
 	<form id="changePassForm" runat="server">
         <asp:Label id="lbl_username" runat="server" Text="Username:"></asp:Label><br />
         <asp:Label id="lbl_oldpassword" runat="server" Text="Old Password:"></asp:Label><br />

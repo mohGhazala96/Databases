@@ -100,10 +100,10 @@ namespace iWork
             cmd.ExecuteNonQuery();
             conn.Close();
             if(output.Value.ToString().Equals("1")){
-                Response.Write("Information Updated");
+                lbl_info_status.Text= "Information Updated";
                 Session["Username"] = txt_username.Text;
             }else{
-                Response.Write("New username is already taken");
+                lbl_info_status.Text = "New username is already taken";
             }
         }
         protected void checkIn(object sender, EventArgs e)
@@ -120,9 +120,12 @@ namespace iWork
             conn.Close();
             if (output.Value.ToString().Equals("1"))
             {
-                Response.Write("Checked in");
+                lbl_shoutbox.Text = "Checked in";
+            }else if (output.Value.ToString().Equals("2"))
+            {
+                lbl_shoutbox.Text = "Already Checked in today";
             }else{
-                Response.Write("Trying to check in on a day off");
+                lbl_shoutbox.Text = "Trying to check in on a day off";
             }
         }
         protected void checkOut(object sender, EventArgs e)
@@ -139,11 +142,14 @@ namespace iWork
             conn.Close();
             if (output.Value.ToString().Equals("1"))
             {
-                Response.Write("Checked out");
+                lbl_shoutbox.Text = "Checked out";
+            }
+            else if(output.Value.ToString().Equals("2")){
+                lbl_shoutbox.Text = "Already Checked out today";
             }
             else
             {
-                Response.Write("Trying to check in on a day off");
+                lbl_shoutbox.Text = "Trying to check in on a day off";
             }
         }
         protected void checkAttendance(object sender, EventArgs e)

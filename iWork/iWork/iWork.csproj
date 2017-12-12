@@ -170,6 +170,8 @@
     <Content Include="Companies\List.aspx" />
     <Content Include="Companies\Search.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="HR\Add_Job.aspx" />
+    <Content Include="HR\List_Jobs.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -228,6 +230,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Add_Job.aspx.cs">
+      <DependentUpon>Add_Job.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\Add_Job.aspx.designer.cs">
+      <DependentUpon>Add_Job.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\List_Jobs.aspx.cs">
+      <DependentUpon>List_Jobs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\List_Jobs.aspx.designer.cs">
+      <DependentUpon>List_Jobs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>

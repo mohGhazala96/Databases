@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace iWork.Companies {
+namespace iWork.HR {
     
     
-    public partial class WebForm1 {
+    public partial class Add_Job {
         
         /// <summary>
         /// form1 control.
@@ -22,12 +22,12 @@ namespace iWork.Companies {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// grid control.
+        /// companies control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid;
+        protected global::System.Web.UI.WebControls.GridView companies;
     }
 }

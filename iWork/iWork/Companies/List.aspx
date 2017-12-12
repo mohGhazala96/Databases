@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="nationalGrid" runat="server" AutoGenerateColumns="false">    
+            <asp:GridView ID="grid" runat="server" AutoGenerateColumns="false">    
              <Columns>    
                  <asp:BoundField DataField="name" HeaderText="Company Name" ItemStyle-Width="150" />
                  <asp:BoundField DataField="type" HeaderText="Company Type" ItemStyle-Width="150" />

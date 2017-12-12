@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace iWork.Companies {
+namespace iWork.HR {
     
     
-    public partial class WebForm1 {
+    public partial class List_Jobs {
         
         /// <summary>
         /// form1 control.

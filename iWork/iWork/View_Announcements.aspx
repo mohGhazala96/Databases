@@ -11,8 +11,13 @@
     Response.WriteFile("Pages/unsigned-menu.inc");
     }
     %>
+    <div class="panel panel-default"> 
+    <div class="panel-body"> 
 	<form id="View_Announcements_Form" runat="server">
-            
+      
+
 	</form>
+    </div>
+    </div>
 </body>
 </html>

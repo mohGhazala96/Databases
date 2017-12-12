@@ -44,19 +44,15 @@ namespace iWork
                 conn.Close();
                 if (output.Value.ToString().Equals("1"))
                 {
-                    Response.Write("Password Updated");
+                    lbl_shoutout.Text="Password Updated";
                 }
                 else
                 {
-                    Response.Write("Old Password is not correct");
+                    lbl_shoutout.Text="Old Password is not correct";
                 }
             }else{
-                Response.Write("Passwords do not match");
+                lbl_shoutout.Text="Passwords do not match";
             }
-        }
-        protected void backToProfile(object sender, EventArgs e)
-        {
-            Response.Redirect("Profile.aspx",true);
         }
     }
 }

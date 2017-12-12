@@ -370,11 +370,15 @@ CREATE OR ALTER PROC Check_in
 AS
 DECLARE @Staff_Members_exist VARCHAR(20)
 DECLARE @day_off VARCHAR(10)
+DECLARE @currentdate DATE
 SELECT @Staff_Members_exist = username, @day_off = day_off
 FROM Staff_Members
 WHERE username = @username
 IF @Staff_Members_exist = @username
     IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
+        IF EXISTS (SELECT * FROM Attendance_Records Where staff = @username and attendance_date = CONVERT(DATE,CURRENT_TIMESTAMP)) 
+        SET @result=2
+        ELSE
         BEGIN
         SET @result=1
         INSERT INTO Attendance_Records

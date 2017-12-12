@@ -14,16 +14,8 @@ namespace iWork
     public partial class Login : System.Web.UI.Page
     {
         string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if(Session["Username"]!=null){
-                lbl_loggedin_username.Text = "Logged in as, " + Session["Username"] + "<br />As a " + Session["userType"]+"<br />";
-                logged_inForm.Visible = true;
-                loginForm.Visible = false;
-            }else{
-                logged_inForm.Visible = false;
-                loginForm.Visible = true;
-            }
+        protected void Page_Load(object sender, EventArgs e){
+
         }
 
         protected void login(object sender, EventArgs e)
@@ -62,13 +54,7 @@ namespace iWork
                 }
                 Response.Redirect("Profile.aspx",true);
             }else{
-                Response.Write("User/Password incorrect");
             }
-        }
-        protected void logout(object sender, EventArgs e)
-        {
-            Session["Username"] = null;
-            Response.Redirect("Default.aspx",true);
         }
     }
 }

@@ -6,3 +6,4 @@ iWork/.vs
 UpgradeLog*.htm
 *.csproj.user
 iWork/Backup*
+Web.config

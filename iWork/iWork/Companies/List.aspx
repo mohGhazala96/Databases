@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="List.aspx.cs" Inherits="Companies_List" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="iWork.Companies.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="nationalGrid" runat="server" AutoGenerateColumns="false">    
+            <asp:GridView ID="grid" runat="server" AutoGenerateColumns="false">    
              <Columns>    
                  <asp:BoundField DataField="name" HeaderText="Company Name" ItemStyle-Width="150" />
                  <asp:BoundField DataField="type" HeaderText="Company Type" ItemStyle-Width="150" />

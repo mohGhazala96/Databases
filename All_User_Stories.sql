@@ -976,6 +976,23 @@ AS
     INSERT INTO Job_Has_Question SELECT @title, @dep, @company, id FROM @inserted_ids
 GO
 
+CREATE PROCEDURE HR_Employees_list_Jobs
+	@username VARCHAR(20)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @dep output, @company output
+    SELECT * FROM Jobs WHERE department = @dep AND company = @company
+GO
+
 CREATE PROCEDURE HR_Employees_view_job
     @username VARCHAR(20),
     @title VARCHAR(20)

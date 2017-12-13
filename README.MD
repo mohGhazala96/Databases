@@ -128,7 +128,7 @@ jobs_table.CssClass = "table table-striped";
 
 ## General Styling guidelines
 
-- For subheadings (Example Personal information in Profile.aspx or Quick Actions), *** use <h3> tag ***
+- For subheadings (Example Personal information in Profile.aspx or Quick Actions), *** use ```<h3>``` tag ***
 
 ## Setting CSS CLass in ASPX
 
@@ -142,8 +142,7 @@ Same with anything else
 # Important:
 - If you have any questions ask me
 - If something doesn't look right and you will need to edit the css file make sure to contact me first so that we don't make a conflict and screw how everything looks
+- If you want to add anything else, just google bootstrap and look
 
 
-*** Thanks peeps,
-KG
-***
+*** Thanks peeps, KG ***

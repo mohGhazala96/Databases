@@ -33,7 +33,7 @@ namespace iWork
                         txt_first_name.Text = reader.GetString(reader.GetOrdinal("first_name"));
                         txt_middle_name.Text = reader.GetString(reader.GetOrdinal("middle_name"));
                         txt_last_name.Text = reader.GetString(reader.GetOrdinal("last_name"));
-                        txt_birth_date.Text = reader.GetString(reader.GetOrdinal("birth_date"));
+                        txt_birth_date.Text = reader.GetOrdinal("birth_date").ToString();
                         lbl_age_value.Text = "" + reader.GetInt32(reader.GetOrdinal("age"));
                         txt_years_of_exp.Text = "" + reader.GetInt32(reader.GetOrdinal("years_of_experience"));
                     }

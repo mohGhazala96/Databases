@@ -9,11 +9,13 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 
+
 namespace iWork
 {
 
-    public partial class viewJobsManager : System.Web.UI.Page
+    public partial class AssignEmployeesOnProject : System.Web.UI.Page
     {
+
         string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
      
 
@@ -25,38 +27,40 @@ namespace iWork
 
                 SqlConnection conn = new SqlConnection(connStr);
 
-                SqlCommand cmd = new SqlCommand("getJobs", conn);
+                SqlCommand cmd = new SqlCommand("getProjectsAviavlable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@manager_name", Session["Username"].ToString()));
 
                 conn.Open();
                 SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 Label Title = new Label();
-                Title.Text = "Choose the job you want to show the applicaiton for" + "<br />" + "<br />";
-                viewJobsManager_from.Controls.Add(Title);
+                Title.Text = "Choose the Project you want to assign Regular Empolyees in" + "<br />" + "<br />";
+                form1.Controls.Add(Title);
                 if (!rdr.HasRows)
                 {
                     Label errorName = new Label();
-                    errorName.Text = "No Jobs are available";
+                    errorName.Text = "No Projects are available";
 
-                    viewJobsManager_from.Controls.Add(errorName);
+                    form1.Controls.Add(errorName);
                 }
                 while (rdr.Read())
                 {
                   
-                    Label jobTitle = new Label();
-                    jobTitle.Text = "<br />"+"Title: " +rdr.GetString(rdr.GetOrdinal("title"))
+                    Label projectTitle = new Label();
+                    string project_title = rdr.GetString(rdr.GetOrdinal("name"));
+                    projectTitle.Text = "<br />"+"Title: " +project_title
                  
                        + "<br />";
-                    Button jobToApplication = new Button();
-                    jobToApplication.ID = rdr.GetString(rdr.GetOrdinal("title"));
-                    viewJobsManager_from.Controls.Add(jobTitle);
-                    jobToApplication.Text = "Open Applications";
+                    Button ViewRegularEmployees = new Button();
+                    ViewRegularEmployees.ID = project_title;
+                    form1.Controls.Add(projectTitle);
+                    ViewRegularEmployees.Text = "See regeluar Employees avaliable";
 
-                    jobToApplication.Click += new EventHandler(openApplications);
-                    viewJobsManager_from.Controls.Add(jobToApplication);
+                    ViewRegularEmployees.Click += new EventHandler(viewRegularEmployeesAvailable);
+                    form1.Controls.Add(ViewRegularEmployees);
 
                 }
+
 
             }
             else
@@ -66,15 +70,14 @@ namespace iWork
 
 
         }
-        protected void openApplications(object sender, EventArgs e){
-            Session["JobToApplication"] = ((Button)sender).ID;
-            Response.Redirect("Review_Job_appliactions_manager.aspx", true);
+        protected void viewRegularEmployeesAvailable(object sender, EventArgs e){
+            Session["ProjectFor_RegualrEmployees_Avialable"] = ((Button)sender).ID;
+            Response.Redirect("AssignEmployeesOnProject_Redicted.aspx", true);
 
             
         }
             
     
-
 
     }
 }

@@ -1,0 +1,14 @@
+﻿<%@ Master Language="C#" Inherits="iWork.View_Requests" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+	<title>View_Requests</title>
+</head>
+<body>
+<div id="container">
+<form runat="server">
+    <asp:ContentPlaceHolder id="contentPlaceHolder" runat="server" /> 
+</form>
+</div>
+</body>
+</html>

@@ -13,6 +13,7 @@
          <asp:Label id="endDate" runat="server" Text="End date"></asp:Label><br />
         <asp:TextBox id="endDate_input" runat="server"></asp:TextBox><br/> 
         <asp:Button id="Btn_CreateProject" runat="server" Text="Create Project" OnClick="createProject"></asp:Button>
-    </form>
+
+        </form>
 </body>
 </html>

@@ -211,5 +211,10 @@ namespace iWork
             Response.Redirect("Manager/DefineTask_manager.aspx", true);
 
         }
+        protected void ChangeRegular_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ChangeRegularOnTask.aspx", true);
+
+        }
     }
 }

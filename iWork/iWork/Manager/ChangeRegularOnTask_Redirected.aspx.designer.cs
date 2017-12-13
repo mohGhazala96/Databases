@@ -8,12 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace iWork {
+namespace iWork.Manager {
 	
 	
-	public partial class viewJobsManager {
-        protected System.Web.UI.HtmlControls.HtmlForm viewJobsManager_from;
-
-
+	public partial class ChangeRegularOnTask_Redirected {
+		
+		protected System.Web.UI.HtmlControls.HtmlForm form1;
+		
+		protected System.Web.UI.WebControls.Label RegularEmployee;
+		
+		protected System.Web.UI.WebControls.TextBox RegularEmployee_in;
+		
+		protected System.Web.UI.WebControls.Button changeRegularEmployee;
 	}
 }

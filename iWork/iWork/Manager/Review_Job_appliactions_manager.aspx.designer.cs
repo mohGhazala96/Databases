@@ -11,9 +11,8 @@
 namespace iWork {
 	
 	
-	public partial class viewJobsManager {
-        protected System.Web.UI.HtmlControls.HtmlForm viewJobsManager_from;
-
+	public partial class Review_Job_appliactions_manager {
+        protected System.Web.UI.HtmlControls.HtmlForm Review_Job_appliactions_manager_form;
 
 	}
 }

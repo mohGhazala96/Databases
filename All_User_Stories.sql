@@ -1823,6 +1823,17 @@ END
 GO
 
 -----------
+-- manager10 helper
+CREATE PROCEDURE getTasks
+  @manager_name VARCHAR(20) 
+  AS
+  DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+    SELECT name,project 
+    from Tasks
+    where @manager_name = manager and company =@manager_company and regular_employee is not NULL and status = 'Assigned'
+Go
 -- manager10
 CREATE PROCEDURE Change_regular_employee_on_a_task
   @manager_name VARCHAR(20) ,
@@ -1833,9 +1844,6 @@ CREATE PROCEDURE Change_regular_employee_on_a_task
     DECLARE @manager_company VARCHAR(100)
     DECLARE @manager_department int
     EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
-    INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
-     @project_name_in, @manager_company, @regular_employee_in, @manager_name
-    )
     UPDATE  Tasks
     Set regular_employee = @regular_employee_in
     WHERE @manager_name= manager AND @project_name_in = project and @task_in=name AND status='Assigned' AND regular_employee is not null and @manager_company= company

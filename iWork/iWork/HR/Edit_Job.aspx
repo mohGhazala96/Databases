@@ -18,26 +18,24 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <form action="http://localhost/MyTestApp/Default.aspx" method="post">
-            <!-- Check how to do placeholders. Check if we need the name to be adjusted, too. -->
-            <asp:TextBox id="title" runat="server" placeholder="Title"></asp:TextBox>
-            <asp:TextBox id="role" runat="server" placeholder="Role"></asp:TextBox>
-            <asp:TextBox id="short_description" runat="server" placeholder="Short description"></asp:TextBox>
-            <asp:TextBox id="detailed_description" runat="server" placeholder="Detailed description"></asp:TextBox>
-            <asp:TextBox id="min_experience" runat="server" placeholder="Minimum experience"></asp:TextBox>
-            <asp:TextBox id="salary" runat="server" placeholder="Salary"></asp:TextBox>
-            <asp:TextBox id="deadline" runat="server" placeholder="Deadline"></asp:TextBox>
-            <asp:TextBox id="no_of_vacancies" runat="server" placeholder="Number of vacancies"></asp:TextBox>
-            <asp:TextBox id="working_hours" runat="server" placeholder="Working hours"></asp:TextBox>
 
-            <input type="submit" name="submit" value="Submit" id="submit" />
-        </form>
-        <br /><br />
-        <asp:GridView ID="companies" runat="server" AutoGenerateColumns="false">    
-            <Columns>
-                <asp:BoundField DataField="name" HeaderText="Company Name" ItemStyle-Width="150" />
-            </Columns>    
-        </asp:GridView>
+        <asp:Label ID="error" Text="" runat="server"></asp:Label>
+
+        <asp:Panel ID="data" runat="server">
+            <form action="http://localhost/MyTestApp/Default.aspx" method="post">
+                <!-- Check how to do placeholders. Check if we need the name to be adjusted, too. -->
+                <asp:TextBox id="title" runat="server" placeholder="Title"></asp:TextBox>
+                <asp:TextBox id="short_description" runat="server" placeholder="Short description"></asp:TextBox>
+                <asp:TextBox id="detailed_description" runat="server" placeholder="Detailed description"></asp:TextBox>
+                <asp:TextBox id="min_experience" runat="server" placeholder="Minimum experience"></asp:TextBox>
+                <asp:TextBox id="salary" runat="server" placeholder="Salary"></asp:TextBox>
+                <asp:TextBox id="deadline" runat="server" placeholder="Deadline"></asp:TextBox>
+                <asp:TextBox id="no_of_vacancies" runat="server" placeholder="Number of vacancies"></asp:TextBox>
+                <asp:TextBox id="working_hours" runat="server" placeholder="Working hours"></asp:TextBox>
+
+                <input type="submit" name="submit" value="Update" id="submit" />
+            </form>
+        </asp:Panel>
     </form>
 </body>
 </html>

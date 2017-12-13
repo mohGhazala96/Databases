@@ -14,6 +14,15 @@ namespace iWork.HR
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["userType"] == null || Session["userType"].ToString() != "HR Employee")
+            {
+                data.Visible = false;
+                return;
+            } else
+            {
+                error.Visible = false;
+            }
+
             if (IsPostBack)
             {
                 string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
@@ -44,14 +53,16 @@ namespace iWork.HR
                 comString = comString.Substring(0, comString.Length - 1);
                 comString += ";";
 
+                // Add role to title
+                title = role + " - " + title;
+
                 comString += $"EXEC HR_Employees_add_job '{Session["Username"]}','{title}', " +
                     $"'{@short_description}', '{@detailed_description}', {@min_experience}, " +
                     $"{@salary}, '{@deadline}', {@no_of_vacancies}, {@working_hours}, @q_list;";
 
                 SqlCommand com = new SqlCommand(comString, conn);
                 conn.Open();
-                //com.ExecuteNonQuery();
-                Response.Write(com.ExecuteScalar());
+                com.ExecuteScalar();
                 conn.Close();
             }
         }

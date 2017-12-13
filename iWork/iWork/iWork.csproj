@@ -173,6 +173,7 @@
     <Content Include="Companies\Search.aspx" />
     <Content Include="Global.asax" />
     <Content Include="HR\Add_Job.aspx" />
+    <Content Include="HR\Create_Announcement.aspx" />
     <Content Include="HR\Edit_Job.aspx" />
     <Content Include="HR\List_Jobs.aspx" />
     <Content Include="HR\View_Applications.aspx" />
@@ -258,6 +259,13 @@
     </Compile>
     <Compile Include="HR\Add_Job.aspx.designer.cs">
       <DependentUpon>Add_Job.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Create_Announcement.aspx.cs">
+      <DependentUpon>Create_Announcement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\Create_Announcement.aspx.designer.cs">
+      <DependentUpon>Create_Announcement.aspx</DependentUpon>
     </Compile>
     <Compile Include="HR\Edit_Job.aspx.cs">
       <DependentUpon>Edit_Job.aspx</DependentUpon>
@@ -366,72 +374,84 @@
     </Compile>
     <Compile Include="Manager\Create_Projects_Manager.aspx.cs">
       <DependentUpon>Create_Projects_Manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\Create_Projects_Manager.aspx.designer.cs">
       <DependentUpon>Create_Projects_Manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\viewJobsManager.aspx.cs">
       <DependentUpon>viewJobsManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\viewJobsManager.aspx.designer.cs">
       <DependentUpon>viewJobsManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\ViewReuqests_Manager.aspx.cs">
       <DependentUpon>ViewReuqests_Manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\ViewReuqests_Manager.aspx.designer.cs">
       <DependentUpon>ViewReuqests_Manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\ReviewRequests_manager.aspx.cs">
       <DependentUpon>ReviewRequests_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\ReviewRequests_manager.aspx.designer.cs">
       <DependentUpon>ReviewRequests_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AssignEmployeesOnProject.aspx.cs">
       <DependentUpon>AssignEmployeesOnProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\AssignEmployeesOnProject.aspx.designer.cs">
       <DependentUpon>AssignEmployeesOnProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\Review_Job_appliactions_manager.aspx.cs">
       <DependentUpon>Review_Job_appliactions_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\Review_Job_appliactions_manager.aspx.designer.cs">
       <DependentUpon>Review_Job_appliactions_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AssignEmployeesOnProject_Redicted.aspx.cs">
       <DependentUpon>AssignEmployeesOnProject_Redicted.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\AssignEmployeesOnProject_Redicted.aspx.designer.cs">
       <DependentUpon>AssignEmployeesOnProject_Redicted.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\RemoveRegularEmployeeProject_manager.aspx.cs">
       <DependentUpon>RemoveRegularEmployeeProject_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\RemoveRegularEmployeeProject_manager.aspx.designer.cs">
       <DependentUpon>RemoveRegularEmployeeProject_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx.cs">
       <DependentUpon>RemoveRegularEmployeeProject_manager_Redirected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx.designer.cs">
       <DependentUpon>RemoveRegularEmployeeProject_manager_Redirected.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\DefineTask_manager.aspx.cs">
       <DependentUpon>DefineTask_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\DefineTask_manager.aspx.designer.cs">
       <DependentUpon>DefineTask_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -449,10 +469,7 @@
     <None Include="Scripts\jquery-3.2.1.slim.min.map" />
     <None Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Manager\" />
-  </ItemGroup>
-
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -14,9 +14,9 @@
     <div class="panel panel-default"> 
     <div class="panel-body"> 
     <div class="row">
-    <div class="col-sm-8">
-    <div class="row">
+
 	<form id="info" runat="server">
+        <div class="col-sm-8">
         <asp:Panel id="infoPanel" runat="server">
         <div class="form-group">
         <h3>Personal Information </h3>                        
@@ -81,10 +81,8 @@
         <h1>Regular Employee stuff here</h1>
         </asp:Panel>
         </div>
+        </div>
 	</form>
-    </div>
-    </div>
-
     </div>
     </div>
     </div>

@@ -42,6 +42,7 @@
         <asp:Label id="lbl_info_status" runat="server"></asp:Label><br />
         </div>
         </asp:Panel>
+        </div>
         <div class="col-sm-4">
         <asp:Panel id="Staff_Member" runat="server">
         <h3>Quick Actions</h3>
@@ -80,7 +81,6 @@
         <asp:Panel id="Regular_Employee" runat="server">
         <h1>Regular Employee stuff here</h1>
         </asp:Panel>
-        </div>
         </div>
 	</form>
     </div>

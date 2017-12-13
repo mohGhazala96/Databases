@@ -19,7 +19,7 @@ namespace iWork
         {
             if (Session["Username"] != null)
             {
-                Read_Email_Form.Visible = false;
+                ReadEmails.Visible = false;
                 SqlConnection conn = new SqlConnection(connStr);
 
                 SqlCommand cmd = new SqlCommand("View_Emails", conn);
@@ -82,7 +82,7 @@ namespace iWork
                     emails_table.Rows.Add(trow);
                     i += 1;
                 }
-                View_Emails_Form.Controls.Add(emails_table);
+                ViewEmails.Controls.Add(emails_table);
             }else{
                 Response.Redirect("Login.aspx",true);
             }
@@ -114,10 +114,10 @@ namespace iWork
                 Button replyButton = new Button();
                 replyButton.Text = "Reply";
                 replyButton.ID = "" + emailnumIndex;
-                Read_Email_Form.Controls.Add(replyButton);
+                ReadEmails.Controls.Add(replyButton);
             }
-            View_Emails_Form.Visible = false;
-            Read_Email_Form.Visible = true;
+            ViewEmails.Visible = false;
+            ReadEmails.Visible = true;
         }
         protected void replyEmail(object sender, EventArgs e)
         {

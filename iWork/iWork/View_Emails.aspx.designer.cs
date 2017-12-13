@@ -15,7 +15,9 @@ namespace iWork {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm View_Emails_Form;
 		
-		protected System.Web.UI.HtmlControls.HtmlForm Read_Email_Form;
+		protected System.Web.UI.WebControls.Panel ViewEmails;
+		
+		protected System.Web.UI.WebControls.Panel ReadEmails;
 		
 		protected System.Web.UI.WebControls.Label lbl_sender;
 		

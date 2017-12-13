@@ -161,18 +161,26 @@ EXEC View_All_Applications 'osama.rady','Engineer'
 --manager 4
 EXEC Edit_Application 'osama.rady','Rejected','Khaled.Hanafy','Engineer'
 --manager 5
-EXEC Create_project 'osama.rady','project1','info@facebook.com','9/2/2017 00:00:00', '10/2/2017 00:00:00'
+EXEC Create_project 'osama.rady','project3','9/2/2017 00:00:00', '10/2/2017 00:00:00'
 --manager 6
 EXEC Assign_regular_employees_on_projects 'osama.rady','project1','Amina.Abaas'
+EXEC Assign_regular_employees_on_projects 'bakr.mostafa','kkk','Amina.Abaas'
+
 --manager 7
 exec Remove_regular_employee_from_project'osama.rady','project1','Amina.Abaas'
 --manager 8
-exec Define_task 'task0','project1','info@facebook.com','9/2/2018 00:00:00','description','osama.rady' -- the insertion is based on pervius procedure
+exec Define_task 'task2','project3','9/2/2018 00:00:00','description','osama.rady' -- the insertion is based on pervius procedure
 --manager 9
 exec Assign_regular_employee_on_task 'emad.sherif','Logo','task_Logo' ,'Doaa.Ahmed'
+select * from Tasks
+declare @out int
+exec Assign_regular_employee_on_task 'bakr.mostafa','kkk','kook' ,'A',@out output
+print @out
 --manager 10
-exec Change_regular_employee_on_a_task 'emad.sherif','Logo','task_Logo' ,'Rowan.Ibrahim'
+exec Change_regular_employee_on_a_task 'bakr.mostafa','cloudApp','AmjadTask5' ,'FifthGuy'
 --manager 11
 exec View_list_of_tasks_in_project 'emad.sherif','Logo','Assigned'
 --manager 12
 exec Review_task_in_a_project 'emad.sherif','task5','Animation Video',0,'12/2/2018 00:00:00' -- 0 reject 1 accept
+select * from Managers_assign_Regular_Employees_Projects
+SELECT * FROM Tasks

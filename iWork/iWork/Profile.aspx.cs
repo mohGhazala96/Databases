@@ -180,5 +180,36 @@ namespace iWork
         {
             Response.Redirect("View_Announcements.aspx", true);
         }
+        protected void viewRequests_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ViewReuqests_Manager.aspx", true);
+        }
+        protected void ReviewRequests_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewRequests_manager.aspx", true);
+        }
+        protected void ReviewJobs_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/viewJobsManager.aspx", true);
+        }
+        protected void Create_Projects_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/Create_Projects_Manager.aspx", true);
+        }
+        protected void assignRegularOnProject_manager(object sender, EventArgs e){
+            Response.Redirect("Manager/AssignEmployeesOnProject.aspx", true);
+
+        }
+        protected void removeRegularOnProject_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/RemoveRegularEmployeeProject_manager.aspx", true);
+
+        }
+        //DefineTask_manager
+        protected void defineTask_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/DefineTask_manager.aspx", true);
+
+        }
     }
 }

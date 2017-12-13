@@ -204,6 +204,16 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Register.aspx" />
     <Content Include="Search_Jobs.aspx" />
+    <Content Include="Manager\Create_Projects_Manager.aspx" />
+    <Content Include="Manager\viewJobsManager.aspx" />
+    <Content Include="Manager\ViewReuqests_Manager.aspx" />
+    <Content Include="Manager\ReviewRequests_manager.aspx" />
+    <Content Include="Manager\AssignEmployeesOnProject.aspx" />
+    <Content Include="Manager\Review_Job_appliactions_manager.aspx" />
+    <Content Include="Manager\AssignEmployeesOnProject_Redicted.aspx" />
+    <Content Include="Manager\RemoveRegularEmployeeProject_manager.aspx" />
+    <Content Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx" />
+    <Content Include="Manager\DefineTask_manager.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
@@ -346,6 +356,65 @@
     <Compile Include="Search_Jobs.aspx.designer.cs">
       <DependentUpon>Search_Jobs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Manager\Create_Projects_Manager.aspx.cs">
+      <DependentUpon>Create_Projects_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Create_Projects_Manager.aspx.designer.cs">
+      <DependentUpon>Create_Projects_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\viewJobsManager.aspx.cs">
+      <DependentUpon>viewJobsManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\viewJobsManager.aspx.designer.cs">
+      <DependentUpon>viewJobsManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ViewReuqests_Manager.aspx.cs">
+      <DependentUpon>ViewReuqests_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ViewReuqests_Manager.aspx.designer.cs">
+      <DependentUpon>ViewReuqests_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewRequests_manager.aspx.cs">
+      <DependentUpon>ReviewRequests_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewRequests_manager.aspx.designer.cs">
+      <DependentUpon>ReviewRequests_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject.aspx.cs">
+      <DependentUpon>AssignEmployeesOnProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject.aspx.designer.cs">
+      <DependentUpon>AssignEmployeesOnProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Review_Job_appliactions_manager.aspx.cs">
+      <DependentUpon>Review_Job_appliactions_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Review_Job_appliactions_manager.aspx.designer.cs">
+      <DependentUpon>Review_Job_appliactions_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject_Redicted.aspx.cs">
+      <DependentUpon>AssignEmployeesOnProject_Redicted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject_Redicted.aspx.designer.cs">
+      <DependentUpon>AssignEmployeesOnProject_Redicted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager.aspx.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager.aspx.designer.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx.designer.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DefineTask_manager.aspx.cs">
+      <DependentUpon>DefineTask_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DefineTask_manager.aspx.designer.cs">
+      <DependentUpon>DefineTask_manager.aspx</DependentUpon>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
@@ -371,6 +440,10 @@
     <None Include="Scripts\jquery-3.2.1.slim.min.map" />
     <None Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Manager\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

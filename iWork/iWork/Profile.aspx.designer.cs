@@ -81,6 +81,22 @@ namespace iWork {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm Manager;
 		
+		protected System.Web.UI.WebControls.Button btn_manager_approve_reject_requests;
+		
+		protected System.Web.UI.WebControls.Button btn_manager_Review_appliactions;
+		
+		protected System.Web.UI.WebControls.Button btn_manager_create_project;
+		
+		protected System.Web.UI.WebControls.Button btn_manager_assign_to_project;
+		
+		protected System.Web.UI.WebControls.Button btn_manager_remove_from_project;
+		
+		protected System.Web.UI.WebControls.Button btn_manager_define_task;
+		
+		protected System.Web.UI.WebControls.Button btn_manager_change_regularEmployee_task;
+		
+		protected System.Web.UI.WebControls.Button btn_manager_view_tasks;
+		
 		protected System.Web.UI.HtmlControls.HtmlForm HR_Employee;
 		
 		protected System.Web.UI.HtmlControls.HtmlForm Regular_Employee;

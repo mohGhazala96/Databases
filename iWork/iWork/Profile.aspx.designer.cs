@@ -53,7 +53,11 @@ namespace iWork {
 		
 		protected System.Web.UI.WebControls.Button btn_update;
 		
+		protected System.Web.UI.WebControls.Label lbl_info_status;
+		
 		protected System.Web.UI.HtmlControls.HtmlForm Staff_Member;
+		
+		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 		
 		protected System.Web.UI.WebControls.Button btn_check_in;
 		

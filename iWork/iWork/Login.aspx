@@ -1,20 +1,19 @@
-﻿<%@ Page Language="C#" Inherits="iWork.Default" %>
+﻿<%@ Page Language="C#"  Inherits="iWork.Login"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">
-	<title>Default</title>
+	<title>Login</title>
 </head>
 <body>
-	<form id="loginForm" runat="server">
+        <!--#include file="Pages/unsigned-menu.inc"-->
+        <form id="loginForm" runat="server">
+            <div class="form-group">
         <asp:Label id="lbl_username" runat="server" Text="Username:"></asp:Label>
-        <asp:TextBox id="txt_username" runat="server"></asp:TextBox><br/>
+        <asp:TextBox id="txt_username" runat="server" CssClass="form-control"></asp:TextBox><br/>
         <asp:Label id="lbl_password" runat="server" Text="Password:"></asp:Label>
-        <asp:TextBox id="txt_password" runat="server" TextMode="Password"></asp:TextBox><br/>
-        <asp:Button id="btn_login" runat="server" Text="Login" OnClick="login"></asp:Button>
-    </form>
-    <form id="logged_inForm" runat="server">
-        <asp:Label id="lbl_loggedin_username" runat="server" Text="Username:"></asp:Label>
-        <asp:Button id="btn_logout" runat="server" Text="Logout" OnClick="logout"></asp:Button>
+        <asp:TextBox id="txt_password" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox><br/>
+                </div>
+        <asp:Button id="btn_login" runat="server" Text="Login" OnClick="login" CssClass="btn btn-default"></asp:Button>
     </form>
 </body>
 </html>

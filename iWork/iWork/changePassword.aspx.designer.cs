@@ -31,6 +31,6 @@ namespace iWork {
 		
 		protected System.Web.UI.WebControls.Button btn_changePass;
 		
-		protected System.Web.UI.WebControls.Button btn_backtoProfile;
+		protected System.Web.UI.WebControls.Label lbl_shoutout;
 	}
 }

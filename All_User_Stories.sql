@@ -214,26 +214,23 @@ END
 GO
 
 CREATE OR ALTER PROC ChangePass
-@username VARCHAR(20),
-@oldpassword varchar(100),
-@newpassword varchar(100),
-@result int OUTPUT
+	@username VARCHAR(20),
+	@oldpassword varchar(100),
+	@newpassword varchar(100),
+	@result int OUTPUT
 AS 
-DECLARE @pass varchar(100)
-SELECT @pass = password
-WHERE username = @username and password = @oldpassword
+	DECLARE @pass varchar(100);
 
-If @pass = @oldpassword
-BEGIN
-SET @result = 1
-UPDATE Users 
-SET password=@newpassword
-WHERE username = @username and password = @oldpassword
-END
-ELSE
-SET @result = 0
+	SELECT @pass = password FROM Users WHERE username = @username and password = @oldpassword
 
+	If @pass = @oldpassword BEGIN
+		SET @result = 1
+		UPDATE Users SET password = @newpassword WHERE username = @username and password = @oldpassword
+	END
+	ELSE
+		SET @result = 0
 GO
+
 -- Job seeker 1
 CREATE PROC  Apply
 @job_title varchar(100) ,
@@ -373,11 +370,15 @@ CREATE OR ALTER PROC Check_in
 AS
 DECLARE @Staff_Members_exist VARCHAR(20)
 DECLARE @day_off VARCHAR(10)
+DECLARE @currentdate DATE
 SELECT @Staff_Members_exist = username, @day_off = day_off
 FROM Staff_Members
 WHERE username = @username
 IF @Staff_Members_exist = @username
     IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
+        IF EXISTS (SELECT * FROM Attendance_Records Where staff = @username and attendance_date = CONVERT(DATE,CURRENT_TIMESTAMP)) 
+        SET @result=2
+        ELSE
         BEGIN
         SET @result=1
         INSERT INTO Attendance_Records
@@ -973,6 +974,23 @@ AS
 
     INSERT INTO Questions OUTPUT INSERTED.number INTO @inserted_ids SELECT * FROM @q_list
     INSERT INTO Job_Has_Question SELECT @title, @dep, @company, id FROM @inserted_ids
+GO
+
+CREATE PROCEDURE HR_Employees_list_Jobs
+	@username VARCHAR(20)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @dep output, @company output
+    SELECT * FROM Jobs WHERE department = @dep AND company = @company
 GO
 
 CREATE PROCEDURE HR_Employees_view_job

@@ -5,6 +5,12 @@
 	<title>Send_Email</title>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("Pages/unsigned-menu.inc");
+    }
+    %>
 	<form id="Send_Email_Form" runat="server">
         <asp:Label id="lbl_recipient" runat="server" Text="To:"></asp:Label><br />
         <asp:TextBox id="txt_recipient" runat="server"></asp:TextBox><br/> 

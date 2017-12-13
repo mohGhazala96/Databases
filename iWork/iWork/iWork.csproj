@@ -415,6 +415,7 @@
     </Compile>
     <Compile Include="Manager\DefineTask_manager.aspx.designer.cs">
       <DependentUpon>DefineTask_manager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>

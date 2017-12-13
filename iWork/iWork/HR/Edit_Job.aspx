@@ -18,7 +18,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
         <asp:Label ID="error" Text="" runat="server"></asp:Label>
 
         <asp:Panel ID="data" runat="server">

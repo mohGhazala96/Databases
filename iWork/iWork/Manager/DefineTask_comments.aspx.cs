@@ -27,7 +27,7 @@ namespace iWork.Manager
             ErrorMessage.Text = "";
 
             if(commentTitle_in.Text.Length==0){
-                Response.Write("Please write valid Inputs and make sure the input is filled");
+                ErrorMessage.Text = "<br />" + "Please write valid Inputs and make sure the input is filled" + "<br />";
 
             }
             else{

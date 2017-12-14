@@ -8,7 +8,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <asp:Label ID="error" Text="You are not logged in or you are not an HR employee" runat="server"></asp:Label>
+
+        <asp:Panel ID="data" runat="server">
             <asp:GridView ID="grid" runat="server" AutoGenerateColumns="false">    
              <Columns>    
                  <asp:BoundField DataField="title" HeaderText="Title" />
@@ -22,7 +24,7 @@
                  <asp:HyperLinkField DataNavigateUrlFields="title" DataNavigateUrlFormatString="/HR/Edit_Job.aspx?title={0}" Text="View/Edit Job" />
              </Columns>    
             </asp:GridView>
-        </div>
+        </asp:Panel>
     </form>
 </body>
 </html>

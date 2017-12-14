@@ -22,7 +22,7 @@
         <asp:Label ID="error" Text="" runat="server"></asp:Label>
 
         <asp:Panel ID="data" runat="server">
-            <form action="http://localhost/MyTestApp/Default.aspx" method="post">
+            <form id="action="http://localhost/MyTestApp/Default.aspx" method="post">
                 <!-- Check how to do placeholders. Check if we need the name to be adjusted, too. -->
                 <asp:TextBox id="title" runat="server" placeholder="Title"></asp:TextBox>
                 <asp:TextBox id="short_description" runat="server" placeholder="Short description"></asp:TextBox>

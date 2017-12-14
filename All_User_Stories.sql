@@ -1042,7 +1042,7 @@ AS
         WHERE Jobs.title = @title AND Jobs.department = @dep AND Jobs.company = @company
 GO
 
-CREATE PROCEDURE HR_Employees_view_applications /* Does "new" applications mean that the hr_response is pending? I believe so */
+CREATE OR ALTER PROCEDURE HR_Employees_view_applications /* Does "new" applications mean that the hr_response is pending? I believe so */
     @username VARCHAR(20),
     @job_title VARCHAR(20)
 AS
@@ -1063,6 +1063,7 @@ AS
            Users.personal_email,
            Users.birth_date,
            Users.years_of_experience,
+		   Users.username,
            Users.first_name,
            Users.middle_name,
            Users.last_name,

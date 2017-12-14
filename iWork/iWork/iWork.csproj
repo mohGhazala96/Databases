@@ -175,6 +175,7 @@
     <Content Include="HR\Add_Job.aspx" />
     <Content Include="HR\Create_Announcement.aspx" />
     <Content Include="HR\Edit_Job.aspx" />
+    <Content Include="HR\High_Achievers.aspx" />
     <Content Include="HR\List_Jobs.aspx" />
     <Content Include="HR\Total_Hours.aspx" />
     <Content Include="HR\View_Applications.aspx" />
@@ -283,6 +284,13 @@
     </Compile>
     <Compile Include="HR\Edit_Job.aspx.designer.cs">
       <DependentUpon>Edit_Job.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\High_Achievers.aspx.cs">
+      <DependentUpon>High_Achievers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\High_Achievers.aspx.designer.cs">
+      <DependentUpon>High_Achievers.aspx</DependentUpon>
     </Compile>
     <Compile Include="HR\List_Jobs.aspx.cs">
       <DependentUpon>List_Jobs.aspx</DependentUpon>
@@ -489,42 +497,49 @@
     </Compile>
     <Compile Include="Manager\ChangeRegularOnTask.aspx.cs">
       <DependentUpon>ChangeRegularOnTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\ChangeRegularOnTask.aspx.designer.cs">
       <DependentUpon>ChangeRegularOnTask.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\ChangeRegularOnTask_Redirected.aspx.cs">
       <DependentUpon>ChangeRegularOnTask_Redirected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\ChangeRegularOnTask_Redirected.aspx.designer.cs">
       <DependentUpon>ChangeRegularOnTask_Redirected.aspx</DependentUpon>
     </Compile>
     <Compile Include="Companies.aspx.cs">
       <DependentUpon>Companies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Companies.aspx.designer.cs">
       <DependentUpon>Companies.aspx</DependentUpon>
     </Compile>
     <Compile Include="Departments.aspx.cs">
       <DependentUpon>Departments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Departments.aspx.designer.cs">
       <DependentUpon>Departments.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\ReviewTaskInProject_Main.aspx.cs">
       <DependentUpon>ReviewTaskInProject_Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\ReviewTaskInProject_Main.aspx.designer.cs">
       <DependentUpon>ReviewTaskInProject_Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\ReviewTaskInProject_Redirected.aspx.cs">
       <DependentUpon>ReviewTaskInProject_Redirected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\ReviewTaskInProject_Redirected.aspx.designer.cs">
       <DependentUpon>ReviewTaskInProject_Redirected.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\DefineTask_comments.aspx.cs">
       <DependentUpon>DefineTask_comments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\DefineTask_comments.aspx.designer.cs">
       <DependentUpon>DefineTask_comments.aspx</DependentUpon>

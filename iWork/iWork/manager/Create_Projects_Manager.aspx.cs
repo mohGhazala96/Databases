@@ -50,7 +50,7 @@ namespace iWork
                     }
                     else
                     {
-                        Response.Redirect("Create_Projects_Manager.aspx", true);
+                        Response.Redirect("../Profile.aspx", true);
                     }
                     conn.Close();
 

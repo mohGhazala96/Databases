@@ -63,7 +63,7 @@ namespace iWork.Manager
                 conn.Open();
                 if (addCommentCommand.ExecuteNonQuery() == 1)
                 {
-                    Response.Redirect("DefineTask_manager.aspx", true);
+                    Response.Redirect("../Profile.aspx", true);
 
                 }
                 else

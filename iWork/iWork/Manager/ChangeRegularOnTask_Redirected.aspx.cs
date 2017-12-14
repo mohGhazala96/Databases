@@ -34,7 +34,7 @@ namespace iWork.Manager
                     conn.Open();
                     changeRegularOnTask.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("ChangeRegularOnTask_Redirected.aspx", true);
+                    Response.Redirect("../Profile.aspx", true);
 
                 }
                 else

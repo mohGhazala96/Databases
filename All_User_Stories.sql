@@ -1754,15 +1754,6 @@ Create PROCEDURE Assign_regular_employees_on_projects
         END
 GO
 
------
--- manager7 Helpers
-EXEC getProjectsAviavlableHavingRegularEmpolyees 'emad.sherif'
-
-GO
---EXEC getRegularEmployeesWorkingOnProject 'bakr.mostafa','Animation Video'
-go
-drop PROCEDURE getProjectsAviavlableHavingRegularEmpolyees
-go
 CREATE PROCEDURE getProjectsAviavlableHavingRegularEmpolyees
  @manager_name VARCHAR(20) 
   AS

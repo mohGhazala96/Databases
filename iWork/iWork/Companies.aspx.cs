@@ -77,7 +77,7 @@ namespace SampleWebsite
             form1.Controls.Add(phoneNumbersTitle);
             while(rdr2.Read()){
                 Label phoneNumber = new Label();
-                phoneNumber.Text=   "" + rdr2.GetString(rdr.GetOrdinal("phone"))+"<br />" ;
+                phoneNumber.Text=   "" + rdr2.GetString(rdr2.GetOrdinal("phone"))+"<br />" ;
                 form1.Controls.Add(phoneNumber);
             }
             conn.Close();

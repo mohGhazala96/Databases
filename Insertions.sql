@@ -702,8 +702,10 @@ INSERT INTO Announcements
 VALUES(
     CURRENT_TIMESTAMP, 'Hello','AaronSwartz','URGENT','Hello'
 )
-
-
+INSERT INTO Announcements
+VALUES(
+    CURRENT_TIMESTAMP, 'Hello2','AaronSwartz','URGENT','description here'
+)
 ------aboughazala
 
 -- add new 8 users
@@ -1261,13 +1263,6 @@ INSERT INTO Attendance_Records VALUES(
     'FifthGuy',
     '12:00',
     '16:00'
-)
-INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
-    'Logo', 'info@facebook.com', 'Mona.Osman', 'emad.sherif'
-)
-
-INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
-    'Animation Video', 'info@facebook.com', 'Mona.Osman', 'emad.sherif'
 )
 
 

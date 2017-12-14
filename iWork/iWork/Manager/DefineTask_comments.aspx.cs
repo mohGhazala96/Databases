@@ -46,35 +46,8 @@ namespace iWork.Manager
         }
         protected void finish(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(connStr);
-
-            SqlCommand addCommentCommand = new SqlCommand("addComment", conn);
-            addCommentCommand.CommandType = CommandType.StoredProcedure;
-            addCommentCommand.Parameters.Add(new SqlParameter("@project_name_in", Session["projectName"].ToString()));
-            addCommentCommand.Parameters.Add(new SqlParameter("@task_in", Session["taskName"].ToString()));
-            addCommentCommand.Parameters.Add(new SqlParameter("@comment", commentTitle_in.Text));
-            if (commentTitle_in.Text.Length == 0)
-            {
-                ErrorMessage.Text = "<br />" + "Please write valid Inputs and make sure the input is filled" + "<br />";
-
-            }
-            else
-            {
-                conn.Open();
-                if (addCommentCommand.ExecuteNonQuery() == 1)
-                {
-                    Response.Redirect("../Profile.aspx", true);
-
-                }
-                else
-                {
-                    ErrorMessage.Text = "<br />" + "Please write valid Inputs and make sure the input is filled" + "<br />";
-
-
-                }
-                conn.Close();
-            }
-
+     
+             Response.Redirect("../Profile.aspx", true);
         }
 
     }

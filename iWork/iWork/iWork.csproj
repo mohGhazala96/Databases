@@ -176,7 +176,9 @@
     <Content Include="HR\Create_Announcement.aspx" />
     <Content Include="HR\Edit_Job.aspx" />
     <Content Include="HR\List_Jobs.aspx" />
+    <Content Include="HR\Total_Hours.aspx" />
     <Content Include="HR\View_Applications.aspx" />
+    <Content Include="HR\View_Attendance.aspx" />
     <Content Include="HR\View_Requests.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -282,12 +284,26 @@
     <Compile Include="HR\List_Jobs.aspx.designer.cs">
       <DependentUpon>List_Jobs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HR\Total_Hours.aspx.cs">
+      <DependentUpon>Total_Hours.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\Total_Hours.aspx.designer.cs">
+      <DependentUpon>Total_Hours.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HR\View_Applications.aspx.cs">
       <DependentUpon>View_Applications.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="HR\View_Applications.aspx.designer.cs">
       <DependentUpon>View_Applications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\View_Attendance.aspx.cs">
+      <DependentUpon>View_Attendance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\View_Attendance.aspx.designer.cs">
+      <DependentUpon>View_Attendance.aspx</DependentUpon>
     </Compile>
     <Compile Include="HR\View_Requests.aspx.cs">
       <DependentUpon>View_Requests.aspx</DependentUpon>

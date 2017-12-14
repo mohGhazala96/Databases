@@ -1249,7 +1249,7 @@ AS
         END
 GO
 
-CREATE PROCEDURE HR_Employees_view_attendance /* Does "Any staff member" mean list all staff members,
+CREATE OR ALTER PROCEDURE HR_Employees_view_attendance /* Does "Any staff member" mean list all staff members,
     or be able to specify which staff member do you want to view?
     If we need to list all, just remove the WHERE condition and the @staff variable */
     @username VARCHAR(20),
@@ -1281,7 +1281,8 @@ AS
         RETURN
     END
 
-    SELECT attendance_date,
+    SELECT username,
+		   attendance_date,
            start_time,
            end_time,
            DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,

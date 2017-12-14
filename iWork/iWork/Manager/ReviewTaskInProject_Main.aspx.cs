@@ -45,7 +45,7 @@ namespace iWork.Manager
 
 
                     Label projectTtitle = new Label();
-                    projectTtitle.Text = "<br />" +" Project: "+ projectName+"<br />";
+                    projectTtitle.Text = "<br/> <b>Project:</b> "+ projectName+"<br />";
                     form1.Controls.Add(projectTtitle);
 
                     Button buttonFixed = new Button();

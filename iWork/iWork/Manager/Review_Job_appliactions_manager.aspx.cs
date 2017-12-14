@@ -44,16 +44,16 @@ namespace iWork
                 {
 
                     Label application = new Label();
-                    application.Text = "Job: " + rdr.GetString(rdr.GetOrdinal("job"))
-                        + " Score: " + rdr.GetInt32(rdr.GetOrdinal("score"))
-                        + " Personal Email: " + rdr.GetString(rdr.GetOrdinal("personal_email")) +
-                        " Birth date" + rdr.GetOrdinal("birth_date") +
+                    application.Text = "<b>Job:</b> " + rdr.GetString(rdr.GetOrdinal("job"))
+                        + "<br/> <b>Score:</b> " + rdr.GetInt32(rdr.GetOrdinal("score"))
+                        + "<br/> <b>Personal Email:</b> " + rdr.GetString(rdr.GetOrdinal("personal_email")) +
+                        "<br/> <b>Birth date:</b>" + rdr.GetOrdinal("birth_date") +
 
-                        " Years of experience: " + rdr.GetInt32(rdr.GetOrdinal("years_of_experience")) +
-                        " First Name: " + rdr.GetString(rdr.GetOrdinal("first_name")) +
-                        " Middle Name: " + rdr.GetString(rdr.GetOrdinal("middle_name")) +
-                        " Last Name: " + rdr.GetString(rdr.GetOrdinal("last_name")) +
-                        " Age: " + rdr.GetInt32(rdr.GetOrdinal("age")) +
+                        "<br/> <b>Years of experience:</b> " + rdr.GetInt32(rdr.GetOrdinal("years_of_experience")) +
+                        "<br/> <b>First Name:</b> " + rdr.GetString(rdr.GetOrdinal("first_name")) +
+                        "<br/> <b>Middle Name:</b> " + rdr.GetString(rdr.GetOrdinal("middle_name")) +
+                        "<br/> <b>Last Name:</b> " + rdr.GetString(rdr.GetOrdinal("last_name")) +
+                        "<br/> <b>Age:</b> " + rdr.GetInt32(rdr.GetOrdinal("age")) +
                         "<br />";
                     Review_Job_appliactions_manager_form.Controls.Add(application);
 

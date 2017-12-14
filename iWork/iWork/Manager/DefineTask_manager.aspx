@@ -12,10 +12,12 @@ Response.WriteFile("../Pages/unsigned-menu.inc");
 }
 %>
 	<form id="form1" runat="server">
+                     <asp:Label id="ErrorMessage" Text="" runat="server"></asp:Label><br/> 
+
         <asp:Label id="project_name" Text="Project Name" runat="server"></asp:Label><br/> 
         <asp:TextBox id="project_name_in" runat="server" CssClass="form-control"></asp:TextBox><br/> 
 
-        <asp:Label id="task" runat="server" Text="Tsk Name"></asp:Label><br />
+        <asp:Label id="task" runat="server" Text="Task Name"></asp:Label><br />
         <asp:TextBox id="task_in" runat="server" CssClass="form-control" ></asp:TextBox><br />
             
         <asp:Label id="deadline" runat="server" Text=" Start date"></asp:Label><br />

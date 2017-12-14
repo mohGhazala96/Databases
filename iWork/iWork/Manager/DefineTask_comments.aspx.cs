@@ -24,6 +24,8 @@ namespace iWork.Manager
             addCommentCommand.Parameters.Add(new SqlParameter("@project_name_in", Session["projectName"].ToString()));
             addCommentCommand.Parameters.Add(new SqlParameter("@task_in", Session["taskName"].ToString()));
             addCommentCommand.Parameters.Add(new SqlParameter("@comment", commentTitle_in.Text ) );
+            ErrorMessage.Text = "";
+
             if(commentTitle_in.Text.Length==0){
                 Response.Write("Please write valid Inputs and make sure the input is filled");
 
@@ -35,7 +37,7 @@ namespace iWork.Manager
 
             }
             else{
-                Response.Write("Please write valid Inputs and make sure the input is filled");
+                    ErrorMessage.Text = "<br />" + "Please write valid Inputs and make sure the input is filled" + "<br />";
 
             }
             conn.Close();
@@ -53,7 +55,7 @@ namespace iWork.Manager
             addCommentCommand.Parameters.Add(new SqlParameter("@comment", commentTitle_in.Text));
             if (commentTitle_in.Text.Length == 0)
             {
-                Response.Write("Please write valid Inputs and make sure the input is filled");
+                ErrorMessage.Text = "<br />" + "Please write valid Inputs and make sure the input is filled" + "<br />";
 
             }
             else
@@ -61,12 +63,13 @@ namespace iWork.Manager
                 conn.Open();
                 if (addCommentCommand.ExecuteNonQuery() == 1)
                 {
-                    Response.Redirect("DefineTask_manager.aspx", true);
+                    Response.Redirect("../Profile.aspx", true);
 
                 }
                 else
                 {
-                    Response.Write("Please write valid Inputs and make sure the input is filled");
+                    ErrorMessage.Text = "<br />" + "Please write valid Inputs and make sure the input is filled" + "<br />";
+
 
                 }
                 conn.Close();

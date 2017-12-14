@@ -12,6 +12,8 @@ Response.WriteFile("../Pages/unsigned-menu.inc");
 }
 %>
 	<form id="form1" runat="server">
+         <asp:Label id="ErrorMessage" Text="" runat="server"></asp:Label><br/> 
+
         <asp:Label id="project_name" runat="server" Text="Project Name"></asp:Label><br />
         <asp:TextBox id="project_name_input" runat="server" CssClass="form-control"></asp:TextBox><br/> 
           <asp:Label id="startDate" runat="server" Text=" Start date"></asp:Label><br />

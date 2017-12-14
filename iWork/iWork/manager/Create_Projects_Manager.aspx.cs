@@ -25,6 +25,7 @@ namespace iWork
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@manager_name", Session["Username"].ToString()));
             cmd.Parameters.Add(new SqlParameter("@name_in", project_name_input.Text));
+            ErrorMessage.Text = "";
 
             try
             {
@@ -34,7 +35,7 @@ namespace iWork
                 {
 
 
-                    Response.Write("Fill all inputs");
+                    ErrorMessage.Text = "<br />"+ "Fill all inputs"+"<br />";
 
                 }
                 else
@@ -43,14 +44,13 @@ namespace iWork
                     conn.Open();
                     if (cmd.ExecuteNonQuery() == 0)
                     {
-                        Response.Write("Make sure the start date is less than the end date");
 
+                        ErrorMessage.Text = "<br />" + "Make sure the start date is less than the end date"+"<br />";
 
                     }
                     else
                     {
-                        Response.Write("Succeeded");
-                        Response.Redirect("Create_Projects_Manager.aspx", true);
+                        Response.Redirect("../Profile.aspx", true);
                     }
                     conn.Close();
 
@@ -58,7 +58,7 @@ namespace iWork
             }
             catch
             {
-                Response.Write("Write the date in a valid form");
+                ErrorMessage.Text = "<br />" + "Fill all inputs and make sure the date in a valid form"+"<br />";
 
             }
 

@@ -14,5 +14,7 @@ namespace iWork.Manager {
 	public partial class ReviewTaskInProject_Main {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm form1;
+		
+		protected System.Web.UI.WebControls.Label ErrorMessage;
 	}
 }

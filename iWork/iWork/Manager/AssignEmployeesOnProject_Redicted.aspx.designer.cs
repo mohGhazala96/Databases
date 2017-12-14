@@ -14,5 +14,7 @@ namespace iWork {
 	public partial class AssignEmployeesOnProject_Redicted {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm form1;
+		
+		protected System.Web.UI.WebControls.Label ErrorMessage;
 	}
 }

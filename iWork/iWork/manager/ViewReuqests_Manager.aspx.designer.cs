@@ -14,5 +14,7 @@ namespace iWork {
 	public partial class ViewReuqests_Manager {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm ViewReuqests_Manager_Form;
+		
+		protected System.Web.UI.WebControls.Label ErrorMessage;
 	}
 }

@@ -34,6 +34,7 @@ namespace iWork.Manager
                 cmd.Parameters.Add(new SqlParameter("@status_in", Session["StatusType"].ToString()));
 
                 conn.Open();
+                ErrorMessage.Text = "";
                 SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 if (!rdr.HasRows)
@@ -172,7 +173,8 @@ namespace iWork.Manager
             SqlConnection conn = new SqlConnection(connStr);
             String date = ((TextBox)textBoxes[ int.Parse(((Button)sender).ID)]).Text;
             if (date.Equals("")) {
-            Response.Write("please enter the date as a new deadline");
+                ErrorMessage.Text = "<br />" + "please enter the date as a new deadline" + "<br />";
+
             }
             else
             {
@@ -188,7 +190,8 @@ namespace iWork.Manager
                     cmd.Parameters.Add(new SqlParameter("@deadline_in", DateTime.Parse(date)));
                     conn.Open();
                     if( cmd.ExecuteNonQuery()==0){
-                        Response.Write("please enter the date in a valid form and make sure the date you entered  is greater than the deadline");
+                        ErrorMessage.Text = "<br />" + "please enter the date in a valid form and make sure the date you entered  is greater than the deadline" + "<br />";
+
 
                     }
 
@@ -196,7 +199,8 @@ namespace iWork.Manager
                     Response.Redirect("ReviewTaskInProject_Redirected.aspx", true);
                 }
                 catch{
-                    Response.Write("please enter the date in a valid form and make sure the date you entered  is greater than the deadline");
+                    ErrorMessage.Text = "<br />"+"please enter the date in a valid form and make sure the date you entered  is greater than the deadline"+"<br />";
+
 
                 }
             }

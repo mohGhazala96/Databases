@@ -35,7 +35,7 @@ namespace iWork.Manager
             Assign_to_Task.Parameters.Add(new SqlParameter("@task_in", task_in.Text));
             Assign_to_Task.Parameters.Add(new SqlParameter("@project_name_in", project_name_in.Text ));
             Assign_to_Task.Parameters.Add(new SqlParameter("@regular_employee_in", regularEmployee_in.Text));
-            regularEmployee_in.Text = "";
+            ErrorMessage.Text = "";
 
 
                 try
@@ -47,7 +47,7 @@ namespace iWork.Manager
                     description_in.Text.Length==0)
                    
                     {
-                        Response.Write("Fill all the inputs");                   
+                    ErrorMessage.Text = "<br />" + "Fill all the inputs" + "<br />";
 
                     }
                 else{
@@ -66,7 +66,7 @@ namespace iWork.Manager
                             conn.Close();
                         if (output.Value.ToString().Equals("1"))
                         {
-                            Response.Write("An error has occured, make sure the regular employee is working in your department");
+                            ErrorMessage.Text = "<br />" + "An error has occured, make sure the regular employee is working in your department" + "<br />";
 
                         }
                         else
@@ -77,7 +77,7 @@ namespace iWork.Manager
 
                             if (output2.Value.ToString().Equals("1"))
                             {
-                                Response.Write("An error has occured");
+                                ErrorMessage.Text = "<br />" + "An error has occured" + "<br />";
 
                             }
                             else
@@ -92,14 +92,15 @@ namespace iWork.Manager
                     }
                     catch
                     {
-                        Response.Write("Make sure that the regular employee is assigned to this project");
+                        ErrorMessage.Text = "<br />" + "Make sure that the regular employee is assigned to this project" + "<br />";
 
                     }
                 }
                 }
                 catch
                 {
-                    Response.Write("Write the date in a valid form");
+                ErrorMessage.Text = "<br />" + "Write the date in a valid form" + "<br />";
+
 
                 }
          

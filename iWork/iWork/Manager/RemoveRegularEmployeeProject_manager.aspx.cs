@@ -53,7 +53,7 @@ namespace iWork
                  
                        + "<br />";
                     Button ViewRegularEmployees = new Button();
-                    ViewRegularEmployees.CssClass = "table table-striped";
+                    ViewRegularEmployees.CssClass = "btn btn-default";
                     ViewRegularEmployees.CommandName = rdr.GetString(rdr.GetOrdinal("project_name"));
                     form1.Controls.Add(projectTitle);
                     ViewRegularEmployees.Text = "See regeluar Employees avaliable";

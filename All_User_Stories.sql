@@ -1750,10 +1750,12 @@ GO
 
 -----
 -- manager7 Helpers
---EXEC getProjectsAviavlableHavingRegularEmpolyees 'bakr.mostafa'
+EXEC getProjectsAviavlableHavingRegularEmpolyees 'emad.sherif'
 
 GO
 --EXEC getRegularEmployeesWorkingOnProject 'bakr.mostafa','Animation Video'
+go
+drop PROCEDURE getProjectsAviavlableHavingRegularEmpolyees
 go
 CREATE PROCEDURE getProjectsAviavlableHavingRegularEmpolyees
  @manager_name VARCHAR(20) 
@@ -1771,6 +1773,7 @@ CREATE PROCEDURE getProjectsAviavlableHavingRegularEmpolyees
                 FROM Tasks T 
                 WHERE T.project = M.project_name
                  )
+                 GROUP by (project_name)
 Go
 go
 CREATE PROCEDURE getRegularEmployeesWorkingOnProject

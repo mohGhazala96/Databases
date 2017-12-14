@@ -12,6 +12,8 @@ Response.WriteFile("../Pages/unsigned-menu.inc");
 }
 %>
 	<form id="form1" runat="server">
+        <asp:Label id="ErrorMessage" Text="" runat="server"></asp:Label><br/> 
+
         <asp:Label id="RegularEmployee" Text="Enter Regular Employee" runat="server"></asp:Label><br/> 
         <asp:TextBox id="RegularEmployee_in" runat="server" CssClass="form-control"></asp:TextBox><br/> 
         <asp:Button id="changeRegularEmployee" runat="server" Text="Change Regular Empoyee" OnClick="DefineTask_btn" CssClass="btn btn-default"></asp:Button>

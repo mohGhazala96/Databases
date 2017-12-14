@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.View_Emails" %>
+﻿<%@ Page Language="C#" Inherits="iWork.View_Emails" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">

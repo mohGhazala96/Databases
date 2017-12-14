@@ -26,6 +26,16 @@ namespace iWork.Companies
             sda.Fill(dt);
             grid.DataSource = dt;
             grid.DataBind();
+            grid.CssClass = "table table-striped";
         }
+        protected void Sort_Companies(object sender, EventArgs e)
+        {
+            Response.Redirect("/View_Sorted_Companies.aspx",true);
+        }
+        protected void Search_Companies(object sender, EventArgs e)
+        {
+            Response.Redirect("/Companies/Search.aspx",true);
+        }
+
     }
 }

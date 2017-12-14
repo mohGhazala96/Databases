@@ -78,7 +78,7 @@ namespace iWork
                     Response.Redirect("Login.aspx", true);
                 }
             }catch{
-                lbl_shoutbox.Text = "Retrieval of information failed";
+                lbl_info_status.Text = "Retrieval of information failed";
             }
         }
 

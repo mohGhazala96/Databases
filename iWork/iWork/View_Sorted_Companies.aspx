@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.View_Sorted_Companies" %>
+﻿<%@ Page Language="C#" Inherits="iWork.View_Sorted_Companies" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">

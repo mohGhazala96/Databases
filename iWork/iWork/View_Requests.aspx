@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.View_Requests" %>
+﻿<%@ Page Language="C#" Inherits="iWork.View_Requests" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">

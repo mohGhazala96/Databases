@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.Register" %>
+﻿<%@ Page Language="C#" Inherits="iWork.Register" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">

@@ -37,7 +37,7 @@ namespace SampleWebsite
                 string companySpecialization= rdr.GetString(rdr.GetOrdinal("specialization"));
 
                 Label lbl_CompanyName = new Label();
-                lbl_CompanyName.Text ="Name: "+ companyName +" , Email: "+companyEmail+ "  , speciliazes in: "+companySpecialization +" , Address: " +companyAddress+ " , Domain: "+companyDomian +" , Type: "+companyType+" , Vision: "+companyVision;
+                lbl_CompanyName.Text ="<b>Name:</b> "+ companyName +"<br/><b>Email:</b> "+companyEmail+ "<br/><b>speciliazes in: </b>"+companySpecialization +"<br /><b>Address: </b>" +companyAddress+ "<br /><b>Domain: </b>"+companyDomian +"<br /><b>Type: </b>"+companyType+"<br /><b>Vision: </b>"+companyVision;
 
                 Label lbl_space = new Label();
                 lbl_space.Text =  "  <br /> <br />";
@@ -61,7 +61,7 @@ namespace SampleWebsite
                 viewDepartemnt.Text = "View Department";
                 viewDepartemnt.CssClass = "btn btn-default";
                 viewDepartemnt.Click += new EventHandler(openAnotherPage);
-                lbl_CompanyName.Text ="  <br /> <br />"+"Department Name: "+ depName +" , Code: "+code+ "  <br /> <br />";
+                lbl_CompanyName.Text ="  <br />"+"<b>Department Name: </b>"+ depName +"<br /><b>Code: </b>"+code+ "<br />";
                 form1.Controls.Add(lbl_CompanyName);
                 form1.Controls.Add(viewDepartemnt);
 
@@ -73,11 +73,11 @@ namespace SampleWebsite
             viewPhoneNumbers.Parameters.Add(new SqlParameter("@company", Request.QueryString["email"]));
             SqlDataReader rdr2 = viewPhoneNumbers.ExecuteReader(CommandBehavior.CloseConnection);
             Label phoneNumbersTitle = new Label();
-            phoneNumbersTitle.Text = "  <br /> <br />" +"Phone Numbers";
+            phoneNumbersTitle.Text = "  <br /> <br />" +"<b>Phone Numbers</b><br />";
             form1.Controls.Add(phoneNumbersTitle);
             while(rdr2.Read()){
                 Label phoneNumber = new Label();
-                phoneNumber.Text=   "  <br /> <br />" + rdr2.GetString(rdr.GetOrdinal("phone"))+"  <br /> <br />" ;
+                phoneNumber.Text=   "" + rdr2.GetString(rdr.GetOrdinal("phone"))+"<br />" ;
                 form1.Controls.Add(phoneNumber);
             }
             conn.Close();

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.Check_Attendance" %>
+﻿<%@ Page Language="C#" Inherits="iWork.Check_Attendance" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">

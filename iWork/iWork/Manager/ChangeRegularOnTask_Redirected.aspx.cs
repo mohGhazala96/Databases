@@ -21,7 +21,7 @@ namespace iWork.Manager
             SqlConnection conn = new SqlConnection(connStr);
 
             SqlCommand changeRegularOnTask = new SqlCommand("Change_regular_employee_on_a_task", conn);
-
+            ErrorMessage.Text = "";
             changeRegularOnTask.CommandType = CommandType.StoredProcedure;
             changeRegularOnTask.Parameters.Add(new SqlParameter("@manager_name", Session["Username"].ToString() ));
             changeRegularOnTask.Parameters.Add(new SqlParameter("@project_name_in", Session["Project_For_RegualrEmployees_Avialable"].ToString()));
@@ -39,13 +39,12 @@ namespace iWork.Manager
                 }
                 else
                 {
-                    Response.Write("Please enter a regular employee");
-
+                    ErrorMessage.Text = "<br />"+"Please enter a regular employee"+"<br />";
                 }
             }
             catch{
-                Response.Write("Please Enter a valid Regular Employee");
- 
+                ErrorMessage.Text = "<br />" + "Please enter a valid regular employee" + "<br />";
+
             }
 
         }

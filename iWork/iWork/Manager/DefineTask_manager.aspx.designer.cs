@@ -15,6 +15,8 @@ namespace iWork.Manager {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm form1;
 		
+		protected System.Web.UI.WebControls.Label ErrorMessage;
+		
 		protected System.Web.UI.WebControls.Label project_name;
 		
 		protected System.Web.UI.WebControls.TextBox project_name_in;

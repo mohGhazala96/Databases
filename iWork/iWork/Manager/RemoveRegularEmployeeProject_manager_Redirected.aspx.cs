@@ -49,7 +49,7 @@ namespace iWork.Manager
 
                        + "<br />";
                     Button RemoveEmployee = new Button();
-                    RemoveEmployee.CssClass = "table table-striped";
+                    RemoveEmployee.CssClass = "btn btn-default";
                     RemoveEmployee.ID = rdr.GetString(rdr.GetOrdinal("username"));
                     form1.Controls.Add(employeeName);
                     RemoveEmployee.Text = "Remove";

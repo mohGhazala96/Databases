@@ -28,6 +28,7 @@ namespace iWork
                 conn.Open();
                 SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 Table emails_table = new Table();
+                emails_table.CssClass="table table-striped";
                 TableRow headerRow = new TableRow();
                 TableCell header_sender = new TableCell();
                 header_sender.Text = "Sender";

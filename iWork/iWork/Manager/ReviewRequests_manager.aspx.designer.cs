@@ -11,8 +11,8 @@
 namespace iWork {
 	
 	
-	public partial class ViewReuqests_Manager {
+	public partial class ReviewRequests_manager {
 		
-		protected System.Web.UI.HtmlControls.HtmlForm ViewReuqests_Manager_Form;
+		protected System.Web.UI.HtmlControls.HtmlForm ReviewRequests_manager_form;
 	}
 }

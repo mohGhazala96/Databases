@@ -34,12 +34,18 @@ namespace iWork
                 Label Title = new Label();
                 Title.Text = "Choose the job you want to show the applicaiton for" + "<br />" + "<br />";
                 viewJobsManager_from.Controls.Add(Title);
+                if (!rdr.HasRows)
+                {
+                    Label errorName = new Label();
+                    errorName.Text = "No Jobs are available";
 
+                    viewJobsManager_from.Controls.Add(errorName);
+                }
                 while (rdr.Read())
                 {
                   
                     Label jobTitle = new Label();
-                    jobTitle.Text = "Title: " +rdr.GetString(rdr.GetOrdinal("title"))
+                    jobTitle.Text = "<br />"+"Title: " +rdr.GetString(rdr.GetOrdinal("title"))
                  
                        + "<br />";
                     Button jobToApplication = new Button();

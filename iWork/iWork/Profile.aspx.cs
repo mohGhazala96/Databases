@@ -100,10 +100,10 @@ namespace iWork
             cmd.ExecuteNonQuery();
             conn.Close();
             if(output.Value.ToString().Equals("1")){
-                Response.Write("Information Updated");
+                lbl_info_status.Text= "Information Updated";
                 Session["Username"] = txt_username.Text;
             }else{
-                Response.Write("New username is already taken");
+                lbl_info_status.Text = "New username is already taken";
             }
         }
         protected void checkIn(object sender, EventArgs e)
@@ -120,9 +120,12 @@ namespace iWork
             conn.Close();
             if (output.Value.ToString().Equals("1"))
             {
-                Response.Write("Checked in");
+                lbl_shoutbox.Text = "Checked in";
+            }else if (output.Value.ToString().Equals("2"))
+            {
+                lbl_shoutbox.Text = "Already Checked in today";
             }else{
-                Response.Write("Trying to check in on a day off");
+                lbl_shoutbox.Text = "Trying to check in on a day off";
             }
         }
         protected void checkOut(object sender, EventArgs e)
@@ -139,11 +142,14 @@ namespace iWork
             conn.Close();
             if (output.Value.ToString().Equals("1"))
             {
-                Response.Write("Checked out");
+                lbl_shoutbox.Text = "Checked out";
+            }
+            else if(output.Value.ToString().Equals("2")){
+                lbl_shoutbox.Text = "Already Checked out today";
             }
             else
             {
-                Response.Write("Trying to check in on a day off");
+                lbl_shoutbox.Text = "Trying to check in on a day off";
             }
         }
         protected void checkAttendance(object sender, EventArgs e)
@@ -173,6 +179,42 @@ namespace iWork
         protected void viewAnnouncements(object sender, EventArgs e)
         {
             Response.Redirect("View_Announcements.aspx", true);
+        }
+        protected void viewRequests_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ViewReuqests_Manager.aspx", true);
+        }
+        protected void ReviewRequests_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewRequests_manager.aspx", true);
+        }
+        protected void ReviewJobs_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/viewJobsManager.aspx", true);
+        }
+        protected void Create_Projects_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/Create_Projects_Manager.aspx", true);
+        }
+        protected void assignRegularOnProject_manager(object sender, EventArgs e){
+            Response.Redirect("Manager/AssignEmployeesOnProject.aspx", true);
+
+        }
+        protected void removeRegularOnProject_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/RemoveRegularEmployeeProject_manager.aspx", true);
+
+        }
+        //DefineTask_manager
+        protected void defineTask_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/DefineTask_manager.aspx", true);
+
+        }
+        protected void ChangeRegular_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ChangeRegularOnTask.aspx", true);
+
         }
     }
 }

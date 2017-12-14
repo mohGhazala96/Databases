@@ -97,9 +97,6 @@
     <Reference Include="Microsoft.Extensions.Logging">
       <HintPath>..\packages\Microsoft.Extensions.Logging.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Remotion.Linq">
-      <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore">
       <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.0.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
@@ -147,15 +144,6 @@
     <Reference Include="System.Security.Cryptography.Primitives">
       <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms">
-      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates">
-      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.ReaderWriter">
       <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
     </Reference>
@@ -167,6 +155,18 @@
       <HintPath>..\packages\Microsoft.EntityFrameworkCore.SqlServer.Design.1.1.4\lib\net451\Microsoft.EntityFrameworkCore.SqlServer.Design.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="Remotion.Linq">
+      <HintPath>..\packages\Remotion.Linq.2.1.2\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Companies\List.aspx" />
@@ -186,7 +186,6 @@
     <Content Include="Profile.aspx" />
     <Content Include="changePassword.aspx" />
     <Content Include="View_Sorted_Companies.aspx" />
-    <Content Include="Login.aspx" />
     <Content Include="Check_Attendance.aspx" />
     <Content Include="Leave_Request.aspx" />
     <Content Include="Business_Request.aspx" />
@@ -194,9 +193,6 @@
     <Content Include="Send_Email.aspx" />
     <Content Include="View_Emails.aspx" />
     <Content Include="View_Announcements.aspx" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -209,6 +205,27 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Register.aspx" />
     <Content Include="Search_Jobs.aspx" />
+    <Content Include="Manager\Create_Projects_Manager.aspx" />
+    <Content Include="Manager\viewJobsManager.aspx" />
+    <Content Include="Manager\ViewReuqests_Manager.aspx" />
+    <Content Include="Manager\ReviewRequests_manager.aspx" />
+    <Content Include="Manager\AssignEmployeesOnProject.aspx" />
+    <Content Include="Manager\Review_Job_appliactions_manager.aspx" />
+    <Content Include="Manager\AssignEmployeesOnProject_Redicted.aspx" />
+    <Content Include="Manager\RemoveRegularEmployeeProject_manager.aspx" />
+    <Content Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx" />
+    <Content Include="Manager\DefineTask_manager.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1-vsdoc.js" />
+    <Content Include="images\BusinessBanner.jpg" />
+    <Content Include="images\JobSeekerBanners.jpg" />
+    <Content Include="images\Logo.png" />
+    <Content Include="images\MainBanners.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Companies\List.aspx.cs">
@@ -284,13 +301,6 @@
     <Compile Include="View_Sorted_Companies.aspx.designer.cs">
       <DependentUpon>View_Sorted_Companies.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Check_Attendance.aspx.cs">
       <DependentUpon>Check_Attendance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -354,15 +364,95 @@
     <Compile Include="Search_Jobs.aspx.designer.cs">
       <DependentUpon>Search_Jobs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Manager\Create_Projects_Manager.aspx.cs">
+      <DependentUpon>Create_Projects_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Create_Projects_Manager.aspx.designer.cs">
+      <DependentUpon>Create_Projects_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\viewJobsManager.aspx.cs">
+      <DependentUpon>viewJobsManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\viewJobsManager.aspx.designer.cs">
+      <DependentUpon>viewJobsManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ViewReuqests_Manager.aspx.cs">
+      <DependentUpon>ViewReuqests_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ViewReuqests_Manager.aspx.designer.cs">
+      <DependentUpon>ViewReuqests_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewRequests_manager.aspx.cs">
+      <DependentUpon>ReviewRequests_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewRequests_manager.aspx.designer.cs">
+      <DependentUpon>ReviewRequests_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject.aspx.cs">
+      <DependentUpon>AssignEmployeesOnProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject.aspx.designer.cs">
+      <DependentUpon>AssignEmployeesOnProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Review_Job_appliactions_manager.aspx.cs">
+      <DependentUpon>Review_Job_appliactions_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Review_Job_appliactions_manager.aspx.designer.cs">
+      <DependentUpon>Review_Job_appliactions_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject_Redicted.aspx.cs">
+      <DependentUpon>AssignEmployeesOnProject_Redicted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AssignEmployeesOnProject_Redicted.aspx.designer.cs">
+      <DependentUpon>AssignEmployeesOnProject_Redicted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager.aspx.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager.aspx.designer.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RemoveRegularEmployeeProject_manager_Redirected.aspx.designer.cs">
+      <DependentUpon>RemoveRegularEmployeeProject_manager_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DefineTask_manager.aspx.cs">
+      <DependentUpon>DefineTask_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DefineTask_manager.aspx.designer.cs">
+      <DependentUpon>DefineTask_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Content\bootstrap.min.css.map" />
     <None Include="Content\bootstrap.css.map" />
     <None Include="Content\bootstrap-theme.min.css.map" />
     <None Include="Content\bootstrap-theme.css.map" />
+    <None Include="Pages\menu.inc" />
+    <None Include="Pages\footer.inc" />
+    <None Include="Pages\unsigned-menu.inc" />
+    <None Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <None Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Manager\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -391,6 +481,8 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v15.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
 </Project>

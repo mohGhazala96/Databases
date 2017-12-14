@@ -370,11 +370,15 @@ CREATE OR ALTER PROC Check_in
 AS
 DECLARE @Staff_Members_exist VARCHAR(20)
 DECLARE @day_off VARCHAR(10)
+DECLARE @currentdate DATE
 SELECT @Staff_Members_exist = username, @day_off = day_off
 FROM Staff_Members
 WHERE username = @username
 IF @Staff_Members_exist = @username
     IF @day_off != DATENAME(dw,CURRENT_TIMESTAMP) OR @day_off='Friday'
+        IF EXISTS (SELECT * FROM Attendance_Records Where staff = @username and attendance_date = CONVERT(DATE,CURRENT_TIMESTAMP)) 
+        SET @result=2
+        ELSE
         BEGIN
         SET @result=1
         INSERT INTO Attendance_Records
@@ -1624,6 +1628,55 @@ Create PROCEDURE Create_project
 
 
 ----------- 
+-- helper views
+Go 
+ 
+-- manager6 helpers
+
+
+CREATE PROCEDURE getProjectsAviavlable
+ @manager_name VARCHAR(20) 
+  AS
+  SELECT name
+   FROM Projects  
+   where @manager_name = manager
+   GROUP BY name 
+
+go
+
+CREATE PROCEDURE getRegularEmployeesAvailable
+  @manager_name VARCHAR(20) ,
+  @project_name_in VARCHAR(20)
+  AS
+    DECLARE @manager_department int
+    DECLARE @company_check_manager VARCHAR(100) 
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check_manager output
+    
+      SELECT S.username 
+    from Staff_Members S ,Regular_Employees R
+     
+    WHERE S.username=R.username and S.department = @manager_department AND @company_check_manager=S.company And S.username
+    Not IN(
+    SELECT regular_employee
+
+    from Managers_assign_Regular_Employees_Projects
+     where project_name <> @project_name_in
+    GROUP by regular_employee
+    HAVING count(*)>=2
+                )
+                And S.username
+    Not IN(
+    SELECT regular_employee
+
+    from Managers_assign_Regular_Employees_Projects
+     where project_name = @project_name_in
+      )
+                
+       
+  
+ 
+
+GO
 -- manager6
 Create PROCEDURE Assign_regular_employees_on_projects
   @manager_name VARCHAR(20) ,
@@ -1657,7 +1710,40 @@ Create PROCEDURE Assign_regular_employees_on_projects
 GO
 
 -----
--- manager7
+-- manager7 Helpers
+--EXEC getProjectsAviavlableHavingRegularEmpolyees 'bakr.mostafa'
+
+GO
+--EXEC getRegularEmployeesWorkingOnProject 'bakr.mostafa','Animation Video'
+go
+CREATE PROCEDURE getProjectsAviavlableHavingRegularEmpolyees
+ @manager_name VARCHAR(20) 
+  AS
+  SELECT project_name
+   FROM Managers_assign_Regular_Employees_Projects  M
+   Where M.regular_employee
+           Not IN(
+                Select T.regular_employee
+                FROM Tasks T 
+                WHERE T.project =  M.project_name
+                 )
+Go
+go
+CREATE PROCEDURE getRegularEmployeesWorkingOnProject
+  @manager_name VARCHAR(20) ,
+    @project_name_in VARCHAR(20) 
+
+  AS
+    DECLARE @manager_department int
+    DECLARE @company_check_manager VARCHAR(100) 
+
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check_manager output
+    SELECT S.username 
+    FROM Staff_Members S , Managers_assign_Regular_Employees_Projects  M
+    WHERE @manager_department=S.department AND @company_check_manager=S.company AND M.regular_employee =S.username and @project_name_in = M.project_name
+        
+Go
+-- manager7 
 CREATE PROCEDURE Remove_regular_employee_from_project
   @manager_name VARCHAR(20) ,
   @project_name_in VARCHAR(20),
@@ -1683,11 +1769,10 @@ GO
 CREATE PROCEDURE Define_task
   @task_in VARCHAR(20),
   @project_name_in VARCHAR(20),
-  @company_in VARCHAR(100) ,
   @deadline_in datetime,
   @description_in VARCHAR(MAX),
-  @manager_name VARCHAR(20) 
-
+  @manager_name VARCHAR(20),
+  @errorDetection int Out
   AS 
     DECLARE @manager_department int
     DECLARE @manager_company VARCHAR(100)
@@ -1699,26 +1784,24 @@ CREATE PROCEDURE Define_task
     SELECT  @project_manager_name = manager -- get name of the manager who defined the project
     FROM  Projects
     WHERE name= @project_name_in
-
-
+    set @errorDetection = 0
     SELECT @project_manager_department= department  ,@project_manager_company =company -- get the department and company of the manager who defined the project
     FROM Staff_Members
     where @project_manager_name = username
 
-    IF @project_manager_department=  @manager_department and @project_manager_company=@manager_company 
-        INSERT Into Tasks VALUES( @task_in,@project_name_in,@company_in, @deadline_in,'Open',@description_in,null, @manager_name)
-    ELSE
-        PRINT 'The project is not in your department or company'
-GO
+    IF @project_manager_department=  @manager_department and @project_manager_company=@manager_company AND @project_manager_name is not NULL
+        INSERT Into Tasks VALUES( @task_in,@project_name_in,@manager_company, @deadline_in,'Open',@description_in,null, @manager_name)
+    else
+       set @errorDetection = 1
 
----------
-Go
--- manager9
+GO
+--manager 9
 CREATE PROCEDURE Assign_regular_employee_on_task
   @manager_name VARCHAR(20) ,
   @project_name_in VARCHAR(20),
   @task_in VARCHAR(20),
-  @regular_employee_in VARCHAR(20)
+  @regular_employee_in VARCHAR(20),
+  @errorDetection int output 
   AS
     DECLARE @check_regular VARCHAR(20)
     DECLARE @manager_company VARCHAR(100)
@@ -1730,15 +1813,28 @@ CREATE PROCEDURE Assign_regular_employee_on_task
     WHERE @regular_employee_in =  regular_employee
 
     IF @check_regular IS Not NULL
+    BEGIN 
+    SET @errorDetection=0
         UPDATE  Tasks
         Set regular_employee = @regular_employee_in , status='Assigned'
         WHERE @manager_name= manager AND @project_name_in = project and regular_employee is null and @task_in=name and @manager_company=company
-
+END
     ELSE
-        PRINT 'the regular employee doesnot work on such project'
+    SET @errorDetection=1
 GO
 
 -----------
+-- manager10 helper
+CREATE PROCEDURE getTasks
+  @manager_name VARCHAR(20) 
+  AS
+  DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+    SELECT name,project 
+    from Tasks
+    where @manager_name = manager and company =@manager_company and regular_employee is not NULL and status = 'Assigned'
+Go
 -- manager10
 CREATE PROCEDURE Change_regular_employee_on_a_task
   @manager_name VARCHAR(20) ,
@@ -1749,9 +1845,6 @@ CREATE PROCEDURE Change_regular_employee_on_a_task
     DECLARE @manager_company VARCHAR(100)
     DECLARE @manager_department int
     EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
-    INSERT INTO Managers_assign_Regular_Employees_Projects VALUES(
-     @project_name_in, @manager_company, @regular_employee_in, @manager_name
-    )
     UPDATE  Tasks
     Set regular_employee = @regular_employee_in
     WHERE @manager_name= manager AND @project_name_in = project and @task_in=name AND status='Assigned' AND regular_employee is not null and @manager_company= company

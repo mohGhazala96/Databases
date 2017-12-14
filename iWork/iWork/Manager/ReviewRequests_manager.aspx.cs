@@ -191,11 +191,11 @@ namespace iWork
             Reason.Columns = 100;
             Reason.Enabled = true;
             Reason.Rows = 5;
+            Reason.CssClass = "form-control";
             Reason.TextMode = TextBoxMode.MultiLine;
             Reason.ID = buttonIndex + "";
             textBoxes.Add(Reason);
             buttonIndex++;
-
             Label space = new Label();
             space.Text = "  " + "<br />" + "  " + "<br />";
 
@@ -206,7 +206,7 @@ namespace iWork
             Button buttonAccept = new Button();
             buttonAccept.ID = buttonIndex + "";
             buttonAccept.Text = "Accept Request";
-
+            buttonAccept.CssClass = "btn btn-default";
             buttonAccept.Click += new EventHandler(acceptRequest);
             buttonIndex++;
 
@@ -214,7 +214,7 @@ namespace iWork
             buttonReject.ID = buttonIndex + "";
             buttonReject.Text = "Reject Request";
             buttonIndex++;
-
+            buttonReject.CssClass = "btn btn-default";
             buttonReject.Click += new EventHandler(rejectRequest);
             ReviewRequests_manager_form.Controls.Add(buttonAccept);
             ReviewRequests_manager_form.Controls.Add(buttonReject);

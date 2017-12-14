@@ -61,22 +61,30 @@
         <h1>Job Seeker stuff here</h1>
         </asp:Panel>
         <asp:Panel id="Manager" runat="server">
-         <h1>Manager Member stuff here</h1><br />
+         <h1>Manager Actions</h1><br />
         <!--            <asp:Button id="btn_manager_view_requests" runat="server" Text="View Requests" OnClick="viewRequests_manager"></asp:Button><br />
-        -->            <asp:Button id="btn_manager_approve_reject_requests" runat="server" Text="View or Review Requests" OnClick="ReviewRequests_manager"></asp:Button><br />
+        -->            <asp:Button id="btn_manager_approve_reject_requests" runat="server" Text="View or Review Requests" OnClick="ReviewRequests_manager" CssClass="btn btn-default"></asp:Button><br />
         <!--            <asp:Button id="btn_manager_view_applications" runat="server" Text="View Applications" OnClick="checkAttendance"></asp:Button><br />
         -->           
-        <asp:Button id="btn_manager_Review_appliactions" runat="server" Text="Review Applications" OnClick="ReviewJobs_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_create_project" runat="server" Text="Create Project" OnClick="Create_Projects_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_assign_to_project" runat="server" Text="Assign to Projects" OnClick="assignRegularOnProject_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_remove_from_project" runat="server" Text="Remove from Projects" OnClick="removeRegularOnProject_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_define_task" runat="server" Text="Define Tasks" OnClick="defineTask_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="ChangeRegular_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="ReviewTask_manager"></asp:Button><br />
+        <asp:Button id="btn_manager_Review_appliactions" runat="server" Text="Review Applications" OnClick="ReviewJobs_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_create_project" runat="server" Text="Create Project" OnClick="Create_Projects_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_assign_to_project" runat="server" Text="Assign to Projects" OnClick="assignRegularOnProject_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_remove_from_project" runat="server" Text="Remove from Projects" OnClick="removeRegularOnProject_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_define_task" runat="server" Text="Define Tasks" OnClick="defineTask_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="ChangeRegular_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="ReviewTask_manager" CssClass="btn btn-default"></asp:Button><br />
 
         </asp:Panel>
         <asp:Panel id="HR_Employee" runat="server">
         <h1>HR Employee stuff here</h1>
+        <asp:Button id="Button1" runat="server" Text="Add Job" OnClick="HR_Employees_Add_Job" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="Button2" runat="server" Text="Create Announcement" OnClick="HR_Employees_Create_Announcement" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="Button3" runat="server" Text="View High Achievers" OnClick="HR_Employees_High_Achievers" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="Button4" runat="server" Text="List Jobs" OnClick="HR_Employees_List_Jobs" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="Button5" runat="server" Text="View Total Hours for a Staff Members" OnClick="HR_Employees_Total_Hours" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="Button6" runat="server" Text="View Applications" OnClick="HR_Employees_View_Applications" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="Button7" runat="server" Text="View Attendance" OnClick="HR_Employees_View_Attendance" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="Button8" runat="server" Text="View Requests" OnClick="HR_Employees_View_Requests" CssClass="btn btn-default"></asp:Button><br />
         </asp:Panel>
         <asp:Panel id="Regular_Employee" runat="server">
         <h1>Regular Employee stuff here</h1>

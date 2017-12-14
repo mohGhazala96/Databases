@@ -16,12 +16,14 @@ namespace SampleWebsite
         public static string companyName;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Server=localhost;Database=websiteDataBase;User Id=sa;Password=Password123");
+            string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
 
             SqlCommand cmd = new SqlCommand("View_Company_Department", conn);
+            SqlCommand viewPhoneNumbers = new SqlCommand("View_Company_Department_Phone", conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@company", companyName));
+            cmd.Parameters.Add(new SqlParameter("@company", Request.QueryString["email"] ));
             conn.Open();
             SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.SingleRow);
             while (rdr.Read())
@@ -43,6 +45,8 @@ namespace SampleWebsite
                 form1.Controls.Add(lbl_space);
             }
             conn.Close();
+
+
             conn.Open();
 
              rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -55,14 +59,29 @@ namespace SampleWebsite
                 Button viewDepartemnt = new Button();
                 viewDepartemnt.ID = code+"";
                 viewDepartemnt.Text = "View Department";
-
+                viewDepartemnt.CssClass = "btn btn-default";
                 viewDepartemnt.Click += new EventHandler(openAnotherPage);
                 lbl_CompanyName.Text ="  <br /> <br />"+"Department Name: "+ depName +" , Code: "+code+ "  <br /> <br />";
                 form1.Controls.Add(lbl_CompanyName);
                 form1.Controls.Add(viewDepartemnt);
 
             }
-       
+            conn.Close();
+            conn.Open();
+
+            viewPhoneNumbers.CommandType = CommandType.StoredProcedure;
+            viewPhoneNumbers.Parameters.Add(new SqlParameter("@company", Request.QueryString["email"]));
+            SqlDataReader rdr2 = viewPhoneNumbers.ExecuteReader(CommandBehavior.CloseConnection);
+            Label phoneNumbersTitle = new Label();
+            phoneNumbersTitle.Text = "  <br /> <br />" +"Phone Numbers";
+            form1.Controls.Add(phoneNumbersTitle);
+            while(rdr2.Read()){
+                Label phoneNumber = new Label();
+                phoneNumber.Text=   "  <br /> <br />" + rdr2.GetString(rdr.GetOrdinal("phone"))+"  <br /> <br />" ;
+                form1.Controls.Add(phoneNumber);
+            }
+            conn.Close();
+
 
 
             //this is how you retrive data from session variable.
@@ -70,7 +89,7 @@ namespace SampleWebsite
             //Response.Write("Logged-in User: " + userId + "  <br /> <br />");
         }
         protected void openAnotherPage(object sender, EventArgs e){
-            Departments.companyName = companyName;
+            Departments.companyName = Request.QueryString["email"];
             Departments.DepCode = int.Parse( ((Button)sender).ID);
             Response.Redirect("Departments.aspx", true);
 

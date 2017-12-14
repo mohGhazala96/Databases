@@ -52,6 +52,7 @@ namespace iWork
                  
                        + "<br />";
                     Button ViewRegularEmployees = new Button();
+                    ViewRegularEmployees.CssClass = "btn btn-default";
                     ViewRegularEmployees.ID = project_title;
                     form1.Controls.Add(projectTitle);
                     ViewRegularEmployees.Text = "See regeluar Employees avaliable";

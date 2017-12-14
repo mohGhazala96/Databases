@@ -52,6 +52,7 @@ namespace iWork
                     jobToApplication.ID = rdr.GetString(rdr.GetOrdinal("title"));
                     viewJobsManager_from.Controls.Add(jobTitle);
                     jobToApplication.Text = "Open Applications";
+                    jobToApplication.CssClass = "btn btn-default";
 
                     jobToApplication.Click += new EventHandler(openApplications);
                     viewJobsManager_from.Controls.Add(jobToApplication);

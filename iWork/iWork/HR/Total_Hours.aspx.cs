@@ -50,6 +50,7 @@ namespace iWork.HR
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@username", Session["Username"]));
             cmd.Parameters.Add(new SqlParameter("@year", my_year));
+            cmd.Parameters.Add(new SqlParameter("@staff_member", staff_member.Text));
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

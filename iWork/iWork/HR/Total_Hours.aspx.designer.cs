@@ -49,6 +49,15 @@ namespace iWork.HR {
         protected global::System.Web.UI.WebControls.Panel form;
         
         /// <summary>
+        /// staff_member control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox staff_member;
+        
+        /// <summary>
         /// year control.
         /// </summary>
         /// <remarks>

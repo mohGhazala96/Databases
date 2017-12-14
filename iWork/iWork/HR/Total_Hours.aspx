@@ -7,18 +7,25 @@
     <title></title>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("/Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("/Pages/unsigned-menu.inc");
+    }
+    %>
+
     <form id="form1" runat="server">
         <asp:Label ID="error" Text="You are not logged in or you are not an HR employee" runat="server"></asp:Label>
 
         <asp:Panel ID="data" runat="server">
             <asp:Panel ID="form" runat="server">
+                <asp:TextBox id="staff_member" runat="server" placeholder="Staff Member Username"></asp:TextBox>
                 <asp:TextBox id="year" runat="server" placeholder="Year"></asp:TextBox>
                 <input type="submit" name="submit" value="Submit" id="submit" />
             </asp:Panel>
 
             <asp:GridView ID="grid" runat="server" AutoGenerateColumns="false">    
              <Columns>    
-                 <asp:BoundField DataField="username" HeaderText="Username" />
                  <asp:BoundField DataField="January" HeaderText="January" />
                  <asp:BoundField DataField="February" HeaderText="February" />
                  <asp:BoundField DataField="March" HeaderText="March" />

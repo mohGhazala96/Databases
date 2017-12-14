@@ -60,18 +60,18 @@ namespace iWork
 
 
                     Label LeaveRequests = new Label();
-                    LeaveRequests.Text = "Date: " + rdr.GetDateTime(rdr.GetOrdinal("start_date")).ToString("G")
-                        + " Applicant: " + rdr.GetString(rdr.GetOrdinal("applicant"))
-                        + " Request Date: " + rdr.GetDateTime(rdr.GetOrdinal("request_date")).ToString("G") +
-                        "End Date" + rdr.GetDateTime(rdr.GetOrdinal("end_date")).ToString("G") +
+                    LeaveRequests.Text = "<br/><b>Date:</b> " + rdr.GetDateTime(rdr.GetOrdinal("start_date")).ToString("G")
+                        + "<br/><b>Applicant:</b> " + rdr.GetString(rdr.GetOrdinal("applicant"))
+                        + "<br/><b>Request Date:</b> " + rdr.GetDateTime(rdr.GetOrdinal("request_date")).ToString("G") +
+                        "<br/><b>End Date:</b>" + rdr.GetDateTime(rdr.GetOrdinal("end_date")).ToString("G") +
 
-                        " Total Days: " + rdr.GetInt32(rdr.GetOrdinal("total_days")) +
-                        " HR Employee: " + hrEmployeeName +
-                        " HR Response: " + rdr.GetString(rdr.GetOrdinal("hr_response")) +
-                        " Manager: " + managerName +
-                        " Manager Response : " + rdr.GetString(rdr.GetOrdinal("manager_response")) +
-                        " Type: " + rdr.GetString(rdr.GetOrdinal("type")) +
-                        "<br />" + " Manager Reason: "  +
+                        "<br/><b>Total Days:</b> " + rdr.GetInt32(rdr.GetOrdinal("total_days")) +
+                        "<br/><b>HR Employee:</b> " + hrEmployeeName +
+                        "<br/><b>HR Response:</b> " + rdr.GetString(rdr.GetOrdinal("hr_response")) +
+                        "<br/><b>Manager:</b> " + managerName +
+                        "<br/><b>Manager Response :</b> " + rdr.GetString(rdr.GetOrdinal("manager_response")) +
+                        "<br/><b>Type:</b> " + rdr.GetString(rdr.GetOrdinal("type")) +
+                        "<br/><br />" + " Manager Reason:</b> "  +
 
                          "<br />";
                     ReviewRequests_manager_form.Controls.Add(LeaveRequests);
@@ -99,18 +99,18 @@ namespace iWork
                             managerName = rdr.GetString(rdr.GetOrdinal("manager"));
 
                         Label BusinessRequests = new Label();
-                        BusinessRequests.Text = "Date: " + rdr.GetDateTime(rdr.GetOrdinal("start_date")).ToString("G")
-                        + " Applicant: " + rdr.GetString(rdr.GetOrdinal("applicant"))
-                        + " Request Date: " + rdr.GetDateTime(rdr.GetOrdinal("request_date")).ToString("G") +
-                            "End Date"+rdr.GetDateTime(rdr.GetOrdinal("end_date")).ToString("G")+
-                        " Total Days: " + rdr.GetInt32(rdr.GetOrdinal("total_days")) +
-                        " HR Employee: " + hrEmployeeName +
-                        " HR Response: " + rdr.GetString(rdr.GetOrdinal("hr_response")) +
-                        " Manager: " + managerName +
-                        " Manager Response : " + rdr.GetString(rdr.GetOrdinal("manager_response")) +
-                        " Manager Reason: " + rdr.GetString(rdr.GetOrdinal("manager_reason")) +
-                            " Destination: " + rdr.GetString(rdr.GetOrdinal("destination"))
-                            + " Purpose: " + rdr.GetString(rdr.GetOrdinal("purpose")) +
+                        BusinessRequests.Text = "<b>Date:</b> " + rdr.GetDateTime(rdr.GetOrdinal("start_date")).ToString("G")
+                            + " <br/> <b>Applicant:</b> " + rdr.GetString(rdr.GetOrdinal("applicant"))
+                            + "<br/> <b>Request Date:</b> " + rdr.GetDateTime(rdr.GetOrdinal("request_date")).ToString("G") +
+                            "<br/> <b>End Date:</b> "+rdr.GetDateTime(rdr.GetOrdinal("end_date")).ToString("G")+
+                            "<br/><b>Total Days:</b> " + rdr.GetInt32(rdr.GetOrdinal("total_days")) +
+                            " <br/><b>HR Employee:</b> " + hrEmployeeName +
+                            " <br/><b>HR Response:</b> " + rdr.GetString(rdr.GetOrdinal("hr_response")) +
+                            " <br/><b>Manager:</b> " + managerName +
+                            " <br/><b>Manager Response:</b> " + rdr.GetString(rdr.GetOrdinal("manager_response")) +
+                            " <br/><b>Manager Reason:</b> " + rdr.GetString(rdr.GetOrdinal("manager_reason")) +
+                            " <br/><b>Destination:</b> " + rdr.GetString(rdr.GetOrdinal("destination"))
+                            + " <br/><b>Purpose:</b> " + rdr.GetString(rdr.GetOrdinal("purpose")) +
                             "<br />" +
                          "<br />";
 
@@ -175,9 +175,7 @@ namespace iWork
                 cmd.Parameters.Add(new SqlParameter("@reason", ((TextBox)textBoxes[requestIndex]).Text  ));
                 conn.Open();
                 cmd.ExecuteNonQuery();
-                Response.Write(inputs[0]);
-                Response.Write(inputs[1]);
-
+           
                 conn.Close();
                 Response.Redirect("ReviewRequests_manager.aspx", true);
 

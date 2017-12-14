@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <script src="/Content/jquery-3.2.1.min.js"></script>
-    <title>HR Employee | Add Job</title>
+    <title>HR Employee | Edit Job</title>
 
     <script>
         $(function() {
@@ -41,23 +41,8 @@
 
                 <input type="submit" name="submit" value="Update" id="submit" />
             </form>
-
-            <asp:GridView ID="grid" runat="server" AutoGenerateColumns="false">    
-             <Columns>
-                 <asp:TemplateField HeaderText="Question">
-                      <ItemTemplate>
-                        <asp:TextBox id="question_text" runat="server"
-                            Text='<%# Bind("question") %>'></asp:TextBox>
-                      </ItemTemplate>
-                 </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Answer">
-                      <ItemTemplate>
-                        <asp:TextBox id="answer_text" runat="server"
-                            Text='<%# Bind("answer") %>'></asp:TextBox>
-                      </ItemTemplate>
-                 </asp:TemplateField>
-             </Columns>
-            </asp:GridView>
+            <br /><br />
+            <asp:TextBox id="questions" TextMode="multiline" Columns="50" Rows="20" runat="server" />
         </asp:Panel>
     </form>
 </body>

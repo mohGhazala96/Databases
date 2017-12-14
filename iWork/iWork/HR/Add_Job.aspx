@@ -29,17 +29,17 @@
     <form id="form1" runat="server">
         <asp:Label ID="error" Text="You are not logged in or you are not an HR employee" runat="server"></asp:Label>
 
-        <asp:Panel ID="data" runat="server">
+        <asp:Panel ID="data" runat="server" CssClass="panel panel-default">
             <form method="post">
-                <input name="title" type="text" id="title" placeholder="Title"/>
-                <input name="role" type="text" id="role" placeholder="Role"/>
-                <input name="short_description" type="text" id="short_description" placeholder="Short description"/>
-                <input name="detailed_description" type="text" id="detailed_description" placeholder="Detailed description"/>
-                <input name="min_experience" type="text" id="min_experience" placeholder="Minimum experience"/>
-                <input name="salary" type="text" id="salary" placeholder="Salary"/>
-                <input name="deadline" type="text" id="deadline" placeholder="Deadline"/>
-                <input name="no_of_vacancies" type="text" id="no_of_vacancies" placeholder="Number of vacancies"/>
-                <input name="working_hours" type="text" id="working_hours" placeholder="Working hours"/>
+                <input name="title" type="text" id="title" placeholder="Title" class="input-sm"/><br />
+                <input name="role" type="text" id="role" placeholder="Role" class="input-sm"/><br />
+                <input name="short_description" type="text" id="short_description" placeholder="Short description" class="input-sm"/><br />
+                <input name="detailed_description" type="text" id="detailed_description" placeholder="Detailed description" class="input-sm"/><br />
+                <input name="min_experience" type="text" id="min_experience" placeholder="Minimum experience" class="input-sm"/><br />
+                <input name="salary" type="text" id="salary" placeholder="Salary" class="input-sm"/><br />
+                <input name="deadline" type="text" id="deadline" placeholder="Deadline" class="input-sm"/><br />
+                <input name="no_of_vacancies" type="text" id="no_of_vacancies" placeholder="Number of vacancies" class="input-sm"/><br />
+                <input name="working_hours" type="text" id="working_hours" placeholder="Working hours" class="input-sm"/>
                 <br /><br />
                 <div id="questions">
                     <input name='questions[]' type='text' placeholder='Question' />
@@ -58,5 +58,6 @@
             </asp:GridView>
         </asp:Panel>
     </form>
+    <!--#include file="/Pages/footer.inc"-->
 </body>
 </html>

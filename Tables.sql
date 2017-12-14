@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Companies (
 email  varchar(100) NOT NULL PRIMARY KEY ,
 name varchar(40) NOT NULL ,
@@ -68,7 +66,7 @@ company varchar ( 100 ) NOT NULL ,
 question int,
 PRIMARY KEY ( job, department, company, question ) ,
 FOREIGN KEY (job, department, company  ) REFERENCES Jobs( title , department , company ) ,
-FOREIGN KEY (question) REFERENCES Questions ( number )
+FOREIGN KEY (question) REFERENCES Questions ( number ) ON DELETE CASCADE
 
 );
 

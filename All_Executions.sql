@@ -79,7 +79,7 @@ SELECT * FROM @q_list
 EXEC HR_Employees_add_job "JenniferLaw",
                           "Rocket Scientist",
                           "Mad scientists",
-                          "It's not rocket science? Surprise, it is.",
+                          "It is not rocket science? Surprise, it is.",
                           2,
                           250000,
                           "12/12/2020",

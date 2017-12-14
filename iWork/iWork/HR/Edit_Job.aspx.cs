@@ -70,17 +70,22 @@ namespace iWork.HR
                 cmd2.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
                 cmd2.Parameters.Add(new SqlParameter("@title", Request.QueryString["title"]));
 
-                SqlDataAdapter sda = new SqlDataAdapter(cmd2);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                grid.DataSource = dt;
-                grid.DataBind();
+                conn.Open();
+
+                SqlDataReader rdr = cmd2.ExecuteReader(CommandBehavior.CloseConnection);
+
+                questions.Text = "";
+
+                while (rdr.Read())
+                {
+                    questions.Text += rdr.GetString(rdr.GetOrdinal("question"));
+                    questions.Text += ":" + rdr.GetString(rdr.GetOrdinal("answer")) + "\n";
+                }
 
                 conn.Close();
             }
             else
             {
-                error.Text = "kossom keda";
                 error.Visible = true;
                 SqlCommand cmd = new SqlCommand("HR_Employees_update_job", conn);
 
@@ -121,31 +126,52 @@ namespace iWork.HR
                     return;
                 }
 
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
-                cmd.Parameters.Add(new SqlParameter("@title", Request.QueryString["title"]));
-                cmd.Parameters.Add(new SqlParameter("@new_title", title.Text));
-                cmd.Parameters.Add(new SqlParameter("@new_short_description", short_description.Text));
-                cmd.Parameters.Add(new SqlParameter("@new_detailed_description", detailed_description.Text));
-                cmd.Parameters.Add(new SqlParameter("@new_min_experience", Int32.Parse(min_experience.Text)));
-                cmd.Parameters.Add(new SqlParameter("@new_salary", Int32.Parse(salary.Text)));
-                cmd.Parameters.Add(new SqlParameter("@new_deadline", DateTime.Parse(deadline.Text)));
-                cmd.Parameters.Add(new SqlParameter("@new_no_of_vacancies", Int32.Parse(no_of_vacancies.Text)));
-                cmd.Parameters.Add(new SqlParameter("@new_working_hours", Int32.Parse(working_hours.Text)));
+                string[] questions_array = questions.Text.Split('\n');
 
+                var result = questions.Text.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => x.Split(':')).ToArray();
+
+                foreach (var x in result)
+                {
+                    foreach (var y in x)
+                    {
+                        error.Text += y;
+                    }
+                }
+
+                String comString = "declare @q_list q_list;";
+
+                if (result.Length > 1)
+                {
+                    comString += "INSERT INTO @q_list VALUES";
+
+                    foreach (var x in result)
+                    {
+                        comString += $"('{x[0].Trim()}', '{x[1].Trim()}'),";
+                    }
+
+                    comString = comString.Substring(0, comString.Length - 1);
+
+                    comString += ";";
+                }
+
+                comString += $"EXEC HR_Employees_update_job '{Session["Username"]}','{Request.QueryString["title"]}', " +
+                    $"'{title.Text}', '{short_description.Text}', '{detailed_description.Text}', " +
+                    $"{Int32.Parse(min_experience.Text)}, {Int32.Parse(salary.Text)}, '{DateTime.Parse(deadline.Text)}', {Int32.Parse(no_of_vacancies.Text)}, {Int32.Parse(working_hours.Text)}, @q_list;";
+
+                SqlCommand com = new SqlCommand(comString, conn);
                 conn.Open();
-                int affectedRows = cmd.ExecuteNonQuery();
+                int affectedRows = com.ExecuteNonQuery();
                 conn.Close();
 
                 if (affectedRows < 1)
                 {
                     error.Visible = true;
                     error.Text = "Updating job didn't work, please check all fields and try again.";
+                    return;
                 }
-                else
-                {
-                    Response.Redirect("/HR/Edit_Job.aspx?title=" + title.Text);
-                }
+
+                Response.Redirect("/HR/Edit_Job.aspx?title=" + title.Text);
             }
         }
     }

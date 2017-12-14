@@ -1039,7 +1039,7 @@ AS
 		WHERE Job_Has_Question.job = @title AND Job_Has_Question.department = @dep AND Job_Has_Question.company = @company;
 GO
 
-CREATE PROCEDURE HR_Employees_update_job
+CREATE OR ALTER PROCEDURE HR_Employees_update_job
     @username VARCHAR(20),
     @title VARCHAR(20),
     @new_title VARCHAR(20),
@@ -1049,7 +1049,8 @@ CREATE PROCEDURE HR_Employees_update_job
     @new_salary int,
     @new_deadline datetime,
     @new_no_of_vacancies int,
-    @new_working_hours int
+    @new_working_hours int,
+	@q_list q_list READONLY
 AS
     declare @is_hr BIT;
     EXEC HR_Employee_check @username, @is_hr output
@@ -1072,6 +1073,14 @@ AS
                     no_of_vacancies = @new_no_of_vacancies,
                     working_hours = @new_working_hours
         WHERE Jobs.title = @title AND Jobs.department = @dep AND Jobs.company = @company
+
+	DELETE Questions FROM Questions INNER JOIN Job_Has_Question ON Questions.number = Job_Has_Question.question
+		WHERE Job_Has_Question.job = @title AND Job_Has_Question.department = @dep AND Job_Has_Question.company = @company;
+
+	DECLARE @inserted_ids TABLE ([id] INT);
+
+    INSERT INTO Questions OUTPUT INSERTED.number INTO @inserted_ids SELECT * FROM @q_list
+    INSERT INTO Job_Has_Question SELECT @title, @dep, @company, id FROM @inserted_ids
 GO
 
 CREATE PROCEDURE HR_Employees_view_applications /* Does "new" applications mean that the hr_response is pending? I believe so */

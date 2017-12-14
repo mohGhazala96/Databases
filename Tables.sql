@@ -154,7 +154,6 @@ CREATE TABLE Attendance_Records(
     PRIMARY KEY(attendance_date,staff),
     FOREIGN KEY(staff) REFERENCES Staff_Members ON DELETE CASCADE ON UPDATE CASCADE
 );
-SELECT * FROM Emails;
 CREATE TABLE Emails(
     serial_number int PRIMARY KEY IDENTITY ,
     email_subject VARCHAR(50),

@@ -78,9 +78,15 @@ namespace iWork
 
         }
         protected void viewRegularEmployeesAvailable(object sender, EventArgs e){
-            Session["ProjectFor_RegualrEmployees_Avialable"] = ((Button)sender).ID;
-            Response.Redirect("AssignEmployeesOnProject_Redicted.aspx", true);
+            try
+            {
+                Session["ProjectFor_RegualrEmployees_Avialable"] = ((Button)sender).ID;
+                Response.Redirect("AssignEmployeesOnProject_Redicted.aspx", true);
+            }catch
+            {
+                ErrorMessage.Text = "An unknow error has occurred";
 
+            }
             
         }
             

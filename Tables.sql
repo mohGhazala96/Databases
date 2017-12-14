@@ -200,7 +200,7 @@ CREATE TABLE Announcements(
     FOREIGN KEY (hr_employee) REFERENCES HR_Employees (username) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-SELECT * FROM Requests;
+--SELECT * FROM Requests;
 CREATE TABLE Requests(
     start_date DATETIME,
     applicant VARCHAR(20),
@@ -294,7 +294,7 @@ CREATE TABLE Tasks(
   name VARCHAR(20) NOT NULL,
   project VARCHAR(20) NOT NULL,
   company VARCHAR(100) NOT NULL,
-  deadline datetime,
+  deadline datetime not NULL,
   status VARCHAR(10) DEFAULT 'Open' NOT NULL,
   description VARCHAR(MAX) NOT NULL,
   regular_employee VARCHAR(20),

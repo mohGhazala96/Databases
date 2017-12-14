@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-	<title>Profile</title>
+    <title>Profile</title>
 </head>
 <body>
     <% if(Session["Username"] != null){ 
@@ -15,12 +15,12 @@
     <div class="panel-body"> 
     <div class="row">
 
-	<form id="info" runat="server">
+    <form id="info" runat="server">
         <div class="col-sm-8">
         <asp:Panel id="infoPanel" runat="server">
         <div class="form-group">
         <h3>Personal Information </h3>                        
-		<b><asp:Label id="lbl_username" runat="server" Text="Username:"></asp:Label><br />
+        <b><asp:Label id="lbl_username" runat="server" Text="Username:"></asp:Label><br />
         <asp:TextBox id="txt_username" runat="server" CssClass="form-control"></asp:TextBox><br/>
         <asp:Label id="lbl_password" runat="server" Text="Password:"></asp:Label><br />
         <asp:Button id="btn_changePass" runat="server" Text="Change Password" OnClick="changePass" CssClass="btn btn-default"></asp:Button><br /><br />
@@ -71,8 +71,8 @@
         <asp:Button id="btn_manager_assign_to_project" runat="server" Text="Assign to Projects" OnClick="assignRegularOnProject_manager"></asp:Button><br />
         <asp:Button id="btn_manager_remove_from_project" runat="server" Text="Remove from Projects" OnClick="removeRegularOnProject_manager"></asp:Button><br />
         <asp:Button id="btn_manager_define_task" runat="server" Text="Define Tasks" OnClick="defineTask_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="viewAnnouncements"></asp:Button><br />
-        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="viewAnnouncements"></asp:Button><br />
+        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="ChangeRegular_manager"></asp:Button><br />
+        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="ReviewTask_manager"></asp:Button><br />
 
         </asp:Panel>
         <asp:Panel id="HR_Employee" runat="server">
@@ -82,7 +82,7 @@
         <h1>Regular Employee stuff here</h1>
         </asp:Panel>
         </div>
-	</form>
+    </form>
     </div>
     </div>
     </div>

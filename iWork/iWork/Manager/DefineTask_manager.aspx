@@ -22,7 +22,7 @@
         <asp:Label id="regularEmployee" runat="server" Text="Regular Employee"></asp:Label><br/> 
         <asp:TextBox id="regularEmployee_in" runat="server"></asp:TextBox><br/> 
             
-        <asp:Button id="DefineTask" runat="server" Text="Define Task" OnClick="DefineTask_btn"></asp:Button>
+        <asp:Button id="DefineTask" runat="server" Text="Next" OnClick="DefineTask_btn"></asp:Button>
 
      
 	</form>

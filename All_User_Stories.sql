@@ -1046,7 +1046,7 @@ AS
         WHERE Jobs.title = @title AND Jobs.department = @dep AND Jobs.company = @company
 GO
 
-CREATE OR ALTER PROCEDURE HR_Employees_view_applications /* Does "new" applications mean that the hr_response is pending? I believe so */
+CREATE PROCEDURE HR_Employees_view_applications /* Does "new" applications mean that the hr_response is pending? I believe so */
     @username VARCHAR(20),
     @job_title VARCHAR(20)
 AS
@@ -1067,7 +1067,6 @@ AS
            Users.personal_email,
            Users.birth_date,
            Users.years_of_experience,
-		   Users.username,
            Users.first_name,
            Users.middle_name,
            Users.last_name,
@@ -1122,7 +1121,7 @@ AS
     INSERT INTO Announcements VALUES(getdate(), @title, @username, @type, @description)
 GO
 
-CREATE OR ALTER PROCEDURE HR_Employees_view_requests
+CREATE PROCEDURE HR_Employees_view_requests
     @username VARCHAR(20)
 AS
     declare @is_hr BIT;
@@ -1143,17 +1142,17 @@ AS
     INNER JOIN Business_Trip_Requests ON
         Requests.start_date = Business_Trip_Requests.start_date AND
         Requests.applicant = Business_Trip_Requests.applicant
-    WHERE Requests.manager_response = 'Approved' AND Requests.hr_response = 'Pending';
+    WHERE Requests.manager_response = 'Approved'
 
     SELECT Requests.*, Leave_Requests.type FROM Requests INNER JOIN Staff_Members
         ON (applicant = Staff_Members.username AND Staff_Members.department = @dep)
     INNER JOIN Leave_Requests ON
         Requests.start_date = Leave_Requests.start_date AND
         Requests.applicant = Leave_Requests.applicant
-    WHERE Requests.manager_response = 'Approved' AND Requests.hr_response = 'Pending';
+    WHERE Requests.manager_response = 'Approved'
 GO
 
-CREATE OR ALTER PROCEDURE HR_Employees_update_requests /* Should updating the value of annual_leaves be exclusive to leave requests? */
+CREATE PROCEDURE HR_Employees_update_requests /* Should updating the value of annual_leaves be exclusive to leave requests? */
     @username VARCHAR(20),
     @applicant VARCHAR(20),
     @start_date DATETIME,
@@ -1181,8 +1180,7 @@ AS
             AND Staff_Members.company = @company_email
             AND Staff_Members.username = @applicant
             AND Requests.start_date = @start_date
-            AND Requests.manager_response = 'Approved'
-			AND Requests.hr_response = 'Pending';
+            AND Requests.manager_response = 'Approved';
 
     IF @end_date IS NULL
         BEGIN
@@ -1225,25 +1223,23 @@ AS
                 
                 declare @annual_leaves int;
 
-                SELECT @annual_leaves = annual_leaves FROM Staff_Members WHERE username = @applicant
+                SELECT @annual_leaves = annual_leaves FROM Staff_Members WHERE username = @username
 
                 IF @vacation_days > @annual_leaves
-				BEGIN
                     PRINT 'Staff member does not have enough annual leaves'
                     RETURN
-				END
 
-                UPDATE Staff_Members SET annual_leaves = (@annual_leaves - @vacation_days) WHERE username = @applicant
+                UPDATE Staff_Members SET annual_leaves = (@annual_leaves - @vacation_days)
             END
 
-            UPDATE Requests SET hr_response = 'Approved', hr_employee = @username WHERE
+            UPDATE Requests SET hr_response = 'Approved' WHERE
                 start_date = @start_date AND
                 applicant = @applicant
 
         END
     ELSE
         BEGIN
-            UPDATE Requests SET hr_response = 'Rejected', hr_employee = @username WHERE
+            UPDATE Requests SET hr_response = 'Rejected' WHERE
                 start_date = @start_date AND
                 applicant = @applicant
         END
@@ -1626,7 +1622,7 @@ Create PROCEDURE Create_project
     DECLARE @manager_department int
     DECLARE  @company_in VARCHAR(100) 
     EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_in output
-
+    if  @start_date_in<  @end_date_in
     INSERT Into Projects VALUES( @name_in, @company_in, @start_date_in,  @end_date_in,  @manager_name )
     GO
 
@@ -1723,13 +1719,18 @@ go
 CREATE PROCEDURE getProjectsAviavlableHavingRegularEmpolyees
  @manager_name VARCHAR(20) 
   AS
+   DECLARE @manager_department int
+    DECLARE @company_check_manager VARCHAR(100) 
+
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_check_manager output
+
   SELECT project_name
    FROM Managers_assign_Regular_Employees_Projects  M
-   Where M.regular_employee
+   Where company=@company_check_manager and M.regular_employee
            Not IN(
                 Select T.regular_employee
                 FROM Tasks T 
-                WHERE T.project =  M.project_name
+                WHERE T.project = M.project_name
                  )
 Go
 go
@@ -1769,6 +1770,18 @@ CREATE PROCEDURE Remove_regular_employee_from_project
 GO
 
 -------
+-- manager8 helper
+CREATE PROCEDURE addComment
+  @task_in VARCHAR(20),
+  @project_name_in VARCHAR(20),
+  @comment VARCHAR(700) 
+  as
+    DECLARE @taskCompany VARCHAR(100)
+    SELECT @taskCompany = company
+    FROM Tasks  
+    where name=@task_in and project= @project_name_in
+    INSERT into Task_Comments VALUES(@task_in,@project_name_in,@taskCompany,@comment)
+go
 -- manager8
 CREATE PROCEDURE Define_task
   @task_in VARCHAR(20),
@@ -1778,6 +1791,7 @@ CREATE PROCEDURE Define_task
   @manager_name VARCHAR(20),
   @errorDetection int Out
   AS 
+  SELECT * from Projects
     DECLARE @manager_department int
     DECLARE @manager_company VARCHAR(100)
     DECLARE @project_manager_name VARCHAR(20) 
@@ -1855,7 +1869,22 @@ CREATE PROCEDURE Change_regular_employee_on_a_task
 GO
 
 ----
--- manager11
+-- manager11 helper
+CREATE PROCEDURE getProjects
+  @manager_name VARCHAR(20) 
+  AS
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+    SELECT name
+    from Projects
+    where manager=@manager_name and company = @manager_company and name  in(
+        select project
+        FROM Tasks
+        WHERE manager=@manager_name  and company = @manager_company
+    ) 
+GO    
+-- manager11 
 Create PROCEDURE View_list_of_tasks_in_project
   @manager_name VARCHAR(20) ,
   @project_name_in VARCHAR(20),
@@ -1867,7 +1896,7 @@ AS
 
     SELECT *
     FROM Tasks 
-    Where @manager_name= manager AND @project_name_in = project  And status= @status_in and @manager_company= company
+    Where @manager_name= manager AND @project_name_in = project  And status= @status_in and @manager_company= company and regular_employee is not NULL
 
     SELECT *
     FROM Task_Comments
@@ -1895,7 +1924,7 @@ CREATE PROCEDURE Review_task_in_a_project
             Set @stauts_check = 'Closed'
             UPDATE  Tasks
             Set status = @stauts_check 
-            WHERE @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company
+            WHERE @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company and regular_employee is not NULL
         END
     ELSE
         BEGIN
@@ -1903,6 +1932,6 @@ CREATE PROCEDURE Review_task_in_a_project
             SET @deadline_check =   @deadline_in 
             UPDATE  Tasks
             Set status = @stauts_check , deadline= @deadline_check
-            WHERE @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company
+            WHERE @deadline_check>deadline and @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company  and regular_employee is not NULL
         END
 Go

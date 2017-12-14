@@ -76,6 +76,7 @@ namespace iWork
                     Button replyButton = new Button();
                     replyButton.Text = "Reply";
                     replyButton.ID = "" + i;
+                    replyButton.CssClass = "btn btn-default";
                     replyButton.Click += new EventHandler(replyEmail);
                     replyCell.Controls.Add(replyButton);
                     trow.Cells.Add(replyCell);

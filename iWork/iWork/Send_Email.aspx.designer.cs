@@ -28,5 +28,7 @@ namespace iWork {
 		protected System.Web.UI.WebControls.TextBox txt_body;
 		
 		protected System.Web.UI.WebControls.Button btn_send_email;
+		
+		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 	}
 }

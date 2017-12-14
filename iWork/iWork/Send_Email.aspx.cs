@@ -60,11 +60,11 @@ namespace iWork
             cmd.ExecuteNonQuery();
             conn.Close();
             if(output.Value.ToString()=="1"){
-                Response.Write("Email Sent Successfully");
+                lbl_shoutbox.Text = "Email Sent Successfully";
             }else if(output.Value.ToString()=="0"){
-                Response.Write("Sorry, You are trying to send an email to someone not in your company");
+                lbl_shoutbox.Text = "Sorry, You are trying to send an email to someone not in your company";
             }else{
-                Response.Write("Sorry an error occured");
+                lbl_shoutbox.Text = "Sorry an error occured";
             }
         }
     }

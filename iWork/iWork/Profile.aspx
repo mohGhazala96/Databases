@@ -32,7 +32,7 @@
         <asp:TextBox id="txt_middle_name" runat="server" CssClass="form-control"></asp:TextBox><br/>
         <asp:Label id="lbl_last_name" runat="server" Text="Last Name:"></asp:Label><br />
         <asp:TextBox id="txt_last_name" runat="server" CssClass="form-control"></asp:TextBox><br/>
-        <asp:Label id="lbl_birth_date" runat="server" Text="Birth Date:"></asp:Label><br />
+        <asp:Label id="lbl_birth_date" runat="server" Text="Birth Date: (YYYY-MM-DD)"></asp:Label><br />
         <asp:TextBox id="txt_birth_date" runat="server" CssClass="form-control"></asp:TextBox><br/>
         <asp:Label id="lbl_age" runat="server" Text="Age:"></asp:Label><br />
         <asp:Label id="lbl_age_value" runat="server" Text="" ></asp:Label><br /><br />

@@ -10,16 +10,7 @@
 namespace iWork.HR {
     
     
-    public partial class List_Jobs {
-        
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+    public partial class View_Requests {
         
         /// <summary>
         /// error control.
@@ -40,12 +31,21 @@ namespace iWork.HR {
         protected global::System.Web.UI.WebControls.Panel data;
         
         /// <summary>
-        /// grid control.
+        /// business control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid;
+        protected global::System.Web.UI.WebControls.GridView business;
+        
+        /// <summary>
+        /// leave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView leave;
     }
 }

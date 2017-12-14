@@ -23,7 +23,7 @@
         <asp:Label ID="error" Text="You are not logged in or you are not an HR employee" runat="server"></asp:Label>
 
         <asp:Panel ID="data" runat="server">
-            <form action="http://localhost/MyTestApp/Default.aspx" method="post">
+            <form method="post">
                 <input name="title" type="text" id="title" placeholder="Title"/>
                 <input name="role" type="text" id="role" placeholder="Role"/>
                 <input name="short_description" type="text" id="short_description" placeholder="Short description"/>

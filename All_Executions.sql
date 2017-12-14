@@ -1,7 +1,9 @@
 EXEC Company_Search NULL , NULL , 'International'
 EXEC Company_Search 'Microsoft' , NULL , 'International'
 EXEC Company_Search NULL ,'Tesla Motors. 3500 Deer Creek Road.Palo Alto, CA 94304.' ,NULL
-
+SELECT * FROM Staff_Members WHERE Staff_Members.username = 'BenedictCumberbatch';
+UPDATE Requests SET hr_response = 'Pending';
+SELECT * FROM Requests;
 EXEC List_Of_Companies
 
 EXEC View_Company_Department 'hr@Microsoft.com'
@@ -125,17 +127,17 @@ EXEC HR_Employees_update_requests 'JenniferLaw', /* Reject non-leave request */
 EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept annual leave request */
                                   'BenedictCumberbatch',
                                   '9/27/2017 16:00:00',
-                                  'Rejected'
+                                  'Approved'
 
 EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept annual leave request with not enough annual leaves */
                                   'BenedictCumberbatch',
                                   '9/26/2017 16:00:00',
-                                  'Rejected'
+                                  'Approved'
 
 EXEC HR_Employees_update_requests 'JenniferLaw', /* Accept accidental leave request */
                                   'BenedictCumberbatch',
                                   '9/26/2017 16:00:00',
-                                  'Rejected'
+                                  'Approved'
 --hr 9
 EXEC HR_Employees_view_attendance 'JenniferLaw', '2012-01-01 08:00:00', '2022-12-12 09:00:00'
 --hr 10

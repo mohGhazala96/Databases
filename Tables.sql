@@ -198,7 +198,9 @@ CREATE TABLE Announcements(
 
     PRIMARY KEY (date, title, hr_employee),
     FOREIGN KEY (hr_employee) REFERENCES HR_Employees (username) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
+
+SELECT * FROM Requests;
 CREATE TABLE Requests(
     start_date DATETIME,
     applicant VARCHAR(20),

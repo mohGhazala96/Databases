@@ -10,7 +10,7 @@
 namespace iWork.HR {
     
     
-    public partial class List_Jobs {
+    public partial class Create_Announcement {
         
         /// <summary>
         /// form1 control.
@@ -40,12 +40,30 @@ namespace iWork.HR {
         protected global::System.Web.UI.WebControls.Panel data;
         
         /// <summary>
-        /// grid control.
+        /// title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid;
+        protected global::System.Web.UI.WebControls.TextBox title;
+        
+        /// <summary>
+        /// type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox type;
+        
+        /// <summary>
+        /// description control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox description;
     }
 }

@@ -14,8 +14,15 @@ namespace iWork.HR
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // For debug
-            Session["Username"] = "Mostafa.Mamdouh";
+            if (Session["userType"] == null || Session["userType"].ToString() != "HR Employee")
+            {
+                data.Visible = false;
+                error.Visible = true;
+                return;
+            } else
+            {
+                error.Visible = false;
+            }
 
             string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
             SqlConnection conn = new SqlConnection(connStr);

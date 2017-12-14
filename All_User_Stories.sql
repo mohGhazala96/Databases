@@ -1947,8 +1947,8 @@ AS
     Where @manager_name= manager AND @project_name_in = project  And status= @status_in and @manager_company= company and regular_employee is not NULL
 
     SELECT *
-    FROM Task_Comments
-    Where  @project_name_in = project  and @manager_company= company
+    FROM Task_Comments C ,Tasks T
+    Where  @project_name_in = C.project  and @manager_company= C.company and T.name=C.task_name AND T.[status]=@status_in
 
 GO
 

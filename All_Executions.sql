@@ -79,7 +79,7 @@ SELECT * FROM @q_list
 EXEC HR_Employees_add_job "JenniferLaw",
                           "Rocket Scientist",
                           "Mad scientists",
-                          "It is not rocket science? Surprise, it is.",
+                          "It's not rocket science? Surprise, it is.",
                           2,
                           250000,
                           "12/12/2020",
@@ -88,8 +88,6 @@ EXEC HR_Employees_add_job "JenniferLaw",
                           @q_list;
 --hr 2
 EXEC HR_Employees_view_job "JenniferLaw", "Rocket Scientist"
-
-EXEC HR_Employees_view_job_question "JenniferLaw", "Rocket Scientist"
 --hr 3
 EXEC HR_Employees_update_job "JenniferLaw",
                              "Rocket Scientist",
@@ -186,5 +184,3 @@ exec View_list_of_tasks_in_project 'emad.sherif','Logo','Assigned'
 
 --manager 12
 exec Review_task_in_a_project 'emad.sherif','task5','Animation Video',0,'12/2/2018 00:00:00' -- 0 reject 1 accept
-select * from Managers_assign_Regular_Employees_Projects
-SELECT * FROM Tasks

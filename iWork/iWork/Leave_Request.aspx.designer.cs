@@ -32,5 +32,7 @@ namespace iWork {
 		protected System.Web.UI.WebControls.TextBox txt_type;
 		
 		protected System.Web.UI.WebControls.Button btn_apply_for_leave;
+		
+		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 	}
 }

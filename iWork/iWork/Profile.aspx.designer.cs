@@ -101,6 +101,22 @@ namespace iWork {
 		
 		protected System.Web.UI.WebControls.Panel HR_Employee;
 		
+		protected System.Web.UI.WebControls.Button Button1;
+		
+		protected System.Web.UI.WebControls.Button Button2;
+		
+		protected System.Web.UI.WebControls.Button Button3;
+		
+		protected System.Web.UI.WebControls.Button Button4;
+		
+		protected System.Web.UI.WebControls.Button Button5;
+		
+		protected System.Web.UI.WebControls.Button Button6;
+		
+		protected System.Web.UI.WebControls.Button Button7;
+		
+		protected System.Web.UI.WebControls.Button Button8;
+		
 		protected System.Web.UI.WebControls.Panel Regular_Employee;
 	}
 }

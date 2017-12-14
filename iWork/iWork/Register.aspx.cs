@@ -18,8 +18,8 @@ namespace iWork
         {
             if (Session["Username"] != null)
             {
-                Response.Write("You are already logged in");
-                Register_Form.Visible = false;
+                lbl_shoutbox.Text="You are already logged in";
+                RegisterPanel.Visible = false;
             }
         }
 
@@ -50,14 +50,14 @@ namespace iWork
                     Session["userType"] = "Job Seeker";
                     Response.Redirect("Profile.aspx",true);
                 }else if(output.Value.ToString().Equals("0")){
-                    Response.Write("Sorry, username taken");
+                    lbl_shoutbox.Text="Sorry, username taken";
                 }else{
-                    Response.Write("Sorry an error occured");
+                    lbl_shoutbox.Text="Sorry an error occured";
                 }
             }
             else
             {
-                Response.Write("Passwords do not match");
+                lbl_shoutbox.Text="Passwords do not match";
             }
         }
 

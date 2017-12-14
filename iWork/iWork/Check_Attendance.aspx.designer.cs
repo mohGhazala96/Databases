@@ -24,5 +24,7 @@ namespace iWork {
 		protected System.Web.UI.WebControls.TextBox txt_to_date;
 		
 		protected System.Web.UI.WebControls.Button btn_view_attendance;
+		
+		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 	}
 }

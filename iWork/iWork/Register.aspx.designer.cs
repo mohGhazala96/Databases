@@ -15,6 +15,8 @@ namespace iWork {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm Register_Form;
 		
+		protected System.Web.UI.WebControls.Panel RegisterPanel;
+		
 		protected System.Web.UI.WebControls.Label lbl_username;
 		
 		protected System.Web.UI.WebControls.TextBox txt_username;
@@ -52,5 +54,7 @@ namespace iWork {
 		protected System.Web.UI.WebControls.TextBox txt_experience;
 		
 		protected System.Web.UI.WebControls.Button btn_register;
+		
+		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 	}
 }

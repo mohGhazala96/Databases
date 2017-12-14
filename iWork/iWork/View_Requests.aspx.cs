@@ -29,6 +29,7 @@ namespace iWork
                 conn.Open();
                 SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 Table requests_table = new Table();
+                requests_table.CssClass = "table table-striped";
                 TableRow headerRow = new TableRow();
                 TableCell header_start_date = new TableCell();
                 header_start_date.Text = "Start Date";
@@ -88,6 +89,7 @@ namespace iWork
                     Button deleteButton = new Button();
                     deleteButton.Text = "Delete";
                     deleteButton.ID = "" + i;
+                    deleteButton.CssClass = "btn btn-default";
                     deleteButton.Click += new EventHandler(deleteRequest);
                     deleteCell.Controls.Add(deleteButton);
                     trow.Cells.Add(deleteCell);

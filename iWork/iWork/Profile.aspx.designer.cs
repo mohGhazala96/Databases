@@ -15,6 +15,8 @@ namespace iWork {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm info;
 		
+		protected System.Web.UI.WebControls.Panel infoPanel;
+		
 		protected System.Web.UI.WebControls.Label lbl_username;
 		
 		protected System.Web.UI.WebControls.TextBox txt_username;
@@ -55,7 +57,7 @@ namespace iWork {
 		
 		protected System.Web.UI.WebControls.Label lbl_info_status;
 		
-		protected System.Web.UI.HtmlControls.HtmlForm Staff_Member;
+		protected System.Web.UI.WebControls.Panel Staff_Member;
 		
 		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 		
@@ -77,9 +79,9 @@ namespace iWork {
 		
 		protected System.Web.UI.WebControls.Button btn_view_announcements;
 		
-		protected System.Web.UI.HtmlControls.HtmlForm Job_Seeker;
+		protected System.Web.UI.WebControls.Panel Job_Seeker;
 		
-		protected System.Web.UI.HtmlControls.HtmlForm Manager;
+		protected System.Web.UI.WebControls.Panel Manager;
 		
 		protected System.Web.UI.WebControls.Button btn_manager_approve_reject_requests;
 		
@@ -97,8 +99,8 @@ namespace iWork {
 		
 		protected System.Web.UI.WebControls.Button btn_manager_view_tasks;
 		
-		protected System.Web.UI.HtmlControls.HtmlForm HR_Employee;
+		protected System.Web.UI.WebControls.Panel HR_Employee;
 		
-		protected System.Web.UI.HtmlControls.HtmlForm Regular_Employee;
+		protected System.Web.UI.WebControls.Panel Regular_Employee;
 	}
 }

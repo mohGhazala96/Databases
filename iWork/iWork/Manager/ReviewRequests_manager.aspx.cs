@@ -145,8 +145,8 @@ namespace iWork
 
             conn.Open();
             cmd.ExecuteNonQuery();
-            Response.Write(inputs[0]);
-            Response.Write(inputs[1]);
+            //Response.Write(inputs[0]);
+            //Response.Write(inputs[1]);
 
             conn.Close();
             Response.Redirect("ReviewRequests_manager.aspx", true);
@@ -160,8 +160,7 @@ namespace iWork
 
             SqlConnection conn = new SqlConnection(connStr);
             if ( ((TextBox) textBoxes[requestIndex]).Text.Equals("") ||textBoxes[requestIndex]==null){
-                Response.Write("You should provide a reason");
-
+                ErrorMessage.Text = "<br />"+"You should provide a reason"+"<br />";
             }
 
             else

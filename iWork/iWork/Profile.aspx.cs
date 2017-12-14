@@ -15,70 +15,63 @@ namespace iWork
         string connStr= ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (Session["Username"] != null)
             {
-                if (Session["Username"] != null)
+                if (!IsPostBack)
                 {
-                    if (!IsPostBack)
+                    SqlConnection conn = new SqlConnection(connStr);
+
+                    SqlCommand cmd = new SqlCommand("View_Information", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    while (reader.Read())
                     {
-                        SqlConnection conn = new SqlConnection(connStr);
-
-                        SqlCommand cmd = new SqlCommand("View_Information", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
-
-                        conn.Open();
-                        SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                        while (reader.Read())
-                        {
-                            txt_username.Text = reader.GetString(reader.GetOrdinal("username"));
-                            txt_personal_email.Text = reader.GetString(reader.GetOrdinal("personal_email"));
-                            txt_first_name.Text = reader.GetString(reader.GetOrdinal("first_name"));
-                            txt_middle_name.Text = reader.GetString(reader.GetOrdinal("middle_name"));
-                            txt_last_name.Text = reader.GetString(reader.GetOrdinal("last_name"));
-                            txt_birth_date.Text = reader.GetString(reader.GetOrdinal("birth_date"));
-                            lbl_age_value.Text = "" + reader.GetInt32(reader.GetOrdinal("age"));
-                            txt_years_of_exp.Text = reader.GetInt32(reader.GetOrdinal("years_of_experience")).ToString();
-                        }
-
+                        txt_username.Text = reader.GetString(reader.GetOrdinal("username"));
+                        txt_personal_email.Text = reader.GetString(reader.GetOrdinal("personal_email"));
+                        txt_first_name.Text = reader.GetString(reader.GetOrdinal("first_name"));
+                        txt_middle_name.Text = reader.GetString(reader.GetOrdinal("middle_name"));
+                        txt_last_name.Text = reader.GetString(reader.GetOrdinal("last_name"));
+                        txt_birth_date.Text = reader.GetDateTime(reader.GetOrdinal("birth_date")).ToString();
+                        lbl_age_value.Text = "" + reader.GetInt32(reader.GetOrdinal("age"));
+                        txt_years_of_exp.Text = reader.GetInt32(reader.GetOrdinal("years_of_experience")).ToString();
                     }
-                    Staff_Member.Visible = false;
-                    Regular_Employee.Visible = false;
-                    Manager.Visible = false;
-                    HR_Employee.Visible = false;
-                    Job_Seeker.Visible = false;
-                    switch (Session["userType"])
-                    {
-                        case "Manager":
-                            Staff_Member.Visible = true;
-                            Manager.Visible = true;
-                            break;
-                        case "Regular Employee":
-                            Staff_Member.Visible = true;
-                            Regular_Employee.Visible = true;
-                            break;
-                        case "HR Employee":
-                            Staff_Member.Visible = true;
-                            HR_Employee.Visible = true;
-                            break;
-                        case "Job Seeker":
-                            Job_Seeker.Visible = true;
-                            break;
-                        default:
-                            Staff_Member.Visible = false;
-                            Regular_Employee.Visible = false;
-                            HR_Employee.Visible = false;
-                            Manager.Visible = false;
-                            Job_Seeker.Visible = false;
-                            break;
-                    }
+
                 }
-                else
+                Staff_Member.Visible = false;
+                Regular_Employee.Visible = false;
+                Manager.Visible = false;
+                HR_Employee.Visible = false;
+                Job_Seeker.Visible = false;
+                switch (Session["userType"])
                 {
+                    case "Manager":
+                        Staff_Member.Visible = true;
+                        Manager.Visible = true;
+                        break;
+                    case "Regular Employee":
+                        Staff_Member.Visible = true;
+                        Regular_Employee.Visible = true;
+                        break;
+                    case "HR Employee":
+                        Staff_Member.Visible = true;
+                        HR_Employee.Visible = true;
+                        break;
+                    case "Job Seeker":
+                        Job_Seeker.Visible = true;
+                        break;
+                    default:
+                        Staff_Member.Visible = false;
+                        Regular_Employee.Visible = false;
+                        HR_Employee.Visible = false;
+                        Manager.Visible = false;
+                        Job_Seeker.Visible = false;
+                        break;
+                }
+            }else{
                     Response.Redirect("Login.aspx", true);
-                }
-            }catch{
-                lbl_info_status.Text = "Retrieval of information failed";
             }
         }
 

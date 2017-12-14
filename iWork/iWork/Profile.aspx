@@ -72,7 +72,7 @@
         <asp:Button id="btn_manager_remove_from_project" runat="server" Text="Remove from Projects" OnClick="removeRegularOnProject_manager" CssClass="btn btn-default"></asp:Button><br />
         <asp:Button id="btn_manager_define_task" runat="server" Text="Define Tasks" OnClick="defineTask_manager" CssClass="btn btn-default"></asp:Button><br />
         <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="ChangeRegular_manager" CssClass="btn btn-default"></asp:Button><br />
-        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="ReviewTask_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_view_tasks" runat="server" Text="Review Tasks" OnClick="ReviewTask_manager" CssClass="btn btn-default"></asp:Button><br />
 
         </asp:Panel>
         <asp:Panel id="HR_Employee" runat="server">

@@ -216,5 +216,10 @@ namespace iWork
             Response.Redirect("Manager/ChangeRegularOnTask.aspx", true);
 
         }
+        protected void ReviewTask_manager(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+
+        }
     }
 }

@@ -225,6 +225,12 @@
     <Content Include="images\JobSeekerBanners.jpg" />
     <Content Include="images\Logo.png" />
     <Content Include="images\MainBanners.jpg" />
+    <Content Include="Manager\ChangeRegularOnTask.aspx" />
+    <Content Include="Manager\ChangeRegularOnTask_Redirected.aspx" />
+    <Content Include="Companies.aspx" />
+    <Content Include="Departments.aspx" />
+    <Content Include="Manager\ReviewTaskInProject_Main.aspx" />
+    <Content Include="Manager\ReviewTaskInProject_Redirected.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Companies\List.aspx.cs">
@@ -427,6 +433,42 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ChangeRegularOnTask.aspx.cs">
+      <DependentUpon>ChangeRegularOnTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ChangeRegularOnTask.aspx.designer.cs">
+      <DependentUpon>ChangeRegularOnTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ChangeRegularOnTask_Redirected.aspx.cs">
+      <DependentUpon>ChangeRegularOnTask_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ChangeRegularOnTask_Redirected.aspx.designer.cs">
+      <DependentUpon>ChangeRegularOnTask_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Companies.aspx.cs">
+      <DependentUpon>Companies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Companies.aspx.designer.cs">
+      <DependentUpon>Companies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Departments.aspx.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Departments.aspx.designer.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewTaskInProject_Main.aspx.cs">
+      <DependentUpon>ReviewTaskInProject_Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewTaskInProject_Main.aspx.designer.cs">
+      <DependentUpon>ReviewTaskInProject_Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewTaskInProject_Redirected.aspx.cs">
+      <DependentUpon>ReviewTaskInProject_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ReviewTaskInProject_Redirected.aspx.designer.cs">
+      <DependentUpon>ReviewTaskInProject_Redirected.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

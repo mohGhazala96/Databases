@@ -1621,7 +1621,7 @@ Create PROCEDURE Create_project
     DECLARE @manager_department int
     DECLARE  @company_in VARCHAR(100) 
     EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @company_in output
-
+    if  @start_date_in<  @end_date_in
     INSERT Into Projects VALUES( @name_in, @company_in, @start_date_in,  @end_date_in,  @manager_name )
     GO
 
@@ -1850,6 +1850,21 @@ CREATE PROCEDURE Change_regular_employee_on_a_task
 GO
 
 ----
+-- manager11 helper
+CREATE PROCEDURE getProjects
+  @manager_name VARCHAR(20) 
+  AS
+    DECLARE @manager_company VARCHAR(100)
+    DECLARE @manager_department int
+    EXEC Staff_Members_get_my_department @manager_name , @manager_department output, @manager_company output
+    SELECT name
+    from Projects
+    where manager=@manager_name and company = @manager_company and name  in(
+        select project
+        FROM Tasks
+        WHERE manager=@manager_name  and company = @manager_company
+    ) 
+GO    
 -- manager11
 Create PROCEDURE View_list_of_tasks_in_project
   @manager_name VARCHAR(20) ,
@@ -1898,6 +1913,6 @@ CREATE PROCEDURE Review_task_in_a_project
             SET @deadline_check =   @deadline_in 
             UPDATE  Tasks
             Set status = @stauts_check , deadline= @deadline_check
-            WHERE @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company
+            WHERE @deadline_check>deadline and @manager_name= manager AND @project_name_in = project AND @task_in=name  and status='Fixed' and @manager_company= company
         END
 Go

@@ -14,5 +14,7 @@ namespace iWork {
 	public partial class View_Requests {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm View_Requests_Form;
+		
+		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 	}
 }

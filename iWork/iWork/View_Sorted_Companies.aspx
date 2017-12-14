@@ -13,5 +13,6 @@
     %>
 	<form id="companies" runat="server">
 	</form>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

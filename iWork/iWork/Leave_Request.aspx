@@ -29,5 +29,6 @@
     </form>
     </div>
     </div>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

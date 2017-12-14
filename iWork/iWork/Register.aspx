@@ -41,5 +41,6 @@
         </div>
         </div>
 	</form>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

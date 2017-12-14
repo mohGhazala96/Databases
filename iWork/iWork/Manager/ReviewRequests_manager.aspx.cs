@@ -25,7 +25,8 @@ namespace iWork
         {
             if (Session["Username"] != null)
             {
-
+                requestsInfo = new ArrayList();
+                buttonIndex = 0;
                 SqlConnection conn = new SqlConnection(connStr);
 
                 SqlCommand cmd = new SqlCommand("View_New_Requests", conn);
@@ -33,6 +34,7 @@ namespace iWork
                 cmd.Parameters.Add(new SqlParameter("@manager_name", Session["Username"].ToString()));
 
                 conn.Open();
+                ErrorMessage.Text = "";
                 SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 Label leaveRequestsTitle = new Label();
                 leaveRequestsTitle.Text = "Leave Requests"+ "<br />"+ "<br />";
@@ -128,7 +130,7 @@ namespace iWork
         }
         protected void acceptRequest(object sender, EventArgs e)
         {
-            int requestIndex = int.Parse(((Button)sender).ID)-1;
+            int requestIndex = int.Parse(((Button)sender).CommandName);
             SqlConnection conn = new SqlConnection(connStr);
 
             SqlCommand cmd = new SqlCommand("Change_Request_state", conn);
@@ -155,12 +157,12 @@ namespace iWork
         }
         protected void rejectRequest(object sender, EventArgs e)
         {
-            int requestIndex = int.Parse(((Button)sender).ID)-2;
+            int requestIndex = int.Parse(((Button)sender).CommandName);
             string[] inputs = new string[2];
 
             SqlConnection conn = new SqlConnection(connStr);
             if ( ((TextBox) textBoxes[requestIndex]).Text.Equals("") ||textBoxes[requestIndex]==null){
-                Response.Write("You should provide a reason");
+                ErrorMessage.Text = "<br />"+"You should provide a reason" +"<br />";
 
             }
 
@@ -195,7 +197,6 @@ namespace iWork
             Reason.TextMode = TextBoxMode.MultiLine;
             Reason.ID = buttonIndex + "";
             textBoxes.Add(Reason);
-            buttonIndex++;
             Label space = new Label();
             space.Text = "  " + "<br />" + "  " + "<br />";
 
@@ -204,15 +205,15 @@ namespace iWork
             ReviewRequests_manager_form.Controls.Add(space);
 
             Button buttonAccept = new Button();
-            buttonAccept.ID = buttonIndex + "";
+            buttonAccept.CommandName = buttonIndex + "";
             buttonAccept.Text = "Accept Request";
             buttonAccept.CssClass = "btn btn-default";
             buttonAccept.Click += new EventHandler(acceptRequest);
-            buttonIndex++;
 
             Button buttonReject = new Button();
-            buttonReject.ID = buttonIndex + "";
+            buttonReject.CommandName = buttonIndex + "";
             buttonReject.Text = "Reject Request";
+
             buttonIndex++;
             buttonReject.CssClass = "btn btn-default";
             buttonReject.Click += new EventHandler(rejectRequest);

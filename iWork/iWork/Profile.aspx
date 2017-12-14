@@ -71,8 +71,8 @@
         <asp:Button id="btn_manager_assign_to_project" runat="server" Text="Assign to Projects" OnClick="assignRegularOnProject_manager"></asp:Button><br />
         <asp:Button id="btn_manager_remove_from_project" runat="server" Text="Remove from Projects" OnClick="removeRegularOnProject_manager"></asp:Button><br />
         <asp:Button id="btn_manager_define_task" runat="server" Text="Define Tasks" OnClick="defineTask_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="viewAnnouncements"></asp:Button><br />
-        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="viewAnnouncements"></asp:Button><br />
+        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="ChangeRegular_manager"></asp:Button><br />
+        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="ReviewTask_manager"></asp:Button><br />
 
         </asp:Panel>
         <asp:Panel id="HR_Employee" runat="server">

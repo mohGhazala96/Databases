@@ -64,11 +64,13 @@ namespace iWork.Manager
                             conn.Open();
                             defineTask.ExecuteNonQuery();
                             conn.Close();
-                            if (output.Value.ToString().Equals("1"))
-                            {
-                                Response.Write("An error has occured");
+                        if (output.Value.ToString().Equals("1"))
+                        {
+                            Response.Write("An error has occured, make sure the regular employee is working in your department");
 
-                            }
+                        }
+                        else
+                        {
                             conn.Open();
                             Assign_to_Task.ExecuteNonQuery();
                             conn.Close();
@@ -80,9 +82,12 @@ namespace iWork.Manager
                             }
                             else
                             {
-
-                                Response.Redirect("DefineTask_manager.aspx", true);
+                                Session["projectName"] = project_name_in.Text;
+                                Session["taskName"] = task_in.Text;
+                       
+                                Response.Redirect("DefineTask_comments.aspx", true);
                             }
+                        }
 
                     }
                     catch

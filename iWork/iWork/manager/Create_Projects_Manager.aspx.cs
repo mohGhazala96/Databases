@@ -41,11 +41,18 @@ namespace iWork
                 {
 
                     conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                    Response.Write("Succeeded");
-                    Response.Redirect("Create_Projects_Manager.aspx", true);
+                    if (cmd.ExecuteNonQuery() == 0)
+                    {
+                        Response.Write("Make sure the start date is less than the end date");
 
+
+                    }
+                    else
+                    {
+                        Response.Write("Succeeded");
+                        Response.Redirect("Create_Projects_Manager.aspx", true);
+                    }
+                    conn.Close();
 
                 }
             }

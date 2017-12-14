@@ -234,6 +234,7 @@
     <Content Include="Departments.aspx" />
     <Content Include="Manager\ReviewTaskInProject_Main.aspx" />
     <Content Include="Manager\ReviewTaskInProject_Redirected.aspx" />
+    <Content Include="Manager\DefineTask_comments.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Companies\List.aspx.cs">
@@ -505,6 +506,12 @@
     </Compile>
     <Compile Include="Manager\ReviewTaskInProject_Redirected.aspx.designer.cs">
       <DependentUpon>ReviewTaskInProject_Redirected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DefineTask_comments.aspx.cs">
+      <DependentUpon>DefineTask_comments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DefineTask_comments.aspx.designer.cs">
+      <DependentUpon>DefineTask_comments.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

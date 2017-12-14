@@ -180,6 +180,8 @@ print @out
 exec Change_regular_employee_on_a_task 'bakr.mostafa','cloudApp','AmjadTask5' ,'FifthGuy'
 --manager 11
 exec View_list_of_tasks_in_project 'emad.sherif','Animation Video','Fixed'
+exec View_list_of_tasks_in_project 'emad.sherif','Logo','Assigned'
+
 --manager 12
 exec Review_task_in_a_project 'emad.sherif','task5','Animation Video',0,'12/2/2018 00:00:00' -- 0 reject 1 accept
 select * from Managers_assign_Regular_Employees_Projects

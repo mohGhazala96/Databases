@@ -122,13 +122,14 @@ namespace iWork
             Button buttonAccept = new Button();
             buttonAccept.ID = buttonIndex + "";
             buttonAccept.Text = "Accept Request";
-
+            buttonAccept.CssClass = "btn btn-default";
             buttonAccept.Click += new EventHandler(acceptApplication);
             buttonIndex++;
 
             Button buttonReject = new Button();
             buttonReject.ID = buttonIndex + "";
             buttonReject.Text = "Reject Request";
+            buttonReject.CssClass = "btn btn-default";
             buttonIndex++;
 
             buttonReject.Click += new EventHandler(rejectApplication);

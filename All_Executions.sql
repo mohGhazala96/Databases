@@ -141,7 +141,7 @@ EXEC HR_Employees_view_attendance 'JenniferLaw', '2012-01-01 08:00:00', '2022-12
 --hr 10
 EXEC HR_Employees_total_hours 'JenniferLaw', 2012
 -- hr11
-EXEC HR_Employees_view_high_achievers "tarek.osman"
+EXEC HR_Employees_view_high_achievers 'tarek.osman', 2012, 12
 --regular 1
 EXEC Regular_Employees_view_projects "Mona.Osman"
 --regular 2

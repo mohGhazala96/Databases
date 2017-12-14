@@ -44,7 +44,7 @@ SELECT phone
 FROM Company_Phone_Numbers c 
 WHERE  c.company = @company
 -- Registered/Unregistered User 3
-
+GO
 CREATE PROC View_Company_Department
 @company varchar(40)
 AS
@@ -1253,7 +1253,7 @@ AS
         END
 GO
 
-CREATE PROCEDURE HR_Employees_view_attendance /* Does "Any staff member" mean list all staff members,
+CREATE OR ALTER PROCEDURE HR_Employees_view_attendance /* Does "Any staff member" mean list all staff members,
     or be able to specify which staff member do you want to view?
     If we need to list all, just remove the WHERE condition and the @staff variable */
     @username VARCHAR(20),
@@ -1285,7 +1285,8 @@ AS
         RETURN
     END
 
-    SELECT attendance_date,
+    SELECT username,
+		   attendance_date,
            start_time,
            end_time,
            DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
@@ -1358,8 +1359,10 @@ AS
     ) piv;
 GO
 
-CREATE PROCEDURE HR_Employees_view_high_achievers
-    @username VARCHAR(20)
+CREATE OR ALTER PROCEDURE HR_Employees_view_high_achievers
+    @username VARCHAR(20),
+	@year int,
+	@month int
 AS
     declare @is_hr BIT;
     EXEC HR_Employee_check @username, @is_hr output
@@ -1372,9 +1375,11 @@ AS
     declare @dep int;
     declare @company_email VARCHAR(50);
 
+	declare @start_date DATETIME;
+
     EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
 
-    SELECT TOP 3 Users.first_name, Users.middle_name, Users.last_name, SUM(DATEDIFF(second, Attendance_Records.start_time, Attendance_Records.end_time) / 3600.0) as hours_spent
+    SELECT TOP 3 Users.username, Users.first_name, Users.middle_name, Users.last_name, SUM(DATEDIFF(second, Attendance_Records.start_time, Attendance_Records.end_time) / 3600.0) as hours_spent
         FROM Regular_Employees INNER JOIN Attendance_Records
             ON Regular_Employees.username = Attendance_Records.staff
         INNER JOIN Staff_Members ON Regular_Employees.username = Staff_Members.username
@@ -1384,8 +1389,12 @@ AS
               AND NOT EXISTS(SElECT * FROM Tasks WHERE
                 Tasks.regular_employee = Regular_Employees.username
                 AND Tasks.status <> 'Fixed'
+				And year(Tasks.deadline) = @year
+				AND month(Tasks.deadline) = @month
               )
-        GROUP BY Users.first_name, Users.middle_name, Users.last_name
+			  AND year(Attendance_Records.attendance_date) = @year
+			  AND month(Attendance_Records.attendance_date) = @month
+        GROUP BY Users.username, Users.first_name, Users.middle_name, Users.last_name
         ORDER BY hours_spent DESC;
 GO
 

@@ -19,6 +19,7 @@ namespace SampleWebsite
             SqlConnection conn = new SqlConnection(@"Server=localhost;Database=websiteDataBase;User Id=sa;Password=Password123");
 
             SqlCommand cmd = new SqlCommand("View_Company_Department", conn);
+            SqlCommand viewPhoneNumbers = new SqlCommand("View_Company_Department_Phone", conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@company", companyName));
@@ -43,6 +44,8 @@ namespace SampleWebsite
                 form1.Controls.Add(lbl_space);
             }
             conn.Close();
+
+
             conn.Open();
 
              rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -62,7 +65,21 @@ namespace SampleWebsite
                 form1.Controls.Add(viewDepartemnt);
 
             }
-       
+            conn.Open();
+            viewPhoneNumbers.CommandType = CommandType.StoredProcedure;
+            viewPhoneNumbers.Parameters.Add(new SqlParameter("@company", companyName));
+            conn.Open();
+            SqlDataReader rdr2 = viewPhoneNumbers.ExecuteReader(CommandBehavior.CloseConnection);
+            Label phoneNumbersTitle = new Label();
+            phoneNumbersTitle.Text = "Phone Numbers";
+            form1.Controls.Add(phoneNumbersTitle);
+            while(rdr2.Read()){
+                Label phoneNumber = new Label();
+                phoneNumber.Text=   "  <br /> <br />" + rdr2.GetString(rdr.GetOrdinal("phone"))+"  <br /> <br />" ;
+                form1.Controls.Add(phoneNumber);
+            }
+            conn.Close();
+
 
 
             //this is how you retrive data from session variable.

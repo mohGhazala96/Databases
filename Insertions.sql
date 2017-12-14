@@ -16,7 +16,7 @@ INSERT INTO Departments
 VALUES (   'hr@Microsoft.com'  , 'Teaching' )  ;
 
 
-
+SELECT * FROM Attendance_Records;
 
 
 INSERT INTO Jobs 

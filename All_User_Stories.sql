@@ -1122,7 +1122,7 @@ AS
     INSERT INTO Announcements VALUES(getdate(), @title, @username, @type, @description)
 GO
 
-CREATE PROCEDURE HR_Employees_view_requests
+CREATE OR ALTER PROCEDURE HR_Employees_view_requests
     @username VARCHAR(20)
 AS
     declare @is_hr BIT;
@@ -1143,17 +1143,17 @@ AS
     INNER JOIN Business_Trip_Requests ON
         Requests.start_date = Business_Trip_Requests.start_date AND
         Requests.applicant = Business_Trip_Requests.applicant
-    WHERE Requests.manager_response = 'Approved'
+    WHERE Requests.manager_response = 'Approved' AND Requests.hr_response = 'Pending';
 
     SELECT Requests.*, Leave_Requests.type FROM Requests INNER JOIN Staff_Members
         ON (applicant = Staff_Members.username AND Staff_Members.department = @dep)
     INNER JOIN Leave_Requests ON
         Requests.start_date = Leave_Requests.start_date AND
         Requests.applicant = Leave_Requests.applicant
-    WHERE Requests.manager_response = 'Approved'
+    WHERE Requests.manager_response = 'Approved' AND Requests.hr_response = 'Pending';
 GO
 
-CREATE PROCEDURE HR_Employees_update_requests /* Should updating the value of annual_leaves be exclusive to leave requests? */
+CREATE OR ALTER PROCEDURE HR_Employees_update_requests /* Should updating the value of annual_leaves be exclusive to leave requests? */
     @username VARCHAR(20),
     @applicant VARCHAR(20),
     @start_date DATETIME,
@@ -1181,7 +1181,8 @@ AS
             AND Staff_Members.company = @company_email
             AND Staff_Members.username = @applicant
             AND Requests.start_date = @start_date
-            AND Requests.manager_response = 'Approved';
+            AND Requests.manager_response = 'Approved'
+			AND Requests.hr_response = 'Pending';
 
     IF @end_date IS NULL
         BEGIN
@@ -1224,23 +1225,25 @@ AS
                 
                 declare @annual_leaves int;
 
-                SELECT @annual_leaves = annual_leaves FROM Staff_Members WHERE username = @username
+                SELECT @annual_leaves = annual_leaves FROM Staff_Members WHERE username = @applicant
 
                 IF @vacation_days > @annual_leaves
+				BEGIN
                     PRINT 'Staff member does not have enough annual leaves'
                     RETURN
+				END
 
-                UPDATE Staff_Members SET annual_leaves = (@annual_leaves - @vacation_days)
+                UPDATE Staff_Members SET annual_leaves = (@annual_leaves - @vacation_days) WHERE username = @applicant
             END
 
-            UPDATE Requests SET hr_response = 'Approved' WHERE
+            UPDATE Requests SET hr_response = 'Approved', hr_employee = @username WHERE
                 start_date = @start_date AND
                 applicant = @applicant
 
         END
     ELSE
         BEGIN
-            UPDATE Requests SET hr_response = 'Rejected' WHERE
+            UPDATE Requests SET hr_response = 'Rejected', hr_employee = @username WHERE
                 start_date = @start_date AND
                 applicant = @applicant
         END

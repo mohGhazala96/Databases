@@ -177,6 +177,7 @@
     <Content Include="HR\Edit_Job.aspx" />
     <Content Include="HR\List_Jobs.aspx" />
     <Content Include="HR\View_Applications.aspx" />
+    <Content Include="HR\View_Requests.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -287,6 +288,13 @@
     </Compile>
     <Compile Include="HR\View_Applications.aspx.designer.cs">
       <DependentUpon>View_Applications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\View_Requests.aspx.cs">
+      <DependentUpon>View_Requests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\View_Requests.aspx.designer.cs">
+      <DependentUpon>View_Requests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>

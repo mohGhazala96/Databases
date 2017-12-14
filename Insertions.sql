@@ -981,7 +981,13 @@ INSERT INTO Requests VALUES(
     'BenedictCumberbatch',
     'Approved',
     'reason here'
-)
+);
+
+INSERT INTO Leave_Requests VALUES(
+    '9/26/2017 16:00:00',
+    'BenedictCumberbatch',
+    'annual'
+);
 
 INSERT INTO Leave_Requests VALUES(
     '9/27/2017 16:00:00',

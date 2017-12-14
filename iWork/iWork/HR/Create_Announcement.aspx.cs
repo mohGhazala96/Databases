@@ -48,6 +48,10 @@ namespace iWork.HR
                     error.Text = "Creating announcement failed.";
                     return;
                 }
+                else
+                {
+                    Response.Redirect(Request.RawUrl);
+                }
             }
         }
     }

@@ -80,6 +80,8 @@ namespace iWork.HR
             }
             else
             {
+                error.Text = "kossom keda";
+                error.Visible = true;
                 SqlCommand cmd = new SqlCommand("HR_Employees_update_job", conn);
 
                 int my_min_experience;

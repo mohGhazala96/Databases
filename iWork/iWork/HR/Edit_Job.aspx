@@ -17,6 +17,13 @@
     </script>
 </head>
 <body>
+    <% if(Session["Username"] != null){ 
+    Response.WriteFile("/Pages/menu.inc");
+    } else if(Session["Username"] == null){
+    Response.WriteFile("/Pages/unsigned-menu.inc");
+    }
+    %>
+
     <form id="form1" runat="server">
         <asp:Label ID="error" Text="" runat="server"></asp:Label>
 
@@ -39,20 +46,18 @@
              <Columns>
                  <asp:TemplateField HeaderText="Question">
                       <ItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server"
+                        <asp:TextBox id="question_text" runat="server"
                             Text='<%# Bind("question") %>'></asp:TextBox>
                       </ItemTemplate>
                  </asp:TemplateField>
                  <asp:TemplateField HeaderText="Answer">
                       <ItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server"
+                        <asp:TextBox id="answer_text" runat="server"
                             Text='<%# Bind("answer") %>'></asp:TextBox>
                       </ItemTemplate>
                  </asp:TemplateField>
              </Columns>
             </asp:GridView>
-
-            <asp:Button id="add_question" runat="server" Text="Add Question" OnClick="Add_Question"></asp:Button>
         </asp:Panel>
     </form>
 </body>

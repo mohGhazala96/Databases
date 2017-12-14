@@ -13,7 +13,8 @@
         <asp:Label id="lbl_password" runat="server" Text="Password:"></asp:Label>
         <asp:TextBox id="txt_password" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox><br/>
                 </div>
-        <asp:Button id="btn_login" runat="server" Text="Login" OnClick="login" CssClass="btn btn-default"></asp:Button>
+        <asp:Button id="btn_login" runat="server" Text="Login" OnClick="login" CssClass="btn btn-default"></asp:Button><br />
+            <asp:Label id="lbl_shoutbox" runat="server"></asp:Label>
     </form>
 </body>
 </html>

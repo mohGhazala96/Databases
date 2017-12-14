@@ -24,5 +24,7 @@ namespace iWork {
 		protected System.Web.UI.WebControls.TextBox txt_password;
 		
 		protected System.Web.UI.WebControls.Button btn_login;
+		
+		protected System.Web.UI.WebControls.Label lbl_shoutbox;
 	}
 }

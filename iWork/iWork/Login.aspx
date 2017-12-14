@@ -16,5 +16,6 @@
         <asp:Button id="btn_login" runat="server" Text="Login" OnClick="login" CssClass="btn btn-default"></asp:Button><br />
             <asp:Label id="lbl_shoutbox" runat="server"></asp:Label>
     </form>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

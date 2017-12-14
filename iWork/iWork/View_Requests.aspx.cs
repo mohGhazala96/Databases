@@ -78,7 +78,9 @@ namespace iWork
                     responseCell.Text = rdr.GetString(rdr.GetOrdinal("response"));
                     trow.Cells.Add(responseCell);
                     TableCell managerCell = new TableCell();
-                    managerCell.Text = rdr.GetString(rdr.GetOrdinal("manager"));
+                    if (!rdr.IsDBNull(rdr.GetOrdinal("manager")))
+                        managerCell.Text = rdr.GetString(rdr.GetOrdinal("manager"));
+                    else managerCell.Text = "Null";
                     trow.Cells.Add(managerCell);
                     TableCell reasonCell = new TableCell();
                     if (!rdr.IsDBNull(rdr.GetOrdinal("manager_reason")))
@@ -120,12 +122,12 @@ namespace iWork
             conn.Close();
 
             if(output.Value.ToString()=="1"){
-                Response.Write("Delete Successful");
+                lbl_shoutbox.Text = "Delete Successful";
                 Response.Redirect("View_Requests.aspx");
             }else if(output.Value.ToString()=="0"){
-                Response.Write("Sorry, Request already processed");
+                lbl_shoutbox.Text = "Sorry, Request already processed";
             }else{
-                Response.Write("Sorry, an Error Occured");
+                lbl_shoutbox.Text = "Sorry, an Error Occured";
             }
         }
     }

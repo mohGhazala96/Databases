@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.View_Announcements" %>
+﻿<%@ Page Language="C#" Inherits="iWork.View_Announcements" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -19,5 +19,6 @@
 	</form>
     </div>
     </div>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

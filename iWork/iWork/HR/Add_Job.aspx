@@ -19,13 +19,6 @@
     </script>
 </head>
 <body>
-    <% if(Session["Username"] != null){ 
-    Response.WriteFile("/Pages/menu.inc");
-    } else if(Session["Username"] == null){
-    Response.WriteFile("/Pages/unsigned-menu.inc");
-    }
-    %>
-
     <form id="form1" runat="server">
         <asp:Label ID="error" Text="You are not logged in or you are not an HR employee" runat="server"></asp:Label>
 

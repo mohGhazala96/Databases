@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.View_Requests" %>
+﻿<%@ Page Language="C#" Inherits="iWork.View_Requests" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -12,7 +12,8 @@
     }
     %>
 	<form id="View_Requests_Form" runat="server">
-            
+            <asp:Label id="lbl_shoutbox" runat="server"></asp:Label>
 	</form>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

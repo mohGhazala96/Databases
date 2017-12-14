@@ -6,14 +6,7 @@
 <head runat="server">
     <title></title>
 </head>
-<body
-    <% if(Session["Username"] != null){ 
-    Response.WriteFile("/Pages/menu.inc");
-    } else if(Session["Username"] == null){
-    Response.WriteFile("/Pages/unsigned-menu.inc");
-    }
-    %>
-
+<body>
     <asp:Label ID="error" Text="You are not logged in or you are not an HR employee" runat="server"></asp:Label>
 
     <form runat="server">

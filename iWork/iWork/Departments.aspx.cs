@@ -18,7 +18,7 @@ namespace SampleWebsite
         public static int DepCode;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Server=localhost;Database=websiteDataBase;User Id=sa;Password=Password123");
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDbConn"].ToString());
 
             SqlCommand cmd = new SqlCommand("Department_Jobs", conn);
 
@@ -42,7 +42,7 @@ namespace SampleWebsite
 
 
                 Label lbl_CompanyName = new Label();
-                lbl_CompanyName.Text = "Title: " + title + " , short_description: " + shortDesc +" , detailed description: "+detailedDesc +" , minmum experience: "+minExp+" , salary: "+salary+" ,deadline: "+deadline+" , number of vacancies: "+noVacancies+" , working hours: "+workingHours;
+                lbl_CompanyName.Text = "<b>Title: </b>" + title + "<br/><b>short_description: </b>" + shortDesc +"<br/><b>detailed description: </b>"+detailedDesc +"<br /><b>minmum experience: </b>"+minExp+"<br /><b>salary: </b>"+salary+"<br /><b>deadline: </b>"+deadline+"<br /><b>number of vacancies: </b>"+noVacancies+"<br /><b>working hours: </b>"+workingHours;
 
                 Label lbl_space = new Label();
                 lbl_space.Text = "  <br /> <br />";

@@ -50,5 +50,14 @@ namespace iWork.Companies
                 companies.DataBind();
             }
         }
+
+        protected void Sort_Companies(object sender, EventArgs e)
+        {
+            Response.Redirect("/View_Sorted_Companies.aspx", true);
+        }
+        protected void List_Companies(object sender, EventArgs e)
+        {
+            Response.Redirect("/Companies/List.aspx", true);
+        }
     }
 }

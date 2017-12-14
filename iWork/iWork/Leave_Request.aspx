@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.Leave_Request" %>
+﻿<%@ Page Language="C#" Inherits="iWork.Leave_Request" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -29,5 +29,6 @@
     </form>
     </div>
     </div>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

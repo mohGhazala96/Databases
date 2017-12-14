@@ -11,7 +11,8 @@
     <ul class="nav navbar-nav">
       <li><a href="/Default.aspx">Home</a></li>
       <li><a href="/Search_Jobs.aspx">Job Hunt</a></li>
-      <li><a href="/View_Sorted_Companies.aspx">Company Sort</a></li>
+      <li><a href="/Companies/Search.aspx">Company Search</a></li>
+      <li><a href="/Companies/List.aspx">List Companies</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/Register.aspx"><span class="glyphicon glyphicon-user"></span> Register</a></li>

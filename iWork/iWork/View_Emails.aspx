@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.View_Emails" %>
+﻿<%@ Page Language="C#" Inherits="iWork.View_Emails" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -25,5 +25,6 @@
             <asp:Button id="btn_back" runat="server" Text="Back" OnClick="backToEmails"></asp:Button>
           </asp:Panel>
 	</form>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

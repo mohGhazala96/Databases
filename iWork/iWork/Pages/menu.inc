@@ -12,7 +12,8 @@
       <li><a href="/Default.aspx">Home</a></li>
       <li><a href="/Profile.aspx">Profile</a></li>
       <li><a href="/Search_Jobs.aspx">Job Hunt</a></li>
-      <li><a href="/View_Sorted_Companies.aspx">Company Sort</a></li>
+      <li><a href="/Companies/Search.aspx">Company Search</a></li>
+      <li><a href="/Companies/List.aspx">List Companies</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/Logout.aspx">Logout</a></li>

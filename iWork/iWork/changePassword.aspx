@@ -24,5 +24,6 @@
         <asp:Label id="lbl_shoutout" runat="server"></asp:Label>
         </div>
 	</form>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

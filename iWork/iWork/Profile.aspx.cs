@@ -70,10 +70,8 @@ namespace iWork
                         Job_Seeker.Visible = false;
                         break;
                 }
-            }
-            else
-            {
-                Response.Redirect("Login.aspx", true);
+            }else{
+                    Response.Redirect("Login.aspx", true);
             }
         }
 

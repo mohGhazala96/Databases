@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.Send_Email" %>
+﻿<%@ Page Language="C#" Inherits="iWork.Send_Email" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -27,5 +27,6 @@
 	</form>
     </div>
     </div>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

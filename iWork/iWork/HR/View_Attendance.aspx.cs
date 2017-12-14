@@ -69,7 +69,6 @@ namespace iWork.HR
             cmd.Parameters.Add(new SqlParameter("@username", Session["Username"]));
             cmd.Parameters.Add(new SqlParameter("@start_datetime", start));
             cmd.Parameters.Add(new SqlParameter("@end_datetime", end));
-            cmd.Parameters.Add(new SqlParameter("@staff_member", staff_member.Text));
 
             conn.Open();
 

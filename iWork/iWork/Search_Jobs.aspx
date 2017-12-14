@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="iWork.Search_Jobs" %>
+﻿<%@ Page Language="C#" Inherits="iWork.Search_Jobs" EnableEventValidation="false"%>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -24,5 +24,6 @@
 	</form>
         </div>
         </div>
+        <!--#include file="Pages/footer.inc"-->
 </body>
 </html>

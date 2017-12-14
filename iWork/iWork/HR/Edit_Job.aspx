@@ -17,13 +17,6 @@
     </script>
 </head>
 <body>
-    <% if(Session["Username"] != null){ 
-    Response.WriteFile("/Pages/menu.inc");
-    } else if(Session["Username"] == null){
-    Response.WriteFile("/Pages/unsigned-menu.inc");
-    }
-    %>
-
     <form id="form1" runat="server">
         <asp:Label ID="error" Text="" runat="server"></asp:Label>
 
@@ -41,6 +34,7 @@
 
                 <input type="submit" name="submit" value="Update" id="submit" />
             </form>
+
             <br /><br />
             <asp:TextBox id="questions" TextMode="multiline" Columns="50" Rows="20" runat="server" />
         </asp:Panel>

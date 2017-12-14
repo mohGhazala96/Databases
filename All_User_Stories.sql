@@ -1287,8 +1287,7 @@ CREATE OR ALTER PROCEDURE HR_Employees_view_attendance /* Does "Any staff member
     If we need to list all, just remove the WHERE condition and the @staff variable */
     @username VARCHAR(20),
     @start_datetime DATETIME,
-    @end_datetime DATETIME,
-	@staff_member VARCHAR(20)
+    @end_datetime DATETIME
 AS
     declare @is_hr BIT;
     EXEC HR_Employee_check @username, @is_hr output
@@ -1315,7 +1314,8 @@ AS
         RETURN
     END
 
-    SELECT attendance_date,
+    SELECT username,
+		   attendance_date,
            start_time,
            end_time,
            DATEDIFF(second, start_time, end_time) / 3600.0 AS duration,
@@ -1329,13 +1329,11 @@ AS
             Staff_Members.company = Jobs.company
         ) INNER JOIN Attendance_records ON Staff_Members.username = Attendance_records.staff
         WHERE CAST(Attendance_records.attendance_date AS DATETIME) + CAST(CAST(Attendance_records.start_time AS TIME) AS DATETIME) BETWEEN @start_datetime AND @end_datetime
-			AND username = @staff_member
 GO
 
-CREATE OR ALTER PROCEDURE HR_Employees_total_hours /* Check if this is correct. Should the total hours be total working hours? */
+CREATE PROCEDURE HR_Employees_total_hours /* Check if this is correct. Should the total hours be total working hours? */
     @username VARCHAR(20),
-    @year int,
-	@staff_member VARCHAR(20)
+    @year int
 AS
     declare @is_hr BIT;
     EXEC HR_Employee_check @username, @is_hr output
@@ -1350,7 +1348,7 @@ AS
 
     EXEC Staff_Members_get_my_department @username, @dep output, @company_email output;
 
-    SELECT
+    SELECT username,
        ISNULL(January, 0) as January,
        ISNULL(February, 0) as February,
        ISNULL(March, 0) as March,
@@ -1371,8 +1369,7 @@ AS
             SELECT * FROM Attendance_Records WHERE YEAR(attendance_date) = @year
         ) a ON Staff_Members.username = a.staff
         WHERE Staff_Members.company = @company_email AND
-              Staff_Members.department = @dep AND
-			  username = @staff_member
+              Staff_Members.department = @dep
     ) d
     PIVOT (
         SUM(duration) for month in (

@@ -88,6 +88,8 @@ EXEC HR_Employees_add_job "JenniferLaw",
                           @q_list;
 --hr 2
 EXEC HR_Employees_view_job "JenniferLaw", "Rocket Scientist"
+
+EXEC HR_Employees_view_job_question "JenniferLaw", "Rocket Scientist"
 --hr 3
 EXEC HR_Employees_update_job "JenniferLaw",
                              "Rocket Scientist",

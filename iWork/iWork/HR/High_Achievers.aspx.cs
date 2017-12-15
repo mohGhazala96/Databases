@@ -46,7 +46,8 @@ namespace iWork.HR
                 error.Text = "Month has invalid numerical format.";
                 error.Visible = true;
                 return;
-            } else if(my_month < 1 || my_month > 12)
+            }
+            else if (my_month < 1 || my_month > 12)
             {
                 error.Text = "Month has invalid numerical format.";
                 error.Visible = true;
@@ -78,6 +79,68 @@ namespace iWork.HR
             grid.DataSource = dt;
             grid.DataBind();
             conn.Close();
+        }
+
+        protected void congratulate(object sender, EventArgs e)
+        {
+            int my_year = 0;
+            int my_month = 0;
+
+            if (!int.TryParse(year.Text, out my_year))
+            {
+                error.Text = "Year has invalid numerical format.";
+                error.Visible = true;
+                return;
+            }
+
+            if (!int.TryParse(month.Text, out my_month))
+            {
+                error.Text = "Month has invalid numerical format.";
+                error.Visible = true;
+                return;
+            }
+            else if (my_month < 1 || my_month > 12)
+            {
+                error.Text = "Month has invalid numerical format.";
+                error.Visible = true;
+                return;
+            }
+
+            string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
+
+            for (int i = 0; i < grid.Rows.Count; i++)
+            {
+                SqlCommand cmd = new SqlCommand("Send_email", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@sender", Session["Username"].ToString()));
+                cmd.Parameters.Add(new SqlParameter("@recipient", grid.Rows[i].Cells[0].Text));
+                cmd.Parameters.Add(new SqlParameter("@subject", "Congratulations! You're a high achiever!"));
+                cmd.Parameters.Add(new SqlParameter("@body", "Congratulations, you're a high achiever for month " + month.Text + " of year " + year.Text + "."));
+
+                SqlParameter output = cmd.Parameters.Add(new SqlParameter("@result", SqlDbType.Int));
+                output.Direction = ParameterDirection.Output;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                error.Text = "";
+
+                if (output.Value.ToString() == "1")
+                {
+                    error.Text = "Email Sent Successfully";
+                }
+                else if (output.Value.ToString() == "0")
+                {
+                    error.Text = "Sorry, You are trying to send an email to someone not in your company";
+                }
+                else
+                {
+                    error.Text = "Sorry an error occured";
+                }
+
+                error.Visible = true;
+            }
         }
     }
 }

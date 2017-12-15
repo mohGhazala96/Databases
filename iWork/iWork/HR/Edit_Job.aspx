@@ -21,7 +21,7 @@
         <asp:Label ID="error" Text="" runat="server"></asp:Label>
 
         <asp:Panel ID="data" runat="server">
-            <form method="post">
+            <form id="form" method="post">
                 <!-- Check how to do placeholders. Check if we need the name to be adjusted, too. -->
                 <asp:TextBox id="title" runat="server" placeholder="Title"></asp:TextBox>
                 <asp:TextBox id="short_description" runat="server" placeholder="Short description"></asp:TextBox>
@@ -34,6 +34,25 @@
 
                 <input type="submit" name="submit" value="Update" id="submit" />
             </form>
+
+            <asp:GridView ID="grid" runat="server" AutoGenerateColumns="false">    
+             <Columns>
+                 <asp:TemplateField HeaderText="Question">
+                      <ItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server"
+                            Text='<%# Bind("question") %>'></asp:TextBox>
+                      </ItemTemplate>
+                 </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Answer">
+                      <ItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server"
+                            Text='<%# Bind("answer") %>'></asp:TextBox>
+                      </ItemTemplate>
+                 </asp:TemplateField>
+             </Columns>
+            </asp:GridView>
+
+            <asp:Button id="add_question" runat="server" Text="Add Question" OnClick="Add_Question"></asp:Button>
         </asp:Panel>
     </form>
 </body>

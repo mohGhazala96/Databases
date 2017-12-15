@@ -1019,6 +1019,26 @@ AS
     SELECT * FROM Jobs WHERE title = @title AND department = @dep AND company = @company
 GO
 
+CREATE PROCEDURE HR_Employees_view_job_question
+    @username VARCHAR(20),
+    @title VARCHAR(20)
+AS
+    declare @is_hr BIT;
+    EXEC HR_Employee_check @username, @is_hr output
+    IF @is_hr = 0
+        BEGIN
+            PRINT 'Request does not exist or you do not have access to it'
+            RETURN
+        END
+
+    declare @dep int;
+    declare @company VARCHAR(100);
+    EXEC Staff_Members_get_my_department @username, @dep output, @company output
+
+    SELECT Questions.* FROM Questions INNER JOIN Job_Has_Question ON Questions.number = Job_Has_Question.question
+		WHERE Job_Has_Question.job = @title AND Job_Has_Question.department = @dep AND Job_Has_Question.company = @company;
+GO
+
 CREATE PROCEDURE HR_Employees_update_job
     @username VARCHAR(20),
     @title VARCHAR(20),

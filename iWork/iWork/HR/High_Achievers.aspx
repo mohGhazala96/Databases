@@ -26,6 +26,8 @@
                  <asp:BoundField DataField="hours_spent" HeaderText="Hours Spent" />
              </Columns>
             </asp:GridView>
+
+            <asp:Button id="congratulate_button" runat="server" Text="Congratulate High Achievers" OnClick="congratulate"></asp:Button>
         </asp:Panel>
     </form>
 </body>

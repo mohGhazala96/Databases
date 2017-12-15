@@ -16,7 +16,8 @@ namespace SampleWebsite
         public static string companyName;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Server=localhost;Database=websiteDataBase;User Id=sa;Password=Password123");
+            string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
 
             SqlCommand cmd = new SqlCommand("View_Company_Department", conn);
 

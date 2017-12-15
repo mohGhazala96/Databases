@@ -23,6 +23,7 @@
         <asp:GridView ID="companies" runat="server" AutoGenerateColumns="false">    
             <Columns>
                 <asp:BoundField DataField="name" HeaderText="Company Name" ItemStyle-Width="150" />
+                <asp:HyperLinkField DataNavigateUrlFields="name" DataNavigateUrlFormatString="/Companies.aspx?name={0}" Text="View Company" />
             </Columns>    
         </asp:GridView>
     </form>

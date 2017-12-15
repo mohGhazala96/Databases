@@ -221,5 +221,46 @@ namespace iWork
             Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
 
         }
+
+        // HR Employees
+        protected void HR_Employees_Add_Job(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/DefineTask_manager.aspx", true);
+        }
+
+        protected void HR_Employees_Create_Announcement(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ChangeRegularOnTask.aspx", true);
+        }
+
+        protected void HR_Employees_High_Achievers(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+        }
+
+        protected void HR_Employees_List_Jobs(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+        }
+
+        protected void HR_Employees_Total_Hours(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+        }
+
+        protected void HR_Employees_View_Applications(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+        }
+
+        protected void HR_Employees_View_Attendance(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+        }
+
+        protected void HR_Employees_View_Requests(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+        }
     }
 }

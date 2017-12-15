@@ -225,42 +225,42 @@ namespace iWork
         // HR Employees
         protected void HR_Employees_Add_Job(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/DefineTask_manager.aspx", true);
+            Response.Redirect("HR/Add_Job.aspx", true);
         }
 
         protected void HR_Employees_Create_Announcement(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/ChangeRegularOnTask.aspx", true);
+            Response.Redirect("HR/Create_Announcement.aspx", true);
         }
 
         protected void HR_Employees_High_Achievers(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+            Response.Redirect("HR/High_Achievers.aspx", true);
         }
 
         protected void HR_Employees_List_Jobs(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+            Response.Redirect("HR/List_Jobs.aspx", true);
         }
 
         protected void HR_Employees_Total_Hours(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+            Response.Redirect("HR/Total_Hours.aspx", true);
         }
 
         protected void HR_Employees_View_Applications(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+            Response.Redirect("HR/View_Applications.aspx", true);
         }
 
         protected void HR_Employees_View_Attendance(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+            Response.Redirect("HR/View_Attendance.aspx", true);
         }
 
         protected void HR_Employees_View_Requests(object sender, EventArgs e)
         {
-            Response.Redirect("Manager/ReviewTaskInProject_Main.aspx", true);
+            Response.Redirect("HR/View_Requests.aspx", true);
         }
     }
 }

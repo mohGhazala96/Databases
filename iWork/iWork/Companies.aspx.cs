@@ -23,7 +23,7 @@ namespace SampleWebsite
             SqlCommand viewPhoneNumbers = new SqlCommand("View_Company_Department_Phone", conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@company", companyName));
+            cmd.Parameters.Add(new SqlParameter("@company", Request.QueryString["email"] ));
             conn.Open();
             SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.SingleRow);
             while (rdr.Read())
@@ -59,20 +59,21 @@ namespace SampleWebsite
                 Button viewDepartemnt = new Button();
                 viewDepartemnt.ID = code+"";
                 viewDepartemnt.Text = "View Department";
-
+                viewDepartemnt.CssClass = "btn btn-default";
                 viewDepartemnt.Click += new EventHandler(openAnotherPage);
                 lbl_CompanyName.Text ="  <br /> <br />"+"Department Name: "+ depName +" , Code: "+code+ "  <br /> <br />";
                 form1.Controls.Add(lbl_CompanyName);
                 form1.Controls.Add(viewDepartemnt);
 
             }
+            conn.Close();
             conn.Open();
+
             viewPhoneNumbers.CommandType = CommandType.StoredProcedure;
-            viewPhoneNumbers.Parameters.Add(new SqlParameter("@company", companyName));
-            conn.Open();
+            viewPhoneNumbers.Parameters.Add(new SqlParameter("@company", Request.QueryString["email"]));
             SqlDataReader rdr2 = viewPhoneNumbers.ExecuteReader(CommandBehavior.CloseConnection);
             Label phoneNumbersTitle = new Label();
-            phoneNumbersTitle.Text = "Phone Numbers";
+            phoneNumbersTitle.Text = "  <br /> <br />" +"Phone Numbers";
             form1.Controls.Add(phoneNumbersTitle);
             while(rdr2.Read()){
                 Label phoneNumber = new Label();
@@ -88,7 +89,7 @@ namespace SampleWebsite
             //Response.Write("Logged-in User: " + userId + "  <br /> <br />");
         }
         protected void openAnotherPage(object sender, EventArgs e){
-            Departments.companyName = companyName;
+            Departments.companyName = Request.QueryString["email"];
             Departments.DepCode = int.Parse( ((Button)sender).ID);
             Response.Redirect("Departments.aspx", true);
 

@@ -54,6 +54,7 @@ namespace iWork
                 }
                 Response.Redirect("Profile.aspx",true);
             }else{
+                lbl_shoutbox.Text = "Login failed, Invalid username or password";
             }
         }
     }

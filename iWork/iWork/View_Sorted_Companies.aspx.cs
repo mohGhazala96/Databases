@@ -24,19 +24,32 @@ namespace iWork
 
             conn.Open();
             SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            Table companiesTable = new Table();
+            companiesTable.CssClass = "table table-striped";
+            TableRow headerRow = new TableRow();
+            TableCell emailHeader = new TableCell();
+            emailHeader.Text = "Company Email";
+            TableCell companySalaryHeader = new TableCell();
+            companySalaryHeader.Text = "Average Salary";
+            headerRow.Cells.Add(emailHeader);
+            headerRow.Cells.Add(companySalaryHeader);
+            companiesTable.Rows.Add(headerRow);
             while (rdr.Read())
             {
+                TableRow trow = new TableRow();
+                TableCell cEmail = new TableCell();
+                TableCell cSalary = new TableCell();
                 string companyEmail = rdr.GetString(rdr.GetOrdinal("email"));
                 string companySalary = ""+rdr.GetInt32(rdr.GetOrdinal("salary"));
 
-                Label lbl_CompanyEmail = new Label();
-                lbl_CompanyEmail.Text = companyEmail + " \t \t ";
-                companies.Controls.Add(lbl_CompanyEmail);
+                cEmail.Text = companyEmail;
+                cSalary.Text = companySalary;
+                trow.Cells.Add(cEmail);
+                trow.Cells.Add(cSalary);
 
-                Label lbl_CompanySalary = new Label();
-                lbl_CompanySalary.Text = companySalary + " <br/> ";
-                companies.Controls.Add(lbl_CompanySalary);
+                companiesTable.Rows.Add(trow);
             }
+            companies.Controls.Add(companiesTable);
         }
     }
 }

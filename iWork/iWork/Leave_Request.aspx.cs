@@ -23,40 +23,46 @@ namespace iWork
         }
         protected void applyForLeaveRequest(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                SqlConnection conn = new SqlConnection(connStr);
 
-            SqlCommand cmd = new SqlCommand("Apply_For_Leave_Request", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
-            cmd.Parameters.Add(new SqlParameter("@replacement", txt_replacement.Text));
-            cmd.Parameters.Add(new SqlParameter("@from_date", txt_from_date.Text));
-            cmd.Parameters.Add(new SqlParameter("@to_date", txt_to_date.Text));
-            cmd.Parameters.Add(new SqlParameter("@type", txt_type.Text));
-            SqlParameter output = cmd.Parameters.Add(new SqlParameter("@result", SqlDbType.Int));
-            output.Direction = ParameterDirection.Output;
-            conn.Open();
-            cmd.ExecuteNonQuery();
-            conn.Close();
+                SqlCommand cmd = new SqlCommand("Apply_For_Leave_Request", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@username", Session["Username"].ToString()));
+                cmd.Parameters.Add(new SqlParameter("@replacement", txt_replacement.Text));
+                cmd.Parameters.Add(new SqlParameter("@from_date", txt_from_date.Text));
+                cmd.Parameters.Add(new SqlParameter("@to_date", txt_to_date.Text));
+                cmd.Parameters.Add(new SqlParameter("@type", txt_type.Text));
+                SqlParameter output = cmd.Parameters.Add(new SqlParameter("@result", SqlDbType.Int));
+                output.Direction = ParameterDirection.Output;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
 
-            switch(output.Value.ToString()){
-                case "0":
-                    Response.Write("Sorry, you have exceeded your annual leaves");
-                    break;
-                case "1":
-                    Response.Write("Submitted Successfully");
-                    break;
-                case "2":
-                    Response.Write("Sorry, Replacement type does not match to yours");
-                    break;
-                case "3":
-                    Response.Write("Sorry, replacement is not in the same company as you");
-                    break;
-                case "4":
-                    Response.Write("Sorry, request overlapping with another request");
-                    break;
-                default:
-                    Response.Write("Sorry, an error occured");
-                    break;
+                switch (output.Value.ToString())
+                {
+                    case "0":
+                        lbl_shoutbox.Text="Sorry, you have exceeded your annual leaves";
+                        break;
+                    case "1":
+                        lbl_shoutbox.Text = "Submitted Successfully";
+                        break;
+                    case "2":
+                        lbl_shoutbox.Text = "Sorry, Replacement type does not match to yours";
+                        break;
+                    case "3":
+                        lbl_shoutbox.Text = "Sorry, replacement is not in the same company as you";
+                        break;
+                    case "4":
+                        lbl_shoutbox.Text = "Sorry, request overlapping with another request";
+                        break;
+                    default:
+                        lbl_shoutbox.Text = "Sorry, an error occured";
+                        break;
+                }
+            }catch{
+                lbl_shoutbox.Text = "Sorry an error occured";
             }
 
 

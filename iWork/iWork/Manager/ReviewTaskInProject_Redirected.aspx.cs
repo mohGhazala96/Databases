@@ -91,7 +91,7 @@ namespace iWork.Manager
                         acceptTaskbtn.Text = "Accept";
                         acceptTaskbtn.Click += new EventHandler(acceptTask);
                         acceptTaskbtn.CommandName = rdr.GetString(rdr.GetOrdinal("name"));
-
+                        acceptTaskbtn.CssClass = "btn btn-default";
                         Label space = new Label();
                         space.Text = "<br />" + " " + "<br />";
                         Label newDeadlinetitle = new Label();
@@ -101,8 +101,9 @@ namespace iWork.Manager
                         rejectTaskbtn.Text = "Reject";
                         rejectTaskbtn.Click += new EventHandler(rejecttTask);
                         rejectTaskbtn.CommandName = rdr.GetString(rdr.GetOrdinal("name"));
-
+                        rejectTaskbtn.CssClass = "btn btn-default";
                         TextBox newDeadline = new TextBox();
+                        newDeadline.CssClass = "form-control";
                         newDeadline.Columns = 20;
                         newDeadline.Enabled = true;
                         newDeadline.Rows = 1;

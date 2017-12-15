@@ -27,7 +27,7 @@ END
 
 go
 
--- Registered/Unregistered User 2
+-- Registered/Unregistered User 2 helper
 
 CREATE PROC List_Of_Companies
 AS
@@ -36,7 +36,15 @@ FROM Companies c
 
 go
 
+-- Registered/Unregistered User 3 helper 
+CREATE PROC View_Company_Department_Phone
+@company varchar(40)
+AS
+SELECT phone
+FROM Company_Phone_Numbers c 
+WHERE  c.company = @company
 -- Registered/Unregistered User 3
+GO
 CREATE PROC View_Company_Department
 @company varchar(40)
 AS

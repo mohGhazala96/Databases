@@ -61,18 +61,18 @@
         <h1>Job Seeker stuff here</h1>
         </asp:Panel>
         <asp:Panel id="Manager" runat="server">
-         <h1>Manager Member stuff here</h1><br />
+         <h1>Manager Actions</h1><br />
         <!--            <asp:Button id="btn_manager_view_requests" runat="server" Text="View Requests" OnClick="viewRequests_manager"></asp:Button><br />
-        -->            <asp:Button id="btn_manager_approve_reject_requests" runat="server" Text="View or Review Requests" OnClick="ReviewRequests_manager"></asp:Button><br />
+        -->            <asp:Button id="btn_manager_approve_reject_requests" runat="server" Text="View or Review Requests" OnClick="ReviewRequests_manager" CssClass="btn btn-default"></asp:Button><br />
         <!--            <asp:Button id="btn_manager_view_applications" runat="server" Text="View Applications" OnClick="checkAttendance"></asp:Button><br />
         -->           
-        <asp:Button id="btn_manager_Review_appliactions" runat="server" Text="Review Applications" OnClick="ReviewJobs_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_create_project" runat="server" Text="Create Project" OnClick="Create_Projects_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_assign_to_project" runat="server" Text="Assign to Projects" OnClick="assignRegularOnProject_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_remove_from_project" runat="server" Text="Remove from Projects" OnClick="removeRegularOnProject_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_define_task" runat="server" Text="Define Tasks" OnClick="defineTask_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="ChangeRegular_manager"></asp:Button><br />
-        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="ReviewTask_manager"></asp:Button><br />
+        <asp:Button id="btn_manager_Review_appliactions" runat="server" Text="Review Applications" OnClick="ReviewJobs_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_create_project" runat="server" Text="Create Project" OnClick="Create_Projects_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_assign_to_project" runat="server" Text="Assign to Projects" OnClick="assignRegularOnProject_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_remove_from_project" runat="server" Text="Remove from Projects" OnClick="removeRegularOnProject_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_define_task" runat="server" Text="Define Tasks" OnClick="defineTask_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_change_regularEmployee_task" runat="server" Text="Change Employee on Task" OnClick="ChangeRegular_manager" CssClass="btn btn-default"></asp:Button><br />
+        <asp:Button id="btn_manager_view_tasks" runat="server" Text="View Tasks" OnClick="ReviewTask_manager" CssClass="btn btn-default"></asp:Button><br />
 
         </asp:Panel>
         <asp:Panel id="HR_Employee" runat="server">

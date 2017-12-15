@@ -49,6 +49,7 @@ namespace iWork
 
                        + "<br />";
                     Button AddEmployee = new Button();
+                    AddEmployee.CssClass = "btn btn-default";
                     AddEmployee.ID = employee_text;
                     form1.Controls.Add(employeeName);
                     AddEmployee.Text = "Add";

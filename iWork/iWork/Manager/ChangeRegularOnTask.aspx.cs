@@ -53,6 +53,7 @@ namespace iWork
                     form1.Controls.Add(taskTitle);
 
                     Button changeRegularEmployee_btn = new Button();
+                    changeRegularEmployee_btn.CssClass = "btn btn-default";
                     changeRegularEmployee_btn.ID = rdr.GetString(rdr.GetOrdinal("name"))+","+rdr.GetString(rdr.GetOrdinal("project"));
                     changeRegularEmployee_btn.Text = "Change Regular Employee";
                     changeRegularEmployee_btn.Click += new EventHandler(changeRegularEmployee);

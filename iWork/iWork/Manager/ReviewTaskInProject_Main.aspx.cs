@@ -69,6 +69,11 @@ namespace iWork.Manager
                     buttonOpen.CommandName = projectName;
                     buttonClosed.CommandName = projectName;
 
+                    buttonOpen.CssClass = "btn btn-default";
+                    buttonFixed.CssClass = "btn btn-default";
+                    buttonAssigned.CssClass = "btn btn-default";
+                    buttonClosed.CssClass = "btn btn-default";
+
                     form1.Controls.Add(buttonFixed);
                     form1.Controls.Add(buttonAssigned);
                     form1.Controls.Add(buttonOpen);
